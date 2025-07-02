@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Discover() {
+function Trips() {
     return (
         <>add here</>
     )
 }
 
-export default Discover
+export default Trips
