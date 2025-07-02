@@ -3,6 +3,7 @@ import Navbar from '../components/Custom/Navbar'
 import SearchBar from '../components/Custom/SearchBar'
 import CategoryFilters from '../components/Custom/CategoryFilters'
 import HeroSection from '../components/Custom/HeroSection'
+import Footer from '../components/Custom/Footer'
 
 function Home() {
     return (
@@ -14,6 +15,7 @@ function Home() {
                 <SearchBar />
                 <HeroSection />
             </main>
+            <Footer />
         </div>
     )
 }

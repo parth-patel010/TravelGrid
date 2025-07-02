@@ -5,10 +5,23 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home'
 
+// Placeholder pages (to be created if not exist)
+import Discover from './pages/Discover'
+import Trips from './pages/Trips'
+import Review from './pages/Review'
+import Forums from './pages/Forums'
+
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />,
+    element: <App />, // App provides context and layout
+    children: [
+      { path: '/', element: <Home /> },
+      { path: '/discover', element: <Discover /> },
+      { path: '/trips', element: <Trips /> },
+      { path: '/review', element: <Review /> },
+      { path: '/forums', element: <Forums /> },
+    ],
   },
 ])
 

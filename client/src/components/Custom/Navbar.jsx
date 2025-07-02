@@ -13,7 +13,9 @@ const Navbar = () => {
         <a href="/trips" className="text-gray-700 hover:text-green-700 font-medium">Trips</a>
         <a href="/review" className="text-gray-700 hover:text-green-700 font-medium">Review</a>
         <a href="/forums" className="text-gray-700 hover:text-green-700 font-medium">Forums</a>
-        <Button className="ml-4">Sign In</Button>
+        <a href="/signin">
+          <Button className="ml-4 bg-black hover:bg-gray-900 text-white px-6 py-2">Sign In</Button>
+        </a>
       </div>
       {/* Mobile menu icon */}
       <div className="md:hidden">
