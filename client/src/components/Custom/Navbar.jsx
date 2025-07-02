@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '../ui/button';
 
 const Navbar = () => {
   return (
@@ -12,7 +13,7 @@ const Navbar = () => {
         <a href="/trips" className="text-gray-700 hover:text-green-700 font-medium">Trips</a>
         <a href="/review" className="text-gray-700 hover:text-green-700 font-medium">Review</a>
         <a href="/forums" className="text-gray-700 hover:text-green-700 font-medium">Forums</a>
-        <button className="ml-4 px-4 py-2 bg-green-700 text-white rounded-full font-semibold hover:bg-green-800">Sign In</button>
+        <Button className="ml-4">Sign In</Button>
       </div>
       {/* Mobile menu icon */}
       <div className="md:hidden">
