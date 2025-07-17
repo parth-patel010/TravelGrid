@@ -1,3 +1,4 @@
+`Note: This repository is created for the contributors of GSSoC'25`
 # TravelGrid
 
 Welcome to **TravelGrid**, a comprehensive travel platform designed to simplify your travel planning experience! With TravelGrid, you can seamlessly book travel tickets, hire or rent vehicles, reserve hotels, explore travel guides, and choose complete or customizable travel packages—all in one place. Whether you're a solo adventurer or planning a group getaway, TravelGrid has you covered.
