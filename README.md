@@ -149,7 +149,7 @@ TravelGrid/client/
 
 ## 📜 Code of Conduct
 
-All contributors are expected to adhere to the [GirlScript Code of Conduct](https://github.com/Adarsh-Chaubey03/TravelGrid/edit/main/README.md). Be respectful, inclusive, and collaborative in all interactions.
+All contributors are expected to adhere to the [GirlScript Code of Conduct](https://github.com/Adarsh-Chaubey03/TravelGrid/blob/main/CODE_OF_CONDUCT.md). Be respectful, inclusive, and collaborative in all interactions.
 
 ---
 
