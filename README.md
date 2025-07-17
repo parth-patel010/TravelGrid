@@ -1,3 +1,4 @@
+<pre>Note: This repository is created for the contributors of GSSoC'25</pre> 
 # TravelGrid
 
 Welcome to **TravelGrid**, a comprehensive travel platform designed to simplify your travel planning experience! With TravelGrid, you can seamlessly book travel tickets, hire or rent vehicles, reserve hotels, explore travel guides, and choose complete or customizable travel packages—all in one place. Whether you're a solo adventurer or planning a group getaway, TravelGrid has you covered.
@@ -19,19 +20,13 @@ This project is proudly part of **GirlScript Summer of Code 2025 (GSSoC)**, and 
   - Task Assignment Process
 - Project Structure
 - Code of Conduct
-- Contact
 - License
-- Acknowledgments
 
 ---
 
 ## 🌍 About the Project
 
 TravelGrid is your one-stop platform for all travel-related needs. From booking flights, trains, or buses to renting vehicles, reserving hotels, or exploring curated travel guides, TravelGrid offers a seamless and user-friendly experience. Our mission is to make travel planning effortless, affordable, and enjoyable for everyone.
-
-<div style="background-color: #f4f4f4; padding: 10px; border-radius: 5px; text-decoration: none;">
-The frontend is currently under active development, with the backend setup planned to follow once key frontend milestones are achieved.
-</div>
 
 This project is being developed as part of **GSSoC 2025**, providing contributors with an opportunity to collaborate, learn, and build a real-world application.
 
@@ -71,6 +66,7 @@ Follow these steps to set up the project locally and start contributing to Trave
 ### Prerequisites
 
 Ensure you have the following installed:
+
 - **Node.js** (v16 or higher)
 - **npm** or **yarn**
 - **Git**
@@ -78,16 +74,17 @@ Ensure you have the following installed:
 
 ### Installation
 
-1. **Fork the Repository**:
-   Click the "Fork" button at the top-right corner of the [TravelGrid repository](https://github.com/Adarsh-Chaubey03/TravelGrid).
+1. **Fork the Repository**: Click the "Fork" button at the top-right corner of the [TravelGrid repository](https://github.com/Adarsh-Chaubey03/TravelGrid).
 
 2. **Clone the Repository**:
+
    ```bash
    git clone https://github.com/Adarsh-Chaubey03/TravelGrid.git
    cd TravelGrid
    ```
 
 3. **Install Dependencies**:
+
    ```bash
    npm install
    # or
@@ -95,6 +92,7 @@ Ensure you have the following installed:
    ```
 
 4. **Run the Development Server**:
+
    ```bash
    npm run dev
    # or
@@ -132,7 +130,7 @@ We welcome contributions from the GSSoC 2025 community! To ensure a smooth and p
 ## 📂 Project Structure
 
 ```plaintext
-TravelGrid/
+TravelGrid/client/
 ├── public/                # Static assets
 ├── src/
 │   ├── assets/            # Images, fonts, etc.
@@ -151,13 +149,7 @@ TravelGrid/
 
 ## 📜 Code of Conduct
 
-All contributors are expected to adhere to the [GirlScript Code of Conduct](https://www.girlscript.tech/codeofconduct). Be respectful, inclusive, and collaborative in all interactions.
-
----
-
-## 📬 Contact
-
-For any queries or assistance, reach out to the project admin via the GSSoC communication channels (e.g., Discord/Slack). Please avoid direct complaints to the program manager, as the project admin is also a student managing this initiative.
+All contributors are expected to adhere to the [GirlScript Code of Conduct](https://github.com/Adarsh-Chaubey03/TravelGrid/blob/main/CODE_OF_CONDUCT.md). Be respectful, inclusive, and collaborative in all interactions.
 
 ---
 
@@ -167,12 +159,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## 🙌 Acknowledgments
 
-- **GirlScript Summer of Code 2025** for providing this amazing opportunity.
-- All contributors who are helping shape TravelGrid into a reality.
-- The open-source community for inspiring and supporting this project.
-
----
 
 Happy coding, and let's make **TravelGrid** the ultimate travel companion! 🚗✈️🏨
