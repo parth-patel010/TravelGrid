@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <nav className="w-full bg-white shadow-sm py-3 px-4 flex items-center justify-between fixed top-0 left-0 z-30">
-      <div className="text-2xl font-bold text-blue-700 tracking-tight">
+      <div className="text-2xl font-bold text-black tracking-tight">
         TravelGrid
       </div>
       <div className="flex gap-6 items-center">
