@@ -1,20 +1,32 @@
 ---
 name: Issue Template
-about: Briefly describe the issue or feature request.
+about: " Use this format for all types of issues."
 title: ''
 labels: ''
 assignees: ''
 
 ---
 
+- [ ] I have checked that this issue has not already been opened.
+
+## 🐞 Issue Description
+
+Briefly describe the problem.
+
+
+
+
 ## 💡 Expected Behavior
+
 
 What should happen instead?
 
-## 📷 Screenshots (if applicable)
 
-Add screenshots here.
+## 📷 Screenshots (Optional)
 
-## ✅ Additional Context
+Attach screenshots if needed.
 
-Any other relevant context or information.
+
+## ✅ Additional Context (Optional)
+
+Add any other relevant info.
