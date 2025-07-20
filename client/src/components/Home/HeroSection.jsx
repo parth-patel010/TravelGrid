@@ -1,18 +1,108 @@
-import React from "react";
-import SearchBar from "./SearchBar";
-import CategoryFilters from "./CategoryFilters";
+import React, { useState } from "react";
 
 const HeroSection = ({ onSearch }) => {
+  const [location, setLocation] = useState("");
+  const [category, setCategory] = useState("All Categories");
+
+  const handleSearch = () => {
+    onSearch({ location, category });
+  };
+
+  const categories = [
+    "All Categories",
+    "Restaurants",
+    "Hotels",
+    "Events",
+    "Shopping",
+    "Attractions",
+    "Transportation"
+  ];
+
   return (
-    <section className="relative w-screen min-h-[60vh] flex items-center justify-center overflow-hidden bg-[#eaf6fb]">
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80')] bg-cover bg-center opacity-85 z-10" />
-      <div className="relative z-20 text-center text-white max-w-2xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight">
-          Explore <span className="text-yellow-400">your amazing city</span>
-        </h1>
-        <p className="text-lg md:text-xl mb-8 font-normal">Find great places to stay, eat, shop, or visit from local experts</p>
-        <SearchBar onSearch={onSearch} />
-        <CategoryFilters />
+    <section className="relative w-screen min-h-[80vh] flex items-center justify-center overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center opacity-90 z-10" />
+      
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-black bg-opacity-30 z-15" />
+      
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 lg:px-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
+          
+          {/* Left Side - Hero Content */}
+          <div className="flex-1 text-center lg:text-left text-white">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 tracking-tight leading-tight">
+              Explore{" "}
+              <span className="text-yellow-400">your amazing city</span>
+            </h1>
+            <p className="text-lg md:text-xl mb-8 font-normal text-gray-100 max-w-2xl">
+              Find great places to stay, eat, shop, or visit from local experts
+            </p>
+          </div>
+
+          {/* Right Side - Search Bar and Filters */}
+          <div className="flex-1 w-full max-w-md">
+            <div className="bg-white rounded-2xl shadow-2xl p-6 space-y-4">
+              {/* Search Bar */}
+              <div className="space-y-3">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Ex: Borivali, Mumbai, India"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 placeholder-gray-400"
+                  />
+                </div>
+                
+                <div className="relative">
+                  <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 appearance-none bg-white"
+                  >
+                    {categories.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
+                
+                <button
+                  onClick={handleSearch}
+                  className="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-xl transition-colors duration-200 transform hover:scale-105"
+                >
+                  Search
+                </button>
+              </div>
+
+              {/* Category Filters */}
+              <div className="pt-4 border-t border-gray-100">
+                <p className="text-sm font-medium text-gray-600 mb-3">Quick Filters:</p>
+                <div className="flex flex-wrap gap-2">
+                  {["Restaurants", "Events", "Shopping"].map((filter) => (
+                    <button
+                      key={filter}
+                      onClick={() => {
+                        setCategory(filter);
+                        handleSearch();
+                      }}
+                      className="px-3 py-2 bg-gray-50 hover:bg-gray-100 text-gray-700 text-sm font-medium rounded-lg transition-colors duration-200"
+                    >
+                      {filter}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
