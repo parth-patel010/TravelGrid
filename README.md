@@ -119,40 +119,23 @@ We welcome **GSSoC 2025** contributors! Follow these guidelines for a smooth col
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
-- `TravelGrid`
-  - `client/`
-    - `dist/`
-    - `node_modules/`
-    - `public/`
-      - `src/`
-        - `assets/`
-        - `components/`
-          - `Custom/`
-          - `Home/`
-          - `ui/`
-        - `context/`
-        - `lib/`
-    - `App.css`
-    - `App.jsx`
-    - `#index.css`
-    - `#index.jsx`
-    - `main.jsx`
-    - `.gitignore`
-  - `components.json`
-  - `.eslintrc.cjs`
-  - `index.html`
-  - `.eslintrc.json`
-  - `package-lock.json`
-  - `package.json`
-  - `README.md`
-  - `vite.config.js`
-  - `.gitattributes`
-  - `CODE_OF_CONDUCT.md`
-  - `LEARN.md`
-
----
+```plaintext
+TravelGrid/client/
+├── public/                # Static assets
+├── src/
+│   ├── assets/            # Images, fonts, etc.
+│   ├── components/        # Reusable React components
+│   ├── pages/             # Page components
+│   ├── styles/            # Tailwind CSS and custom styles
+│   ├── App.jsx            # Main app component
+│   ├── main.jsx           # Entry point
+├── .gitignore             # Git ignore file
+├── package.json           # Project dependencies and scripts
+├── README.md              # Project documentation
+├── vite.config.js         # Vite configuration
+```
 
 ## Code of Conduct
 
