@@ -8,6 +8,7 @@ assignees: ''
 ---
 
 - [ ] I have checked that this issue has not already been opened.
+- Note: Fill the above [] with x to mark it.
 
 ## 🐞 Issue Description
 
