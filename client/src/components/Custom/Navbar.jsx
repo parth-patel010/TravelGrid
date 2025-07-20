@@ -8,11 +8,13 @@ const Navbar = () => {
         TravelGrid
       </div>
       <div className="flex gap-6 items-center">
-        <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</Link>
-        <Link to="/trips" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">Trips</Link>
-        <Link to="/various" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">Various</Link>
-        <Link to="/discover" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">Discover</Link>
-        <Link to="/forums" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">Forums</Link>
+        <Link to="/" className="text-black hover:text-pink-500 font-medium transition-colors">Home</Link>
+        <Link to="/ticket" className="text-black hover:text-pink-500 font-medium transition-colors">Ticket</Link>
+        <Link to="/packages" className="text-black hover:text-pink-500 font-medium transition-colors">Packages</Link>
+        <Link to="/hotels" className="text-black hover:text-pink-500 font-medium transition-colors">Hotels</Link>
+        <Link to="/guides" className="text-black hover:text-pink-500 font-medium transition-colors">Guides</Link>
+        <Link to="/contact" className="text-black hover:text-pink-500 font-medium transition-colors">Contact</Link>
+        <button className="ml-4 bg-zinc-800 hover:bg-zinc-900 text-white px-5 py-2 rounded-lg font-semibold transition-colors">Login</button>
       </div>
     </nav>
   );
