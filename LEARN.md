@@ -109,28 +109,19 @@ Ensure you have the following installed:
 5. Open `http://localhost:5173` in your browser to view the app.
 
 ---
-
 ## 🤝 Contributing to TravelGrid
 
-We welcome contributions from the GSSoC 2025 community! To ensure a smooth and professional collaboration, please adhere to the following guidelines.
+We welcome **GSSoC 2025** contributors! Follow these guidelines for a smooth collaboration.
 
-### Contribution Guidelines
-
-- **Modular Code**: Write clean, modular, and reusable code. Place React components in the `src/components/` directory.
-- **Code Quality**: Use ESLint and Prettier to maintain consistent code style.
-- **Pull Requests (PRs)**:
-  - Ensure your PR addresses a specific issue or task.
-  - Avoid introducing new bugs. PRs that create issues or disrupt functionality will not be merged.
-  - Provide a clear description of changes in your PR.
-- **Professionalism**: Be patient and respectful in all communications. Unnecessary complaints or unprofessional behavior will not be tolerated.
-- **Task Levels**: Tasks are assigned based on difficulty (easy, medium, hard) and will be reviewed during fixed daily meetings.
-
-### Task Assignment Process
-
-- Tasks are assigned daily at a fixed time.
-- Contributors must follow the assigned tasks and submit PRs for review.
-- PRs will be reviewed for quality, functionality, and adherence to guidelines. Low-quality or bug-inducing PRs will not be merged.
-- For any concerns, reach out to the project admin via the designated communication channel.
+- **Issues**: Pick an unassigned issue from the [Issues section](https://github.com/Adarsh-Chaubey03/TravelGrid/issues) or create a new one with a clear description. Wait for admin approval before starting.
+- **Responsive Design**: Ensure all code is responsive across screen sizes using **Tailwind CSS**.
+- **Code Quality**: Write clean, modular code in `src/components/`. Use **ESLint** and **Prettier**.
+- **Pull Requests**: Address a specific issue, test thoroughly, and include a clear description. Buggy PRs will not be merged.
+- **Task & PR Review**: Assignments and reviews happen daily from **6:00 PM to 7:00 PM**.
+- **Communication**: Avoid unnecessary comments or complaints. For support, contact:
+  - **GitHub**: [Adarsh-Chaubey03](https://github.com/Adarsh-Chaubey03)
+  - **LinkedIn**: [Adarsh Chaubey](https://www.linkedin.com/in/adarsh-chaubey/)
+- **Support Us**: Star the repo at [TravelGrid](https://github.com/Adarsh-Chaubey03/TravelGrid).
 
 ---
 

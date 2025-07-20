@@ -1,6 +1,6 @@
-> **Note**: This repository is dedicated to contributors of **GirlScript Summer of Code 2025 (GSSoC'25)**.
+**Note**: This repository is dedicated to contributors of **GirlScript Summer of Code 2025 (GSSoC'25)**.
 
-# TravelGrid
+# TravelGrid [Live Demo](https://travel-grid.vercel.app/)
 
 Welcome to **TravelGrid**, your all-in-one travel platform designed to streamline your travel planning experience! With TravelGrid, you can effortlessly book tickets, rent vehicles, reserve hotels, explore curated travel guides, and select customizable travel packages—all in one place. Whether you're a solo traveler or planning a group adventure, TravelGrid simplifies every step of your journey.
 
@@ -21,7 +21,6 @@ This project is proudly part of **GirlScript Summer of Code 2025 (GSSoC)**, and 
   - [Task Assignment Process](#task-assignment-process)
 - [Project Structure](#project-structure)
 - [Code of Conduct](#code-of-conduct)
-- [License](#license)
 
 ---
 
@@ -57,6 +56,9 @@ As a **GSSoC 2025** project, TravelGrid provides contributors with an opportunit
   - Git & GitHub for version control
   - Vite (Build tool for faster development)
   - ESLint & Prettier for code quality
+
+---
+
 ## 🚀 Getting Started
 
 Follow these steps to set up **TravelGrid** locally and begin contributing.
@@ -98,6 +100,9 @@ Ensure you have the following installed:
    ```
 
 5. Visit `http://localhost:5173` in your browser to view the application.
+
+---
+
 ## 🤝 Contributing to TravelGrid
 
 We welcome **GSSoC 2025** contributors! Follow these guidelines for a smooth collaboration.
@@ -111,3 +116,27 @@ We welcome **GSSoC 2025** contributors! Follow these guidelines for a smooth col
   - **GitHub**: [Adarsh-Chaubey03](https://github.com/Adarsh-Chaubey03)
   - **LinkedIn**: [Adarsh Chaubey](https://www.linkedin.com/in/adarsh-chaubey/)
 - **Support Us**: Star the repo at [TravelGrid](https://github.com/Adarsh-Chaubey03/TravelGrid).
+
+---
+
+## 📂 Project Structure
+
+```plaintext
+TravelGrid/client/
+├── public/                # Static assets
+├── src/
+│   ├── assets/            # Images, fonts, etc.
+│   ├── components/        # Reusable React components
+│   ├── pages/             # Page components
+│   ├── styles/            # Tailwind CSS and custom styles
+│   ├── App.jsx            # Main app component
+│   ├── main.jsx           # Entry point
+├── .gitignore             # Git ignore file
+├── package.json           # Project dependencies and scripts
+├── README.md              # Project documentation
+├── vite.config.js         # Vite configuration
+```
+
+## Code of Conduct
+
+Please refer to the [Code of Conduct](https://github.com/Adarsh-Chaubey03/TravelGrid?tab=coc-ov-file) for details on contributing guidelines and community standards.
