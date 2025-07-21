@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Navbar from './custom/navbar';
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -18,13 +19,16 @@ const Contact = () => {
   };
 
   const contactCards = [
-    { icon: '✈️', title: 'Travel Inquiries', info: 'hello@travelgrid.com', sub: 'Response within 2 hours', bg: 'bg-green-50 hover:bg-blue-50', color: 'text-blue-600', iconBg: '<from-blue-800></from-blue-800> to-blue-600' },
-    { icon: '🌍', title: '24/7 Support', info: '+91 1234567890', sub: 'Emergency assistance', bg: 'bg-green-50 hover:bg-green-100', color: 'text-green-600', iconBg: '<from-green-800></from-green-800> to-green-600' },
-    { icon: '📍', title: 'Visit Our Office', info: 'Xyz , New Delhi ', sub: 'Mon-Fri: 9AM-6PM', bg: 'bg-purple-50 hover:bg-purple-100', color: 'text-purple-600', iconBg: '<from-purple-800></from-purple-800> to-purple-600' }
+    { icon: '✈️', title: 'Travel Inquiries', info: 'hello@travelgrid.com', sub: 'Response within 2 hours', bg: 'bg-blue-50 hover:bg-blue-100', color: 'text-blue-600', iconBg: 'from-blue-500 to-blue-600' },
+    { icon: '🌍', title: '24/7 Support', info: '+91 1234567890', sub: 'Emergency assistance', bg: 'bg-green-50 hover:bg-green-100', color: 'text-green-600', iconBg: 'from-green-500 to-green-600' },
+    { icon: '📍', title: 'Visit Our Office', info: 'Xyz, New Delhi', sub: 'Mon-Fri: 9AM-6PM', bg: 'bg-purple-50 hover:bg-purple-100', color: 'text-purple-600', iconBg: 'from-purple-500 to-purple-600' }
   ];
 
   return (
     <div className="min-h-screen bg-gray-50">
+      
+      {/* Navbar at the top */}
+      <Navbar />
       
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white py-24 px-4 relative overflow-hidden">
