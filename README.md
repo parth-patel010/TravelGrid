@@ -1,5 +1,6 @@
 **Note**: This repository is dedicated to contributors of **GirlScript Summer of Code 2025 (GSSoC'25)**.
 
+<pre>All the tasks assignment and PR review will be done from 6pm to 8pm.</pre>
 # TravelGrid [Live Demo](https://travel-grid.vercel.app/)
 
 Welcome to **TravelGrid**, your all-in-one travel platform designed to streamline your travel planning experience! With TravelGrid, you can effortlessly book tickets, rent vehicles, reserve hotels, explore curated travel guides, and select customizable travel packages—all in one place. Whether you're a solo traveler or planning a group adventure, TravelGrid simplifies every step of your journey.
