@@ -4,7 +4,10 @@ import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home'
-import Contact from './components/Contact'
+
+//Created guides page to display travel guides
+import TravelGuidesCarousel from './pages/TravelGuidesProfiles.jsx'
+import Contact from './components/Contact
 
 import Discover from './pages/Discover'
 import Trips from './pages/Trips'
@@ -23,7 +26,11 @@ const router = createBrowserRouter([
       { path: '/review', element: <Review /> },
       { path: '/forums', element: <Forums /> },
       { path: '/contributors', element: <Contributors /> },
+ 
+      {path: '/guides', element: <TravelGuidesCarousel /> },
+
       { path: '/contact', element: <Contact /> },
+
     ],
   },
 ])
