@@ -12,7 +12,7 @@ import Testimonials from '../components/Home/Testimonials'
 function Home() {
     const [searchFilter, setSearchFilter] = useState(null);
     return (
-        <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-blue-50 to-pink-50 overflow-x-hidden">
+        <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-black to-pink-900 overflow-x-hidden">
             <Navbar />
             <main className="flex flex-col flex-1 items-center justify-start w-full h-full">
                 <HeroSection onSearch={setSearchFilter} />
