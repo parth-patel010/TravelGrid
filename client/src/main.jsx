@@ -10,6 +10,7 @@ import Discover from './pages/Discover'
 import Trips from './pages/Trips'
 import Review from './pages/Review'
 import Forums from './pages/Forums'
+import Contributors from './pages/Contributors'
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       { path: '/trips', element: <Trips /> },
       { path: '/review', element: <Review /> },
       { path: '/forums', element: <Forums /> },
+      { path: '/contributors', element: <Contributors /> },
     ],
   },
 ])
