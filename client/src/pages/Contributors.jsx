@@ -3,12 +3,20 @@ import React, { useEffect, useState } from 'react';
 export default function Contributors() {
   const [contributors, setContributors] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     fetch('https://api.github.com/repos/Adarsh-Chaubey03/TravelGrid/contributors')
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to fetch contributors');
+        return res.json();
+      })
       .then((data) => {
         setContributors(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setError(true);
         setLoading(false);
       });
   }, []);
@@ -28,6 +36,8 @@ export default function Contributors() {
       <h1 className="text-4xl font-bold text-pink-400 mb-8">Our Contributors</h1>
       {loading ? (
         <div className="text-pink-200 text-xl">Loading...</div>
+      ) : error ? (
+        <div className="text-pink-200 text-xl">Unable to load contributors. Please try again later.</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full max-w-5xl px-4">
           {contributors.map((contributor) => (
