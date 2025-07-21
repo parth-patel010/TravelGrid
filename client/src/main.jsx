@@ -4,8 +4,8 @@ import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home'
+import Contact from './components/Contact'
 
-// Placeholder pages (to be created if not exist)
 import Discover from './pages/Discover'
 import Trips from './pages/Trips'
 import Review from './pages/Review'
@@ -15,7 +15,7 @@ import Contributors from './pages/Contributors'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />, // App provides context and layout
+    element: <App />,
     children: [
       { path: '/', element: <Home /> },
       { path: '/discover', element: <Discover /> },
@@ -23,6 +23,7 @@ const router = createBrowserRouter([
       { path: '/review', element: <Review /> },
       { path: '/forums', element: <Forums /> },
       { path: '/contributors', element: <Contributors /> },
+      { path: '/contact', element: <Contact /> },
     ],
   },
 ])
@@ -31,4 +32,4 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>,
-) 
+)
