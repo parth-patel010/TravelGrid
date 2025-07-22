@@ -22,7 +22,7 @@ import ServerError from './components/ErrorHandle/ServerError'
 import TravelPackages from './pages/TravelPackages'
 import HotelBookingPage from './pages/HotelBookingPage'
 
-import TravelGuidesCarousel from './pages/TravelGuidesProfiles';
+
 
 
 const router = createBrowserRouter([
