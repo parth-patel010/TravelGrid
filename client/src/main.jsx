@@ -11,6 +11,12 @@ import Trips from './pages/Trips'
 import Review from './pages/Review'
 import Forums from './pages/Forums'
 import Contributors from './pages/Contributors'
+<<<<<<< Updated upstream
+=======
+import TicketBooking from './pages/TicketBooking'
+import TravelGuidesCarousel from './pages/TravelGuidesProfiles'
+
+>>>>>>> Stashed changes
 
 const router = createBrowserRouter([
   {
