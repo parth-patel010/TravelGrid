@@ -4,22 +4,7 @@ import Navbar from '../components/Custom/Navbar';
 import Footer from '../components/Custom/Footer';
 import hotels from '../data/hotels';
 
-/**
- * Hotels.jsx
- * -------------
- * Displays a searchable, card-based list of luxury hotels.
- *
- * Key features:
- * 1. Uses <Navbar/> and <Footer/> from the common layout to stay consistent with the overall theme.
- * 2. Maintains local state `query` to capture the search string typed by the user.
- * 3. Filters the static `hotels` dataset (imported from `../data/hotels`) in real time to only show
- *    hotels whose name or location match the query (case-insensitive).
- * 4. Renders each hotel as a visually-rich Tailwind card and includes a “Book Hotel” button.
- *    Clicking the button navigates to `/hotels/:id` using `useNavigate` from React-Router.
- * 5. Layout adapts responsively: 1 column on mobile, 2 on small screens, 3 on large.
- *
- * The component is entirely client-side and does not perform any network requests; all data is static.
- */
+
 function Hotels() {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
