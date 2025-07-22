@@ -9,17 +9,17 @@ import { AuthProvider } from './context/AuthContext'
 function App() {
   return (
     <AuthProvider>
-    <AppProvider>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <div className="flex-grow">
-          <ErrorBoundary>
-            <Outlet />
-          </ErrorBoundary>
+      <AppProvider>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <div className="flex-grow">
+            <ErrorBoundary>
+              <Outlet />
+            </ErrorBoundary>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </AppProvider>
+      </AppProvider>
     </AuthProvider>
   )
 }
