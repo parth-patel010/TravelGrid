@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
 
 class ErrorBoundary extends Component {
     constructor(props) {
@@ -29,9 +30,7 @@ class ErrorBoundary extends Component {
                     <div className="max-w-3xl w-full bg-gradient-to-br from-gray-900 to-black p-8 rounded-3xl shadow-2xl border border-pink-500">
                         <div className="mb-8 text-center">
                             <div className="inline-flex items-center justify-center w-20 h-20 bg-pink-500 bg-opacity-20 rounded-full mb-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-12 h-12 text-pink-500">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                </svg>
+                                <AlertTriangle className="w-12 h-12 text-pink-500" strokeWidth={1.5} />
                             </div>
                             <h1 className="text-4xl font-bold text-pink-400 mb-2">Oops! Something went wrong</h1>
                             <p className="text-gray-300">We're sorry, but we've encountered an unexpected error.</p>
@@ -52,14 +51,16 @@ class ErrorBoundary extends Component {
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <button
                                 onClick={() => window.location.reload()}
-                                className="px-6 py-3 bg-pink-600 hover:bg-pink-700 rounded-xl font-semibold transition-colors"
+                                className="px-6 py-3 bg-pink-600 hover:bg-pink-700 rounded-xl font-semibold transition-colors flex items-center justify-center"
                             >
+                                <RefreshCw className="w-5 h-5 mr-2" />
                                 Refresh Page
                             </button>
                             <Link
                                 to="/"
-                                className="px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-xl font-semibold transition-colors text-center"
+                                className="px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-xl font-semibold transition-colors text-center flex items-center justify-center"
                             >
+                                <Home className="w-5 h-5 mr-2" />
                                 Return to Home
                             </Link>
                         </div>
