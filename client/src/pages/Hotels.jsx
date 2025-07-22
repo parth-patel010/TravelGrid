@@ -19,7 +19,7 @@ function Hotels() {
 
   return (
     <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-black to-pink-900 overflow-x-hidden">
-      <Navbar />
+      {/* <Navbar /> */}
       <main className="flex flex-col flex-1 w-full items-center">
         {/* Hero + Search */}
         <section className="w-full py-24 flex flex-col items-center text-center px-4">
@@ -78,7 +78,7 @@ function Hotels() {
           )}
         </section>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
