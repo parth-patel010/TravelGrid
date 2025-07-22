@@ -14,6 +14,7 @@ import Review from './pages/Review'
 import Forums from './pages/Forums'
 import Contributors from './pages/Contributors'
 import TicketBooking from './pages/TicketBooking'
+import TravelPackages from './pages/TravelPackages'
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
       { path: '/ticket', element: <TicketBooking /> },
  
       {path: '/guides', element: <TravelGuidesCarousel /> },
-
+      { path: '/packages', element: <TravelPackages /> },
 
       { path: '/contact', element: <Contact /> },
 

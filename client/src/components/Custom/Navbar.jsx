@@ -56,6 +56,7 @@ const Navbar = () => {
     { name: "Packages", path: "/packages", icon: <Package size={18} /> },
     { name: "Hotels", path: "/hotels", icon: <Building2 size={18} /> },
     { name: "Guides", path: "/guides", icon: <UserRound size={18} /> },
+    { name: "Packages", path: "/packages", icon: <UserRound size={18} /> },
     { name: "Contact", path: "/contact", icon: <Contact size={18} /> },
   ];
   
