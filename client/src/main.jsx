@@ -39,8 +39,8 @@ import { AuthProvider } from './context/AuthContext'
 
 const router = createBrowserRouter([
 
-      { path: "/login", element: <Login /> },
-      { path: "/signup", element: <Signup /> },
+  { path: "/login", element: <Login /> },
+  { path: "/signup", element: <Signup /> },
   {
     path: '/',
     element: <App />,
@@ -85,7 +85,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary>
       <AuthProvider>
-      <RouterProvider router={router} />
+        <RouterProvider router={router} />
       </AuthProvider>
     </ErrorBoundary>
   </StrictMode>,
