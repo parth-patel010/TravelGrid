@@ -59,7 +59,7 @@ const hotels = [
     name: 'Raffles',
     location: 'Singapore',
     rating: 5,
-    image: 'https://images.unsplash.com/photo-1544982990-9b1411a45ba1?auto=format&fit=crop&w=800&q=80',
+    image: 'https://plus.unsplash.com/premium_photo-1661878434394-7f7e3d032b2a?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description:
       'Where the Singapore Sling was born, Raffles is an oasis of colonial-style luxury, tropical gardens, and storied heritage suites.',
   },
