@@ -1,3 +1,21 @@
+/**
+ * hotels.js
+ * ----------
+ * Static dataset of renowned luxury hotels used by the Hotels and HotelDetails pages.
+ *
+ * Each object inside the exported `hotels` array has the following shape:
+ * {
+ *    id:        string   – unique slug used in route `/hotels/:id`.
+ *    name:      string   – hotel display name.
+ *    location:  string   – city & country.
+ *    rating:    number   – star rating (currently all 5 for demo purposes).
+ *    image:     string   – URL of a representative banner image (Unsplash CDN).
+ *    description:string   – short marketing blurb shown in list & details views.
+ * }
+ *
+ * NOTE: Because the data is baked into the bundle, there is no network latency or
+ * failure mode. In the future, this file can be replaced with an API request.
+ */
 const hotels = [
   {
     id: 'taj-mahal-palace',

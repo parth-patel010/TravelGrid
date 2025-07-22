@@ -3,11 +3,27 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Custom/Navbar';
 import Footer from '../components/Custom/Footer';
 import hotels from '../data/hotels';
-
+/**
+ * HotelDetails.jsx
+ * ----------------
+ * Provides a detailed view of a single hotel selected from the list page.
+ *
+ * Behaviour:
+ * • Reads the dynamic URL segment (`/hotels/:id`) via `useParams` to identify which hotel should be displayed.
+ * • Looks up the hotel information from the static `hotels` array.
+ * • If the id is invalid, a graceful fallback screen is rendered with a link back to the hotels list.
+ * • Otherwise, shows:
+ *    – Hero section with a large banner image overlayed by the hotel name & location.
+ *    – Description paragraph.
+ *    – Placeholder “Proceed to Book” action (currently alerts; hook up to booking flow later).
+ *
+ * The component is strictly presentational – there is no API call at this stage.
+ */
+// build function to get the hotel details from the hotels.js file 
 function HotelDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const hotel = hotels.find((h) => h.id === id);
+  const hotel = hotels.find((h) => h.id === id); // Linear search through the static list based on the route param
 
   if (!hotel) {
     return (
