@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Navbar from '../components/Custom/Navbar';
-import Footer from '../components/Custom/Footer';
 
 const travelOptions = [
   { label: 'Flight', value: 'flight' },
@@ -31,7 +29,6 @@ function TicketBooking() {
 
   return (
     <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-blue-50 to-pink-50 overflow-x-hidden">
-      <Navbar />
       <main className="flex flex-col flex-1 items-center justify-center w-full h-full pt-24 pb-8 relative z-10">
         <div className="bg-white rounded-3xl shadow-2xl p-10 w-full max-w-lg flex flex-col items-center border border-pink-200">
           <h2 className="text-4xl font-extrabold text-pink-500 mb-8 tracking-tight drop-shadow">Book Your Ticket</h2>
@@ -76,7 +73,6 @@ function TicketBooking() {
           )}
         </div>
       </main>
-      <Footer />
     </div>
   );
 }
