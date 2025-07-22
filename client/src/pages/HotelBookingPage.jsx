@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import "./HotelBookingPage.css";
+
+import "./styles/HotelBookingPage.css";
+
 
 const hotelsData = [
   { id: 1, name: "The Grand Palace", price: 2200, rating: 4.5 },
