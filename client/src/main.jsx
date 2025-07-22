@@ -5,14 +5,7 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home'
 
-<<<<<<< Updated upstream
-// Placeholder pages (to be created if not exist)
-=======
-//Created guides page to display travel guides
-import TravelGuidesCarousel from './pages/TravelGuidesProfiles.jsx'
 import Contact from './pages/Contact'
-
->>>>>>> Stashed changes
 import Discover from './pages/Discover'
 import Trips from './pages/Trips'
 import Review from './pages/Review'
@@ -30,6 +23,7 @@ const router = createBrowserRouter([
       { path: '/review', element: <Review /> },
       { path: '/forums', element: <Forums /> },
       { path: '/contributors', element: <Contributors /> },
+      {path:'/contact',element: <Contact/>},
     ],
   },
 ])
