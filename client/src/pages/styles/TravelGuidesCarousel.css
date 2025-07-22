@@ -1,0 +1,301 @@
+.travel-guides-section {
+  width: 100%;
+  background: linear-gradient(to bottom right, #ebf8ff, #ffe0f0);
+  padding: 50px 20px; /* reduced vertical padding */
+  text-align: center;
+  margin-top: -50px;  /* moves it up */
+  min-height: 120vh; /* ⬅ ensures full height coverage for smaller screens */
+}
+
+
+.main-heading {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.sub-caption {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 3rem;
+}
+
+.carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+  height: 420px;
+  margin-top: -40px;
+  overflow: hidden; /* ⬅ prevent overflow of sliding cards */
+}
+
+
+.carousel-track {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.card {
+  position: absolute;
+  width: 320px;
+  height: 360px;
+  padding: 20px;
+  border-radius: 20px;
+  background: linear-gradient(to bottom right, #dbeafe, #fce7f3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  opacity: 0;
+  z-index: 0;
+}
+
+
+
+.card.left {
+  transform: translateX(-340px) scale(0.92);
+  opacity: 1;
+  z-index: 2;
+}
+
+.card.center {
+  transform: translateX(0px) scale(1.1);
+  opacity: 1;
+  z-index: 3;
+}
+
+.card.right {
+  transform: translateX(340px) scale(0.92);
+  opacity: 1;
+  z-index: 2;
+}
+
+
+
+.card-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 16px;
+  border: 4px solid #ec4899;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-info h3 {
+  font-size: 1.25rem;
+  margin-bottom: 5px;
+  color: #1f2937;
+}
+
+.expertise {
+  color: #ec4899;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.bio {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-bottom: 12px;
+}
+
+.view-btn {
+  background-color: #1f2937;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.view-btn:hover {
+  background-color: #111827;
+  transform: scale(1.05);
+}
+
+.carousel-btn {
+  font-size: 2rem;
+  color: #1f2937;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  padding: 10px;
+  transition: transform 0.2s ease;
+}
+.carousel-btn:hover {
+  transform: scale(1.2);
+}
+
+.carousel-btn.left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-btn.right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+  .card.left, .card.right {
+    display: none;
+  }
+  .card.center {
+    transform: scale(1.05);
+  }
+  .carousel-container {
+    height: 400px;
+    margin: auto;
+  }
+  .carousel-title {
+    text-align: center;
+  }
+  .profile-details {
+    padding: 20px;
+  }
+  .main-heading{
+    margin-top: 20px;
+  }
+}
+
+.card:not(.left):not(.center):not(.right) {
+  transform: translateX(0) scale(0.8);
+  opacity: 0;
+  z-index: 1;
+}
+
+.profile-section {
+  animation: slideIn 0.5s ease-in-out;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.profile-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 20px;
+}
+
+.profile-heading hr {
+  flex: 1;
+  border: none;
+  height: 2px;
+  background-color: #ff80ab; /* soft pink */
+}
+
+.profile-heading h2 {
+  color: #000000;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.profile-box {
+background-color: linear-gradient(to bottom right, #ebf8ff, #ffe0f0);
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: left;
+  animation: fadeInUp 0.5s ease-in-out;
+}
+
+.profile-box p {
+  margin: 10px 0;
+  font-size: 1.1rem;
+  color: #444;
+}
+
+.profile-box strong {
+  color: #d81b60;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.profile-section {
+  margin-top: 60px;
+  text-align: center;
+  padding: 30px;
+  background: linear-gradient(to bottom right, #ebf8ff, #ffe0f0);
+  border-radius: 20px;
+}
+
+.profile-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: #000000;
+  margin-bottom: 30px;
+}
+
+.profile-heading .line {
+  flex: 1;
+  height: 2px;
+  background-color: #000000;
+}
+
+.profile-details-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to bottom right, #ebf8ff, #ffe0f0);
+  border: 2px solid #e8bfcd;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.profile-pic {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+ border: 3px solid #ddb6c3;
+}
+
+.profile-text p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #333;
+}  
