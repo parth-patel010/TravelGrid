@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../components/Custom/Navbar';
-import Footer from '../components/Custom/Footer';
 import { Home, Map, Ticket, BookOpen, Mail, AlertCircle, ArrowRight } from 'lucide-react';
 
 const NotFound = () => {
@@ -39,7 +37,6 @@ const NotFound = () => {
 
     return (
         <div className="flex flex-col min-h-screen bg-gradient-to-br from-black to-pink-900">
-            <Navbar />
 
             <main className="flex flex-1 items-center justify-center w-full px-4 py-12">
                 <div className="text-center max-w-3xl mx-auto">
@@ -115,7 +112,6 @@ const NotFound = () => {
                 </div>
             </main>
 
-            <Footer />
         </div>
     );
 };

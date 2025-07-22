@@ -21,6 +21,7 @@ import HotelDetails from './pages/HotelDetails'
 
 import TicketBooking from './pages/TicketBooking'
 
+
 import NotFound from './pages/NotFound'
 import ErrorBoundary from './components/ErrorHandle/ErrorBoundary'
 import NetworkError from './components/ErrorHandle/NetworkError'
@@ -28,8 +29,8 @@ import ServerError from './components/ErrorHandle/ServerError'
 
 import TravelPackages from './pages/TravelPackages'
 import HotelBookingPage from './pages/HotelBookingPage'
-
-
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 
 
@@ -55,6 +56,8 @@ const router = createBrowserRouter([
       { path: '/packages', element: <TravelPackages /> },
 
       { path: '/contact', element: <Contact /> },
+      {path:"/login", element:<Login/>},
+      {path:"/signup", element:<Signup/>},
 
       // Error handling routes
       { path: '/network-error', element: <NetworkError /> },
