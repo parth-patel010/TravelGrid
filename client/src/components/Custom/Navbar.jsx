@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { 
-  Home, 
-  Ticket, 
-  Package, 
-  Building2, 
-  UserRound, 
-  Contact, 
+import {
+  Home,
+  Ticket,
+  Package,
+  Building2,
+  UserRound,
+  Contact,
   LogIn,
-  Menu, 
-  X, 
+  Menu,
+  X,
   ChevronRight,
   User,
   LogOut,
@@ -24,13 +24,13 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout, isAuthenticated } = useAuth();
-  
+
   // Close sidebar when route changes
   useEffect(() => {
     setIsSidebarOpen(false);
     setShowUserMenu(false);
   }, [location.pathname]);
-  
+
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
@@ -40,7 +40,7 @@ const Navbar = () => {
         setScrolled(false);
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -52,7 +52,7 @@ const Navbar = () => {
     } else {
       document.body.style.overflow = 'auto';
     }
-    
+
     return () => {
       document.body.style.overflow = 'auto';
     };
@@ -66,7 +66,7 @@ const Navbar = () => {
     { name: "Guides", path: "/guides", icon: <UserRound size={18} /> },
     { name: "Contact", path: "/contact", icon: <Contact size={18} /> },
   ];
-  
+
   const isActive = (path) => location.pathname === path;
 
   const handleLogout = () => {
@@ -78,7 +78,7 @@ const Navbar = () => {
   return (
     <>
       {/* Main Navbar */}
-      <nav 
+      <nav
         className={`w-full py-3 px-4 md:px-8 fixed top-0 left-0 z-40 transition-all duration-300 
           ${scrolled ? 'bg-black/95 backdrop-blur-md shadow-lg' : 'bg-black/60 backdrop-blur-sm'}`}
       >
@@ -89,24 +89,23 @@ const Navbar = () => {
               TravelGrid
             </div>
           </Link>
-          
+
           {/* Desktop Navigation */}
           <div className="hidden md:flex gap-6 items-center">
             {navLinks.map((link) => (
-              <Link 
+              <Link
                 key={link.path}
                 to={link.path}
-                className={`font-medium transition-colors flex items-center gap-2 ${
-                  isActive(link.path) 
-                    ? 'text-pink-400' 
+                className={`font-medium transition-colors flex items-center gap-2 ${isActive(link.path)
+                    ? 'text-pink-400'
                     : 'text-white hover:text-pink-300'
-                }`}
+                  }`}
               >
                 {link.icon}
                 {link.name}
               </Link>
             ))}
-            
+
             {/* Auth Section */}
             {isAuthenticated ? (
               <div className="relative">
@@ -121,7 +120,7 @@ const Navbar = () => {
                   />
                   <span className="hidden lg:block">{user.name.split(' ')[0]}</span>
                 </button>
-                
+
                 {/* User Dropdown */}
                 {showUserMenu && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
@@ -170,9 +169,9 @@ const Navbar = () => {
               </div>
             )}
           </div>
-          
+
           {/* Mobile Menu Button */}
-          <button 
+          <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             className="md:hidden flex items-center text-pink-400 relative"
             aria-label="Toggle menu"
@@ -182,24 +181,22 @@ const Navbar = () => {
           </button>
         </div>
       </nav>
-      
+
       {/* Mobile Sidebar */}
-      <div 
-        className={`fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300 md:hidden ${
-          isSidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
+      <div
+        className={`fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300 md:hidden ${isSidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
         onClick={() => setIsSidebarOpen(false)}
       />
-      
-      <div 
-        className={`fixed top-0 right-0 h-full w-[75%] max-w-[300px] bg-gradient-to-br from-black to-zinc-900 z-50 transform transition-transform duration-300 ease-in-out shadow-xl md:hidden ${
-          isSidebarOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+
+      <div
+        className={`fixed top-0 right-0 h-full w-[75%] max-w-[300px] bg-gradient-to-br from-black to-zinc-900 z-50 transform transition-transform duration-300 ease-in-out shadow-xl md:hidden ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
       >
         <div className="p-5 flex flex-col h-full">
           {/* Close Button */}
           <div className="flex justify-end mb-8">
-            <button 
+            <button
               onClick={() => setIsSidebarOpen(false)}
               className="text-pink-400 p-1 hover:bg-pink-500/10 rounded-full"
               aria-label="Close menu"
@@ -207,14 +204,14 @@ const Navbar = () => {
               <X size={24} />
             </button>
           </div>
-          
+
           {/* Mobile Logo */}
           <Link to="/" className="flex items-center mb-8">
             <div className="text-2xl font-bold text-pink-400 tracking-tight">
               TravelGrid
             </div>
           </Link>
-          
+
           {/* User Info (Mobile) */}
           {isAuthenticated && (
             <div className="flex items-center gap-3 mb-6 p-3 bg-white/10 rounded-lg">
@@ -229,18 +226,17 @@ const Navbar = () => {
               </div>
             </div>
           )}
-          
+
           {/* Mobile Navigation Links */}
           <div className="flex flex-col gap-3">
             {navLinks.map((link) => (
-              <Link 
+              <Link
                 key={link.path}
                 to={link.path}
-                className={`font-medium py-2.5 px-3 rounded-lg transition-colors flex items-center justify-between ${
-                  isActive(link.path) 
-                    ? 'bg-pink-500/20 text-pink-400' 
+                className={`font-medium py-2.5 px-3 rounded-lg transition-colors flex items-center justify-between ${isActive(link.path)
+                    ? 'bg-pink-500/20 text-pink-400'
                     : 'text-white hover:bg-pink-500/10 hover:text-pink-300'
-                }`}
+                  }`}
               >
                 <div className="flex items-center gap-3">
                   <span className="text-pink-400">{link.icon}</span>
@@ -249,7 +245,7 @@ const Navbar = () => {
                 <ChevronRight size={16} className="text-pink-400/70" />
               </Link>
             ))}
-            
+
             {/* Mobile Auth Links */}
             {isAuthenticated ? (
               <>
@@ -295,11 +291,11 @@ const Navbar = () => {
               </>
             )}
           </div>
-          
+
           {/* Footer Links in Mobile */}
           <div className="mt-auto pt-8 border-t border-pink-900/30">
-            <Link 
-              to="/contributors" 
+            <Link
+              to="/contributors"
               className="text-pink-400 text-sm hover:underline"
             >
               Contributors
@@ -307,7 +303,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Spacer to prevent content from going under navbar */}
       <div className="h-[60px]"></div>
     </>
