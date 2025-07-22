@@ -29,8 +29,11 @@ import ServerError from './components/ErrorHandle/ServerError'
 
 import TravelPackages from './pages/TravelPackages'
 import HotelBookingPage from './pages/HotelBookingPage'
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+import Dashboard from './pages/Dashboard'
+import ProtectedRoute from './components/Auth/ProtectedRoute'
+
 import FAQ from './pages/FAQ.jsx'
 
 
@@ -59,6 +62,15 @@ const router = createBrowserRouter([
       { path: '/contact', element: <Contact /> },
       {path:"/login", element:<Login/>},
       {path:"/signup", element:<Signup/>},
+
+       { 
+        path: '/dashboard', 
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        ) 
+      },
 
       // Error handling routes
       { path: '/network-error', element: <NetworkError /> },

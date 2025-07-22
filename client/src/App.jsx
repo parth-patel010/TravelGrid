@@ -4,9 +4,11 @@ import { Outlet } from 'react-router-dom'
 import ErrorBoundary from './components/ErrorHandle/ErrorBoundary'
 import Navbar from './components/Custom/Navbar'
 import Footer from './components/Custom/Footer'
+import { AuthProvider } from './context/AuthContext'
 
 function App() {
   return (
+    <AuthProvider>
     <AppProvider>
       <div className="flex flex-col min-h-screen">
         <Navbar />
@@ -18,6 +20,7 @@ function App() {
         <Footer />
       </div>
     </AppProvider>
+    </AuthProvider>
   )
 }
 

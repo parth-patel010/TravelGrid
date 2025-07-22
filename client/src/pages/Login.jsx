@@ -1,135 +1,152 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { Eye, EyeOff, Mail, Lock, LogIn, AlertCircle } from 'lucide-react';
 
-export default function Login() {
+const Login = () => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  
+  const { login, isLoading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  const from = location.state?.from?.pathname || '/';
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-
-  // Password validation function
-  const validatePassword = (pwd) => {
-    const lengthCheck = pwd.length >= 8;
-    const numberCheck = /\d/.test(pwd);
-    const specialCharCheck = /[!@#$%^&*(),.?":{}|<>]/.test(pwd);
-
-    if (!lengthCheck) {
-      return "Password must be at least 8 characters.";
-    }
-    if (!numberCheck) {
-      return "Password must include at least one number.";
-    }
-    if (!specialCharCheck) {
-      return "Password must include at least one special character.";
-    }
-    return "";
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+    setError('');
   };
 
-  const handlePasswordChange = (e) => {
-    const value = e.target.value;
-    setPassword(value);
-    setPasswordError(validatePassword(value));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!formData.email || !formData.password) {
+      setError('Please fill in all fields');
+      return;
+    }
 
-    // You can connect to API or backend here
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Password:", password);
+    const result = await login(formData.email, formData.password);
+    
+    if (result.success) {
+      navigate(from, { replace: true });
+    } else {
+      setError(result.error);
+    }
   };
-  const handleGoogleLogin = () => {
-    console.log("Google login clicked - integrate OAuth here.");
-  };
+
   return (
-    <div className="min-h-screen w-full flex flex-col lg:flex-row">
-      {/* Left: Background image only for large screens */}
-      <div className="hidden lg:block lg:w-2/3 relative">
-        <div
-          className="absolute inset-0 bg-cover bg-center z-0"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1695045038427-3acc1c0df23c?w=1600&auto=format&fit=crop&q=80')",
-          }}
-        ></div>
-        <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/0 via-black/40 to-black"></div>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-black to-pink-900 flex items-center justify-center p-4">
+      <div className="max-w-md w-full">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <Link to="/" className="inline-block mb-6">
+            <div className="text-3xl font-bold text-pink-400 tracking-tight">
+              TravelGrid
+            </div>
+          </Link>
+          <h1 className="text-3xl font-bold text-white mb-2">Welcome Back</h1>
+          <p className="text-gray-300">Sign in to your account to continue your journey</p>
+        </div>
 
-      {/* Right: Login form on all screen sizes */}
-      <div className="w-full h-screen lg:w-1/3 bg-black flex items-center justify-center p-8">
-        <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-sm">
-          <h2 className="text-3xl font-semibold text-pink-500 mb-6 text-center">
-            Welcome Back
-          </h2>
+        {/* Demo Credentials */}
+        <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mb-6">
+          <h3 className="text-blue-400 font-semibold mb-2">Demo Credentials:</h3>
+          <p className="text-blue-300 text-sm">Email: demo@travelgrid.com</p>
+          <p className="text-blue-300 text-sm">Password: password123</p>
+        </div>
 
-          <form onSubmit={handleSubmit}>
+        {/* Login Form */}
+        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {error && (
+              <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex items-center gap-3">
+                <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
+                <span className="text-red-300 text-sm">{error}</span>
+              </div>
+            )}
+
             {/* Email Field */}
-            <div className="mb-4">
-              <input
-                type="email"
-                required
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400"
-              />
+            <div>
+              <label className="block text-white font-medium mb-2">Email Address</label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
             </div>
 
             {/* Password Field */}
-            <div className="mb-1">
-              <input
-                type="password"
-                required
-                placeholder="Password"
-                value={password}
-                onChange={handlePasswordChange}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400"
-              />
+            <div>
+              <label className="block text-white font-medium mb-2">Password</label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-12 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                  placeholder="Enter your password"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
             </div>
 
-            {/* Password Error or Success */}
-            {password && (
-              <p
-                className={`text-sm mt-1 ${
-                  passwordError ? "text-red-500" : "text-green-500"
-                }`}
-              >
-                {passwordError || "Password looks good!"}
-              </p>
-            )}
-            <button
-            onClick={handleGoogleLogin}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400"
-          >
-            <span className="text-sm font-medium text-gray-700">
-              Login with Google
-            </span>
-          </button>
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full mt-6 bg-pink-500 text-white py-3 rounded-lg hover:bg-pink-600 transition duration-300 disabled:opacity-50"
-              disabled={!!passwordError}
+              disabled={isLoading}
+              className="w-full bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Login
+              {isLoading ? (
+                <>
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                  Signing In...
+                </>
+              ) : (
+                <>
+                  <LogIn className="w-5 h-5" />
+                  Sign In
+                </>
+              )}
             </button>
           </form>
 
-          {/* Signup Link */}
-          <p className="mt-4 text-center text-sm text-gray-600">
-            Don’t have an account?{" "}
-            <span
-              className="text-pink-500 cursor-pointer hover:underline"
-              onClick={() => navigate("/signup")}
-            >
-              Sign up
-            </span>
-          </p>
+          {/* Footer */}
+          <div className="mt-6 text-center">
+            <p className="text-gray-300">
+              Don't have an account?{' '}
+              <Link to="/signup" className="text-pink-400 hover:text-pink-300 font-medium">
+                Sign up here
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Login;
