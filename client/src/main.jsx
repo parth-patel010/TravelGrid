@@ -3,17 +3,21 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
 import Home from './pages/Home'
-
-
 import Contact from './pages/Contact'
-
 import Discover from './pages/Discover'
 import Trips from './pages/Trips'
 import Review from './pages/Review'
 import Forums from './pages/Forums'
 import Contributors from './pages/Contributors'
 import TicketBooking from './pages/TicketBooking'
+import TravelGuidesCarousel from './pages/TravelGuidesProfiles'
+
+import NotFound from './pages/NotFound'
+import ErrorBoundary from './components/ErrorHandle/ErrorBoundary'
+import NetworkError from './components/ErrorHandle/NetworkError'
+import ServerError from './components/ErrorHandle/ServerError'
 
 const router = createBrowserRouter([
   {
@@ -28,18 +32,22 @@ const router = createBrowserRouter([
       { path: '/contributors', element: <Contributors /> },
 
       { path: '/ticket', element: <TicketBooking /> },
- 
-      {path: '/guides', element: <TravelGuidesCarousel /> },
 
-
+      { path: '/guides', element: <TravelGuidesCarousel /> },
       { path: '/contact', element: <Contact /> },
 
+      // Error handling routes
+      { path: '/network-error', element: <NetworkError /> },
+      { path: '/server-error', element: <ServerError /> },
+      { path: '*', element: <NotFound /> },
     ],
   },
 ])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ErrorBoundary>
+      <RouterProvider router={router} />
+    </ErrorBoundary>
   </StrictMode>,
 )
