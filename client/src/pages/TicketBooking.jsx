@@ -235,7 +235,7 @@ function TicketBooking() {
           )}
         </div>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
