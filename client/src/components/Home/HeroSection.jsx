@@ -21,10 +21,18 @@ const HeroSection = ({ onSearch }) => {
   return (
     <section className="relative w-screen min-h-[80vh] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center opacity-90 z-10" />
+     <div
+  className="absolute inset-0 bg-cover bg-center opacity-90 z-10"
+  style={{
+    backgroundImage:
+      "url('https://images.unsplash.com/photo-1695045038427-3acc1c0df23c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzl8fG5pZ2h0JTIwYmVhY2h8ZW58MHx8MHx8fDA%3D')",
       
+  }}
+></div>
+
+
       {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-black bg-opacity-30 z-15" />
+      <div className="absolute inset-0 bg-opacity-30 z-15" />
       
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
