@@ -14,8 +14,12 @@ import Review from './pages/Review'
 import Forums from './pages/Forums'
 import Contributors from './pages/Contributors'
 import TicketBooking from './pages/TicketBooking'
+
 import TravelPackages from './pages/TravelPackages'
 import HotelBookingPage from './pages/HotelBookingPage'
+
+import TravelGuidesCarousel from './pages/TravelGuidesProfiles';
+
 
 const router = createBrowserRouter([
   {
