@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Typewriter from "typewriter-effect";
 
 const HeroSection = ({ onSearch }) => {
   const [location, setLocation] = useState("");
@@ -37,16 +38,27 @@ const HeroSection = ({ onSearch }) => {
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
           
-          {/* Left Side - Hero Content */}
-          <div className="flex-1 text-center lg:text-left text-white">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 tracking-tight leading-tight">
-              Explore{" "}
-              <span className="text-yellow-400">your amazing city</span>
+         <div className="flex-1 text-center lg:text-left text-white">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 tracking-tight leading-tight font-[Playfair Display]">
+              Explore&nbsp;
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 inline-block min-h-[1.5em]">
+                <Typewriter
+                  options={{
+                    strings: ['Restaurants!', 'Events!', 'Shopping!', 'Hotels!', 'Your City!'],
+                    autoStart: true,
+                    loop: true,
+                    delay: 50,
+                    deleteSpeed: 20,
+                  }}
+                />
+              </span>
             </h1>
-            <p className="text-lg md:text-xl mb-8 font-normal text-gray-100 max-w-2xl">
-              Find great places to stay, eat, shop, or visit from local experts
+
+            <p className="text-lg md:text-xl mb-8 font-medium text-gray-100 max-w-2xl font-[Poppins] animate-fadeIn">
+              Find great places to stay, eat, shop, or visit from local experts.
             </p>
-          </div>
+         </div>
+
 
           {/* Right Side - Search Bar and Filters */}
           <div className="flex-1 w-full max-w-md">

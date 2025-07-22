@@ -100,40 +100,40 @@ const Footer = () => {
             </div>
 
             {/* Column 4: Newsletter */}
-                  <div className="space-y-4">
-                    <h4 className="text-lg font-semibold text-black">Newsletter</h4>
-                    <p className="text-gray-600 text-sm">Subscribe to get the latest travel tips and exclusive offers.</p>
-                    <form onSubmit={handleNewsletterSubmit} className="space-y-3">
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter your email"
-                      className="w-full px-3 py-2 bg-gray-100 border-2 border-black rounded-md text-gray-800 
+            <div className="space-y-4">
+              <h4 className="text-lg font-semibold text-black">Newsletter</h4>
+              <p className="text-gray-600 text-sm">Subscribe to get the latest travel tips and exclusive offers.</p>
+              <form onSubmit={handleNewsletterSubmit} className="space-y-3">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-full px-3 py-2 bg-gray-100 border-2 border-black rounded-md text-gray-800 
                       placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent 
                       text-sm transition-all duration-300 hover:bg-gray-200"
-                      required
-                    />
-                    <button
-                      type="submit"
-                      className="w-full bg-zinc-800 hover:bg-zinc-900 text-white py-2 px-4 rounded-md 
+                  required
+                />
+                <button
+                  type="submit"
+                  className="w-full bg-zinc-800 hover:bg-zinc-900 text-white py-2 px-4 rounded-md 
                       transition-all duration-300 text-sm font-medium transform hover:scale-[1.02] 
                       hover:shadow-lg active:scale-[0.98]"
-                    >
-                      Subscribe
-                    </button>
-                    </form>
-                  </div>
-                  </div>
+                >
+                  Subscribe
+                </button>
+              </form>
+            </div>
+          </div>
 
-                  {/* /* Bottom section */}
-                        <div className="border-t border-gray-300 mt-8 pt-8 flex flex-col md:flex-row justify-center items-center">
-                        <p className="text-gray-500 text-sm text-center">© 2025 TravelGrid. All rights reserved.</p>
-                        </div>
-                      </div>
-                      </footer>
+          {/* /* Bottom section */}
+          <div className="border-t border-gray-300 mt-8 pt-8 flex flex-col md:flex-row justify-center items-center">
+            <p className="text-gray-500 text-sm text-center">© 2025 TravelGrid. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
 
-                      {/* Toast Notification */}
+      {/* Toast Notification */}
       {toast.show && (
         <div className="fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-2 duration-300">
           <div

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Navbar from '../components/Custom/Navbar';
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -26,9 +25,6 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      
-      {/* Navbar at the top */}
-      <Navbar />
       
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white py-24 px-4 relative overflow-hidden">
