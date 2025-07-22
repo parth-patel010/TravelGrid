@@ -13,7 +13,7 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
-  
+
   const { signup, isLoading } = useAuth();
   const navigate = useNavigate();
 
@@ -30,32 +30,32 @@ const Signup = () => {
       setError('Please fill in all fields');
       return false;
     }
-    
+
     if (formData.name.length < 2) {
       setError('Name must be at least 2 characters long');
       return false;
     }
-    
+
     if (formData.password.length < 6) {
       setError('Password must be at least 6 characters long');
       return false;
     }
-    
+
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       return false;
     }
-    
+
     return true;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
 
     const result = await signup(formData);
-    
+
     if (result.success) {
       navigate('/', { replace: true });
     } else {
@@ -66,7 +66,7 @@ const Signup = () => {
   const getPasswordStrength = () => {
     const password = formData.password;
     if (!password) return '';
-    
+
     if (password.length < 6) return 'weak';
     if (password.length < 8) return 'medium';
     return 'strong';

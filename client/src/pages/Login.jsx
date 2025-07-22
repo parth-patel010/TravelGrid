@@ -10,11 +10,11 @@ const Login = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
-  
+
   const { login, isLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   const from = location.state?.from?.pathname || '/';
 
   const handleChange = (e) => {
@@ -27,14 +27,14 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!formData.email || !formData.password) {
       setError('Please fill in all fields');
       return;
     }
 
     const result = await login(formData.email, formData.password);
-    
+
     if (result.success) {
       navigate(from, { replace: true });
     } else {
