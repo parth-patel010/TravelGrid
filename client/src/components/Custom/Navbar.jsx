@@ -12,7 +12,7 @@ import {
   X, 
   ChevronRight 
 } from "lucide-react";
-
+import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -62,7 +62,7 @@ const Navbar = () => {
   ];
   
   const isActive = (path) => location.pathname === path;
-
+  const navigate=useNavigate();
   return (
     <>
       {/* Main Navbar */}
@@ -94,7 +94,7 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <button className="ml-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2">
+            <button onClick={() => navigate("/login")} className="ml-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2">
               <LogIn size={18} />
               Login
             </button>
