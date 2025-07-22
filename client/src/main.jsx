@@ -5,23 +5,29 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home'
 
+
 import Contact from './pages/Contact'
+
 import Discover from './pages/Discover'
 import Trips from './pages/Trips'
 import Review from './pages/Review'
 import Forums from './pages/Forums'
 import Contributors from './pages/Contributors'
-<<<<<<< Updated upstream
-=======
+
 import TicketBooking from './pages/TicketBooking'
 import TravelGuidesCarousel from './pages/TravelGuidesProfiles'
+import TicketBooking from './pages/TicketBooking'
 
->>>>>>> Stashed changes
+import TravelPackages from './pages/TravelPackages'
+import HotelBookingPage from './pages/HotelBookingPage'
+
+
+
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />, // App provides context and layout
+    element: <App />,
     children: [
       { path: '/', element: <Home /> },
       { path: '/discover', element: <Discover /> },
@@ -29,7 +35,15 @@ const router = createBrowserRouter([
       { path: '/review', element: <Review /> },
       { path: '/forums', element: <Forums /> },
       { path: '/contributors', element: <Contributors /> },
-      {path:'/contact',element: <Contact/>},
+
+      { path: '/ticket', element: <TicketBooking /> },
+ 
+      {path: '/guides', element: <TravelGuidesCarousel /> },
+      { path: '/packages', element: <TravelPackages /> },
+      { path: '/hotels', element: <HotelBookingPage /> },
+
+      { path: '/contact', element: <Contact /> },
+
     ],
   },
 ])
@@ -38,4 +52,4 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>,
-) 
+)
