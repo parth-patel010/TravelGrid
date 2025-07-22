@@ -31,7 +31,7 @@ import TravelPackages from './pages/TravelPackages'
 import HotelBookingPage from './pages/HotelBookingPage'
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-
+import FAQ from './pages/FAQ.jsx'
 
 
 const router = createBrowserRouter([
@@ -54,6 +54,7 @@ const router = createBrowserRouter([
       { path: '/ticket', element: <TicketBooking /> },
       { path: '/guides', element: <TravelGuidesCarousel /> },
       { path: '/packages', element: <TravelPackages /> },
+      { path: '/faq', element: <FAQ /> },
 
       { path: '/contact', element: <Contact /> },
       {path:"/login", element:<Login/>},
