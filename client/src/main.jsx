@@ -42,7 +42,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
-    { path: '/', element: <Home /> },
+      { path: '/', element: <Home /> },
       { path: '/discover', element: <Discover /> },
       { path: '/trips', element: <Trips /> },
       { path: '/review', element: <Review /> },
@@ -60,16 +60,16 @@ const router = createBrowserRouter([
       { path: '/faq', element: <FAQ /> },
 
       { path: '/contact', element: <Contact /> },
-      {path:"/login", element:<Login/>},
-      {path:"/signup", element:<Signup/>},
+      { path: "/login", element: <Login /> },
+      { path: "/signup", element: <Signup /> },
 
-       { 
-        path: '/dashboard', 
+      {
+        path: '/dashboard',
         element: (
           <ProtectedRoute>
             <Dashboard />
           </ProtectedRoute>
-        ) 
+        )
       },
 
       // Error handling routes
