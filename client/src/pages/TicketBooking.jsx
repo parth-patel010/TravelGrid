@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Navbar from "../components/Custom/Navbar";
+import Footer from "../components/Custom/Footer";
 import {
   Users,
   CalendarDays,
@@ -21,20 +23,6 @@ const travelOptions = [
   { label: "Bus", value: "bus", icon: <Bus size={18} /> },
   { label: "Cab", value: "cab", icon: <Car size={18} /> },
 ];
-
-// Mock Navbar component
-const Navbar = () => (
-  <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-pink-400/20 px-4 py-3">
-    <div className="flex items-center justify-between max-w-6xl mx-auto">
-      <h1 className="text-2xl font-bold text-pink-400">TravelGrid</h1>
-      <button className="text-white">
-        <div className="w-6 h-0.5 bg-pink-400 mb-1"></div>
-        <div className="w-6 h-0.5 bg-pink-400 mb-1"></div>
-        <div className="w-6 h-0.5 bg-pink-400"></div>
-      </button>
-    </div>
-  </nav>
-);
 
 function TicketBooking() {
   const [tripMode, setTripMode] = useState("oneWay");
@@ -81,22 +69,25 @@ function TicketBooking() {
           alt="City skyline"
           className="absolute inset-0 w-full h-full object-cover opacity-30 z-0"
         />
-        <div className="relative z-10 w-full max-w-4xl bg-white/10 backdrop-blur-md border border-pink-400/30 rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 lg:p-12">
-          {/* Travel type tabs - Fixed layout */}
-          <div className="grid grid-cols-4 gap-2 sm:gap-3 mb-8">
+        <div className="relative z-10 w-full max-w-4xl bg-white/10 backdrop-blur-md border border-pink-400/30 rounded-3xl shadow-2xl p-8 md:p-12">
+          {/* Travel type tabs (responsive) */}
+          <div className="flex justify-center gap-2 sm:gap-4 mb-8 flex-wrap">
             {travelOptions.map((opt) => (
               <button
                 key={opt.value}
                 onClick={() => setTravelType(opt.value)}
-                className={`flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 sm:py-3 rounded-full font-semibold text-xs sm:text-sm transition-all border ${
-                  travelType === opt.value
-                    ? "bg-pink-600 text-white border-pink-600"
-                    : "bg-white/20 text-white border-transparent hover:bg-pink-700/20"
-                }`}
+                className={`flex items-center justify-center sm:justify-start gap-0 sm:gap-2 px-0 sm:px-4 py-2 rounded-full font-semibold text-sm sm:text-base transition-all border
+                  ${
+                    travelType === opt.value
+                      ? "bg-pink-600 text-white border-pink-600"
+                      : "bg-white/20 text-white border-transparent hover:bg-pink-700/20"
+                  }
+                  ${travelType === opt.value ? "shadow-lg" : ""} 
+                  w-10 h-10 sm:w-auto sm:h-auto`}
+                title={opt.label}
               >
                 {opt.icon}
                 <span className="hidden sm:inline">{opt.label}</span>
-                <span className="sm:hidden text-xs">{opt.label}</span>
               </button>
             ))}
           </div>
@@ -164,11 +155,11 @@ function TicketBooking() {
               </button>
             </div>
           ) : (
-            <div className="space-y-6 sm:space-y-8">
-              {/* Core search panel - Mobile first approach */}
-              <div className="space-y-4 md:space-y-0 md:grid md:gap-4 md:grid-cols-5 md:items-end">
+            <form className="space-y-8" onSubmit={handleSubmit}>
+              {/* Core search panel */}
+              <div className="grid gap-4 md:grid-cols-5 items-end">
                 {/* From */}
-                <div className="relative block md:col-span-1">
+                <label className="relative block">
                   <MapPin
                     className="absolute top-3 left-3 text-pink-400"
                     size={18}
@@ -177,32 +168,29 @@ function TicketBooking() {
                     type="text"
                     name="from"
                     placeholder="From"
+                    required
                     value={form.from}
                     onChange={handleChange}
                     className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                   />
-                </div>
-
-                {/* Swap button - hidden on mobile */}
-                <div className="hidden md:flex md:col-span-1 items-center justify-center">
-                  <button
-                    type="button"
-                    title="Swap"
-                    onClick={() =>
-                      setForm((prev) => ({
-                        ...prev,
-                        from: prev.to,
-                        to: prev.from,
-                      }))
-                    }
-                    className="bg-pink-500 hover:bg-pink-600 text-white rounded-xl p-3 transition-all"
-                  >
-                    <ArrowRightLeft size={20} />
-                  </button>
-                </div>
-
+                </label>
+                {/* Swap button on medium screens */}
+                <button
+                  type="button"
+                  title="Swap"
+                  onClick={() =>
+                    setForm((prev) => ({
+                      ...prev,
+                      from: prev.to,
+                      to: prev.from,
+                    }))
+                  }
+                  className="hidden md:flex items-center justify-center self-stretch bg-pink-500 hover:bg-pink-600 text-white rounded-xl transition-all"
+                >
+                  <ArrowRightLeft size={20} />
+                </button>
                 {/* To */}
-                <div className="relative block md:col-span-1">
+                <label className="relative block">
                   <MapPin
                     className="absolute top-3 left-3 text-pink-400"
                     size={18}
@@ -211,14 +199,14 @@ function TicketBooking() {
                     type="text"
                     name="to"
                     placeholder="To"
+                    required
                     value={form.to}
                     onChange={handleChange}
                     className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                   />
-                </div>
-
+                </label>
                 {/* Depart Date */}
-                <div className="relative block md:col-span-1">
+                <label className="relative block">
                   <CalendarDays
                     className="absolute top-3 left-3 text-pink-400"
                     size={18}
@@ -226,15 +214,15 @@ function TicketBooking() {
                   <input
                     type="date"
                     name="depart"
+                    required
                     value={form.depart}
                     onChange={handleChange}
                     className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                   />
-                </div>
-
-                {/* Return Date (conditional) or Passengers for one-way */}
+                </label>
+                {/* Return Date (conditional) */}
                 {tripMode === "roundTrip" ? (
-                  <div className="relative block md:col-span-1">
+                  <label className="relative block">
                     <CalendarDays
                       className="absolute top-3 left-3 text-pink-400"
                       size={18}
@@ -242,13 +230,14 @@ function TicketBooking() {
                     <input
                       type="date"
                       name="return"
+                      required
                       value={form.return}
                       onChange={handleChange}
                       className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                     />
-                  </div>
+                  </label>
                 ) : (
-                  <div className="relative block md:col-span-1">
+                  <label className="relative block">
                     <Users
                       className="absolute top-3 left-3 text-pink-400"
                       size={18}
@@ -258,38 +247,37 @@ function TicketBooking() {
                       name="passengers"
                       min="1"
                       max="10"
+                      required
                       value={form.passengers}
                       onChange={handleChange}
                       className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                     />
-                  </div>
+                  </label>
                 )}
               </div>
 
-              {/* Additional fields for round trip or larger screens */}
+              {/* Passengers & Class row */}
               <div
-                className={`grid gap-4 sm:grid-cols-2 ${
-                  tripMode === "oneWay" ? "md:hidden" : ""
+                className={`grid md:grid-cols-2 gap-6 ${
+                  tripMode === "oneWay" ? "hidden md:grid" : ""
                 }`}
               >
-                {tripMode === "roundTrip" && (
-                  <div className="relative block">
-                    <Users
-                      className="absolute top-3 left-3 text-pink-400"
-                      size={18}
-                    />
-                    <input
-                      type="number"
-                      name="passengers"
-                      min="1"
-                      max="10"
-                      value={form.passengers}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
-                      placeholder="Passengers"
-                    />
-                  </div>
-                )}
+                <label className="relative block">
+                  <Users
+                    className="absolute top-3 left-3 text-pink-400"
+                    size={18}
+                  />
+                  <input
+                    type="number"
+                    name="passengers"
+                    min="1"
+                    max="10"
+                    required
+                    value={form.passengers}
+                    onChange={handleChange}
+                    className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
+                  />
+                </label>
                 <select
                   name="cabin"
                   value={form.cabin}
@@ -307,17 +295,17 @@ function TicketBooking() {
               </div>
 
               <button
-                type="button"
-                onClick={handleSubmit}
+                type="submit"
                 className="w-full mt-4 py-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold rounded-xl text-lg tracking-wide shadow-lg transition-all hover:shadow-pink-700/50"
               >
                 Search{" "}
                 {travelType.charAt(0).toUpperCase() + travelType.slice(1)}s
               </button>
-            </div>
+            </form>
           )}
         </div>
       </main>
+      {/* <Footer /> */}
     </div>
   );
 }
