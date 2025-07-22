@@ -64,7 +64,7 @@ const Navbar = () => {
   return (
     <>
       {/* Main Navbar */}
-      <nav
+      <nav  
         className={`w-full py-3 px-4 md:px-8 fixed top-0 left-0 z-40 transition-all duration-300 
           ${scrolled ? 'bg-black/95 backdrop-blur-md shadow-lg' : 'bg-black/60 backdrop-blur-sm'}`}
       >
@@ -117,7 +117,7 @@ const Navbar = () => {
       />
 
       <div
-        className={`fixed top-0 right-0 h-full w-[75%] max-w-[300px] bg-gradient-to-br from-black to-zinc-900 z-50 transform transition-transform duration-300 ease-in-out shadow-xl md:hidden ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed top-0 right-0 h-full w-[80%] sm:w-[60%] max-w-[320px] bg-gradient-to-br from-black to-zinc-900 z-50 transform transition-transform duration-300 ease-in-out shadow-xl md:hidden ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
       >
         <div className="p-5 flex flex-col h-full">
@@ -161,11 +161,18 @@ const Navbar = () => {
 
           {/* Mobile Login Button */}
           <div className="mt-auto pt-8 border-t border-pink-900/30">
-            <button className="w-full bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white py-3 px-5 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2">
-              <LogIn size={18} />
-              Login
-            </button>
-          </div>
+            <button
+                  onClick={() => {
+                  setIsSidebarOpen(false);
+               navigate("/login");
+             }}
+              className="w-full bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white py-3 px-5 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2"
+                 >
+            <LogIn size={18} />
+               Login
+               </button>
+
+             </div>
 
           {/* Footer Links in Mobile */}
           <div className="mt-8 text-center">
