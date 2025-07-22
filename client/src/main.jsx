@@ -15,6 +15,7 @@ import Forums from './pages/Forums'
 import Contributors from './pages/Contributors'
 import TicketBooking from './pages/TicketBooking'
 import TravelPackages from './pages/TravelPackages'
+import HotelBookingPage from './pages/HotelBookingPage'
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
  
       {path: '/guides', element: <TravelGuidesCarousel /> },
       { path: '/packages', element: <TravelPackages /> },
+      { path: '/hotels', element: <HotelBookingPage /> },
 
       { path: '/contact', element: <Contact /> },
 
