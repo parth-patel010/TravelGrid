@@ -35,9 +35,12 @@ import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './components/Auth/ProtectedRoute'
 
 import FAQ from './pages/FAQ.jsx'
-
+import { AuthProvider } from './context/AuthContext'
 
 const router = createBrowserRouter([
+
+      { path: "/login", element: <Login /> },
+      { path: "/signup", element: <Signup /> },
   {
     path: '/',
     element: <App />,
@@ -60,8 +63,6 @@ const router = createBrowserRouter([
       { path: '/faq', element: <FAQ /> },
 
       { path: '/contact', element: <Contact /> },
-      { path: "/login", element: <Login /> },
-      { path: "/signup", element: <Signup /> },
 
       {
         path: '/dashboard',
@@ -83,7 +84,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary>
+      <AuthProvider>
       <RouterProvider router={router} />
+      </AuthProvider>
     </ErrorBoundary>
   </StrictMode>,
 )
