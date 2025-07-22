@@ -7,13 +7,15 @@ import Home from './pages/Home'
 
 //Created guides page to display travel guides
 import TravelGuidesCarousel from './pages/TravelGuidesProfiles.jsx'
-import Contact from './components/Contact
+import Contact from './components/Contact.jsx'
 
 import Discover from './pages/Discover'
 import Trips from './pages/Trips'
 import Review from './pages/Review'
 import Forums from './pages/Forums'
 import Contributors from './pages/Contributors'
+import Hotels from './pages/Hotels'
+import HotelDetails from './pages/HotelDetails'
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,8 @@ const router = createBrowserRouter([
       { path: '/review', element: <Review /> },
       { path: '/forums', element: <Forums /> },
       { path: '/contributors', element: <Contributors /> },
+      { path: '/hotels', element: <Hotels /> },
+      { path: '/hotels/:id', element: <HotelDetails /> },
  
       {path: '/guides', element: <TravelGuidesCarousel /> },
 
