@@ -41,7 +41,9 @@ export default function Login() {
     console.log("Email:", email);
     console.log("Password:", password);
   };
-
+  const handleGoogleLogin = () => {
+    console.log("Google login clicked - integrate OAuth here.");
+  };
   return (
     <div className="min-h-screen w-full flex flex-col lg:flex-row">
       {/* Left: Background image only for large screens */}
@@ -98,7 +100,14 @@ export default function Login() {
                 {passwordError || "Password looks good!"}
               </p>
             )}
-
+            <button
+            onClick={handleGoogleLogin}
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400"
+          >
+            <span className="text-sm font-medium text-gray-700">
+              Login with Google
+            </span>
+          </button>
             {/* Submit Button */}
             <button
               type="submit"
