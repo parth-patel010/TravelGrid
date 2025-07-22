@@ -5,7 +5,10 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home'
 
-// Placeholder pages (to be created if not exist)
+//Created guides page to display travel guides
+import TravelGuidesCarousel from './pages/TravelGuidesProfiles.jsx'
+import Contact from './components/Contact
+
 import Discover from './pages/Discover'
 import Trips from './pages/Trips'
 import Review from './pages/Review'
@@ -16,7 +19,7 @@ import TicketBooking from './pages/TicketBooking'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />, // App provides context and layout
+    element: <App />,
     children: [
       { path: '/', element: <Home /> },
       { path: '/discover', element: <Discover /> },
@@ -25,6 +28,11 @@ const router = createBrowserRouter([
       { path: '/forums', element: <Forums /> },
       { path: '/contributors', element: <Contributors /> },
       { path: '/ticket', element: <TicketBooking /> },
+ 
+      {path: '/guides', element: <TravelGuidesCarousel /> },
+
+      { path: '/contact', element: <Contact /> },
+
     ],
   },
 ])
@@ -33,4 +41,4 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>,
-) 
+)
