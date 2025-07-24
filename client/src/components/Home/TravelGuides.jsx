@@ -33,25 +33,31 @@ const TravelGuides = () => (
       <h2 className="text-3xl md:text-4xl font-bold text-black mb-8 text-center">
         Meet Our Top Travel Guides
       </h2>
-      <div className="overflow-x-auto pb-2 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-        <div className="flex gap-6 min-w-[600px] md:min-w-0">
-          {guides.map((guide, i) => (
-            <div
-              key={i}
-              className="min-w-[260px] max-w-xs bg-gradient-to-br from-blue-100 to-pink-100 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex-shrink-0 flex flex-col items-center p-6"
-            >
-              <img
-                src={guide.image}
-                alt={guide.name}
-                className="w-20 h-20 rounded-full object-cover border-4 border-pink-400 mb-4"
-              />
-              <h3 className="text-lg font-semibold mb-1 text-gray-800">{guide.name}</h3>
-              <p className="text-pink-600 text-sm font-medium mb-1">{guide.expertise}</p>
-              <p className="text-gray-600 text-sm mb-4 text-center">{guide.bio}</p>
-              <button className="bg-zinc-800 hover:bg-zinc-900 text-white font-semibold py-2 px-4 rounded-xl transition-colors duration-200 transform hover:scale-105">View Profile</button>
-            </div>
-          ))}
-        </div>
+         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {guides.map((guide, i) => (
+          <div
+            key={i}
+            className="
+              min-w-full max-w-full
+              md:min-w-[260px] md:max-w-xs
+              bg-gradient-to-br from-blue-100 to-pink-100
+              rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300
+              overflow-hidden flex-shrink-0 flex flex-col items-center p-6
+            "
+          >
+            <img
+              src={guide.image}
+              alt={guide.name}
+              className="w-20 h-20 rounded-full object-cover border-4 border-pink-400 mb-4"
+            />
+            <h3 className="text-lg font-semibold mb-1 text-gray-800">{guide.name}</h3>
+            <p className="text-pink-600 text-sm font-medium mb-1">{guide.expertise}</p>
+            <p className="text-gray-600 text-sm mb-4 text-center">{guide.bio}</p>
+            <button className="bg-zinc-800 hover:bg-zinc-900 text-white font-semibold py-2 px-4 rounded-xl transition-colors duration-200 transform hover:scale-105">
+              View Profile
+            </button>
+          </div>
+        ))}
         <style>{`
           .scrollbar-hide::-webkit-scrollbar { display: none; }
           .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
@@ -61,4 +67,4 @@ const TravelGuides = () => (
   </section>
 );
 
-export default TravelGuides; 
+export default TravelGuides;

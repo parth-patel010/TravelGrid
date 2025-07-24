@@ -70,6 +70,7 @@ function TicketBooking() {
         />
 
         <div className="relative z-10 w-full max-w-4xl bg-white/10 backdrop-blur-md border border-pink-400/30 rounded-3xl shadow-2xl p-8 md:p-12">
+          {/* Travel Options (Flight, Train, etc.) */}
           <div className="flex justify-center gap-2 sm:gap-4 mb-8 flex-wrap">
             {travelOptions.map((opt) => (
               <button
@@ -88,6 +89,7 @@ function TicketBooking() {
             ))}
           </div>
 
+          {/* Trip Mode (One-way / Round Trip) */}
           <div className="flex gap-4 justify-center mb-10">
             {tripModes.map((mode) => (
               <button
@@ -104,9 +106,12 @@ function TicketBooking() {
             ))}
           </div>
 
+          {/* Form Section */}
           {!submitted ? (
             <form className="space-y-8" onSubmit={handleSubmit}>
+              {/* First row: From, Swap, To, Depart, Return */}
               <div className="grid gap-4 md:grid-cols-5 items-end">
+                {/* From */}
                 <label className="relative block">
                   <MapPin className="absolute top-3 left-3 text-pink-400" size={18} />
                   <input
@@ -119,6 +124,24 @@ function TicketBooking() {
                     className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                   />
                 </label>
+
+                {/* Swap button */}
+                <button
+                  type="button"
+                  title="Swap"
+                  onClick={() =>
+                    setForm((prev) => ({
+                      ...prev,
+                      from: prev.to,
+                      to: prev.from,
+                    }))
+                  }
+                  className="hidden md:flex items-center justify-center self-stretch bg-pink-500 hover:bg-pink-600 text-white rounded-xl transition-all"
+                >
+                  <ArrowRightLeft size={20} />
+                </button>
+
+                {/* To */}
                 <label className="relative block">
                   <MapPin className="absolute top-3 left-3 text-pink-400" size={18} />
                   <input
@@ -131,6 +154,8 @@ function TicketBooking() {
                     className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                   />
                 </label>
+
+                {/* Depart Date */}
                 <label className="relative block">
                   <CalendarDays className="absolute top-3 left-3 text-pink-400" size={18} />
                   <input
@@ -142,6 +167,8 @@ function TicketBooking() {
                     className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                   />
                 </label>
+
+                {/* Return Date (only for round trip) */}
                 {tripMode === "roundTrip" && (
                   <label className="relative block">
                     <CalendarDays className="absolute top-3 left-3 text-pink-400" size={18} />
@@ -155,6 +182,11 @@ function TicketBooking() {
                     />
                   </label>
                 )}
+              </div>
+
+              {/* Second row: Passengers & Cabin */}
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Passengers */}
                 <label className="relative block">
                   <Users className="absolute top-3 left-3 text-pink-400" size={18} />
                   <input
@@ -168,19 +200,23 @@ function TicketBooking() {
                     className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                   />
                 </label>
+
+                {/* Cabin Type */}
+                <select
+                  name="cabin"
+                  value={form.cabin}
+                  onChange={handleChange}
+                  className="w-full p-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
+                >
+                  {["Economy", "Premium Economy", "Business", "First"].map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
               </div>
-              <select
-                name="cabin"
-                value={form.cabin}
-                onChange={handleChange}
-                className="w-full p-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
-              >
-                {["Economy", "Premium Economy", "Business", "First"].map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </select>
+
+              {/* Submit */}
               <button
                 type="submit"
                 className="w-full mt-4 py-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold rounded-xl text-lg tracking-wide shadow-lg transition-all hover:shadow-pink-700/50"
