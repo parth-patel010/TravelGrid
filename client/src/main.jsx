@@ -15,7 +15,7 @@ import Trips from './pages/Trips'
 import Review from './pages/Review'
 import Forums from './pages/Forums'
 import Contributors from './pages/Contributors'
-
+import About from './pages/About'
 import Hotels from './pages/Hotels'
 import HotelDetails from './pages/HotelDetails'
 
@@ -48,6 +48,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: '/', element: <Home /> },
+      {path: '/about',element: <About/> },
       { path: '/discover', element: <Discover /> },
       { path: '/trips', element: <Trips /> },
       { path: '/review', element: <Review /> },
