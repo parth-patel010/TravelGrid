@@ -78,7 +78,7 @@ const Navbar = () => {
   return (
     <>
       {/* Main Navbar */}
-      <nav
+      <nav  
         className={`w-full py-3 px-4 md:px-8 fixed top-0 left-0 z-40 transition-all duration-300 
           ${scrolled ? 'bg-black/95 backdrop-blur-md shadow-lg' : 'bg-black/60 backdrop-blur-sm'}`}
       >
@@ -190,7 +190,7 @@ const Navbar = () => {
       />
 
       <div
-        className={`fixed top-0 right-0 h-full w-[75%] max-w-[300px] bg-gradient-to-br from-black to-zinc-900 z-50 transform transition-transform duration-300 ease-in-out shadow-xl md:hidden ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed top-0 right-0 h-full w-[80%] sm:w-[60%] max-w-[320px] bg-gradient-to-br from-black to-zinc-900 z-50 transform transition-transform duration-300 ease-in-out shadow-xl md:hidden ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
       >
         <div className="p-5 flex flex-col h-full">
@@ -246,6 +246,7 @@ const Navbar = () => {
               </Link>
             ))}
 
+
             {/* Mobile Auth Links */}
             {isAuthenticated ? (
               <>
@@ -291,7 +292,6 @@ const Navbar = () => {
               </>
             )}
           </div>
-
           {/* Footer Links in Mobile */}
           <div className="mt-auto pt-8 border-t border-pink-900/30">
             <Link
@@ -302,9 +302,7 @@ const Navbar = () => {
             </Link>
           </div>
         </div>
-      </div>
-
-      
+      </div>  
      
     </>
   );
