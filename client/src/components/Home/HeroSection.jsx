@@ -6,6 +6,12 @@ const HeroSection = ({ onSearch }) => {
   const [category, setCategory] = useState("All Categories");
 
   const handleSearch = () => {
+    const isLoggedIn = false;
+
+    if(!isLoggedIn){
+      alert("Please sign in to search for destinations.");
+      return;
+    }
     onSearch({ location, category });
   };
 

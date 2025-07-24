@@ -46,7 +46,7 @@ function HotelDetails() {
             Back to Hotels
           </button>
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }
@@ -87,7 +87,7 @@ function HotelDetails() {
           </button>
         </section>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

@@ -29,17 +29,25 @@ import ServerError from './components/ErrorHandle/ServerError'
 
 import TravelPackages from './pages/TravelPackages'
 import HotelBookingPage from './pages/HotelBookingPage'
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+import Dashboard from './pages/Dashboard'
+import ProtectedRoute from './components/Auth/ProtectedRoute'
+import PrivacyPolicy from './pages/Privacypolicy.jsx'
+import TermsAndConditions from './pages/Terms&Conditions.jsx'
 
-
+import FAQ from './pages/FAQ.jsx'
+import { AuthProvider } from './context/AuthContext'
 
 const router = createBrowserRouter([
+
+  { path: "/login", element: <Login /> },
+  { path: "/signup", element: <Signup /> },
   {
     path: '/',
     element: <App />,
     children: [
-    { path: '/', element: <Home /> },
+      { path: '/', element: <Home /> },
       { path: '/discover', element: <Discover /> },
       { path: '/trips', element: <Trips /> },
       { path: '/review', element: <Review /> },
@@ -54,10 +62,19 @@ const router = createBrowserRouter([
       { path: '/ticket', element: <TicketBooking /> },
       { path: '/guides', element: <TravelGuidesCarousel /> },
       { path: '/packages', element: <TravelPackages /> },
+      { path: '/faq', element: <FAQ /> },
 
       { path: '/contact', element: <Contact /> },
-      {path:"/login", element:<Login/>},
-      {path:"/signup", element:<Signup/>},
+      { path: '/privacy', element: <PrivacyPolicy /> },
+      { path: '/terms', element: <TermsAndConditions /> },
+      {
+        path: '/dashboard',
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        )
+      },
 
       // Error handling routes
       { path: '/network-error', element: <NetworkError /> },
@@ -70,7 +87,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </ErrorBoundary>
   </StrictMode>,
 )
