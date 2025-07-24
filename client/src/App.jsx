@@ -4,18 +4,21 @@ import { Outlet } from 'react-router-dom'
 import Navbar from './components/Custom/Navbar'
 import Footer from './components/Custom/Footer'
 import { AuthProvider } from './context/AuthContext'
+import { DashboardDataProvider } from './context/DashboardDataContext'
 
 function App() {
   return (
     <AuthProvider>
       <AppProvider>
-        <div className="flex flex-col min-h-screen">
-          <Navbar />
-          <div className="flex-grow">
-            <Outlet />
+        <DashboardDataProvider>
+          <div className="flex flex-col min-h-screen">
+            <Navbar />
+            <div className="flex-grow">
+              <Outlet />
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
+        </DashboardDataProvider>
       </AppProvider>
     </AuthProvider>
   )

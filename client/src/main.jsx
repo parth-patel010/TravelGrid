@@ -20,7 +20,9 @@ import Hotels from './pages/Hotels'
 import HotelDetails from './pages/HotelDetails'
 
 import TicketBooking from './pages/TicketBooking'
-
+import TripsPlanned from './pages/TripsPlanned';
+import SavedPlaces from './pages/SavedPlaces';
+import CountriesVisited from './pages/CountriesVisited';
 
 import NotFound from './pages/NotFound'
 import ErrorBoundary from './components/ErrorHandle/ErrorBoundary'
@@ -73,8 +75,33 @@ const router = createBrowserRouter([
           <ProtectedRoute>
             <Dashboard />
           </ProtectedRoute>
-        )
+        ),
       },
+      {
+        path: '/dashboard/trips',
+        element: (
+          <ProtectedRoute>
+            <TripsPlanned />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/dashboard/saved',
+        element: (
+          <ProtectedRoute>
+            <SavedPlaces />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/dashboard/countries',
+        element: (
+          <ProtectedRoute>
+            <CountriesVisited />
+          </ProtectedRoute>
+        ),
+      },
+
 
       // Error handling routes
       { path: '/network-error', element: <NetworkError /> },
