@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Outlet,useLocation } from 'react-router-dom'
 import { AppProvider } from './context/AppContext'
@@ -7,6 +8,10 @@ import Footer from './components/Custom/Footer'
 
 import Spinner from './components/Spinner'
 import ErrorBoundary from './components/ErrorHandle/ErrorBoundary';
+
+import { Outlet } from 'react-router-dom';
+
+import GoToTopButton from './components/GoToTopButton'; 
 
 
 
@@ -35,11 +40,14 @@ function App() {
             <Outlet />
           </ErrorBoundary >
           </div>
+          {/* Place the GoToTopButton here, outside the flex-grow div
+              but within the main flex container, so it's always visible and fixed. */}
+          <GoToTopButton />
           <Footer />
         </div>
       </AppProvider>
     </AuthProvider>
-  )
+  );
 }
 
-export default App
+export default App;
