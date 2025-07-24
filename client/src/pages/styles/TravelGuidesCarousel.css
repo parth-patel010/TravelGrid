@@ -1,23 +1,23 @@
 .travel-guides-section {
   width: 100%;
-  background: linear-gradient(to bottom right, #ebf8ff, #ffe0f0);
-  padding: 50px 20px; /* reduced vertical padding */
+  background: linear-gradient(to bottom right, #000000, #831843);
+  padding: 50px 20px;
   text-align: center;
-  margin-top: -50px;  /* moves it up */
-  min-height: 120vh; /* ⬅ ensures full height coverage for smaller screens */
+  margin-top: -50px;
+  min-height: 120vh;
 }
-
 
 .main-heading {
   font-size: 3rem;
   font-weight: bold;
-  color: #111827;
+  color: #ffffff;
   margin-bottom: 0.5rem;
+  margin-top: 3.5rem;
 }
 
 .sub-caption {
   font-size: 1rem;
-  color: #555;
+  color: #f9a8d4;
   margin-bottom: 3rem;
 }
 
@@ -30,9 +30,8 @@
   margin: auto;
   height: 420px;
   margin-top: -40px;
-  overflow: hidden; /* ⬅ prevent overflow of sliding cards */
+  overflow: hidden;
 }
-
 
 .carousel-track {
   display: flex;
@@ -49,14 +48,15 @@
   height: 360px;
   padding: 20px;
   border-radius: 20px;
-  background: linear-gradient(to bottom right, #dbeafe, #fce7f3);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 192, 203, 0.2);
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.15);
   transition: transform 0.5s ease, opacity 0.5s ease;
   opacity: 0;
   z-index: 0;
+  color: white;
 }
-
-
 
 .card.left {
   transform: translateX(-340px) scale(0.92);
@@ -76,8 +76,6 @@
   z-index: 2;
 }
 
-
-
 .card-image {
   width: 100px;
   height: 100px;
@@ -96,11 +94,11 @@
 .card-info h3 {
   font-size: 1.25rem;
   margin-bottom: 5px;
-  color: #1f2937;
+  color: #ffffff;
 }
 
 .expertise {
-  color: #ec4899;
+  color: #f472b6;
   font-weight: 600;
   font-size: 0.95rem;
   margin-bottom: 8px;
@@ -108,12 +106,12 @@
 
 .bio {
   font-size: 0.9rem;
-  color: #4b5563;
+  color: #fcdde7;
   margin-bottom: 12px;
 }
 
 .view-btn {
-  background-color: #1f2937;
+  background: linear-gradient(to right, #db2777, #ec4899);
   color: white;
   border: none;
   padding: 8px 20px;
@@ -121,14 +119,15 @@
   transition: all 0.3s ease;
   cursor: pointer;
 }
+
 .view-btn:hover {
-  background-color: #111827;
+  background: linear-gradient(to right, #be185d, #db2777);
   transform: scale(1.05);
 }
 
 .carousel-btn {
   font-size: 2rem;
-  color: #1f2937;
+  color: #f9a8d4;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -138,6 +137,7 @@
 }
 .carousel-btn:hover {
   transform: scale(1.2);
+  color: #fff;
 }
 
 .carousel-btn.left {
@@ -154,91 +154,98 @@
   transform: translateY(-50%);
 }
 
-@media (max-width: 768px) {
-  .card.left, .card.right {
-    display: none;
-  }
-  .card.center {
-    transform: scale(1.05);
-  }
-  .carousel-container {
-    height: 400px;
-    margin: auto;
-  }
-  .carousel-title {
-    text-align: center;
-  }
-  .profile-details {
-    padding: 20px;
-  }
-  .main-heading{
-    margin-top: 20px;
-  }
-}
-
 .card:not(.left):not(.center):not(.right) {
   transform: translateX(0) scale(0.8);
   opacity: 0;
   z-index: 1;
 }
 
+@media (max-width: 768px) {
+  .card.left,
+  .card.right {
+    display: none;
+  }
+
+  .card.center {
+    transform: scale(1.05);
+  }
+
+  .carousel-container {
+    height: 400px;
+    margin: auto;
+  }
+
+  .carousel-title {
+    text-align: center;
+  }
+
+  .main-heading {
+    margin-top: 20px;
+  }
+}
+
+/* Profile Section */
+
 .profile-section {
-  animation: slideIn 0.5s ease-in-out;
-  margin-top: 30px;
+  margin-top: 60px;
   text-align: center;
+  padding: 30px;
+  background: linear-gradient(to bottom right, #1f1f1f, #831843);
+  border-radius: 20px;
+  animation: fadeInUp 0.5s ease-in-out;
+  color: #f3f4f6;
 }
 
 .profile-heading {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  margin-bottom: 20px;
+  gap: 20px;
+  margin-bottom: 30px;
+  color: #f3f4f6;
 }
 
-.profile-heading hr {
+.profile-heading .line {
   flex: 1;
-  border: none;
   height: 2px;
-  background-color: #ff80ab; /* soft pink */
+  background-color: #f472b6;
 }
 
 .profile-heading h2 {
-  color: #000000;
   font-size: 1.8rem;
   margin: 0;
 }
 
-.profile-box {
-background-color: linear-gradient(to bottom right, #ebf8ff, #ffe0f0);
+.profile-details-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 192, 203, 0.2);
   padding: 20px;
   border-radius: 15px;
   max-width: 700px;
-  margin: 0 auto;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  text-align: left;
-  animation: fadeInUp 0.5s ease-in-out;
+  margin: auto;
+  box-shadow: 0 0 20px rgba(255, 192, 203, 0.15);
 }
 
-.profile-box p {
-  margin: 10px 0;
-  font-size: 1.1rem;
-  color: #444;
+.profile-pic {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: 3px solid #f472b6;
 }
 
-.profile-box strong {
-  color: #d81b60;
+.profile-text p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #fcdde7;
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.profile-text strong {
+  color: #f472b6;
 }
 
 @keyframes fadeInUp {
@@ -251,51 +258,3 @@ background-color: linear-gradient(to bottom right, #ebf8ff, #ffe0f0);
     transform: translateY(0);
   }
 }
-.profile-section {
-  margin-top: 60px;
-  text-align: center;
-  padding: 30px;
-  background: linear-gradient(to bottom right, #ebf8ff, #ffe0f0);
-  border-radius: 20px;
-}
-
-.profile-heading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  color: #000000;
-  margin-bottom: 30px;
-}
-
-.profile-heading .line {
-  flex: 1;
-  height: 2px;
-  background-color: #000000;
-}
-
-.profile-details-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: linear-gradient(to bottom right, #ebf8ff, #ffe0f0);
-  border: 2px solid #e8bfcd;
-  padding: 20px;
-  border-radius: 15px;
-  max-width: 600px;
-  margin: auto;
-}
-
-.profile-pic {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  margin-bottom: 20px;
- border: 3px solid #ddb6c3;
-}
-
-.profile-text p {
-  margin: 8px 0;
-  font-size: 16px;
-  color: #333;
-}  
