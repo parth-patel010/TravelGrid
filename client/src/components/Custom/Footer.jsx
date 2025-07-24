@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 const Footer = () => {
   const [email, setEmail] = useState("")
@@ -62,9 +63,9 @@ const Footer = () => {
                 <a href="/" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
                   Home
                 </a>
-                <a href="/about" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
+                <Link to="/about" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
                   About
-                </a>
+                </Link>
                 <a href="/trips" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
                   Trips
                 </a>

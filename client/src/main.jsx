@@ -20,7 +20,7 @@ import Hotels from './pages/Hotels'
 import HotelDetails from './pages/HotelDetails'
 
 import TicketBooking from './pages/TicketBooking'
-
+import About from './pages/About'
 
 import NotFound from './pages/NotFound'
 import ErrorBoundary from './components/ErrorHandle/ErrorBoundary'
@@ -46,6 +46,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: '/', element: <Home /> },
+      { path: '/about',element: <About/> },
       { path: '/discover', element: <Discover /> },
       { path: '/trips', element: <Trips /> },
       { path: '/review', element: <Review /> },
