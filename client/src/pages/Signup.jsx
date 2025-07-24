@@ -31,6 +31,18 @@ const Signup = () => {
       return false;
     }
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError('Please enter a valid email address');
+      return false;
+    }
+
+    if (typeof formData.name !== 'string' || !/^[A-Za-z\s]+$/.test(formData.name)) {
+      setError('Name can only contain letters and spaces');
+      return false;
+    }
+
+
     if (formData.name.length < 2) {
       setError('Name must be at least 2 characters long');
       return false;
