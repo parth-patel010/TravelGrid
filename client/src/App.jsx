@@ -4,9 +4,17 @@ import { AppProvider } from './context/AppContext'
 import { AuthProvider } from './context/AuthContext'
 import Navbar from './components/Custom/Navbar'
 import Footer from './components/Custom/Footer'
+
 import Spinner from './components/Spinner'
 import { useState, useEffect } from 'react'
 import ErrorBoundary from './components/ErrorBoundary';
+
+import Spinner from './components/Spinner'
+import { useLocation } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+
+import { AuthProvider } from './context/AuthContext'
+
 
 function App() {
   const location = useLocation(); 
@@ -18,7 +26,11 @@ function App() {
     return () => clearTimeout(timer);
   }, [location]);
   return (
-   <AuthProvider>
+
+
+
+<AuthProvider>
+
     <AppProvider>
       <div className="flex flex-col min-h-screen">
         {loading && <Spinner />}
