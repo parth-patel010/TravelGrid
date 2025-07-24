@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Typewriter from "typewriter-effect";
+import { X } from "lucide-react";
 
 const HeroSection = ({ onSearch }) => {
   const [location, setLocation] = useState("");
@@ -124,6 +125,7 @@ const HeroSection = ({ onSearch }) => {
                       {filter}
                     </button>
                   ))}
+                  {category=="All Categories"?null:<button className="px-3 py-2 inline-flex items-center gap-1 bg-pink-500 hover:bg-pink-600 text-white text-sm font-medium rounded-lg transition-colors duration-200" onClick={()=>{setCategory("All Categories")}}>Clear <X size={16} className="relative top-[1px]"/></button>}
                 </div>
               </div>
             </div>
