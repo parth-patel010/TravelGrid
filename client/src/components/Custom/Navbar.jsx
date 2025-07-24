@@ -59,13 +59,17 @@ const Navbar = () => {
   }, [isSidebarOpen]);
 
   const navLinks = [
-    { name: "Home", path: "/", icon: <Home size={18} /> },
-    { name: "Ticket", path: "/ticket", icon: <Ticket size={18} /> },
-    { name: "Packages", path: "/packages", icon: <Package size={18} /> },
-    { name: "Hotels", path: "/hotels", icon: <Building2 size={18} /> },
-    { name: "Guides", path: "/guides", icon: <UserRound size={18} /> },
-    { name: "Contact", path: "/contact", icon: <Contact size={18} /> },
-  ];
+  { name: "Home", path: "/", icon: <Home size={18} /> },
+  { name: "Ticket", path: "/ticket", icon: <Ticket size={18} /> },
+  { name: "Packages", path: "/packages", icon: <Package size={18} /> },
+  { name: "Hotels", path: "/hotels", icon: <Building2 size={18} /> },
+  { name: "Guides", path: "/guides", icon: <UserRound size={18} /> },
+  { name: "Contact", path: "/contact", icon: <Contact size={18} /> },
+];
+
+  
+  const isActive = (path) => location.pathname === path;
+
 
   const isActive = (path) => location.pathname === path;
 
@@ -78,9 +82,14 @@ const Navbar = () => {
   return (
     <>
       {/* Main Navbar */}
-      <nav  
-        className={`w-full py-3 px-4 md:px-8 fixed top-0 left-0 z-40 transition-all duration-300 
-          ${scrolled ? 'bg-black/95 backdrop-blur-md shadow-lg' : 'bg-black/60 backdrop-blur-sm'}`}
+      <nav 
+        className={`w-full py-3 px-4 md:px-8 fixed top-0 left-0 z-40 transition-all duration-300
+        ${
+          scrolled
+          ? 'bg-white/10 backdrop-blur-lg border-b border-white/20 shadow-xl'
+          : 'bg-white/5 backdrop-blur-md border-b border-white/10'
+        }`}
+
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
@@ -91,83 +100,55 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex gap-6 items-center">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`font-medium transition-colors flex items-center gap-2 ${isActive(link.path)
-                    ? 'text-pink-400'
-                    : 'text-white hover:text-pink-300'
-                  }`}
-              >
+
+            {navLinks.map((link) => {
+              const isContact = link.path === "/contact";
+              const isTicket = link.path === "/ticket";
+              const active = isActive(link.path);
+
+              let linkClass = "font-medium transition-colors flex items-center gap-2 ";
+
+              const ticketActive = isActive("/ticket");
+              const contactActive = isActive("/contact");
+
+              if (active) {
+              // Current link is active
+                if (isContact) {
+                  linkClass +=  "text-pink-400";
+                } else if (isTicket) {
+                  linkClass += "text-pink-400";
+                } else {
+                  linkClass += "text-pink-400";
+                }
+              } else {
+              // Current link is not active
+              if (ticketActive) {
+                linkClass += "text-black hover:text-pink-300";
+              } else if (contactActive) {
+                linkClass += scrolled
+                ? "text-white hover:text-pink-300"
+                : "text-black hover:text-pink-300";
+              } else {
+                linkClass += scrolled
+                ? "text-black hover:text-pink-300"
+                : "text-white hover:text-pink-300";
+              }   
+            }
+
+            return (
+              <Link key={link.path} to={link.path} className={linkClass}>
                 {link.icon}
                 {link.name}
               </Link>
-            ))}
+            );
+          })}
 
-            {/* Auth Section */}
-            {isAuthenticated ? (
-              <div className="relative">
-                <button
-                  onClick={() => setShowUserMenu(!showUserMenu)}
-                  className="flex items-center gap-2 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300"
-                >
-                  <img
-                    src={user.avatar}
-                    alt={user.name}
-                    className="w-6 h-6 rounded-full"
-                  />
-                  <span className="hidden lg:block">{user.name.split(' ')[0]}</span>
-                </button>
+            <button className="ml-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2">
 
-                {/* User Dropdown */}
-                {showUserMenu && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
-                    <Link
-                      to="/dashboard"
-                      className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100"
-                      onClick={() => setShowUserMenu(false)}
-                    >
-                      <User size={16} />
-                      Dashboard
-                    </Link>
-                    <Link
-                      to="/settings"
-                      className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100"
-                      onClick={() => setShowUserMenu(false)}
-                    >
-                      <Settings size={16} />
-                      Settings
-                    </Link>
-                    <hr className="my-1" />
-                    <button
-                      onClick={handleLogout}
-                      className="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-gray-100 w-full text-left"
-                    >
-                      <LogOut size={16} />
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="flex items-center gap-3">
-{/*                 <Link
-                  to="/login"
-                  className="text-white hover:text-pink-300 font-medium transition-colors"
-                >
-                  Sign In
-                </Link> */}
-                <Link
-                  to="/signup"
-                  className="bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
-                >
-                  <LogIn size={18} />
-                  Sign Up
-                </Link>
-              </div>
-            )}
+              <LogIn size={18} />
+              Login
+            </button>
+
           </div>
 
           {/* Mobile Menu Button */}

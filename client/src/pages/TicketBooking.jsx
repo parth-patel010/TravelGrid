@@ -115,21 +115,16 @@ function TicketBooking() {
               <p className="max-w-xl mx-auto leading-relaxed">
                 You have booked a {travelType}{" "}
                 {tripMode === "roundTrip" ? "round-trip" : "one-way"} ticket
-                from
-                <span className="font-semibold text-white">
-                  {" "}
-                  {form.from}
-                </span>{" "}
-                to
-                <span className="font-semibold text-white"> {form.to}</span>{" "}
-                departing on
-                <span className="font-semibold text-white"> {form.depart}</span>
+                from{" "}
+                <span className="font-semibold text-white">{form.from}</span> to{" "}
+                <span className="font-semibold text-white">{form.to}</span>{" "}
+                departing on{" "}
+                <span className="font-semibold text-white">{form.depart}</span>
                 {tripMode === "roundTrip" && (
                   <>
                     {" "}
-                    and returning on
+                    and returning on{" "}
                     <span className="font-semibold text-white">
-                      {" "}
                       {form.return}
                     </span>
                   </>
@@ -248,8 +243,9 @@ function TicketBooking() {
                 )}
               </div>
 
-              {tripMode === "roundTrip" && (
-                <div className="grid md:grid-cols-2 gap-6">
+              {/* Always show cabin & passenger selector */}
+              <div className="grid md:grid-cols-2 gap-6">
+                {tripMode === "roundTrip" && (
                   <label className="relative block">
                     <Users
                       className="absolute top-3 left-3 text-pink-400"
@@ -266,22 +262,22 @@ function TicketBooking() {
                       className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                     />
                   </label>
-                  <select
-                    name="cabin"
-                    value={form.cabin}
-                    onChange={handleChange}
-                    className="w-full p-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
-                  >
-                    {["Economy", "Premium Economy", "Business", "First"].map(
-                      (c) => (
-                        <option key={c} value={c}>
-                          {c}
-                        </option>
-                      )
-                    )}
-                  </select>
-                </div>
-              )}
+                )}
+                <select
+                  name="cabin"
+                  value={form.cabin}
+                  onChange={handleChange}
+                  className="w-full p-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
+                >
+                  {["Economy", "Premium Economy", "Business", "First"].map(
+                    (c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    )
+                  )}
+                </select>
+              </div>
 
               <button
                 type="submit"
