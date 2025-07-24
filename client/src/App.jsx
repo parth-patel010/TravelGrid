@@ -7,13 +7,14 @@ import Footer from './components/Custom/Footer'
 
 import Spinner from './components/Spinner'
 import { useState, useEffect } from 'react'
-import ErrorBoundary from './components/ErrorBoundary';
+// import ErrorBoundary from './components/ErrorBoundary';
+import ErrorBoundary from './components/ErrorHandle/ErrorBoundary'
 
-import Spinner from './components/Spinner'
-import { useLocation } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+// import Spinner from './components/Spinner'
+// import { useLocation } from 'react-router-dom'
+// import { useState, useEffect } from 'react'
 
-import { AuthProvider } from './context/AuthContext'
+// import { AuthProvider } from './context/AuthContext'
 
 
 function App() {

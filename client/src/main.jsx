@@ -31,6 +31,7 @@ import TravelPackages from './pages/TravelPackages'
 import HotelBookingPage from './pages/HotelBookingPage'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import ForgotPassword from './pages/ForgotPassword'
 import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './components/Auth/ProtectedRoute'
 import PrivacyPolicy from './pages/Privacypolicy.jsx'
@@ -43,6 +44,8 @@ const router = createBrowserRouter([
 
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <Signup /> },
+  { path: "/forgot-password", element: <ForgotPassword/> },
+
   {
     path: '/',
     element: <App />,
