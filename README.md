@@ -141,3 +141,8 @@ TravelGrid/client/
 ## Code of Conduct
 
 Please refer to the [Code of Conduct](https://github.com/Adarsh-Chaubey03/TravelGrid?tab=coc-ov-file) for details on contributing guidelines and community standards.
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
