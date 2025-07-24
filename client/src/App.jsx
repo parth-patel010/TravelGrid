@@ -8,14 +8,6 @@ import Footer from './components/Custom/Footer'
 import Spinner from './components/Spinner'
 import { useState, useEffect } from 'react'
 import ErrorBoundary from './components/ErrorBoundary';
-
-import Spinner from './components/Spinner'
-import { useLocation } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-
-import { AuthProvider } from './context/AuthContext'
-
-
 function App() {
   const location = useLocation(); 
   const [loading, setLoading] = useState(false); 
