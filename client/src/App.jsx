@@ -1,12 +1,13 @@
 import React from 'react'
+import { Outlet,useLocation } from 'react-router-dom'
 import { AppProvider } from './context/AppContext'
-import { Outlet } from 'react-router-dom'
-import ErrorBoundary from './components/ErrorHandle/ErrorBoundary'
+import { AuthProvider } from './context/AuthContext'
 import Navbar from './components/Custom/Navbar'
 import Footer from './components/Custom/Footer'
 import Spinner from './components/Spinner'
-import { useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import ErrorBoundary from './components/ErrorBoundary';
+
 function App() {
   const location = useLocation(); 
   const [loading, setLoading] = useState(false); 
@@ -17,6 +18,7 @@ function App() {
     return () => clearTimeout(timer);
   }, [location]);
   return (
+   <AuthProvider>
     <AppProvider>
       <div className="flex flex-col min-h-screen">
         {loading && <Spinner />}
@@ -24,11 +26,12 @@ function App() {
         <div className="flex-grow">
           <ErrorBoundary>
             <Outlet />
-          </ErrorBoundary>
+          </ErrorBoundary >
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </AppProvider>
+      </AppProvider>
+    </AuthProvider>
   )
 }
 
