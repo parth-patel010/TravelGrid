@@ -68,6 +68,7 @@ const Footer = () => {
                 >
                   Home
                 </a>
+
                 <Link
                   to="/about"
                   onClick={() => window.scrollTo(0, 0)}
