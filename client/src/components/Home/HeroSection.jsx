@@ -102,7 +102,7 @@ const HeroSection = ({ onSearch }) => {
                 
                 <button
                   onClick={handleSearch}
-                  className="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-xl transition-colors duration-200 transform hover:scale-105"
+                  className="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-102"
                 >
                   Search
                 </button>
