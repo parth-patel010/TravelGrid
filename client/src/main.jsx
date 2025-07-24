@@ -33,6 +33,8 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './components/Auth/ProtectedRoute'
+import PrivacyPolicy from './pages/Privacypolicy.jsx'
+import TermsAndConditions from './pages/Terms&Conditions.jsx'
 
 import FAQ from './pages/FAQ.jsx'
 import { AuthProvider } from './context/AuthContext'
@@ -63,7 +65,8 @@ const router = createBrowserRouter([
       { path: '/faq', element: <FAQ /> },
 
       { path: '/contact', element: <Contact /> },
-
+      { path: '/privacy', element: <PrivacyPolicy /> },
+      { path: '/terms', element: <TermsAndConditions /> },
       {
         path: '/dashboard',
         element: (
