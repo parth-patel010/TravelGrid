@@ -304,8 +304,8 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Spacer to prevent content from going under navbar */}
-      <div className="h-[60px]"></div>
+      
+     
     </>
   );
 };
