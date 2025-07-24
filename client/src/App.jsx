@@ -7,7 +7,7 @@ import Footer from './components/Custom/Footer'
 
 import Spinner from './components/Spinner'
 import { useState, useEffect } from 'react'
-import ErrorBoundary from './components/ErrorBoundary';
+import ErrorBoundary from './components//ErrorHandle/ErrorBoundary';
 function App() {
   const location = useLocation(); 
   const [loading, setLoading] = useState(false); 
