@@ -1,23 +1,23 @@
 import React from 'react'
 import { AppProvider } from './context/AppContext'
 import { Outlet } from 'react-router-dom'
-import ErrorBoundary from './components/ErrorHandle/ErrorBoundary'
 import Navbar from './components/Custom/Navbar'
 import Footer from './components/Custom/Footer'
+import { AuthProvider } from './context/AuthContext'
 
 function App() {
   return (
-    <AppProvider>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <div className="flex-grow">
-          <ErrorBoundary>
+    <AuthProvider>
+      <AppProvider>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <div className="flex-grow">
             <Outlet />
-          </ErrorBoundary>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </AppProvider>
+      </AppProvider>
+    </AuthProvider>
   )
 }
 
