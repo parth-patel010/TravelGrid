@@ -1,8 +1,9 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.jsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import App from './App.jsx';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 
 //Created guides page to display travel guides
 import TravelGuidesCarousel from "./pages/TravelGuidesProfiles.jsx";
@@ -38,51 +39,71 @@ import TermsAndConditions from "./pages/Terms&Conditions.jsx";
 import FAQ from "./pages/FAQ.jsx";
 import { AuthProvider } from "./context/AuthContext";
 
+
 const router = createBrowserRouter([
-  { path: "/login", element: <Login /> },
-  { path: "/signup", element: <Signup /> },
+  { path: '/login', element: <Login /> },
+  { path: '/signup', element: <Signup /> },
+  { path: '/forgot-password', element: <ForgotPassword /> },
   {
-    path: "/",
+    path: '/',
     element: <App />,
     children: [
-      { path: "/", element: <Home /> },
-      { path: "/about", element: <About /> },
-      { path: "/discover", element: <Discover /> },
-      { path: "/trips", element: <Trips /> },
-      { path: "/review", element: <Review /> },
-      { path: "/forums", element: <Forums /> },
-      { path: "/contributors", element: <Contributors /> },
-
-      { path: "/hotels", element: <Hotels /> },
-      { path: "/hotels/:id", element: <HotelDetails /> },
-      // { path: 'hotel-booking', element: <HotelBookingPage /> },
-
-      { path: "/ticket", element: <TicketBooking /> },
-      { path: "/guides", element: <TravelGuidesCarousel /> },
-      { path: "/packages", element: <TravelPackages /> },
-      { path: "/faq", element: <FAQ /> },
-
-      { path: "/contact", element: <Contact /> },
-      { path: "/privacy", element: <PrivacyPolicy /> },
-      { path: "/terms", element: <TermsAndConditions /> },
+      { path: '/', element: <Home /> },
+      { path: '/about', element: <About /> },
+      { path: '/discover', element: <Discover /> },
+      { path: '/trips', element: <Trips /> },
+      { path: '/review', element: <Review /> },
+      { path: '/forums', element: <Forums /> },
+      { path: '/contributors', element: <Contributors /> },
+      { path: '/hotels', element: <Hotels /> },
+      { path: '/hotels/:id', element: <HotelDetails /> },
+      { path: '/ticket', element: <TicketBooking /> },
+      { path: '/guides', element: <TravelGuidesCarousel /> },
+      { path: '/packages', element: <TravelPackages /> },
+      { path: '/faq', element: <FAQ /> },
+      { path: '/contact', element: <Contact /> },
+      { path: '/privacy', element: <PrivacyPolicy /> },
+      { path: '/terms', element: <TermsAndConditions /> },
       {
-        path: "/dashboard",
+        path: '/dashboard',
         element: (
           <ProtectedRoute>
             <Dashboard />
           </ProtectedRoute>
         ),
       },
-
-      // Error handling routes
-      { path: "/network-error", element: <NetworkError /> },
-      { path: "/server-error", element: <ServerError /> },
-      { path: "*", element: <NotFound /> },
+      {
+        path: '/dashboard/trips',
+        element: (
+          <ProtectedRoute>
+            <TripsPlanned />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/dashboard/saved',
+        element: (
+          <ProtectedRoute>
+            <SavedPlaces />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/dashboard/countries',
+        element: (
+          <ProtectedRoute>
+            <CountriesVisited />
+          </ProtectedRoute>
+        ),
+      },
+      { path: '/network-error', element: <NetworkError /> },
+      { path: '/server-error', element: <ServerError /> },
+      { path: '*', element: <NotFound /> },
     ],
   },
 ]);
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary>
       <AuthProvider>

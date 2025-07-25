@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import Navbar from "../components/Custom/Navbar";
-import Footer from "../components/Custom/Footer";
+import React, { useState } from 'react';
+import Navbar from '../components/Custom/Navbar';
+import Footer from '../components/Custom/Footer';
 import {
   Users,
   CalendarDays,
@@ -10,9 +10,10 @@ import {
   Bus,
   Car,
   ArrowRightLeft,
-} from "lucide-react";
+} from 'lucide-react';
 
 const tripModes = [
+
   { label: "One-Way", value: "oneWay" },
   { label: "Round Trip", value: "round" },
 ];
@@ -57,6 +58,7 @@ const TicketBooking = () => {
     return: "",
     passengers: 1,
     cabin: classOptions["flight"][0],
+
   });
 
   const handleChange = (e) => {
@@ -66,6 +68,7 @@ const TicketBooking = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
 
     const fromCountry = getCountry(form.from);
     const toCountry = getCountry(form.to);
@@ -251,6 +254,7 @@ const TicketBooking = () => {
           </div>
         )}
       </div>
+
       <Footer />
     </>
   );
