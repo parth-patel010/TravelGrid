@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 const Footer = () => {
   const [email, setEmail] = useState("")
@@ -59,21 +60,24 @@ const Footer = () => {
             <div className="space-y-4">
               <h4 className="text-lg font-semibold">Quick Links</h4>
               <nav className="flex flex-col space-y-2">
-                <a href="/" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
+                <Link to="/" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
                   Home
-                </a>
-                <a href="/about" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
-                  About
-                </a>
-                <a href="/trips" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
-                  Trips
-                </a>
-                <a href="/destinations" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
-                  Destinations
-                </a>
-                <a href="/blog" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
-                  Blog
-                </a>
+                </Link>
+                <Link to="/ticket" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
+                  Ticket
+                </Link>
+                <Link to="/packages" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
+                  Packages
+                </Link>
+                <Link to="/hotels" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
+                  Hotels
+                </Link>
+                <Link to="/guides" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
+                  Guides
+                </Link>
+                <Link to="/contact" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
+                  Contact
+                </Link>
               </nav>
             </div>
 
