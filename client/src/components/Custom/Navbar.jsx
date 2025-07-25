@@ -139,7 +139,7 @@ const Navbar = () => {
             );
           })}
 
-          <button className="ml-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2">
+          <button className="ml-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2 hover: cursor-pointer">
             <LogIn size={18} />
             Login
           </button>
@@ -148,7 +148,7 @@ const Navbar = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="md:hidden flex items-center text-pink-400 relative"
+          className="md:hidden flex items-center text-pink-400 relative hover: cursor-pointer"
           aria-label="Toggle menu"
         >
           <Menu
@@ -184,7 +184,7 @@ const Navbar = () => {
           <div className="flex justify-end mb-8">
             <button
               onClick={() => setIsSidebarOpen(false)}
-              className="text-pink-400 p-1 hover:bg-pink-500/10 rounded-full"
+              className="text-pink-400 p-1 hover:bg-pink-500/10 rounded-full hover: cursor-pointer" 
               aria-label="Close menu"
             >
               <X size={24} />

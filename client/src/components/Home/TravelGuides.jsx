@@ -53,7 +53,7 @@ const TravelGuides = () => (
             <h3 className="text-lg font-semibold mb-1 text-gray-800">{guide.name}</h3>
             <p className="text-pink-600 text-sm font-medium mb-1">{guide.expertise}</p>
             <p className="text-gray-600 text-sm mb-4 text-center">{guide.bio}</p>
-            <button className="bg-zinc-800 hover:bg-zinc-900 text-white font-semibold py-2 px-4 rounded-xl transition-colors duration-200 transform hover:scale-105">
+            <button className="bg-zinc-800 hover:bg-zinc-900 text-white font-semibold py-2 px-4 rounded-xl transition-colors duration-200 transform hover:scale-105 cursor-pointer">
               View Profile
             </button>
           </div>

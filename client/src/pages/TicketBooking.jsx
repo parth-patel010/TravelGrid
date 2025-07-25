@@ -86,7 +86,7 @@ function TicketBooking() {
                 className={`flex items-center justify-center sm:justify-start gap-0 sm:gap-2 px-0 sm:px-4 py-2 rounded-full font-semibold text-sm sm:text-base transition-all border ${
                   travelType === opt.value
                     ? 'bg-pink-600 text-white border-pink-600 shadow-lg'
-                    : 'bg-white/20 text-white border-transparent hover:bg-pink-700/20'
+                    : 'bg-white/20 text-white border-transparent hover:bg-pink-700/20 cursor-pointer'
                 } w-10 h-10 sm:w-auto sm:h-auto`}
                 title={opt.label}
               >
@@ -102,7 +102,7 @@ function TicketBooking() {
                 <button
                   key={mode.value}
                   onClick={() => setTripMode(mode.value)}
-                  className={`px-8 py-2 rounded-full font-medium transition-all duration-300 ${
+                  className={`hover: cursor-pointer px-8 py-2 rounded-full font-medium transition-all duration-300 ${
                     tripMode === mode.value
                       ? 'bg-pink-500 text-white shadow-md'
                       : 'bg-white text-gray-600 border border-gray-300 hover:bg-pink-50'
@@ -175,7 +175,7 @@ function TicketBooking() {
                     </div>
                   </div>
                   <button
-                    className='px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg'
+                    className='px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg cursor-pointer'
                     onClick={resetForm}
                   >
                     Book Another Trip
@@ -207,7 +207,7 @@ function TicketBooking() {
                         type='button'
                         title='Swap destinations'
                         onClick={() => setForm((prev) => ({ ...prev, from: prev.to, to: prev.from }))}
-                        className='p-3 bg-pink-500 hover:bg-pink-600 text-white rounded-full transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xl'
+                        className='p-3 bg-pink-500 hover:bg-pink-600 text-white rounded-full transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xl cursor-pointer'
                       >
                         <ArrowRightLeft size={20} />
                       </button>
@@ -295,7 +295,7 @@ function TicketBooking() {
                 <div className='text-center pt-4'>
                   <button
                     type='submit'
-                    className='w-full max-w-md py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold rounded-xl text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl'
+                    className='w-full max-w-md py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold rounded-xl text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl cursor-pointer'
                   >
                     <span className='flex items-center justify-center gap-3'>
                       <span>Search {travelType.charAt(0).toUpperCase() + travelType.slice(1)}s</span>

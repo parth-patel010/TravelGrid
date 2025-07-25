@@ -28,7 +28,7 @@ const SavedPlaces = () => {
                         <h2 className="text-2xl font-bold text-white">Saved Places</h2>
                         <button
                             onClick={() => navigate('/dashboard')}
-                            className="text-sm px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white rounded-lg transition"
+                            className="text-sm px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white rounded-lg transition hover: cursor-pointer"
                         >
                             Back to Dashboard
                         </button>

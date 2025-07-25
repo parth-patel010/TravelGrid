@@ -41,7 +41,7 @@ const DiscoverSection = () => (
             <p className="text-gray-600 text-sm">{place.description}</p>
           </div>
           <div className="p-4">
-          <button className="mt-auto w-full bg-zinc-800 hover:bg-zinc-900 text-white font-semibold py-2 px-4 rounded-xl transition-colors duration-200 transform hover:scale-105">Book Now</button>
+          <button className="mt-auto w-full bg-zinc-800 hover:bg-zinc-900 text-white font-semibold py-2 px-4 rounded-xl transition-colors duration-200 transform hover:scale-105 cursor-pointer">Book Now</button>
         </div>
         </div>
       ))}
@@ -55,7 +55,7 @@ const DiscoverSection = () => (
         Discover more travel ideas, tips, and personalized recommendations.
       </p>
       <button
-        className="px-8 py-3 bg-gradient-to-r from-blue-600 to-pink-500 text-white font-medium rounded-full shadow-lg hover:scale-105 transition duration-300"
+        className="px-8 py-3 bg-gradient-to-r from-blue-600 to-pink-500 text-white font-medium rounded-full shadow-lg hover:scale-105 transition duration-300 cursor-pointer"
       
       >
         Discover More Destinations

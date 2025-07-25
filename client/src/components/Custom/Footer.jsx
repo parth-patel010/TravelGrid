@@ -155,7 +155,7 @@ const Footer = () => {
                   type="submit"
                   className="w-full bg-zinc-800 hover:bg-zinc-900 text-white py-2 px-4 rounded-md 
                       transition-all duration-300 text-sm font-medium transform hover:scale-[1.02] 
-                      hover:shadow-lg active:scale-[0.98]"
+                      hover:shadow-lg active:scale-[0.98] cursor-pointer"
                 >
                   Subscribe
                 </button>
