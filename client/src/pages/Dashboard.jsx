@@ -28,6 +28,7 @@ const Dashboard = () => {
     ];
 
     return (
+
         <div className="min-h-screen bg-gradient-to-br from-black to-pink-900 px-4 sm:px-8 md:px-16 py-10 md:py-20">
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
