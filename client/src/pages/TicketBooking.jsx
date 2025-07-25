@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/Custom/Navbar";
 import Footer from "../components/Custom/Footer";
-
 import {
   Users,
   CalendarDays,
@@ -92,14 +91,13 @@ function TicketBooking() {
                   }`}
 
       <main className="relative flex flex-col flex-1 items-center w-full pt-24 pb-10 px-4">
-        {/* Background city image */}
         <img
           src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1600&q=80"
           alt="City skyline"
           className="absolute inset-0 w-full h-full object-cover opacity-30 z-0"
         />
+
         <div className="relative z-10 w-full max-w-4xl bg-white/10 backdrop-blur-md border border-pink-400/30 rounded-3xl shadow-2xl p-8 md:p-12">
-          {/* Travel type tabs (responsive) */}
           <div className="flex justify-center gap-2 sm:gap-4 mb-8 flex-wrap">
             {travelOptions.map((opt) => (
               <button
@@ -121,7 +119,6 @@ function TicketBooking() {
             ))}
           </div>
 
-          {/* Trip mode toggle */}
           <div className="flex gap-4 justify-center mb-10">
             {tripModes.map((mode) => (
               <button
@@ -138,7 +135,6 @@ function TicketBooking() {
             ))}
           </div>
 
-          {/* Form or Success Message */}
           {submitted ? (
             <div className="text-center text-pink-100">
               <h3 className="text-3xl font-bold text-green-400 mb-4 flex items-center justify-center gap-2">
@@ -147,24 +143,16 @@ function TicketBooking() {
               <p className="max-w-xl mx-auto leading-relaxed">
                 You have booked a {travelType}{" "}
                 {tripMode === "roundTrip" ? "round-trip" : "one-way"} ticket
-                from
-                <span className="font-semibold text-white">
-                  {" "}
-                  {form.from}
-                </span>{" "}
-                to
-                <span className="font-semibold text-white">
-                  {" "}
-                  {form.to}
-                </span>{" "}
-                departing on
-                <span className="font-semibold text-white"> {form.depart}</span>
+                from{" "}
+                <span className="font-semibold text-white">{form.from}</span> to{" "}
+                <span className="font-semibold text-white">{form.to}</span>{" "}
+                departing on{" "}
+                <span className="font-semibold text-white">{form.depart}</span>
                 {tripMode === "roundTrip" && (
                   <>
                     {" "}
-                    and returning on
+                    and returning on{" "}
                     <span className="font-semibold text-white">
-                      {" "}
                       {form.return}
                     </span>
                   </>
@@ -185,9 +173,7 @@ function TicketBooking() {
             </div>
           ) : (
             <form className="space-y-8" onSubmit={handleSubmit}>
-              {/* Core search panel */}
               <div className="grid gap-4 md:grid-cols-5 items-end">
-                {/* From */}
                 <label className="relative block">
                   <MapPin
                     className="absolute top-3 left-3 text-pink-400"
@@ -203,7 +189,7 @@ function TicketBooking() {
                     className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                   />
                 </label>
-                {/* Swap button on medium screens */}
+
                 <button
                   type="button"
                   title="Swap"
@@ -214,11 +200,14 @@ function TicketBooking() {
                       to: prev.from,
                     }))
                   }
+
                   className="hidden md:flex items-center justify-center self-stretch bg-pink-500 hover:bg-pink-600 text-white rounded-xl transition-all"
 
+
                 >
-                  <ArrowRightLeft size={20} />
+                  <ArrowRightLeft size={18} />
                 </button>
+
 
               ))}
             </div>
@@ -440,6 +429,7 @@ function TicketBooking() {
             )}
           </div>
                 {/* To */}
+
                 <label className="relative block">
                   <MapPin
                     className="absolute top-3 left-3 text-pink-400"
@@ -455,7 +445,7 @@ function TicketBooking() {
                     className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                   />
                 </label>
-                {/* Depart Date */}
+
                 <label className="relative block">
                   <CalendarDays
                     className="absolute top-3 left-3 text-pink-400"
@@ -470,7 +460,7 @@ function TicketBooking() {
                     className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                   />
                 </label>
-                {/* Return Date (conditional) */}
+
                 {tripMode === "roundTrip" ? (
                   <label className="relative block">
                     <CalendarDays
@@ -505,24 +495,27 @@ function TicketBooking() {
                   </label>
                 )}
               </div>
-              {/* Passengers & Class row */}
+
+              {/* Always show cabin & passenger selector */}
               <div className="grid md:grid-cols-2 gap-6">
-                <label className="relative block">
-                  <Users
-                    className="absolute top-3 left-3 text-pink-400"
-                    size={18}
-                  />
-                  <input
-                    type="number"
-                    name="passengers"
-                    min="1"
-                    max="10"
-                    required
-                    value={form.passengers}
-                    onChange={handleChange}
-                    className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
-                  />
-                </label>
+                {tripMode === "roundTrip" && (
+                  <label className="relative block">
+                    <Users
+                      className="absolute top-3 left-3 text-pink-400"
+                      size={18}
+                    />
+                    <input
+                      type="number"
+                      name="passengers"
+                      min="1"
+                      max="10"
+                      required
+                      value={form.passengers}
+                      onChange={handleChange}
+                      className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
+                    />
+                  </label>
+                )}
                 <select
                   name="cabin"
                   value={form.cabin}
@@ -538,12 +531,12 @@ function TicketBooking() {
                   )}
                 </select>
               </div>
+
               <button
                 type="submit"
                 className="w-full mt-4 py-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold rounded-xl text-lg tracking-wide shadow-lg transition-all hover:shadow-pink-700/50"
               >
-                Search{" "}
-                {travelType.charAt(0).toUpperCase() + travelType.slice(1)}s
+                Search {travelType.charAt(0).toUpperCase() + travelType.slice(1)}s
               </button>
             </form>
           )}
