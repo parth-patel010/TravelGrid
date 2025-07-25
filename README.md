@@ -51,8 +51,17 @@ As a **GSSoC 2025** project, TravelGrid provides contributors with an opportunit
   - React.js
   - Tailwind CSS
   - ShadCN (UI Component Library)
-- **Backend** (To be implemented):
-  - TBD (Details will be shared as the backend setup progresses)
+- **Backend** :
+# Clone the repository
+git clone https://github.com/Adarsh-Chaubey03/TravelGrid.git
+cd TravelGrid/server
+
+# Install backend dependencies
+npm install
+
+# Create .env file
+touch .env
+
 - **Tools & Platforms**:
   - Git & GitHub for version control
   - Vite (Build tool for faster development)
@@ -136,6 +145,14 @@ TravelGrid/client/
 ├── package.json           # Project dependencies and scripts
 ├── README.md              # Project documentation
 ├── vite.config.js         # Vite configuration
+├── server/              # Backend
+│   ├── config/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── index.js
+│   ├── .env             # Not committed
+│   └── README.md
 ```
 
 ## Code of Conduct

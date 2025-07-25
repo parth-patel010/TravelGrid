@@ -14,7 +14,7 @@ import {
   ChevronRight,
   User,
   LogOut,
-  Settings
+  Settings,
 } from "lucide-react";
 
 const Navbar = () => {
@@ -41,55 +41,50 @@ const Navbar = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Prevent body scroll when sidebar is open
   useEffect(() => {
     if (isSidebarOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     }
 
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     };
   }, [isSidebarOpen]);
 
   const navLinks = [
-  { name: "Home", path: "/", icon: <Home size={18} /> },
-  { name: "Ticket", path: "/ticket", icon: <Ticket size={18} /> },
-  { name: "Packages", path: "/packages", icon: <Package size={18} /> },
-  { name: "Hotels", path: "/hotels", icon: <Building2 size={18} /> },
-  { name: "Guides", path: "/guides", icon: <UserRound size={18} /> },
-  { name: "Contact", path: "/contact", icon: <Contact size={18} /> },
-];
-
-  
-  const isActive = (path) => location.pathname === path;
-
+    { name: "Home", path: "/", icon: <Home size={18} /> },
+    { name: "Ticket", path: "/ticket", icon: <Ticket size={18} /> },
+    { name: "Packages", path: "/packages", icon: <Package size={18} /> },
+    { name: "Hotels", path: "/hotels", icon: <Building2 size={18} /> },
+    { name: "Guides", path: "/guides", icon: <UserRound size={18} /> },
+    { name: "Contact", path: "/contact", icon: <Contact size={18} /> },
+  ];
 
   const isActive = (path) => location.pathname === path;
 
   const handleLogout = () => {
     logout();
     setShowUserMenu(false);
-    navigate('/');
+    navigate("/");
   };
 
   return (
     <>
       {/* Main Navbar */}
-      <nav 
+      <nav
         className={`w-full py-3 px-4 md:px-8 fixed top-0 left-0 z-40 transition-all duration-300
         ${
           scrolled
-          ? 'bg-white/10 backdrop-blur-lg border-b border-white/20 shadow-xl'
-          : 'bg-white/5 backdrop-blur-md border-b border-white/10'
+            ? "bg-white/10 backdrop-blur-lg border-b border-white/20 shadow-xl"
+            : "bg-white/5 backdrop-blur-md border-b border-white/10"
         }`}
-
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
@@ -101,38 +96,39 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
 
-            {navLinks.map((link) => {
-              const isContact = link.path === "/contact";
-              const isTicket = link.path === "/ticket";
-              const active = isActive(link.path);
+          {navLinks.map((link) => {
+            const isContact = link.path === "/contact";
+            const isTicket = link.path === "/ticket";
+            const active = isActive(link.path);
 
-              let linkClass = "font-medium transition-colors flex items-center gap-2 ";
+            let linkClass =
+              "font-medium transition-colors flex items-center gap-2 ";
 
-              const ticketActive = isActive("/ticket");
-              const contactActive = isActive("/contact");
+            const ticketActive = isActive("/ticket");
+            const contactActive = isActive("/contact");
 
-              if (active) {
+            if (active) {
               // Current link is active
-                if (isContact) {
-                  linkClass +=  "text-pink-400";
-                } else if (isTicket) {
-                  linkClass += "text-pink-400";
-                } else {
-                  linkClass += "text-pink-400";
-                }
+              if (isContact) {
+                linkClass += "text-pink-400";
+              } else if (isTicket) {
+                linkClass += "text-pink-400";
               } else {
+                linkClass += "text-pink-400";
+              }
+            } else {
               // Current link is not active
               if (ticketActive) {
                 linkClass += "text-black hover:text-pink-300";
               } else if (contactActive) {
                 linkClass += scrolled
-                ? "text-white hover:text-pink-300"
-                : "text-black hover:text-pink-300";
+                  ? "text-white hover:text-pink-300"
+                  : "text-black hover:text-pink-300";
               } else {
                 linkClass += scrolled
-                ? "text-black hover:text-pink-300"
-                : "text-white hover:text-pink-300";
-              }   
+                  ? "text-black hover:text-pink-300"
+                  : "text-white hover:text-pink-300";
+              }
             }
 
             return (
@@ -143,36 +139,45 @@ const Navbar = () => {
             );
           })}
 
-            <button className="ml-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2">
-
-              <LogIn size={18} />
-              Login
-            </button>
-
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="md:hidden flex items-center text-pink-400 relative"
-            aria-label="Toggle menu"
-          >
-            <Menu size={24} className={`transition-opacity duration-300 ${isSidebarOpen ? 'opacity-0' : 'opacity-100'}`} />
-            <X size={24} className={`absolute transition-opacity duration-300 ${isSidebarOpen ? 'opacity-100' : 'opacity-0'}`} />
+          <button className="ml-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2">
+            <LogIn size={18} />
+            Login
           </button>
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          className="md:hidden flex items-center text-pink-400 relative"
+          aria-label="Toggle menu"
+        >
+          <Menu
+            size={24}
+            className={`transition-opacity duration-300 ${
+              isSidebarOpen ? "opacity-0" : "opacity-100"
+            }`}
+          />
+          <X
+            size={24}
+            className={`absolute transition-opacity duration-300 ${
+              isSidebarOpen ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        </button>
       </nav>
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300 md:hidden ${isSidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
+        className={`fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300 md:hidden ${
+          isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
         onClick={() => setIsSidebarOpen(false)}
       />
 
       <div
-        className={`fixed top-0 right-0 h-full w-[80%] sm:w-[60%] max-w-[320px] bg-gradient-to-br from-black to-zinc-900 z-50 transform transition-transform duration-300 ease-in-out shadow-xl md:hidden ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
+        className={`fixed top-0 right-0 h-full w-[80%] sm:w-[60%] max-w-[320px] bg-gradient-to-br from-black to-zinc-900 z-50 transform transition-transform duration-300 ease-in-out shadow-xl md:hidden ${
+          isSidebarOpen ? "translate-x-0" : "translate-x-full"
+        }`}
       >
         <div className="p-5 flex flex-col h-full">
           {/* Close Button */}
@@ -214,10 +219,11 @@ const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`font-medium py-2.5 px-3 rounded-lg transition-colors flex items-center justify-between ${isActive(link.path)
-                    ? 'bg-pink-500/20 text-pink-400'
-                    : 'text-white hover:bg-pink-500/10 hover:text-pink-300'
-                  }`}
+                className={`font-medium py-2.5 px-3 rounded-lg transition-colors flex items-center justify-between ${
+                  isActive(link.path)
+                    ? "bg-pink-500/20 text-pink-400"
+                    : "text-white hover:bg-pink-500/10 hover:text-pink-300"
+                }`}
               >
                 <div className="flex items-center gap-3">
                   <span className="text-pink-400">{link.icon}</span>
@@ -227,7 +233,6 @@ const Navbar = () => {
               </Link>
             ))}
 
-
             {/* Mobile Auth Links */}
             {isAuthenticated ? (
               <>
@@ -236,7 +241,9 @@ const Navbar = () => {
                   className="font-medium py-2.5 px-3 rounded-lg transition-colors flex items-center justify-between text-white hover:bg-pink-500/10 hover:text-pink-300"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-pink-400"><User size={18} /></span>
+                    <span className="text-pink-400">
+                      <User size={18} />
+                    </span>
                     <span>Dashboard</span>
                   </div>
                   <ChevronRight size={16} className="text-pink-400/70" />
@@ -246,7 +253,9 @@ const Navbar = () => {
                   className="font-medium py-2.5 px-3 rounded-lg transition-colors flex items-center justify-between text-red-400 hover:bg-red-500/10 w-full text-left"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-red-400"><LogOut size={18} /></span>
+                    <span className="text-red-400">
+                      <LogOut size={18} />
+                    </span>
                     <span>Logout</span>
                   </div>
                 </button>
@@ -258,7 +267,9 @@ const Navbar = () => {
                   className="font-medium py-2.5 px-3 rounded-lg transition-colors flex items-center justify-between text-white hover:bg-pink-500/10 hover:text-pink-300"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-pink-400"><LogIn size={18} /></span>
+                    <span className="text-pink-400">
+                      <LogIn size={18} />
+                    </span>
                     <span>Sign In</span>
                   </div>
                   <ChevronRight size={16} className="text-pink-400/70" />
@@ -283,8 +294,7 @@ const Navbar = () => {
             </Link>
           </div>
         </div>
-      </div>  
-     
+      </div>
     </>
   );
 };
