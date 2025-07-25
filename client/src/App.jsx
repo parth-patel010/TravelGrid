@@ -1,17 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
 import { AuthProvider } from "./context/AuthContext";
 import Navbar from "./components/Custom/Navbar";
 import Footer from "./components/Custom/Footer";
 
-import React, { useState, useEffect } from 'react';
-
-import { Outlet, useLocation } from 'react-router-dom';
-import { AppProvider } from './context/AppContext';
-import { AuthProvider } from './context/AuthContext';
-import Navbar from './components/Custom/Navbar';
-import Footer from './components/Custom/Footer';
 import Spinner from './components/Spinner';
 
 import ErrorBoundary from './components/ErrorHandle/ErrorBoundary';

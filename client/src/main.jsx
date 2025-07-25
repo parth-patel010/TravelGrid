@@ -19,7 +19,7 @@ import Hotels from "./pages/Hotels";
 import HotelDetails from "./pages/HotelDetails";
 
 import TicketBooking from "./pages/TicketBooking";
-import About from "./pages/About";
+
 
 import NotFound from "./pages/NotFound";
 import ErrorBoundary from "./components/ErrorHandle/ErrorBoundary";
