@@ -6,7 +6,7 @@ export default function TermsAndConditions() {
   return (
     <>
     <Navbar />
-    <div className="bg-white p-8 rounded-lg shadow-lg">
+    <div className="bg-white p-8 rounded-lg shadow-lg" style={{ paddingTop: '70px' }}>
       <h2 className="text-4xl font-extrabold text-gray-800 mb-6 text-center">Terms & Conditions</h2>
 
       <section className="mb-8">

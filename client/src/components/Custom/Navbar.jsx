@@ -99,6 +99,7 @@ const Navbar = ({lightBackground = false}) => {
           {navLinks.map((link) => {
             const isContact = link.path === "/contact";
             const isTicket = link.path === "/ticket";
+            const isHotels = link.path === "/hotels";
             const active = isActive(link.path);
 
             let linkClass =
@@ -106,20 +107,17 @@ const Navbar = ({lightBackground = false}) => {
 
             const ticketActive = isActive("/ticket");
             const contactActive = isActive("/contact");
+            const hotelsActive = isActive("/hotels");
 
             if (active) {
               // Current link is active
-              if (isContact) {
-                linkClass += "text-pink-400";
-              } else if (isTicket) {
-                linkClass += "text-pink-400";
-              } else {
-                linkClass += "text-pink-400";
-              }
+              linkClass += "text-pink-400";
             } else {
               // Current link is not active
-              if (ticketActive) {
+              if (ticketActive || contactActive || hotelsActive) {
+                // On pages with light backgrounds, use dark text
                 linkClass += "text-black hover:text-pink-300";
+
               } else if (contactActive) {            {/*Here if the page is lightBackground, text of navbar will become black which will be easily visible*/}  
                 linkClass += lightBackground
                 ? "text-black hover:text-pink-300"   
@@ -130,9 +128,7 @@ const Navbar = ({lightBackground = false}) => {
                 linkClass += lightBackground
                 ? "test-black hover:text-pink-300"
                 :scrolled
-                  ? "text-black hover:text-pink-300"
-                  : "text-white hover:text-pink-300";
-              }
+              } 
             }
 
             return (
