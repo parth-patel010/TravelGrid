@@ -31,10 +31,14 @@ import TravelPackages from "./pages/TravelPackages";
 import HotelBookingPage from "./pages/HotelBookingPage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import PrivacyPolicy from "./pages/Privacypolicy.jsx";
 import TermsAndConditions from "./pages/Terms&Conditions.jsx";
+import TripsPlanned from "./pages/TripsPlanned";
+import SavedPlaces from "./pages/SavedPlaces";
+import CountriesVisited from "./pages/CountriesVisited";
 
 import FAQ from "./pages/FAQ.jsx";
 import { AuthProvider } from "./context/AuthContext";
