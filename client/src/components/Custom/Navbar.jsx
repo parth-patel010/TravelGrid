@@ -25,6 +25,10 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { user, logout, isAuthenticated } = useAuth();
 
+  const handlelogin = () => {
+    navigate('/login'); // change '/about' to your desired path
+  };
+
   // Close sidebar when route changes
   useEffect(() => {
     setIsSidebarOpen(false);
@@ -139,7 +143,7 @@ const Navbar = () => {
             );
           })}
 
-          <button className="ml-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2 hover: cursor-pointer">
+          <button onClick={handlelogin} className="ml-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2 hover: cursor-pointer">
             <LogIn size={18} />
             Login
           </button>
