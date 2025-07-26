@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
 
 const guides = [
   {
@@ -41,6 +42,10 @@ const TravelGuides = () => {
     const right = (index + 1) % guides.length;
     return [left, center, right];
   };
+ const navigate = useNavigate();
+ const handleguide=(name)=>{
+   navigate('/guides',{ state: { selectedGuideId: name } });
+ }
 
   return (
     <section className="w-full bg-gradient-to-br from-blue-50 to-pink-50 py-16">
@@ -106,7 +111,7 @@ const TravelGuides = () => {
                     <p className="text-gray-600 text-sm text-center mb-4">
                       {guide.bio}
                     </p>
-                    <button className="bg-zinc-800 hover:bg-zinc-900 text-white font-semibold py-2 px-4 rounded-xl transition-transform transform hover:scale-105">
+                    <button onClick={()=>handleguide(guide.name)} className="bg-zinc-800 hover:bg-zinc-900 text-white font-semibold py-2 px-4 rounded-xl transition-transform transform hover:scale-105">
                       View Profile
                     </button>
                   </motion.div>
