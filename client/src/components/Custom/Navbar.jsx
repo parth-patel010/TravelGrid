@@ -99,6 +99,7 @@ const Navbar = () => {
           {navLinks.map((link) => {
             const isContact = link.path === "/contact";
             const isTicket = link.path === "/ticket";
+            const isHotels = link.path === "/hotels";
             const active = isActive(link.path);
 
             let linkClass =
@@ -106,25 +107,18 @@ const Navbar = () => {
 
             const ticketActive = isActive("/ticket");
             const contactActive = isActive("/contact");
+            const hotelsActive = isActive("/hotels");
 
             if (active) {
               // Current link is active
-              if (isContact) {
-                linkClass += "text-pink-400";
-              } else if (isTicket) {
-                linkClass += "text-pink-400";
-              } else {
-                linkClass += "text-pink-400";
-              }
+              linkClass += "text-pink-400";
             } else {
               // Current link is not active
-              if (ticketActive) {
+              if (ticketActive || contactActive || hotelsActive) {
+                // On pages with light backgrounds, use dark text
                 linkClass += "text-black hover:text-pink-300";
-              } else if (contactActive) {
-                linkClass += scrolled
-                  ? "text-white hover:text-pink-300"
-                  : "text-black hover:text-pink-300";
               } else {
+                // On pages with dark backgrounds, use white text when not scrolled
                 linkClass += scrolled
                   ? "text-black hover:text-pink-300"
                   : "text-white hover:text-pink-300";
