@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Custom/Navbar';
-import Footer from '../components/Custom/Footer';
 import {
   Users,
   CalendarDays,
@@ -337,7 +336,6 @@ const TicketBooking = () => {
           </form>
         )}
       </div>
-      <Footer />
     </>
   );
 };
