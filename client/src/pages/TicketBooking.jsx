@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Custom/Navbar';
-import Footer from '../components/Custom/Footer';
 import {
   Users,
   CalendarDays,
@@ -97,9 +96,10 @@ const TicketBooking = () => {
   };
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen w-full overflow-x-hidden">
       <Navbar />
-      <div className="max-w-3xl mx-auto px-4 py-10">
+      <main className="flex flex-col flex-1 w-full items-center pt-20">
+        <div className="max-w-3xl mx-auto px-4 py-10 w-full">
         <h1 className="text-2xl font-bold mb-6 text-center">Book Your Travel</h1>
 
         {/* Trip Type Buttons */}
@@ -129,7 +129,7 @@ const TicketBooking = () => {
                 className={`flex-1 p-3 rounded-lg border flex items-center justify-center gap-2 transition ${
                   travelType === opt.value
                     ? "bg-pink-600 text-white border-pink-600 shadow-lg"
-                    : "bg-white/20 text-white border-transparent hover:bg-pink-700/20"
+                    : "bg-white/20 text-black border-pink-600 hover:bg-pink-700/20"
                 }`}
                 onClick={() => {
                   setTravelType(opt.value);
@@ -336,9 +336,9 @@ const TicketBooking = () => {
             </div>
           </form>
         )}
-      </div>
-      <Footer />
-    </>
+        </div>
+      </main>
+    </div>
   );
 };
 

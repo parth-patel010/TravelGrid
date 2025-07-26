@@ -31,10 +31,14 @@ import TravelPackages from "./pages/TravelPackages";
 import HotelBookingPage from "./pages/HotelBookingPage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import PrivacyPolicy from "./pages/Privacypolicy.jsx";
 import TermsAndConditions from "./pages/Terms&Conditions.jsx";
+import TripsPlanned from "./pages/TripsPlanned";
+import SavedPlaces from "./pages/SavedPlaces";
+import CountriesVisited from "./pages/CountriesVisited";
 
 import FAQ from "./pages/FAQ.jsx";
 import { AuthProvider } from "./context/AuthContext";
@@ -51,9 +55,9 @@ const router = createBrowserRouter([
       { path: '/', element: <Home /> },
       { path: '/about', element: <About /> },
       { path: '/discover', element: <Discover /> },
-      { path: '/trips', element: <Trips /> },
+      // { path: '/trips', element: <Trips /> },
       { path: '/review', element: <Review /> },
-      { path: '/forums', element: <Forums /> },
+      // { path: '/forums', element: <Forums /> },
       { path: '/contributors', element: <Contributors /> },
       { path: '/hotels', element: <Hotels /> },
       { path: '/hotels/:id', element: <HotelDetails /> },
