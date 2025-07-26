@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import './styles/TravelGuidesCarousel.css';
+
 
 const guides = [
   {

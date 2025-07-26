@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const guides = [
   {
@@ -27,44 +29,95 @@ const guides = [
   },
 ];
 
-const TravelGuides = () => (
-  <section className="w-full bg-gradient-to-br from-blue-50 to-pink-50 py-16">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 className="text-3xl md:text-4xl font-bold text-black mb-8 text-center">
-        Meet Our Top Travel Guides
-      </h2>
-         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {guides.map((guide, i) => (
-          <div
-            key={i}
-            className="
-              min-w-full max-w-full
-              md:min-w-[260px] md:max-w-xs
-              bg-gradient-to-br from-blue-100 to-pink-100
-              rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300
-              overflow-hidden flex-shrink-0 flex flex-col items-center p-6
-            "
+const TravelGuides = () => {
+  const [index, setIndex] = useState(0);
+
+  const prev = () => setIndex((index - 1 + guides.length) % guides.length);
+  const next = () => setIndex((index + 1) % guides.length);
+
+  const getVisibleIndices = () => {
+    const left = (index - 1 + guides.length) % guides.length;
+    const center = index;
+    const right = (index + 1) % guides.length;
+    return [left, center, right];
+  };
+
+  return (
+    <section className="w-full bg-gradient-to-br from-blue-50 to-pink-50 py-16">
+      <div className="max-w-6xl mx-auto px-4 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-black mb-10">
+          Meet Our Top Travel Guides
+        </h2>
+
+        <div className="relative">
+          <button
+            onClick={prev}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full hover:bg-pink-100 hover:shadow-lg"
           >
-            <img
-              src={guide.image}
-              alt={guide.name}
-              className="w-20 h-20 rounded-full object-cover border-4 border-pink-400 mb-4"
-            />
-            <h3 className="text-lg font-semibold mb-1 text-gray-800">{guide.name}</h3>
-            <p className="text-pink-600 text-sm font-medium mb-1">{guide.expertise}</p>
-            <p className="text-gray-600 text-sm mb-4 text-center">{guide.bio}</p>
-            <button className="bg-zinc-800 hover:bg-zinc-900 text-white font-semibold py-2 px-4 rounded-xl transition-colors duration-200 transform hover:scale-105 cursor-pointer">
-              View Profile
-            </button>
+            <ChevronLeft className="w-6 h-6 text-pink-600" />
+          </button>
+          <button
+            onClick={next}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full hover:bg-pink-100 hover:shadow-lg"
+          >
+            <ChevronRight className="w-6 h-6 text-pink-600" />
+          </button>
+
+          <div className="overflow-hidden px-12">
+            <div className="flex justify-center gap-6">
+              {getVisibleIndices().map((i, pos) => {
+                const guide = guides[i];
+                const isCenter = i === index;
+
+                return (
+                  <motion.div
+                    key={guide.name}
+                    initial={{
+                      opacity: 0,
+                      scale: 0.85,
+                      x: pos === 0 ? -100 : pos === 2 ? 100 : 0,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      scale: isCenter ? 1 : 0.9,
+                      x: 0,
+                    }}
+                    exit={{ opacity: 0, scale: 0.85 }}
+                    transition={{ duration: 0.4 }}
+                    whileHover={{
+                      y: -10,
+                      boxShadow: "0 20px 30px -10px rgba(0, 0, 0, 0.25)",
+                    }}
+                    className={`flex-shrink-0 w-[280px] md:w-[300px] h-[420px] bg-gradient-to-br from-blue-100 to-pink-100 rounded-2xl p-6 flex flex-col items-center transition-all duration-100 ease-in-out cursor-pointer ${
+                      isCenter ? "z-10 scale-100" : "opacity-80"
+                    }`}
+                  >
+                    <img
+                      src={guide.image}
+                      alt={guide.name}
+                      className="w-24 h-24 rounded-full object-cover border-4 border-pink-400 mb-4"
+                    />
+                    <h3 className="text-lg font-semibold mb-1 text-gray-800">
+                      {guide.name}
+                    </h3>
+                    <p className="text-pink-600 text-sm font-medium mb-2">
+                      {guide.expertise}
+                    </p>
+                    <p className="text-gray-600 text-sm text-center mb-4">
+                      {guide.bio}
+                    </p>
+                    <button className="bg-zinc-800 hover:bg-zinc-900 text-white font-semibold py-2 px-4 rounded-xl transition-transform transform hover:scale-105">
+                      View Profile
+                    </button>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
-        ))}
-        <style>{`
-          .scrollbar-hide::-webkit-scrollbar { display: none; }
-          .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-        `}</style>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default TravelGuides;

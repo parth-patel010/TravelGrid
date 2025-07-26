@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+
+import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
+
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -62,6 +64,7 @@ const Footer = () => {
             <div className="space-y-4">
               <h4 className="text-lg font-semibold">Quick Links</h4>
               <nav className="flex flex-col space-y-2">
+
                 <a
                   href="/"
                   className="text-gray-600 hover:text-gray-900 transition-colors text-sm"
@@ -94,6 +97,7 @@ const Footer = () => {
                 >
                   Blog
                 </a>
+
               </nav>
             </div>
 

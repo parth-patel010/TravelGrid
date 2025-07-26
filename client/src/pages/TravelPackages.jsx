@@ -55,7 +55,6 @@ const packages = [
   },
 ];
 
-
 const parsePrice = (priceStr) => {
   if (!priceStr) return 0;
   const digitsOnly = priceStr.replace(/[^\d]/g, "");
@@ -65,6 +64,9 @@ const parsePrice = (priceStr) => {
 const TravelPackages = () => {
   const [minRating, setMinRating] = useState(0);
   const [maxPrice, setMaxPrice] = useState(Infinity);
+  const [selectedPackage, setSelectedPackage] = useState(null);
+  const [formData, setFormData] = useState({ name: "", email: "", travelers: 1 });
+  const [bookingConfirmed, setBookingConfirmed] = useState(false);
 
   const filteredPackages = packages.filter((pkg) => {
     const numericPrice = parsePrice(pkg.price);
@@ -80,6 +82,22 @@ const TravelPackages = () => {
     }
   };
 
+  const openForm = (pkg) => {
+    setSelectedPackage(pkg);
+    setFormData({ name: "", email: "", travelers: 1 });
+    setBookingConfirmed(false);
+  };
+
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setBookingConfirmed(true);
+  };
+
   return (
     <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-black to-pink-900 overflow-x-hidden">
       <main className="flex flex-col flex-1 w-full items-center">
@@ -91,7 +109,7 @@ const TravelPackages = () => {
             Handpicked vacation deals crafted for unforgettable experiences.
           </p>
 
-          {/* Filters UI */}
+          {/* Filters */}
           <div className="mt-6 flex justify-center items-center gap-8 flex-wrap text-white">
             <div className="flex items-center gap-2">
               <label htmlFor="minRating" className="font-semibold whitespace-nowrap">
@@ -128,6 +146,7 @@ const TravelPackages = () => {
           </div>
         </section>
 
+        {/* Packages */}
         <section className="max-w-7xl w-full px-4 pb-16 grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {filteredPackages.length > 0 ? (
             filteredPackages.map((pkg) => (
@@ -177,7 +196,12 @@ const TravelPackages = () => {
                     )}
                   </div>
 
-                  <button className="mt-auto self-start bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 cursor-pointer">
+
+                  <button
+                    onClick={() => openForm(pkg)}
+                    className="mt-auto self-start bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
+                  >
+
                     Book Now
                   </button>
                 </div>
@@ -190,6 +214,90 @@ const TravelPackages = () => {
           )}
         </section>
       </main>
+
+      {/* Contact/Booking Form Modal */}
+      {selectedPackage && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl shadow-lg max-w-md w-full p-6 relative text-black">
+            <button
+              className="absolute top-2 right-3 text-xl text-red-500 font-bold"
+              onClick={() => setSelectedPackage(null)}
+            >
+              ×
+            </button>
+
+            {!bookingConfirmed ? (
+              <>
+                <h2 className="text-2xl font-bold mb-2">Book: {selectedPackage.title}</h2>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-semibold">Your Name:</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      required
+                      onChange={handleFormChange}
+                      className="w-full border px-3 py-2 rounded-md"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold">Email Address:</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      required
+                      onChange={handleFormChange}
+                      className="w-full border px-3 py-2 rounded-md"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold">Number of Travelers:</label>
+                    <input
+                      type="number"
+                      name="travelers"
+                      min={1}
+                      value={formData.travelers}
+                      required
+                      onChange={handleFormChange}
+                      className="w-full border px-3 py-2 rounded-md"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold">Date</label>
+                    <input
+                      type="date"
+                      name="Date"
+                      value={formData.date}
+                      required
+                      onChange={handleFormChange}
+                      className="w-full border px-3 py-2 rounded-md"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full bg-pink-600 hover:bg-pink-700 text-white py-2 rounded-md font-semibold"
+                  >
+                    Confirm Booking
+                  </button>
+                </form>
+              </>
+            ) : (
+              <div className="text-center">
+                <h2 className="text-2xl font-bold text-green-600">Booking Confirmed!</h2>
+                <p className="mt-2">Thank you, {formData.name}. Your booking on {formData.Date} is successful.</p>
+                <button
+                  className="mt-4 bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-md font-semibold"
+                  onClick={() => setSelectedPackage(null)}
+                >
+                  Close
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
