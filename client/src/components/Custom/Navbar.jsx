@@ -17,7 +17,7 @@ import {
   Settings,
 } from "lucide-react";
 
-const Navbar = () => {
+const Navbar = ({lightBackground = false}) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -120,12 +120,16 @@ const Navbar = () => {
               // Current link is not active
               if (ticketActive) {
                 linkClass += "text-black hover:text-pink-300";
-              } else if (contactActive) {
-                linkClass += scrolled
+              } else if (contactActive) {            {/*Here if the page is lightBackground, text of navbar will become black which will be easily visible*/}  
+                linkClass += lightBackground
+                ? "text-black hover:text-pink-300"   
+                :scrolled
                   ? "text-white hover:text-pink-300"
                   : "text-black hover:text-pink-300";
-              } else {
-                linkClass += scrolled
+              } else {                               {/*Here also if the page is lightBackground, text of navbar will become black which will be easily visible*/}
+                linkClass += lightBackground
+                ? "test-black hover:text-pink-300"
+                :scrolled
                   ? "text-black hover:text-pink-300"
                   : "text-white hover:text-pink-300";
               }
