@@ -34,6 +34,7 @@ import ErrorBoundary from './components/ErrorHandle/ErrorBoundary';
 import NetworkError from './components/ErrorHandle/NetworkError';
 import ServerError from './components/ErrorHandle/ServerError';
 import { AuthProvider } from './context/AuthContext';
+import Blog from './pages/Blog';
 
 const router = createBrowserRouter([
   { path: '/login', element: <Login /> },
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <Home /> },
       { path: '/about', element: <About /> },
+      { path: '/blog', element: <Blog /> },
       { path: '/discover', element: <Discover /> },
       { path: '/trips', element: <Trips /> },
       { path: '/review', element: <Review /> },
