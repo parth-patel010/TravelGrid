@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {motion, AnimatePresence} from "framer-motion";
-import {ChevronLeft, ChevronRight} from "lucide-react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const guides = [
   {
@@ -50,7 +50,6 @@ const TravelGuides = () => {
         </h2>
 
         <div className="relative">
-          {/* Arrows */}
           <button
             onClick={prev}
             className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full hover:bg-pink-100 hover:shadow-lg"
@@ -64,7 +63,6 @@ const TravelGuides = () => {
             <ChevronRight className="w-6 h-6 text-pink-600" />
           </button>
 
-          {/* Carousel Track */}
           <div className="overflow-hidden px-12">
             <div className="flex justify-center gap-6">
               {getVisibleIndices().map((i, pos) => {
@@ -84,8 +82,8 @@ const TravelGuides = () => {
                       scale: isCenter ? 1 : 0.9,
                       x: 0,
                     }}
-                    exit={{opacity: 0, scale: 0.85}}
-                    transition={{duration: 0.4}}
+                    exit={{ opacity: 0, scale: 0.85 }}
+                    transition={{ duration: 0.4 }}
                     whileHover={{
                       y: -10,
                       boxShadow: "0 20px 30px -10px rgba(0, 0, 0, 0.25)",

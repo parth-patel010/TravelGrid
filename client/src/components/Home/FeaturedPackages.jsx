@@ -47,7 +47,7 @@ const FeaturedPackages = () => (
                 </h3>
                 <p className="text-gray-500 mb-4">{pkg.location}</p>
               </div>
-              <button className="mt-auto w-full bg-zinc-800 hover:bg-zinc-900 text-white font-semibold py-2 px-4 rounded-xl transition-colors duration-200 transform hover:scale-105">Book Now</button>
+              <button className="mt-auto w-full bg-zinc-800 hover:bg-zinc-900 text-white font-semibold py-2 px-4 rounded-xl transition-colors duration-200 transform hover:scale-105 cursor-pointer">Book Now</button>
             </div>
           </div>
         ))}

@@ -196,10 +196,12 @@ const TravelPackages = () => {
                     )}
                   </div>
 
+
                   <button
                     onClick={() => openForm(pkg)}
                     className="mt-auto self-start bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
                   >
+
                     Book Now
                   </button>
                 </div>

@@ -51,7 +51,7 @@ const ForumSection = () => (
 
    <div className="mt-16">
       <button
-        className="py-3 px-8 bg-gradient-to-r from-blue-600 to-pink-500 text-white font-semibold rounded-full shadow-lg hover:scale-105 transition duration-300"
+        className="py-3 px-8 bg-gradient-to-r from-blue-600 to-pink-500 text-white font-semibold rounded-full shadow-lg hover:scale-105 transition duration-300 cursor-pointer"
       >
         Visit Forum
       </button>
