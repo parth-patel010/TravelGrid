@@ -53,6 +53,84 @@ const packages = [
       { user: "Bob", comment: "Great experience, would book again." },
     ],
   },
+  {
+    id: 5,
+    title: "City Lights – New York",
+    price: "₹79,999",
+    duration: "6 Days / 5 Nights",
+    rating: 4,
+    image:
+      "https://images.unsplash.com/photo-1531671184257-6cfe3235e5d5?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
+    reviews: [
+      { user: "Alice", comment: "Amazing trip to New York, so many things to do!" },
+      { user: "Bob", comment: "The city that never sleeps – a must-visit!" },
+    ],
+  },
+  {
+    id: 6,
+    title: "Tropical Escape – Bali",
+    price: "₹39,999",
+    duration: "5 Days / 4 Nights",
+    rating: 4,
+    image:
+      "https://images.unsplash.com/photo-1710104434425-6ae10f736622?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
+    reviews: [
+      { user: "Alice", comment: "Bali is such a paradise, perfect for a relaxing getaway." },
+      { user: "Bob", comment: "Great place for beaches, food, and culture!" },
+    ],
+  },
+  {
+    id: 7,
+    title: "Wild Safari – Kenya",
+    price: "₹99,999",
+    duration: "7 Days / 6 Nights",
+    rating: 5,
+    image:
+      "https://images.unsplash.com/photo-1536937275673-8a12b3812e8e?q=80&w=762&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
+    reviews: [
+      { user: "Alice", comment: "Kenya safari was an unforgettable experience!" },
+      { user: "Bob", comment: "The wildlife experience was incredible!" },
+    ],
+  },
+  {
+    id: 8,
+    title: "Historical Wonders – Egypt",
+    price: "₹89,999",
+    duration: "7 Days / 6 Nights",
+    rating: 5,
+    image:
+      "https://plus.unsplash.com/premium_photo-1701172277688-32d05010526a?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
+    reviews: [
+      { user: "Alice", comment: "Visiting the pyramids in Egypt was a dream come true!" },
+      { user: "Bob", comment: "Incredible history, culture, and architecture." },
+    ],
+  },
+  {
+    id: 9,
+    title: "Beach Bliss – Seychelles",
+    price: "₹69,999",
+    duration: "6 Days / 5 Nights",
+    rating: 4,
+    image:
+      "https://images.unsplash.com/photo-1608721557534-f3e066444862?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
+    reviews: [
+      { user: "Alice", comment: "Seychelles was a dream destination for a beach lover." },
+      { user: "Bob", comment: "Amazing beaches, amazing resorts." },
+    ],
+  },
+  {
+    id: 10,
+    title: "Cultural Heritage – Japan",
+    price: "₹109,999",
+    duration: "8 Days / 7 Nights",
+    rating: 5,
+    image:
+      "https://images.unsplash.com/photo-1730724376816-02785c9eefe1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
+    reviews: [
+      { user: "Alice", comment: "Japan is the perfect blend of tradition and modernity!" },
+      { user: "Bob", comment: "The food, culture, and technology are just out of this world." },
+    ],
+  },
 ];
 
 const parsePrice = (priceStr) => {
