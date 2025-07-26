@@ -6,7 +6,7 @@ export default function PrivacyPolicy() {
   return (
     <>
     <Navbar />
-    <div className="bg-white p-8 rounded-lg shadow-lg">
+    <div style={{ paddingTop: '70px' }} className="bg-white p-8 rounded-lg shadow-lg">
       <h2 className="text-4xl font-extrabold text-gray-800 mb-6 text-center">Privacy Policy</h2>
 
       <section className="mb-8">
