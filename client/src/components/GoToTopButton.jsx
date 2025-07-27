@@ -1,5 +1,6 @@
 // client/src/components/GoToTopButton.jsx
 import React, { useState, useEffect } from 'react';
+import { ArrowUp } from 'lucide-react';
 import './GoToTopButton.css'; 
 
 const GoToTopButton = () => {
@@ -33,16 +34,14 @@ const GoToTopButton = () => {
 
   return (
     <>
-      {showButton && (
         <button
-          className="go-to-top-button"
+          className={`go-to-top-button ${showButton? 'show' : ''}`}
           onClick={scrollToTop}
           aria-label="Go to top of page" 
         >
-          &uarr; {/* Up arrow character */}
+          <ArrowUp/> {/* Add scroll-to-top icon with smooth functionality */}
           {/* You could also use an SVG icon here */}
         </button>
-      )}
     </>
   );
 };
