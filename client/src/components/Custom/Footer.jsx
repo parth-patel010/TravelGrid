@@ -124,7 +124,7 @@ const Footer = () => {
                            className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
                          >
                            <span className="w-2 h-2 bg-pink-500 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
-                           Trips
+                           Plan a Trip
                          </Link>
                          <Link
                            to="/destinations"
