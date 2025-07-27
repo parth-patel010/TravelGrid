@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import {
-  Menu,
-  X,
-  User,
-  LogOut,
-  LogIn,
-} from "lucide-react";
+import { Menu, X, User, LogOut, LogIn } from "lucide-react";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -35,61 +29,74 @@ const Navbar = () => {
   return (
     <>
       {/* Sticky Translucent Navbar */}
-      <nav className="w-full fixed top-0 left-0 z-50 backdrop-blur-md bg-white/10 border-b border-white/20 px-4 py-3 flex justify-between items-center">
-        {/* Logo */}
-        <Link to="/" className="text-2xl font-bold text-pink-500 tracking-tight">
-          TravelGrid
-        </Link>
+      <nav className="w-full fixed top-0 left-0 z-50 backdrop-blur-md bg-white/10 border-b border-white/20 px-4 py-3">
+        <div className="flex justify-between items-center max-w-screen-xl mx-auto">
+          {/* Logo */}
+          <Link
+            to="/"
+            className="text-2xl font-bold text-pink-500 tracking-tight"
+          >
+            TravelGrid
+          </Link>
 
-        {/* Desktop Nav Links */}
-        <div className="hidden md:flex gap-6 items-center text-pink-500 font-medium">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              className={`hover:text-pink-600 transition ${
-                location.pathname === link.path ? "underline underline-offset-4" : ""
-              }`}
-            >
-              {link.name}
-            </Link>
-          ))}
-
-          {/* Auth Buttons */}
-          {isAuthenticated ? (
-            <>
-              <Link to="/dashboard" className="hover:text-pink-600 flex items-center gap-1">
-                <User size={18} /> Dashboard
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="hover:text-pink-600 flex items-center gap-1"
-              >
-                <LogOut size={18} /> Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="hover:text-pink-600 flex items-center gap-1">
-                <LogIn size={18} /> Login
-              </Link>
+          {/* Desktop Nav Links */}
+          <div className="hidden md:flex gap-6 items-center text-pink-500 font-medium">
+            {navLinks.map((link) => (
               <Link
-                to="/signup"
-                className="bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-4 py-2 rounded-md font-semibold ml-2"
+                key={link.name}
+                to={link.path}
+                className={`hover:text-pink-600 transition ${
+                  location.pathname === link.path
+                    ? "underline underline-offset-4"
+                    : ""
+                }`}
               >
-                Sign Up
+                {link.name}
               </Link>
-            </>
-          )}
-        </div>
+            ))}
 
-        {/* Hamburger Icon (Mobile only) */}
-        <button
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="md:hidden text-pink-500"
-        >
-          {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+            {/* Auth Buttons */}
+            {isAuthenticated ? (
+              <>
+                <Link
+                  to="/dashboard"
+                  className="hover:text-pink-600 flex items-center gap-1"
+                >
+                  <User size={18} /> Dashboard
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="hover:text-pink-600 flex items-center gap-1"
+                >
+                  <LogOut size={18} /> Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="hover:text-pink-600 flex items-center gap-1"
+                >
+                  <LogIn size={18} /> Login
+                </Link>
+                <Link
+                  to="/signup"
+                  className="bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-4 py-2 rounded-md font-semibold ml-2"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
+
+          {/* Hamburger Icon (Mobile only) */}
+          <button
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="md:hidden text-pink-500"
+          >
+            {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </nav>
 
       {/* Overlay */}
