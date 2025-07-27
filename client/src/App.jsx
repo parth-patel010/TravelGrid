@@ -23,7 +23,6 @@ function App() {
   }, [location]);
 
   return (
-    <AuthProvider>
       <AppProvider>
         <DashboardDataProvider>
           <div className="flex flex-col min-h-screen">
@@ -39,7 +38,6 @@ function App() {
           </div>
         </DashboardDataProvider>
       </AppProvider>
-    </AuthProvider>
   );
 }
 
