@@ -36,6 +36,7 @@ import NetworkError from './components/ErrorHandle/NetworkError';
 import ServerError from './components/ErrorHandle/ServerError';
 import { AuthProvider } from './context/AuthContext';
 import Blog from './pages/Blog';
+import TripCalculatorPage from './pages/TripCalculator';
 
 const router = createBrowserRouter([
   { path: '/login', element: <Login /> },
@@ -62,13 +63,14 @@ const router = createBrowserRouter([
       { path: '/contact', element: <Contact /> },
       { path: '/privacy', element: <PrivacyPolicy /> },
       { path: '/terms', element: <TermsAndConditions /> },
+      { path: '/trip-calculator', element: <TripCalculatorPage/>},
       {
         path: '/dashboard',
         element: (
           <ProtectedRoute>
             <Dashboard />
           </ProtectedRoute>
-        ),
+        )
       },
       {
         path: '/dashboard/trips',

@@ -150,6 +150,15 @@ const Footer = () => {
                            <span className="w-2 h-2 bg-pink-400 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
                            Forums
                          </Link>
+
+                         <Link
+                           to="/trip-calculator"
+                           onClick={scrollToTop}
+                           className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
+                         >
+                           <span className="w-2 h-2 bg-pink-400 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
+                           Trip Expense Calculator
+                         </Link>
                 </nav>
               </div>
 
