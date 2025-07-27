@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './styles/TravelGuidesCarousel.css';
+import { useLocation } from 'react-router-dom';
 
 const guides = [
   {
@@ -57,6 +58,15 @@ const guides = [
 ];
 
 const TravelGuidesCarousel = () => {
+ const location = useLocation();
+ useEffect(() => {
+ if(location.state)
+ {
+  const guidetoview=guides.find(guide=>guide.name==location.state.selectedGuideId)
+  setSelectedGuide(guidetoview);
+ }
+  }, []);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedGuide, setSelectedGuide] = useState(null);
   const profileRef = useRef(null);
@@ -106,6 +116,8 @@ const TravelGuidesCarousel = () => {
     setSearchResults([]);
     setIsSearching(false);
   };
+
+
 
   return (
     <section className="travel-guides-section" style={{ scrollMarginTop: '80px' }}>

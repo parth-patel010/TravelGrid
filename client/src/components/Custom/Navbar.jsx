@@ -17,13 +17,17 @@ import {
   Settings,
 } from "lucide-react";
 
-const Navbar = () => {
+const Navbar = ({lightBackground = false}) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout, isAuthenticated } = useAuth();
+
+  const handlelogin = () => {
+    navigate('/login'); // change '/about' to your desired path
+  };
 
   // Close sidebar when route changes
   useEffect(() => {
@@ -99,6 +103,7 @@ const Navbar = () => {
           {navLinks.map((link) => {
             const isContact = link.path === "/contact";
             const isTicket = link.path === "/ticket";
+            const isHotels = link.path === "/hotels";
             const active = isActive(link.path);
 
             let linkClass =
@@ -106,29 +111,28 @@ const Navbar = () => {
 
             const ticketActive = isActive("/ticket");
             const contactActive = isActive("/contact");
+            const hotelsActive = isActive("/hotels");
 
             if (active) {
               // Current link is active
-              if (isContact) {
-                linkClass += "text-pink-400";
-              } else if (isTicket) {
-                linkClass += "text-pink-400";
-              } else {
-                linkClass += "text-pink-400";
-              }
+              linkClass += "text-pink-400";
             } else {
               // Current link is not active
-              if (ticketActive) {
+              if (ticketActive || contactActive || hotelsActive) {
+                // On pages with light backgrounds, use dark text
                 linkClass += "text-black hover:text-pink-300";
-              } else if (contactActive) {
-                linkClass += scrolled
+
+              } else if (contactActive) {            {/*Here if the page is lightBackground, text of navbar will become black which will be easily visible*/}  
+                linkClass += lightBackground
+                ? "text-black hover:text-pink-300"   
+                :scrolled
                   ? "text-white hover:text-pink-300"
                   : "text-black hover:text-pink-300";
-              } else {
-                linkClass += scrolled
-                  ? "text-black hover:text-pink-300"
-                  : "text-white hover:text-pink-300";
-              }
+              } else {                               {/*Here also if the page is lightBackground, text of navbar will become black which will be easily visible*/}
+                linkClass += lightBackground
+                ? "test-black hover:text-pink-300"
+                :scrolled
+              } 
             }
 
             return (
@@ -139,7 +143,7 @@ const Navbar = () => {
             );
           })}
 
-          <button className="ml-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2">
+          <button onClick={handlelogin} className="ml-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2 hover: cursor-pointer">
             <LogIn size={18} />
             Login
           </button>
@@ -148,7 +152,7 @@ const Navbar = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="md:hidden flex items-center text-pink-400 relative"
+          className="md:hidden flex items-center text-pink-400 relative hover: cursor-pointer"
           aria-label="Toggle menu"
         >
           <Menu
@@ -184,7 +188,7 @@ const Navbar = () => {
           <div className="flex justify-end mb-8">
             <button
               onClick={() => setIsSidebarOpen(false)}
-              className="text-pink-400 p-1 hover:bg-pink-500/10 rounded-full"
+              className="text-pink-400 p-1 hover:bg-pink-500/10 rounded-full hover: cursor-pointer" 
               aria-label="Close menu"
             >
               <X size={24} />

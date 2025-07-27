@@ -19,7 +19,10 @@ function Hotels() {
 
   return (
     <div className="flex flex-col min-h-screen w-full  overflow-x-hidden">
-      {/* <Navbar /> */}
+
+      { <Navbar lightBackground/> }   {/*Added props of lightBackground to this page.*/}
+
+
       <main className="flex flex-col flex-1 w-full items-center">
         {/* Hero + Search */}
         <section className="w-full py-24 flex flex-col items-center text-center px-4 bg-gradient-to-br from-pink-50 to-purple-50">
@@ -64,7 +67,7 @@ function Hotels() {
                 </p>
                 <button
                   onClick={() => navigate(`/hotels/${hotel.id}`)}
-                  className="mt-4 self-start bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
+                  className="mt-4 self-start bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 cursor-pointer"
                 >
                   Book Hotel
                 </button>
@@ -78,7 +81,6 @@ function Hotels() {
           )}
         </section>
       </main>
-      {/* <Footer /> */}
     </div>
   );
 }

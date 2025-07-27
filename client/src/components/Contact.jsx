@@ -20,7 +20,7 @@ const Contact = () => {
 
   const contactCards = [
     { icon: '✈️', title: 'Travel Inquiries', info: 'hello@travelgrid.com', sub: 'Response within 2 hours', bg: 'bg-blue-50 hover:bg-blue-100', color: 'text-blue-600', iconBg: 'from-blue-500 to-blue-600' },
-    { icon: '🌍', title: '24/7 Support', info: '+91 1234567890', sub: 'Emergency assistance', bg: 'bg-green-50 hover:bg-green-100', color: 'text-green-600', iconBg: 'from-green-500 to-green-600' },
+    { icon: '🌍', title: '24/7 Support', info: '+91 1234567890', sub: 'Emergency assistance', bg: 'bg-green-50 hover:bg-green-100', color: 'text-emerald-700', iconBg: 'from-green-500 to-green-600' },
     { icon: '📍', title: 'Visit Our Office', info: 'Xyz, New Delhi', sub: 'Mon-Fri: 9AM-6PM', bg: 'bg-purple-50 hover:bg-purple-100', color: 'text-purple-600', iconBg: 'from-purple-500 to-purple-600' }
   ];
 
@@ -31,11 +31,11 @@ const Contact = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white py-24 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-black bg-opacity-10"></div>
+      <div className="bg-gradient-to-b from-gray-100  to-gray-200  text-black py-24 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-opacity-10"></div>
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <h1 className="text-5xl font-bold mb-6 leading-tight">
-            Get in <span className="text-yellow-400">Touch</span>
+            Get in <span className="text-pink-500">Touch</span>
           </h1>
           <p className="text-xl opacity-95 max-w-2xl mx-auto">
             Planning your next adventure? We're here to help make it unforgettable!
@@ -58,7 +58,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900">{card.title}</h4>
-                    <p className={`${card.color} font-medium`}>{card.info}</p>
+                    <p className={`${card.color}`}>{card.info}</p>
                     <p className="text-gray-500 text-sm">{card.sub}</p>
                   </div>
                 </div>
@@ -111,7 +111,7 @@ const Contact = () => {
                 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-pink-400 to-rose-500 hover:from-pink-500 hover:to-rose-600 text-white font-bold py-4 rounded-xl transition-all transform hover:scale-105 hover:shadow-lg"
+                  className="w-full bg-gradient-to-r from-pink-400 to-rose-500 hover:from-pink-500 hover:to-rose-600 text-white font-bold py-4 rounded-xl transition-all transform hover:scale-105 hover:shadow-lg cursor-pointer"
                 >
                   Send Message
                 </button>
