@@ -61,8 +61,7 @@ export const AuthProvider = ({ children }) => {
             email: foundUser.email,
             name: foundUser.name,
             avatar: foundUser.avatar,
-            phone: foundUser.phone || '',
-            location: foundUser.location || ''
+            
         };
 
             setUser(userSession);
