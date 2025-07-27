@@ -85,7 +85,8 @@ const TravelPackages = () => {
             filteredPackages.map((pkg) => (
               <div
                 key={pkg.id}
-                className="backdrop-blur-sm bg-white/5 border border-pink-400/20 rounded-2xl shadow-xl overflow-hidden flex flex-col"
+                className="backdrop-blur-sm bg-white/5 border border-pink-400/20 rounded-2xl shadow-xl overflow-hidden flex flex-col hover:shadow-2xl transition-shadow duration-300 transform hover:bg-white/8 cursor-pointer"
+                onClick={() => navigate(`/package/${pkg.id}`)}
               >
                 <img
                   src={pkg.image}
@@ -133,7 +134,7 @@ const TravelPackages = () => {
                   <button
                     // onClick={() => openForm(pkg)}
                     onClick={() => navigate(`/package/${pkg.id}`)}
-                    className="mt-auto self-start bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
+                    className="mt-auto self-start bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:cursor-pointer"
                   >
 
                     Book Now
