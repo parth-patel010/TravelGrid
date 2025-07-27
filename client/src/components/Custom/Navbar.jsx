@@ -47,7 +47,7 @@ const Navbar = () => {
             <Link
               key={link.name}
               to={link.path}
-              className={`hover:text-pink-600 transition ${
+              className={`hover:text-white transition ${
                 location.pathname === link.path ? "underline underline-offset-4" : ""
               }`}
             >
