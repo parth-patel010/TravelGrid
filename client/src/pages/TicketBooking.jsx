@@ -40,6 +40,12 @@ function TicketBooking() {
   const [submitted, setSubmitted] = useState(false);
   const [booked, setBooked] = useState(false); //adding a booked state variable to keep track if booked or not
 
+  //Function to get today's date for validating depart date for ticker
+  const getToday=()=>{
+    const today = new Date();
+    return today.toISOString().split('T')[0]
+  }
+
   const confirmBooking = () => {
     //function called when flight booked.
     setBooked(true);
@@ -418,6 +424,7 @@ function TicketBooking() {
                     name="depart"
                     required
                     value={form.depart}
+                    min={getToday()}    //gets today's date and validate input using that.
                     onChange={handleChange}
                     className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                   />
@@ -435,6 +442,7 @@ function TicketBooking() {
                       name="return"
                       required
                       value={form.return}
+                      min={form.depart}
                       onChange={handleChange}
                       className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                     />
