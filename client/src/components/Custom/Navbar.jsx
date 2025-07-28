@@ -19,6 +19,7 @@ const Navbar = () => {
     { name: "Hotels", path: "/hotels" },
     { name: "Guides", path: "/guides" },
     { name: "Contact", path: "/contact" },
+    { name: "Trip Expense Calculator", path: "/trip-calculator"},
   ];
 
   const handleLogout = () => {

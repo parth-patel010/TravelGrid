@@ -15,7 +15,6 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-
     // Check for stored user session on app load
     useEffect(() => {
         const storedUser = localStorage.getItem('travelgrid_user');
@@ -29,7 +28,7 @@ export const AuthProvider = ({ children }) => {
         setIsLoading(false);
     }, []);
 
-    // login logic 
+    // login logic using backend API
     const login = async (email, password) => {
         setIsLoading(true);
 
@@ -61,7 +60,7 @@ export const AuthProvider = ({ children }) => {
         setIsLoading(true);
 
         try {
-            //  First register the user
+            // First register the user
             const res = await fetch('http://localhost:5000/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -75,7 +74,7 @@ export const AuthProvider = ({ children }) => {
                 return { success: false, error: data.message };
             }
 
-            //  immediately login with the same credentials
+            // Immediately login with the same credentials
             const loginRes = await fetch('http://localhost:5000/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -109,11 +108,17 @@ export const AuthProvider = ({ children }) => {
         toast.success('Logged out successfully 👋');
     };
 
+    const updateUser = (updatedUser) => {
+        setUser(updatedUser);
+        localStorage.setItem('travelgrid_user', JSON.stringify(updatedUser));
+    };
+
     const value = {
         user,
         login,
         signup,
         logout,
+        updateUser,
         isLoading,
         isAuthenticated: !!user
     };
@@ -124,3 +129,4 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
+
