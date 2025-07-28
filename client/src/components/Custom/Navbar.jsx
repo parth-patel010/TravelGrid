@@ -20,6 +20,7 @@ const Navbar = () => {
     { name: "Guides", path: "/guides" },
     { name: "Contact", path: "/contact" },
     { name: "Trip Expense Calculator", path: "/trip-calculator"},
+    { name: "Feedback", path: "/feedback" },
   ];
 
   const handleLogout = () => {

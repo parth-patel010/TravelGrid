@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Navbar from "../components/Custom/Navbar";
@@ -272,6 +273,12 @@ function TicketBooking() {
                 >
                   Download Ticket
                 </button>
+                <Link
+                  to="/feedback"
+                  className="mt-4 ml-4 px-6 py-3 bg-green-600 hover:bg-green-700 rounded-full text-white font-semibold inline-block"
+                >
+                  Share Feedback
+                </Link>
               </div>
             ) : (
               //if it is not booked yet, show these booking options.
