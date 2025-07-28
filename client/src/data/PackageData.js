@@ -165,17 +165,28 @@ export const packages = [
     },
     {
       day: 2,
-      title: "Ocean Adventures",
-      description: "Full day of water activities including snorkeling, diving, and dolphin watching.",
+      title: "Italy Adventures",
+      description: "Full day of exploring various tourist places within Italy.",
       activities: [
-        "Guided snorkeling",
-        "Dolphin excursion",
+        "Visiting Colosseum",
+        "Visiting Pantheon",
         "Sunset cruise",
-        "Beach BBQ dinner"
+        "BBQ dinner"
+      ]
+    },
+        {
+      day: 3,
+      title: "France Adventures",
+      description: "Full day of sight-seeing in France with tour to famous France tourist places.",
+      activities: [
+        "Louvre Museum",
+        "Exploring Eiffel Tower",
+        "Disneyland Paris",
+        "BBQ dinner"
       ]
     },
     {
-      day: 3,
+      day: 4,
       title: "Island Exploration",
       description: "Visit local islands, experience Maldivian culture, and enjoy island hopping.",
       activities: [
@@ -186,7 +197,7 @@ export const packages = [
       ]
     },
     {
-      day: 4,
+      day: 5,
       title: "Relaxation Day",
       description: "Spa treatments, beach time, and romantic sunset dinner.",
       activities: [
@@ -196,8 +207,16 @@ export const packages = [
         "Romantic dinner"
       ]
     },
+        {
+      day: 6,
+      title: "Open exploratin day",
+      description: "Visiteers are free to explore places on their in the guidance of our guides.",
+      activities: [
+        "Free to do what you like :)"
+      ]
+    },
     {
-      day: 5,
+      day: 7,
       title: "Departure",
       description: "Final breakfast, check-out, and transfer back to Malé International Airport.",
       activities: [
@@ -209,7 +228,7 @@ export const packages = [
     }
   ],
   inclusions: [
-    "4 nights accommodation in overwater villa",
+    "6 nights accommodation in overwater villa",
     "All meals (breakfast, lunch, dinner)",
     "Seaplane transfers (both ways)",
     "Guided snorkeling tours",
@@ -299,28 +318,17 @@ export const packages = [
     },
     {
       day: 2,
-      title: "Ocean Adventures",
-      description: "Full day of water activities including snorkeling, diving, and dolphin watching.",
+      title: "Desert Adventures",
+      description: "Full day of desert activities including camel riding and adventrous activities like Dune bashing.",
       activities: [
         "Guided snorkeling",
-        "Dolphin excursion",
-        "Sunset cruise",
-        "Beach BBQ dinner"
+        "Camel riding",
+        "Dune Bashing",
+        "Desert camping"
       ]
     },
     {
       day: 3,
-      title: "Island Exploration",
-      description: "Visit local islands, experience Maldivian culture, and enjoy island hopping.",
-      activities: [
-        "Local island visit",
-        "Cultural tour",
-        "Traditional lunch",
-        "Fishing trip"
-      ]
-    },
-    {
-      day: 4,
       title: "Relaxation Day",
       description: "Spa treatments, beach time, and romantic sunset dinner.",
       activities: [
@@ -331,7 +339,7 @@ export const packages = [
       ]
     },
     {
-      day: 5,
+      day: 4,
       title: "Departure",
       description: "Final breakfast, check-out, and transfer back to Malé International Airport.",
       activities: [
@@ -347,7 +355,7 @@ export const packages = [
     "All meals (breakfast, lunch, dinner)",
     "Seaplane transfers (both ways)",
     "Guided snorkeling tours",
-    "Dolphin watching excursion",
+    "Camel riding",
     "Welcome drinks and daily refreshments",
     "Resort activities and entertainment",
     "Professional photoshoot session"
