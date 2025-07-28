@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React ,{ useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useDashboardData } from '../context/DashboardDataContext';
-import { MapPin, Calendar, Heart, LogOut, Edit, Save, X } from 'lucide-react';
+import { MapPin, Calendar, Heart, LogOut, Building2, Edit, Save, X } from 'lucide-react';
+import  hotels from '../data/hotels'; 
+import axios from 'axios';
+
+
 import defaultAvatar from '../assets/defaultprofile.svg';
 
 
@@ -10,11 +14,60 @@ const Dashboard = () => {
     const { user, logout, updateUser } = useAuth();
     const navigate = useNavigate();
     const { tripCount, placeCount, countryCount } = useDashboardData();
+
+    const [bookedHotels, setBookedHotels] = useState([]);
+    const [showHotels, setShowHotels] = useState(false);
+
     const [isEditing, setIsEditing] = useState(false);
     const [editData, setEditData] = useState({
         name: user?.name || '',
         email: user?.email || ''
     });
+
+      const [bookings, setBookings] = useState([]);
+      const [loading, setLoading] = useState(true);
+     
+      console.log("currentUser:", user);
+useEffect(() => {
+  const fetchBookings = async () => {
+    try {
+      const res = await axios.get(`http://localhost:5000/api/bookings/${user.id}`);
+      const bookingsData = Array.isArray(res.data) ? res.data : res.data?.bookings || [];
+
+      // ✅ hotels is from hardcoded array, NOT fetched via axios
+      const bookingsWithHotels = bookingsData.map((booking) => {
+        const hotel = hotels.find((h) => h._id === booking.hotelId); // match _id with hotelId
+        return {
+          ...booking,
+          hotel,
+        };
+      });
+
+      setBookings(bookingsWithHotels);
+
+      setBookedHotels(
+  bookingsWithHotels.map((b) => ({
+    bookedBy:b.name||'Unknown User',
+    name: b.hotelId || 'Unknown Hotel',
+    bookedAt: b.createdAt || '',
+  }))
+);
+
+      console.log("Mapped hotels:", bookingsWithHotels);
+    } catch (err) {
+      console.error('Error fetching bookings:', err);
+    }
+  };
+
+  if (user?.id) {
+    fetchBookings();
+  }
+}, [user?.id, hotels]);
+
+
+   
+
+
 
     const handleProfileEdit = () => {
         // Create a file input element
@@ -22,7 +75,6 @@ const Dashboard = () => {
         fileInput.type = 'file';
         fileInput.accept = 'image/*';
         fileInput.capture = 'user'; // Opens camera on mobile devices
-        
         fileInput.onchange = (e) => {
             const file = e.target.files[0];
             if (file) {
@@ -44,7 +96,7 @@ const Dashboard = () => {
         
         fileInput.click();
     };
-
+    
     const handleEditClick = () => {
         setIsEditing(true);
         setEditData({
@@ -109,6 +161,12 @@ const Dashboard = () => {
             value: placeCount,
             icon: <Heart className="w-6 h-6" />
         },
+        {
+            label: "Hotels Booked",
+            value: bookedHotels.length,
+            icon: <Building2 className="w-6 h-6" /> 
+        }
+
     ];
 
     return (
@@ -221,6 +279,7 @@ const Dashboard = () => {
                                 if (stat.label === 'Trips Planned') navigate('/dashboard/trips');
                                 else if (stat.label === 'Countries Visited') navigate('/dashboard/countries');
                                 else if (stat.label === 'Saved Places') navigate('/dashboard/saved');
+                                else if (stat.label === 'Hotels Booked') setShowHotels(prev => !prev);
                             }}
                         >
                             <div className="flex items-center justify-between">
@@ -233,6 +292,32 @@ const Dashboard = () => {
                         </div>
                     ))}
                 </div>
+
+     {/* Booked Hotels Section */}
+                {showHotels && bookedHotels.length > 0 && (
+                    <div className="mt-10">
+                        <h2 className="text-2xl font-bold text-white mb-4">Your Booked Hotels</h2>
+                        <ul className="space-y-4">
+                        {bookedHotels.map((hotel, index) => (
+                            <li
+                            key={index}
+                            className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20 shadow-md shadow-pink-900/20"
+                            >
+                            <p className="text-white text-lg font-semibold">
+                                {hotel.name || `Hotel #${index + 1}`}
+                            </p>
+                             <p className="text-gray-300 text-sm">
+                                Booked by: {hotel.bookedBy || `Hotel #${index + 1}`}
+                            </p>
+                            <p className="text-gray-300 text-sm">
+                                Booked on: {hotel.bookedAt ? new Date(hotel.bookedAt).toLocaleString() : 'N/A'}
+                            </p>
+                            </li>
+                        ))}
+                        </ul>
+                    </div>
+                    )}
+
 
                 {/* Call-to-action section */}
                 <div className="bg-white/5 border border-white/20 rounded-2xl p-6 sm:p-10 text-center mt-8">

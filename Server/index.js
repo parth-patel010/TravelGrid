@@ -1,4 +1,5 @@
 const express = require('express');
+const bookingRoutes = require("./routes/booking.js");
 const cors = require('cors');
 require('dotenv').config();
 
@@ -20,6 +21,8 @@ app.get('/api/health', (req, res) => {
   res.status(200).json({ message: 'API is running smoothly!' });
 });
 app.use('/api/auth', authRoutes);
+//hotel bookings 
+app.use("/api/bookings", bookingRoutes);
 
 // 404 Not Found middleware
 app.use((req,res,next)=>{

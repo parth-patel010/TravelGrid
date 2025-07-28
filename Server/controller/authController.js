@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const mongoose = require('mongoose');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
 if(!JWT_SECRET) {
@@ -10,6 +11,7 @@ if(!JWT_SECRET) {
 // Register User
 exports.registerUser = async (req, res) => {
   const { name, email, password } = req.body;
+  console.log('Connected DB:', mongoose.connection.name);
 
   if (!name || !email || !password)
     return res.status(400).json({ message: 'All fields are required' });
@@ -31,6 +33,7 @@ exports.registerUser = async (req, res) => {
       email: normalizedemail,
       password: hashedPassword,
     });
+    console.log('User saved to DB:', user);
 
     // Generate JWT
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
