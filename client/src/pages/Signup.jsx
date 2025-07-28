@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Eye, EyeOff, Mail, Lock, User, UserPlus, AlertCircle, CheckCircle } from 'lucide-react';
+import { toast } from 'react-hot-toast';
+
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -69,9 +71,10 @@ const Signup = () => {
     const result = await signup(formData);
 
     if (result.success) {
+      toast.success('Account created successfully! 🎉');
       navigate('/', { replace: true });
     } else {
-      setError(result.error);
+      toast.error(result.error || 'Signup failed');
     }
   };
 
