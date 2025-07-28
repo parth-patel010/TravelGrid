@@ -3,7 +3,10 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
-
+if(!JWT_SECRET) {
+  console.error('JWT_SECRET is not defined in environment variables');
+  process.exit(1);
+};
 // Register User
 exports.registerUser = async (req, res) => {
   const { name, email, password } = req.body;
@@ -12,8 +15,9 @@ exports.registerUser = async (req, res) => {
     return res.status(400).json({ message: 'All fields are required' });
 
   try {
+    const normalizedemail=email.toLowerCase();
     // Check for existing user
-    const userExists = await User.findOne({ email });
+    const userExists = await User.findOne({ email : normalizedemail });
     if (userExists)
       return res.status(400).json({ message: 'User already exists' });
 
@@ -24,7 +28,7 @@ exports.registerUser = async (req, res) => {
     // Save user
     const user = await User.create({
       name,
-      email,
+      email: normalizedemail,
       password: hashedPassword,
     });
 
@@ -54,7 +58,8 @@ exports.loginUser = async (req, res) => {
     return res.status(400).json({ message: 'All fields are required' });
 
   try {
-    const user = await User.findOne({ email });
+      const normalizedEmail = email.toLowerCase();
+    const user = await User.findOne({ email: normalizedEmail });
     if (!user)
       return res.status(404).json({ message: 'User not found' });
 
