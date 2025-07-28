@@ -195,6 +195,10 @@
   }
 }
 
+.unique-heading-1 {
+  margin-top: 6rem; /* Adjust only for this heading */
+}
+
 /* Profile Section */
 
 .profile-section {

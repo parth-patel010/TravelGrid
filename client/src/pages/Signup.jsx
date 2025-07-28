@@ -50,10 +50,10 @@ const Signup = () => {
       return false;
     }
 
-    if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters long');
-      return false;
-    }
+    if (passwordStrength === "Weak") {
+    setError("Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character.");
+    return;
+}
 
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
@@ -79,13 +79,17 @@ const Signup = () => {
   };
 
   const getPasswordStrength = () => {
+
     const password = formData.password;
     if (!password) return '';
+    const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+    const mediumRegex = /^(?=.*[a-z])(?=.*\d).{6,}$/;
 
-    if (password.length < 6) return 'weak';
-    if (password.length < 8) return 'medium';
-    return 'strong';
-  };
+    if (strongRegex.test(password)) return 'strong';
+    if (mediumRegex.test(password)) return 'medium';
+    return 'weak';
+ };
+
 
   const passwordStrength = getPasswordStrength();
 
@@ -174,7 +178,7 @@ const Signup = () => {
                 <div className="mt-2">
                   <div className="flex gap-1">
                     <div className={`h-1 flex-1 rounded ${passwordStrength === 'weak' ? 'bg-red-500' : passwordStrength === 'medium' ? 'bg-yellow-500' : 'bg-green-500'}`}></div>
-                    <div className={`h-1 flex-1 rounded ${passwordStrength === 'medium' || passwordStrength === 'strong' ? 'bg-yellow-500' : 'bg-gray-600'}`}></div>
+                    <div className={`h-1 flex-1 rounded ${passwordStrength === 'medium' ? 'bg-yellow-500' : passwordStrength === 'strong' ? 'bg-green-500' : 'bg-gray-600'}`}></div>
                     <div className={`h-1 flex-1 rounded ${passwordStrength === 'strong' ? 'bg-green-500' : 'bg-gray-600'}`}></div>
                   </div>
                   <p className={`text-xs mt-1 ${passwordStrength === 'weak' ? 'text-red-400' : passwordStrength === 'medium' ? 'text-yellow-400' : 'text-green-400'}`}>
