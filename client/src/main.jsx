@@ -38,6 +38,7 @@ import ServerError from './components/ErrorHandle/ServerError';
 import { AuthProvider } from './context/AuthContext';
 import Blog from './pages/Blog';
 import TripCalculatorPage from './pages/TripCalculator';
+import DiscovermoreDestination from './pages/DiscovermoreDestination';
 
 
 const router = createBrowserRouter([
@@ -61,6 +62,7 @@ const router = createBrowserRouter([
       { path: '/ticket', element: <TicketBooking /> },
       { path: '/guides', element: <TravelGuidesCarousel /> },
       { path: '/packages', element: <TravelPackages /> },
+      { path: '/discovermore', element: <DiscovermoreDestination />},
       { path: '/faq', element: <FAQ /> },
       { path: '/contact', element: <Contact /> },
       { path: '/privacy', element: <PrivacyPolicy /> },
