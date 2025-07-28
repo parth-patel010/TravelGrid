@@ -3,13 +3,12 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
+import Trips from './pages/Trips';
 // Pages & Components
 import TravelGuidesCarousel from './pages/TravelGuidesProfiles.jsx';
 import Contact from './components/Contact.jsx';
 import Home from './pages/Home';
 import Discover from './pages/Discover';
-import Trips from './pages/Trips';
 import Review from './pages/Review';
 import Forums from './pages/Forums';
 import Contributors from './pages/Contributors';
@@ -38,6 +37,7 @@ import { AuthProvider } from './context/AuthContext';
 import Blog from './pages/Blog';
 import TripCalculatorPage from './pages/TripCalculator';
 
+
 const router = createBrowserRouter([
   { path: '/login', element: <Login /> },
   { path: '/signup', element: <Signup /> },
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
       { path: '/about', element: <About /> },
       { path: '/blog', element: <Blog /> },
       { path: '/discover', element: <Discover /> },
-      // { path: '/trips', element: <Trips /> },
+       { path: '/trips', element: <Trips /> },
       { path: '/review', element: <Review /> },
       // { path: '/forums', element: <Forums /> },
       { path: '/contributors', element: <Contributors /> },

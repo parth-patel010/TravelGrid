@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Eye, EyeOff, Mail, Lock, LogIn, AlertCircle } from 'lucide-react';
 import Navbar from '@/components/Custom/Navbar';
-
+import Footer from '@/components/Custom/Footer';
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -46,7 +46,7 @@ const Login = () => {
   return (
   <div>  
     <Navbar/>
-    <div className="min-h-screen bg-gradient-to-br from-black to-pink-900 flex items-center justify-center p-4">
+    <div className="pt-16 min-h-screen bg-gradient-to-br from-black to-pink-900 flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         {/* Header */}
         <div className="text-center mb-8">
@@ -157,6 +157,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    <Footer/>
   </div>  
   );
 };
