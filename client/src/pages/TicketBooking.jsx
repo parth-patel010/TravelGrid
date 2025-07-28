@@ -35,6 +35,11 @@ function TicketBooking() {
     cabin: "Economy",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [booked, setBooked] = useState(false);   //adding a booked state variable to keep track if booked or not
+
+  const confirmBooking = () =>{    //function called when flight booked.
+    setBooked(true);
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -75,6 +80,7 @@ function TicketBooking() {
 
   const resetForm = () => {
     setSubmitted(false);
+    setBooked(false);
     setForm({
       from: "",
       to: "",
@@ -142,50 +148,117 @@ function TicketBooking() {
 
           {/* Form or Success Message */}
           {submitted ? (
-            <div className="text-center text-pink-100">
-              <h3 className="text-3xl font-bold text-green-400 mb-4 flex items-center justify-center gap-2">
-                <ArrowRightLeft size={24} /> Booking Confirmed!
-              </h3>
-              <p className="max-w-xl mx-auto leading-relaxed">
-                You have booked a {travelType}{" "}
-                {tripMode === "roundTrip" ? "round-trip" : "one-way"} ticket
-                from
-                <span className="font-semibold text-white">
-                  {" "}
-                  {form.from}
-                </span>{" "}
-                to
-                <span className="font-semibold text-white">
-                  {" "}
-                  {form.to}
-                </span>{" "}
-                departing on
-                <span className="font-semibold text-white"> {form.depart}</span>
-                {tripMode === "roundTrip" && (
-                  <>
+            booked? (    //introduced this variable to check if booking initiated or not
+              <div className="text-center text-pink-100">
+                <h3 className="text-3xl font-bold text-green-400 mb-4 flex items-center justify-center gap-2">
+                  <ArrowRightLeft size={24} /> Booking Confirmed!
+                </h3>
+                <p className="max-w-xl mx-auto leading-relaxed">
+                  You have booked a {travelType}{" "}
+                  {tripMode === "roundTrip" ? "round-trip" : "one-way"} ticket
+                  from
+                  <span className="font-semibold text-white">
                     {" "}
-                    and returning on
-                    <span className="font-semibold text-white">
+                    {form.from}
+                  </span>{" "}
+                  to
+                  <span className="font-semibold text-white">
+                    {" "}
+                    {form.to}
+                  </span>{" "}
+                  departing on
+                  <span className="font-semibold text-white"> {form.depart}</span>
+                  {tripMode === "roundTrip" && (
+                    <>
                       {" "}
-                      {form.return}
-                    </span>
-                  </>
-                )}
-                . Travellers:{" "}
-                <span className="font-semibold text-white">
-                  {form.passengers}
-                </span>{" "}
-                • Cabin:
-                <span className="font-semibold text-white"> {form.cabin}</span>.
-              </p>
-              <button
-                className="mt-8 px-6 py-3 bg-pink-600 hover:bg-pink-700 rounded-full text-white font-semibold"
-                onClick={resetForm}
-              >
-                New Search
-              </button>
-            </div>
-          ) : (
+                      and returning on
+                      <span className="font-semibold text-white">
+                        {" "}
+                        {form.return}
+                      </span>
+                    </>
+                  )}
+                  . Travellers:{" "}
+                  <span className="font-semibold text-white">
+                    {form.passengers}
+                  </span>{" "}
+                  • Cabin:
+                  <span className="font-semibold text-white"> {form.cabin}</span>.
+                </p>
+                <button
+                  className="mt-8 px-6 py-3 bg-pink-600 hover:bg-pink-700 rounded-full text-white font-semibold"
+                  onClick={resetForm}
+                >
+                  New Search
+                </button>
+              </div>
+            ):(        //if it is not booked yet, show these booking options.
+              <div className="text-center text-pink-100">
+                <h3 className="text-3xl font-bold text-blue-400 mb-4 flex items-center justify-center gap-2">
+                  <ArrowRightLeft size={24} /> {travelType.charAt(0).toUpperCase() + travelType.slice(1)} Available!
+                </h3>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-6 max-w-2xl mx-auto">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                    <div>
+                      <p className="text-sm text-pink-200">Route</p>
+                      <p className="font-semibold text-white">
+                        {form.from} → {form.to}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-pink-200">Travel Type</p>
+                      <p className="font-semibold text-white">{travelType.charAt(0).toUpperCase() + travelType.slice(1)}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-pink-200">Departure</p>
+                      <p className="font-semibold text-white">{form.depart}</p>
+                    </div>
+                    {tripMode === "roundTrip" && (
+                      <div>
+                        <p className="text-sm text-pink-200">Return</p>
+                        <p className="font-semibold text-white">{form.return}</p>
+                      </div>
+                    )}
+                    <div>
+                      <p className="text-sm text-pink-200">Passengers</p>
+                      <p className="font-semibold text-white">{form.passengers}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-pink-200">Cabin Class</p>
+                      <p className="font-semibold text-white">{form.cabin}</p>
+                    </div>
+                  </div>
+                  <div className="mt-4 pt-4 border-t border-pink-300/20">
+                    <p className="text-sm text-pink-200">Total Price</p>
+                    <p className="text-3xl font-bold text-green-400">₹12,450</p>
+                    <p className="text-xs text-pink-300">*Including all taxes and fees</p>
+                  </div>
+                </div>
+                
+                <p className="text-lg mb-6">Would you like to book this {travelType}?</p>
+                
+                <div className="flex gap-4 justify-center flex-wrap">
+                  <button
+                    className="px-8 py-3 bg-green-600 hover:bg-green-700 rounded-full text-white font-semibold transition-colors"
+                    onClick={confirmBooking}
+                  >
+                    Yes, Book {travelType.charAt(0).toUpperCase() + travelType.slice(1)}
+                  </button>
+                  <button
+                    className="px-8 py-3 bg-gray-600 hover:bg-gray-700 rounded-full text-white font-semibold transition-colors"
+                    onClick={resetForm}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>                 
+            )
+          )
+          
+          //-----------------------
+          
+
+          : (
             <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
               {/* Core search panel - Mobile first approach */}
               <div className="space-y-4 md:space-y-0 md:grid md:gap-4 md:grid-cols-5 md:items-end">
