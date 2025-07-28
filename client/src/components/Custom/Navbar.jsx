@@ -114,13 +114,22 @@ const Navbar = () => {
         }`}
       >
         <div className="p-5 flex flex-col h-full text-pink-500">
-          {/* Logo */}
-          <Link
-            to="/"
-            className="text-2xl font-bold mb-6 hover:text-pink-400 transition-colors duration-200"
-          >
-            TravelGrid
-          </Link>
+          {/* Header with Logo and Close Button */}
+          <div className="flex justify-between items-center mb-6">
+            <Link
+              to="/"
+              className="text-2xl font-bold hover:text-pink-400 transition-colors duration-200"
+            >
+              TravelGrid
+            </Link>
+            <button
+              onClick={() => setIsSidebarOpen(false)}
+              className="text-pink-500 hover:text-pink-400 transition-colors duration-200 p-1 rounded-md hover:bg-pink-500/10"
+              aria-label="Close menu"
+            >
+              <X size={24} />
+            </button>
+          </div>
 
           {/* Nav Links */}
           <div className="flex flex-col gap-3">
