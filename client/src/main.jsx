@@ -1,5 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { Toaster } from 'react-hot-toast';
 import './index.css';
 import App from './App.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -110,6 +111,18 @@ createRoot(document.getElementById('root')).render(
     <ErrorBoundary>
       <AuthProvider>
         <RouterProvider router={router} />
+         <Toaster
+          position="top-center"
+          reverseOrder={false}
+          toastOptions={{
+            duration: 5000,
+            style: {
+              background: '#333',
+              color: '#fff',
+              fontSize: '16px',
+            },
+          }}
+        />
       </AuthProvider>
     </ErrorBoundary>
   </StrictMode>
