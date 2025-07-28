@@ -56,12 +56,13 @@ export const AuthProvider = ({ children }) => {
         );
 
         if (foundUser) {
-            const userSession = {
-                id: foundUser.id,
-                email: foundUser.email,
-                name: foundUser.name,
-                avatar: foundUser.avatar
-            };
+                    const userSession = {
+            id: foundUser.id,
+            email: foundUser.email,
+            name: foundUser.name,
+            avatar: foundUser.avatar,
+            
+        };
 
             setUser(userSession);
             localStorage.setItem('travelgrid_user', JSON.stringify(userSession));
@@ -92,7 +93,9 @@ export const AuthProvider = ({ children }) => {
             id: Date.now(),
             email: userData.email,
             name: userData.name,
-            avatar: `https://randomuser.me/api/portraits/${userData.name.toLowerCase().includes('jane') || userData.name.toLowerCase().includes('maria') ? 'women' : 'men'}/${Math.floor(Math.random() * 90) + 1}.jpg`
+            avatar: `https://randomuser.me/api/portraits/${userData.name.toLowerCase().includes('jane') || userData.name.toLowerCase().includes('maria') ? 'women' : 'men'}/${Math.floor(Math.random() * 90) + 1}.jpg`,
+            phone: '',
+            location: ''
         };
 
         setUser(newUser);
@@ -106,12 +109,18 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('travelgrid_user');
     };
 
+    const updateUser = (updatedUser) => {
+        setUser(updatedUser);
+        localStorage.setItem('travelgrid_user', JSON.stringify(updatedUser));
+    };
+
     const value = {
         user,
         isLoading,
         login,
         signup,
         logout,
+        updateUser,
         isAuthenticated: !!user
     };
 
