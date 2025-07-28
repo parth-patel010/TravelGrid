@@ -17,6 +17,7 @@ import Hotels from './pages/Hotels';
 import HotelDetails from './pages/HotelDetails';
 import TicketBooking from './pages/TicketBooking';
 import TravelPackages from './pages/TravelPackages';
+import PackageDetails from "./pages/PackageDetails";
 import HotelBookingPage from './pages/HotelBookingPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -99,6 +100,7 @@ const router = createBrowserRouter([
       { path: '/network-error', element: <NetworkError /> },
       { path: '/server-error', element: <ServerError /> },
       { path: '*', element: <NotFound /> },
+      { path: "/package/:id", element:<PackageDetails /> },
     ],
   },
 ]);

@@ -1,142 +1,12 @@
+import { Package } from "lucide-react";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {packages} from "../data/PackageData";
 import Navbar from "../components/Custom/Navbar";
-
-const packages = [
-  {
-    id: 1,
-    title: "Tropical Paradise – Maldives",
-    price: "₹49,999",
-    duration: "5 Days / 4 Nights",
-    rating: 5,
-    image:
-      "https://plus.unsplash.com/premium_photo-1692897456929-5774bd1c8e28?q=80&w=2090&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    reviews: [
-      { user: "Alice", comment: "Loved the Tropical Paradise – Maldives! Highly recommend." },
-      { user: "Bob", comment: "Great experience, would book again." },
-    ],
-  },
-  {
-    id: 2,
-    title: "European Explorer – Italy & France",
-    price: "₹89,999",
-    duration: "7 Days / 6 Nights",
-    rating: 4,
-    image:
-      "https://images.unsplash.com/photo-1533333980833-8340a468dfec?q=80&w=1176&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    reviews: [
-      { user: "Alice", comment: "Loved the European Explorer – Italy & France! Highly recommend." },
-      { user: "Bob", comment: "Great experience, would book again." },
-    ],
-  },
-  {
-    id: 3,
-    title: "Desert Delight – Dubai",
-    price: "₹59,999",
-    duration: "4 Days / 3 Nights",
-    rating: 5,
-    image:
-      "https://images.unsplash.com/photo-1624664929067-5bc278a7c57e?q=80&w=1195&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    reviews: [
-      { user: "Alice", comment: "Loved the Desert Delight – Dubai! Highly recommend." },
-      { user: "Bob", comment: "Great experience, would book again." },
-    ],
-  },
-  {
-    id: 4,
-    title: "Himalayan Adventure – Manali",
-    price: "₹19,999",
-    duration: "6 Days / 5 Nights",
-    rating: 3,
-    image:
-      "https://plus.unsplash.com/premium_photo-1661964400999-264ce5993f8d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    reviews: [
-      { user: "Alice", comment: "Loved the Himalayan Adventure – Manali! Highly recommend." },
-      { user: "Bob", comment: "Great experience, would book again." },
-    ],
-  },
-  {
-    id: 5,
-    title: "City Lights – New York",
-    price: "₹79,999",
-    duration: "6 Days / 5 Nights",
-    rating: 4,
-    image:
-      "https://images.unsplash.com/photo-1531671184257-6cfe3235e5d5?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
-    reviews: [
-      { user: "Alice", comment: "Amazing trip to New York, so many things to do!" },
-      { user: "Bob", comment: "The city that never sleeps – a must-visit!" },
-    ],
-  },
-  {
-    id: 6,
-    title: "Tropical Escape – Bali",
-    price: "₹39,999",
-    duration: "5 Days / 4 Nights",
-    rating: 4,
-    image:
-      "https://images.unsplash.com/photo-1710104434425-6ae10f736622?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
-    reviews: [
-      { user: "Alice", comment: "Bali is such a paradise, perfect for a relaxing getaway." },
-      { user: "Bob", comment: "Great place for beaches, food, and culture!" },
-    ],
-  },
-  {
-    id: 7,
-    title: "Wild Safari – Kenya",
-    price: "₹99,999",
-    duration: "7 Days / 6 Nights",
-    rating: 5,
-    image:
-      "https://images.unsplash.com/photo-1536937275673-8a12b3812e8e?q=80&w=762&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
-    reviews: [
-      { user: "Alice", comment: "Kenya safari was an unforgettable experience!" },
-      { user: "Bob", comment: "The wildlife experience was incredible!" },
-    ],
-  },
-  {
-    id: 8,
-    title: "Historical Wonders – Egypt",
-    price: "₹89,999",
-    duration: "7 Days / 6 Nights",
-    rating: 5,
-    image:
-      "https://plus.unsplash.com/premium_photo-1701172277688-32d05010526a?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
-    reviews: [
-      { user: "Alice", comment: "Visiting the pyramids in Egypt was a dream come true!" },
-      { user: "Bob", comment: "Incredible history, culture, and architecture." },
-    ],
-  },
-  {
-    id: 9,
-    title: "Beach Bliss – Seychelles",
-    price: "₹69,999",
-    duration: "6 Days / 5 Nights",
-    rating: 4,
-    image:
-      "https://images.unsplash.com/photo-1608721557534-f3e066444862?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
-    reviews: [
-      { user: "Alice", comment: "Seychelles was a dream destination for a beach lover." },
-      { user: "Bob", comment: "Amazing beaches, amazing resorts." },
-    ],
-  },
-  {
-    id: 10,
-    title: "Cultural Heritage – Japan",
-    price: "₹109,999",
-    duration: "8 Days / 7 Nights",
-    rating: 5,
-    image:
-      "https://images.unsplash.com/photo-1730724376816-02785c9eefe1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
-    reviews: [
-      { user: "Alice", comment: "Japan is the perfect blend of tradition and modernity!" },
-      { user: "Bob", comment: "The food, culture, and technology are just out of this world." },
-    ],
-  },
-];
 
 const parsePrice = (priceStr) => {
   if (!priceStr) return 0;
-  const digitsOnly = priceStr.replace(/[^\d]/g, "");
+  const digitsOnly = String(priceStr).replace(/[^\d]/g, "");
   return parseInt(digitsOnly, 10);
 };
 
@@ -144,8 +14,7 @@ const TravelPackages = () => {
   const [minRating, setMinRating] = useState(0);
   const [maxPrice, setMaxPrice] = useState(Infinity);
   const [selectedPackage, setSelectedPackage] = useState(null);
-  const [formData, setFormData] = useState({ name: "", email: "", travelers: 1 });
-  const [bookingConfirmed, setBookingConfirmed] = useState(false);
+  const navigate = useNavigate();
 
   const filteredPackages = packages.filter((pkg) => {
     const numericPrice = parsePrice(pkg.price);
@@ -159,22 +28,6 @@ const TravelPackages = () => {
     } else {
       setMaxPrice(Number(val));
     }
-  };
-
-  const openForm = (pkg) => {
-    setSelectedPackage(pkg);
-    setFormData({ name: "", email: "", travelers: 1 });
-    setBookingConfirmed(false);
-  };
-
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setBookingConfirmed(true);
   };
 
   return (
@@ -264,9 +117,9 @@ const TravelPackages = () => {
                     <h4 className="text-pink-400 text-lg font-bold mb-2">Reviews</h4>
                     {pkg.reviews && pkg.reviews.length > 0 ? (
                       <ul className="space-y-1 text-pink-100 text-sm max-h-28 overflow-y-auto pr-2">
-                        {pkg.reviews.map((review, idx) => (
+                        {pkg.reviews.slice(0, 1).map((review, idx) => (
                           <li key={idx}>
-                            <span className="font-semibold text-pink-300">{review.user}:</span>{" "}
+                            <span className="font-semibold text-pink-300">{review.name}:</span>{" "}
                             {review.comment}
                           </li>
                         ))}
@@ -278,7 +131,8 @@ const TravelPackages = () => {
 
 
                   <button
-                    onClick={() => openForm(pkg)}
+                    // onClick={() => openForm(pkg)}
+                    onClick={() => navigate(`/package/${pkg.id}`)}
                     className="mt-auto self-start bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
                   >
 
@@ -294,90 +148,6 @@ const TravelPackages = () => {
           )}
         </section>
       </main>
-
-      {/* Contact/Booking Form Modal */}
-      {selectedPackage && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl shadow-lg max-w-md w-full p-6 relative text-black">
-            <button
-              className="absolute top-2 right-3 text-xl text-red-500 font-bold"
-              onClick={() => setSelectedPackage(null)}
-            >
-              ×
-            </button>
-
-            {!bookingConfirmed ? (
-              <>
-                <h2 className="text-2xl font-bold mb-2">Book: {selectedPackage.title}</h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-semibold">Your Name:</label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      required
-                      onChange={handleFormChange}
-                      className="w-full border px-3 py-2 rounded-md"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold">Email Address:</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      required
-                      onChange={handleFormChange}
-                      className="w-full border px-3 py-2 rounded-md"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold">Number of Travelers:</label>
-                    <input
-                      type="number"
-                      name="travelers"
-                      min={1}
-                      value={formData.travelers}
-                      required
-                      onChange={handleFormChange}
-                      className="w-full border px-3 py-2 rounded-md"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold">Date</label>
-                    <input
-                      type="date"
-                      name="Date"
-                      value={formData.date}
-                      required
-                      onChange={handleFormChange}
-                      className="w-full border px-3 py-2 rounded-md"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-pink-600 hover:bg-pink-700 text-white py-2 rounded-md font-semibold"
-                  >
-                    Confirm Booking
-                  </button>
-                </form>
-              </>
-            ) : (
-              <div className="text-center">
-                <h2 className="text-2xl font-bold text-green-600">Booking Confirmed!</h2>
-                <p className="mt-2">Thank you, {formData.name}. Your booking on {formData.Date} is successful.</p>
-                <button
-                  className="mt-4 bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-md font-semibold"
-                  onClick={() => setSelectedPackage(null)}
-                >
-                  Close
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 };
