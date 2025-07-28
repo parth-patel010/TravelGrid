@@ -49,11 +49,12 @@ const Navbar = () => {
       <nav className={`w-full fixed top-0 left-0 z-50 backdrop-blur-md  border-b border-white/20 px-4 py-3 flex  justify-between items-center ${ isScrolled? "bg-black/25":"bg-white/10"}`}>
         {/* Logo */}
         <Link
-          to="/"
-          className="text-2xl font-bold text-pink-500 tracking-tight hover:text-pink-600 transition-colors duration-200"
-        >
-          TravelGrid
-        </Link>
+  to="/"
+  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+  className="text-2xl font-bold text-pink-500 tracking-tight hover:text-pink-600 transition-colors duration-200"
+>
+  TravelGrid
+</Link>
 
         {/* Desktop Nav Links - Centered */}
         <div className="hidden md:flex gap-8 items-center text-pink-500 font-medium flex-1 justify-center">
