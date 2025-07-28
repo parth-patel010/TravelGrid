@@ -8,13 +8,8 @@ const replySchema = new mongoose.Schema({
     createdAt:{type:Date,default:Date.now}
 });
 
-// Question Answer Schema
+//postSchema
 
-const qaSchema = new mongoose.Schema({
-    senderName:{type:String,required:true},
-    message:{type:String,required:true},
-    createdAt:{type:Date,default:Date.now}
-});
 
 const postSchema = new mongoose.Schema({
   title: { type: String, required: true },
@@ -28,7 +23,11 @@ const postSchema = new mongoose.Schema({
     default: 'question'
   },
   replies: [replySchema],
-  qa: [qaSchema]
+  
 }, { timestamps: true });
 
-module.exports = mongoose.model('Post', postSchema);
+module.exports = {
+  Post: mongoose.model('Post', postSchema),
+  replySchema
+ 
+};
