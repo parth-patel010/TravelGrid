@@ -121,7 +121,10 @@ const TravelGuidesCarousel = () => {
 
   return (
     <section className="travel-guides-section" style={{ scrollMarginTop: '80px' }}>
-      <h1 className="main-heading">Travel <span className='main-span'>Guides</span></h1>
+      <h1 className="main-heading unique-heading-1">
+  Travel <span className="main-span">Guides</span>
+</h1>
+
       <div style={{
         textAlign: 'center',
         maxWidth: '800px',
