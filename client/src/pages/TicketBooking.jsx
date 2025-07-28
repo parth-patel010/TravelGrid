@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import Navbar from "../components/Custom/Navbar";
 import {
   Users,
@@ -34,12 +36,20 @@ function TicketBooking() {
     passengers: 1,
     cabin: "Economy",
   });
-  const [submitted, setSubmitted] = useState(false);
-  const [booked, setBooked] = useState(false);   //adding a booked state variable to keep track if booked or not
 
-  const confirmBooking = () =>{    //function called when flight booked.
-    setBooked(true);
+  const [submitted, setSubmitted] = useState(false);
+  const [booked, setBooked] = useState(false); //adding a booked state variable to keep track if booked or not
+
+  //Function to get today's date for validating depart date for ticker
+  const getToday=()=>{
+    const today = new Date();
+    return today.toISOString().split('T')[0]
   }
+
+  const confirmBooking = () => {
+    //function called when flight booked.
+    setBooked(true);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,34 +58,93 @@ function TicketBooking() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Validate required fields
     if (!form.from.trim()) {
       alert("Please enter a departure city");
       return;
     }
-    
+
     if (!form.to.trim()) {
       alert("Please enter a destination city");
       return;
     }
-    
+
     if (!form.depart) {
       alert("Please select a departure date");
       return;
     }
-    
+
     if (tripMode === "roundTrip" && !form.return) {
       alert("Please select a return date");
       return;
     }
-    
+
     if (!form.passengers || form.passengers < 1) {
       alert("Please select number of passengers");
       return;
     }
-    
+
     setSubmitted(true);
+  };
+
+  const handleDownload = async () => {
+    // Hide buttons temporarily
+    const buttons = document.querySelector(".pdf-buttons");
+    const prevDisplay = buttons?.style.display;
+    if (buttons) buttons.style.display = "none";
+
+    const el = document.getElementById("ticket-content");
+    if (!el) return;
+
+    const clone = el.cloneNode(true);
+
+    // 🧹 Remove buttons from clone only
+    const buttonsToRemove = clone.querySelectorAll("button");
+    buttonsToRemove.forEach((btn) => btn.remove());
+
+    // Styling
+    clone.style.fontFamily = "Arial, sans-serif";
+    clone.style.padding = "30px";
+    clone.style.width = "600px";
+    clone.style.fontSize = "28px";
+    clone.style.maxWidth = "600px";
+    clone.style.margin = "0 auto";
+
+    const removeClasses = (node) => {
+      if (node instanceof HTMLElement) {
+        node.className = "";
+      } else if (node instanceof SVGElement) {
+        node.setAttribute("class", "");
+      }
+      for (let child of node.children) {
+        removeClasses(child);
+      }
+    };
+    removeClasses(clone);
+
+    document.body.appendChild(clone);
+
+    try {
+      const canvas = await html2canvas(clone, { backgroundColor: "#fff" });
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, "PNG", 10, 10);
+
+      // Add border around the full page
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      pdf.setLineWidth(1); // Border thickness
+      pdf.rect(5, 5, pageWidth - 10, pageHeight - 10); // x, y, width, height
+
+      pdf.save("ticket.pdf");
+    } catch (err) {
+      alert("Unable to Generate At this Moment")
+    } finally {
+      document.body.removeChild(clone);
+      // Restore button display
+      if (buttons) buttons.style.display = prevDisplay || "";
+    }
   };
 
   const resetForm = () => {
@@ -101,14 +170,15 @@ function TicketBooking() {
           alt="City skyline"
           className="absolute inset-0 w-full h-full object-cover opacity-30 z-0"
         />
-         <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2">
-              Book Your <span className="text-pink-400">Perfect Trip</span>
-            </h1>
-            <p className="text-pink-200 text-sm md:text-base">
-              Search and compare prices for flights, trains, buses, and cabs all in one place
-            </p>
-          </div>
+        <div className="text-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2">
+            Book Your <span className="text-pink-400">Perfect Trip</span>
+          </h1>
+          <p className="text-pink-200 text-sm md:text-base">
+            Search and compare prices for flights, trains, buses, and cabs all
+            in one place
+          </p>
+        </div>
         <div className="relative z-10 w-full max-w-4xl bg-white/10 backdrop-blur-md border border-pink-400/30 rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 lg:p-12">
           {/* Travel type tabs - Fixed layout */}
           <div className="grid grid-cols-4 gap-2 sm:gap-3 mb-8">
@@ -148,9 +218,12 @@ function TicketBooking() {
 
           {/* Form or Success Message */}
           {submitted ? (
-            booked? (    //introduced this variable to check if booking initiated or not
-              <div className="text-center text-pink-100">
-                <h3 className="text-3xl font-bold text-green-400 mb-4 flex items-center justify-center gap-2">
+            booked ? ( //introduced this variable to check if booking initiated or not
+              <div
+                id="ticket-content"
+                className="text-center text-pink-100  pdf-friendly"
+              >
+                <h3 className="text-3xl font-bold text-green-400 mb-4 flex flex-col md:flex-row items-center justify-center gap-2">
                   <ArrowRightLeft size={24} /> Booking Confirmed!
                 </h3>
                 <p className="max-w-xl mx-auto leading-relaxed">
@@ -167,7 +240,10 @@ function TicketBooking() {
                     {form.to}
                   </span>{" "}
                   departing on
-                  <span className="font-semibold text-white"> {form.depart}</span>
+                  <span className="font-semibold text-white">
+                    {" "}
+                    {form.depart}
+                  </span>
                   {tripMode === "roundTrip" && (
                     <>
                       {" "}
@@ -183,19 +259,33 @@ function TicketBooking() {
                     {form.passengers}
                   </span>{" "}
                   • Cabin:
-                  <span className="font-semibold text-white"> {form.cabin}</span>.
+                  <span className="font-semibold text-white">
+                    {" "}
+                    {form.cabin}
+                  </span>
+                  .
                 </p>
+
                 <button
                   className="mt-8 px-6 py-3 bg-pink-600 hover:bg-pink-700 rounded-full text-white font-semibold"
                   onClick={resetForm}
                 >
                   New Search
                 </button>
+                <button
+                  onClick={handleDownload}
+                  className="mt-4 ml-4 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-full text-white font-semibold"
+                >
+                  Download Ticket
+                </button>
               </div>
-            ):(        //if it is not booked yet, show these booking options.
+            ) : (
+              //if it is not booked yet, show these booking options.
               <div className="text-center text-pink-100">
                 <h3 className="text-3xl font-bold text-blue-400 mb-4 flex items-center justify-center gap-2">
-                  <ArrowRightLeft size={24} /> {travelType.charAt(0).toUpperCase() + travelType.slice(1)} Available!
+                  <ArrowRightLeft size={24} />{" "}
+                  {travelType.charAt(0).toUpperCase() + travelType.slice(1)}{" "}
+                  Available!
                 </h3>
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-6 max-w-2xl mx-auto">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
@@ -207,7 +297,10 @@ function TicketBooking() {
                     </div>
                     <div>
                       <p className="text-sm text-pink-200">Travel Type</p>
-                      <p className="font-semibold text-white">{travelType.charAt(0).toUpperCase() + travelType.slice(1)}</p>
+                      <p className="font-semibold text-white">
+                        {travelType.charAt(0).toUpperCase() +
+                          travelType.slice(1)}
+                      </p>
                     </div>
                     <div>
                       <p className="text-sm text-pink-200">Departure</p>
@@ -216,12 +309,16 @@ function TicketBooking() {
                     {tripMode === "roundTrip" && (
                       <div>
                         <p className="text-sm text-pink-200">Return</p>
-                        <p className="font-semibold text-white">{form.return}</p>
+                        <p className="font-semibold text-white">
+                          {form.return}
+                        </p>
                       </div>
                     )}
                     <div>
                       <p className="text-sm text-pink-200">Passengers</p>
-                      <p className="font-semibold text-white">{form.passengers}</p>
+                      <p className="font-semibold text-white">
+                        {form.passengers}
+                      </p>
                     </div>
                     <div>
                       <p className="text-sm text-pink-200">Cabin Class</p>
@@ -231,18 +328,23 @@ function TicketBooking() {
                   <div className="mt-4 pt-4 border-t border-pink-300/20">
                     <p className="text-sm text-pink-200">Total Price</p>
                     <p className="text-3xl font-bold text-green-400">₹12,450</p>
-                    <p className="text-xs text-pink-300">*Including all taxes and fees</p>
+                    <p className="text-xs text-pink-300">
+                      *Including all taxes and fees
+                    </p>
                   </div>
                 </div>
-                
-                <p className="text-lg mb-6">Would you like to book this {travelType}?</p>
-                
+
+                <p className="text-lg mb-6">
+                  Would you like to book this {travelType}?
+                </p>
+
                 <div className="flex gap-4 justify-center flex-wrap">
                   <button
                     className="px-8 py-3 bg-green-600 hover:bg-green-700 rounded-full text-white font-semibold transition-colors"
                     onClick={confirmBooking}
                   >
-                    Yes, Book {travelType.charAt(0).toUpperCase() + travelType.slice(1)}
+                    Yes, Book{" "}
+                    {travelType.charAt(0).toUpperCase() + travelType.slice(1)}
                   </button>
                   <button
                     className="px-8 py-3 bg-gray-600 hover:bg-gray-700 rounded-full text-white font-semibold transition-colors"
@@ -251,14 +353,11 @@ function TicketBooking() {
                     Cancel
                   </button>
                 </div>
-              </div>                 
+              </div>
             )
-          )
-          
-          //-----------------------
-          
+          ) : (
+            //-----------------------
 
-          : (
             <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
               {/* Core search panel - Mobile first approach */}
               <div className="space-y-4 md:space-y-0 md:grid md:gap-4 md:grid-cols-5 md:items-end">
@@ -325,6 +424,7 @@ function TicketBooking() {
                     name="depart"
                     required
                     value={form.depart}
+                    min={getToday()}    //gets today's date and validate input using that.
                     onChange={handleChange}
                     className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                   />
@@ -342,6 +442,7 @@ function TicketBooking() {
                       name="return"
                       required
                       value={form.return}
+                      min={form.depart}
                       onChange={handleChange}
                       className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                     />

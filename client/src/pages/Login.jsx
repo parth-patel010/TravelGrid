@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Eye, EyeOff, Mail, Lock, LogIn, AlertCircle } from 'lucide-react';
+import { toast } from 'react-hot-toast';
+
 import Navbar from '@/components/Custom/Navbar';
 import Footer from '@/components/Custom/Footer';
 const Login = () => {
@@ -37,9 +39,10 @@ const Login = () => {
     const result = await login(formData.email, formData.password);
 
     if (result.success) {
+      toast.success('Logged in successfully! 🚀');
       navigate(from, { replace: true });
     } else {
-      setError(result.error);
+      toast.error(result.error || 'Login failed');
     }
   };
 
@@ -57,13 +60,6 @@ const Login = () => {
           </Link>
           <h1 className="text-3xl font-bold text-white mb-2">Welcome Back</h1>
           <p className="text-gray-300">Sign in to your account to continue your journey</p>
-        </div>
-
-        {/* Demo Credentials */}
-        <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mb-6">
-          <h3 className="text-blue-400 font-semibold mb-2">Demo Credentials:</h3>
-          <p className="text-blue-300 text-sm">Email: demo@travelgrid.com</p>
-          <p className="text-blue-300 text-sm">Password: password123</p>
         </div>
 
         {/* Login Form */}

@@ -1,5 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { Toaster } from 'react-hot-toast';
 import './index.css';
 import App from './App.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -17,6 +18,7 @@ import Hotels from './pages/Hotels';
 import HotelDetails from './pages/HotelDetails';
 import TicketBooking from './pages/TicketBooking';
 import TravelPackages from './pages/TravelPackages';
+import PackageDetails from "./pages/PackageDetails";
 import HotelBookingPage from './pages/HotelBookingPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -36,6 +38,7 @@ import ServerError from './components/ErrorHandle/ServerError';
 import { AuthProvider } from './context/AuthContext';
 import Blog from './pages/Blog';
 import TripCalculatorPage from './pages/TripCalculator';
+import DiscovermoreDestination from './pages/DiscovermoreDestination';
 
 
 const router = createBrowserRouter([
@@ -59,6 +62,7 @@ const router = createBrowserRouter([
       { path: '/ticket', element: <TicketBooking /> },
       { path: '/guides', element: <TravelGuidesCarousel /> },
       { path: '/packages', element: <TravelPackages /> },
+      { path: '/discovermore', element: <DiscovermoreDestination />},
       { path: '/faq', element: <FAQ /> },
       { path: '/contact', element: <Contact /> },
       { path: '/privacy', element: <PrivacyPolicy /> },
@@ -99,6 +103,7 @@ const router = createBrowserRouter([
       { path: '/network-error', element: <NetworkError /> },
       { path: '/server-error', element: <ServerError /> },
       { path: '*', element: <NotFound /> },
+      { path: "/package/:id", element:<PackageDetails /> },
     ],
   },
 ]);
@@ -108,6 +113,18 @@ createRoot(document.getElementById('root')).render(
     <ErrorBoundary>
       <AuthProvider>
         <RouterProvider router={router} />
+         <Toaster
+          position="top-center"
+          reverseOrder={false}
+          toastOptions={{
+            duration: 5000,
+            style: {
+              background: '#333',
+              color: '#fff',
+              fontSize: '16px',
+            },
+          }}
+        />
       </AuthProvider>
     </ErrorBoundary>
   </StrictMode>

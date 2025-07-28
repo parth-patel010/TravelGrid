@@ -25,6 +25,17 @@ app.get('/api/health', (req, res) => {
 });
 app.use('/api/auth', authRoutes);
 
+// 404 Not Found middleware
+app.use((req,res,next)=>{
+  res.status(404).json({message:'Resource not found'});
+});
+// Error handling middleware global
+app.use((err,req,res,next)=>{
+  console.error(err.stack);
+  res.status(500).json({message:"Internal Server Error"});
+
+});
+
 // server
 app.listen(PORT, () => {
   console.log(` Server running on http://localhost:${PORT}`);
