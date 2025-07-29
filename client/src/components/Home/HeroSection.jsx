@@ -60,7 +60,7 @@ const HeroSection = ({ onSearch }) => {
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl mb-8 font-medium text-gray-100 max-w-2xl font-[Poppins] animate-fadeIn">
+            <p className="text-lg md:text-xl mb-8 font-medium text-gray-100 max-w-2xl font-[Poppins]">
               Find great places to stay, eat, shop, or visit from local experts.
             </p>
          </div>
