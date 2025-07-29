@@ -47,7 +47,7 @@ const DiscoverSection = () => {
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-2">
         {destinations.map((place, index) => (
-          <DiscoverCard index={index} place={place} handleBookNowClick={handleBookNowClick} />
+          <DiscoverCard key={index} index={index} place={place} handleBookNowClick={handleBookNowClick} />
         ))}
       </div>
 
