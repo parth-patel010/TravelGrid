@@ -7,7 +7,8 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
 if (!JWT_SECRET) {
   console.error('JWT_SECRET is not defined in environment variables');
   process.exit(1);
-};
+}
+
 // Register User
 exports.registerUser = async (req, res) => {
   const { name, email, password } = req.body;
