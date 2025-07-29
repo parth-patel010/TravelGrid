@@ -11,6 +11,7 @@ import Footer from "./components/Custom/Footer";
 import Spinner from './components/Spinner';
 import ErrorBoundary from './components/ErrorHandle/ErrorBoundary';
 import GoToTopButton from './components/GoToTopButton';
+import FeedbackButton from './components/FeedbackButton';
 
 function App() {
   const location = useLocation();
@@ -34,6 +35,7 @@ function App() {
               </ErrorBoundary>
             </div>
             <GoToTopButton />
+            <FeedbackButton />
             <Footer />
           </div>
         </DashboardDataProvider>
