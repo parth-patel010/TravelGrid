@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
       phone,
       checkIn,
       checkOut,
-      guests
+     guests: parseInt(guests, 10), 
     });
 
     await newBooking.save();
