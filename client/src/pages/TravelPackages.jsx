@@ -38,9 +38,20 @@ const TravelPackages = () => {
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
             Discover Our <span className="text-pink-400">Travel Packages</span>
           </h1>
-          <p className="text-lg md:text-xl text-pink-200 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-pink-200 max-w-2xl mx-auto mb-6">
             Handpicked vacation deals crafted for unforgettable experiences.
           </p>
+          
+          {/* Custom Travel Plan Generator Button */}
+          <div className="flex justify-center mb-8">
+            <button
+              onClick={() => navigate('/travel-plan-generator')}
+              className="bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center"
+            >
+              <span className="mr-2">🎯</span>
+              Create Custom Travel Plan
+            </button>
+          </div>
 
           {/* Filters */}
           <div className="mt-6 flex justify-center items-center gap-8 flex-wrap text-white">

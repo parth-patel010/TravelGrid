@@ -40,6 +40,7 @@ import Blog from './pages/Blog';
 import TripCalculatorPage from './pages/TripCalculator';
 import DiscovermoreDestination from './pages/DiscovermoreDestination';
 import Feedback from './pages/Feedback';
+import TravelPlanGenerator from './pages/TravelPlanGenerator';
 
 
 const router = createBrowserRouter([
@@ -70,6 +71,7 @@ const router = createBrowserRouter([
       { path: '/privacy', element: <PrivacyPolicy /> },
       { path: '/terms', element: <TermsAndConditions /> },
       { path: '/trip-calculator', element: <TripCalculatorPage/>},
+      { path: '/travel-plan-generator', element: <TravelPlanGenerator /> },
       {
         path: '/dashboard',
         element: (
