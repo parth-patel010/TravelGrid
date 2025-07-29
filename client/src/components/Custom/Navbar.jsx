@@ -46,7 +46,8 @@ const Navbar = () => {
   return (
     <>
       {/* Sticky Translucent Navbar */}
-      <nav className={`w-full fixed top-0 left-0 z-50 backdrop-blur-md  border-b border-white/20 px-4 py-3 flex  justify-between items-center ${ isScrolled? "bg-black/25":"bg-white/10"}`}>
+      <nav className="w-full fixed top-0 left-0 z-50 backdrop-blur-md border-b border-white/10 bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2a1a2e] px-4 py-3 flex justify-between items-center">
+
         {/* Logo */}
         <Link
   to="/"
