@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./styles/HotelBookingPage.css";
 
 const hotelsData = [
@@ -17,6 +18,8 @@ const hotelsData = [
 const HotelBookingPage = () => {
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState("default");
+  const [bookingConfirmed, setBookingConfirmed] = useState(false);
+  const [selectedHotel, setSelectedHotel] = useState(null);
 
   const filteredHotels = hotelsData
     .filter((hotel) =>
@@ -52,10 +55,62 @@ const HotelBookingPage = () => {
             <h2>{hotel.name}</h2>
             <p>Price: ₹{hotel.price} / night</p>
             <p>Rating: ⭐ {hotel.rating}</p>
-            <button>Book Now</button>
+            <button onClick={() => {
+              setSelectedHotel(hotel);
+              setBookingConfirmed(true);
+            }}>Book Now</button>
           </div>
         ))}
       </div>
+
+      {/* Booking Confirmation Modal */}
+      {bookingConfirmed && selectedHotel && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl shadow-lg max-w-md w-full p-6 relative text-black">
+            <button
+              className="absolute top-2 right-3 text-xl text-red-500 font-bold"
+              onClick={() => {
+                setBookingConfirmed(false);
+                setSelectedHotel(null);
+              }}
+            >
+              ×
+            </button>
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-green-600 mb-4">
+                Booking Confirmed!
+              </h2>
+              <p className="text-lg mb-2">
+                Your booking at <span className="font-semibold">{selectedHotel.name}</span> is successful.
+              </p>
+              <p className="text-gray-600 mb-6">
+                Price: ₹{selectedHotel.price} / night
+              </p>
+              <div className="space-y-2">
+                <button
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-semibold"
+                  onClick={() => {
+                    setBookingConfirmed(false);
+                    setSelectedHotel(null);
+                  }}
+                >
+                  Close
+                </button>
+                <Link
+                  to="/feedback"
+                  className="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-semibold inline-block text-center"
+                  onClick={() => {
+                    setBookingConfirmed(false);
+                    setSelectedHotel(null);
+                  }}
+                >
+                  Share Feedback
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

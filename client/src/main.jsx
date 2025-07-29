@@ -38,6 +38,7 @@ import { AuthProvider } from './context/AuthContext';
 import Blog from './pages/Blog';
 import TripCalculatorPage from './pages/TripCalculator';
 import DiscovermoreDestination from './pages/DiscovermoreDestination';
+import Feedback from './pages/Feedback';
 import TravelForum from './pages/TravelForum';
 
 const router = createBrowserRouter([
@@ -65,6 +66,7 @@ const router = createBrowserRouter([
       { path: '/discovermore', element: <DiscovermoreDestination /> },
       { path: '/faq', element: <FAQ /> },
       { path: '/contact', element: <Contact /> },
+      { path: '/feedback', element: <Feedback /> },
       { path: '/privacy', element: <PrivacyPolicy /> },
       { path: '/terms', element: <TermsAndConditions /> },
       { path: '/trip-calculator', element: <TripCalculatorPage /> },

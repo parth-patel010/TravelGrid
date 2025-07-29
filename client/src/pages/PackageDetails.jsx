@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { packages } from "../data/PackageData";
 import {
   FaStar,
@@ -366,12 +366,21 @@ const PackageDetails = () => {
                   Thank you, {formData.name}. Your booking on {formData.Date} is
                   successful.
                 </p>
-                <button
-                  className="mt-4 bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-md font-semibold"
-                  onClick={() => setSelectedPackage(null)}
-                >
-                  Close
-                </button>
+                <div className="mt-4 space-y-2">
+                  <button
+                    className="w-full bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-md font-semibold"
+                    onClick={() => setSelectedPackage(null)}
+                  >
+                    Close
+                  </button>
+                  <Link
+                    to="/feedback"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-semibold inline-block text-center"
+                    onClick={() => setSelectedPackage(null)}
+                  >
+                    Share Feedback
+                  </Link>
+                </div>
               </div>
             )}
           </div>
