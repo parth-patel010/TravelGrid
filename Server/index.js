@@ -13,11 +13,20 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 
 // Middleware
-// Allow specific origin (frontend)
+const allowedOrigins = ['http://localhost:5173', 'https://travel-grid.vercel.app'];
+
 app.use(cors({
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "DELETE"]
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true, // if you're sending cookies or auth headers
 }));
+// app.options('*', cors()); // handle preflight
+
 app.use(express.json());
 
 // Routes
