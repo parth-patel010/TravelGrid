@@ -31,7 +31,7 @@ const Dashboard = () => {
 useEffect(() => {
   const fetchBookings = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/bookings/${user.id}`);
+      const res = await axios.get(`https://travelgrid.onrender.com/api/bookings/${user.id}`);
       const bookingsData = Array.isArray(res.data) ? res.data : res.data?.bookings || [];
 
       // ✅ hotels is from hardcoded array, NOT fetched via axios
