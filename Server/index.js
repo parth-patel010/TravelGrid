@@ -29,6 +29,9 @@ app.use(cors({
 
 app.use(express.json());
 
+app.get("/",(req,res)=>{
+  res.send("Server is running!");
+});
 // Routes
 app.get('/api/health', (req, res) => {
   res.status(200).json({ message: 'API is running smoothly!' });
