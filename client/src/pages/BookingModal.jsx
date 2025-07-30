@@ -27,7 +27,7 @@ const BookingModal = ({ hotelId, userId, onClose }) => {
 
   console.log("Booking payload:", payload);
     try {
-      await axios.post("http://localhost:5000/api/bookings", {
+      await axios.post("https://travelgrid.onrender.com/api/bookings", {
         ...form,
         hotelId,
         user: userId,
