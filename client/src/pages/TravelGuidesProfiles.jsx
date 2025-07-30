@@ -121,7 +121,10 @@ const TravelGuidesCarousel = () => {
 
   return (
     <section className="travel-guides-section" style={{ scrollMarginTop: '80px' }}>
-      <h1 className="main-heading">Travel Guides</h1>
+      <h1 className="main-heading unique-heading-1">
+  Travel <span className="main-span">Guides</span>
+</h1>
+
       <div style={{
         textAlign: 'center',
         maxWidth: '800px',
@@ -130,20 +133,16 @@ const TravelGuidesCarousel = () => {
       }}>
         <p style={{
           fontSize: '18px',
-          color: '#667eea',
-          fontWeight: '500',
+          fontWeight: '600',
           lineHeight: '1.6',
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          marginBottom: '10px'
+          marginBottom: '10px',
+           color: '#fcfcfc',
         }}>
           Explore the world with our expert local guides
         </p>
         <p style={{
           fontSize: '16px',
-          color: '#718096',
+          color: '#bcbcbc',
           fontWeight: '400',
           lineHeight: '1.5'
         }}>
@@ -154,22 +153,10 @@ const TravelGuidesCarousel = () => {
       {/* Search Bar Section */}
       <div className="search-section" style={{ 
         maxWidth: '800px', 
-        margin: '30px auto 40px',
-        padding: '0 20px'
+        margin: '10px auto 50px auto',
+        padding: '0 20px',
       }}>
-        <div style={{ 
-          position: 'relative',
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          borderRadius: '20px',
-          padding: '6px',
-          boxShadow: '0 8px 32px rgba(102, 126, 234, 0.3)',
-        }}>
-          <div style={{
-            background: 'white',
-            borderRadius: '15px',
-            position: 'relative',
-            overflow: 'hidden'
-          }}>
+        <div className="search-tab" tabIndex={0}>
             <input
               type="text"
               placeholder="🔍 Search guides by name, expertise, location, or language..."
@@ -177,13 +164,14 @@ const TravelGuidesCarousel = () => {
               onChange={(e) => handleSearch(e.target.value)}
               style={{
                 width: '100%',
-                padding: '20px 60px 20px 25px',
+                padding: '15px 30px 15px 25px',
                 border: 'none',
                 outline: 'none',
                 fontSize: '16px',
-                background: 'transparent',
+                background: '#fcfcfc',
                 color: '#2d3748',
-                fontWeight: '500'
+                fontWeight: '500',
+                borderRadius:"10px"
               }}
             />
             {searchQuery && (
@@ -194,7 +182,7 @@ const TravelGuidesCarousel = () => {
                   right: '20px',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  background: 'linear-gradient(135deg, #59168b 0%, #9810fa 100%)',
                   border: 'none',
                   borderRadius: '50%',
                   width: '35px',
@@ -218,7 +206,6 @@ const TravelGuidesCarousel = () => {
               </button>
             )}
           </div>
-        </div>
         
         {/* Search Stats */}
         {isSearching && (

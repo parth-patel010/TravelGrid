@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 
 const AuthContext = createContext();
 
@@ -14,24 +15,6 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    // Mock user data for demonstration
-    const mockUsers = [
-        {
-            id: 1,
-            email: 'demo@travelgrid.com',
-            password: 'password123',
-            name: 'John Doe',
-            avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
-        },
-        {
-            id: 2,
-            email: 'jane@travelgrid.com',
-            password: 'password123',
-            name: 'Jane Smith',
-            avatar: 'https://randomuser.me/api/portraits/women/32.jpg'
-        }
-    ];
-
     // Check for stored user session on app load
     useEffect(() => {
         const storedUser = localStorage.getItem('travelgrid_user');
@@ -45,73 +28,98 @@ export const AuthProvider = ({ children }) => {
         setIsLoading(false);
     }, []);
 
+    // login logic using backend API
     const login = async (email, password) => {
         setIsLoading(true);
 
-        // Simulate API call delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        try {
+            const res = await fetch('http://localhost:5000/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
 
-        const foundUser = mockUsers.find(
-            u => u.email === email && u.password === password
-        );
+            const data = await res.json();
 
-        if (foundUser) {
-            const userSession = {
-                id: foundUser.id,
-                email: foundUser.email,
-                name: foundUser.name,
-                avatar: foundUser.avatar
-            };
-
-            setUser(userSession);
-            localStorage.setItem('travelgrid_user', JSON.stringify(userSession));
+            if (res.ok) {
+                setUser(data.user);
+                localStorage.setItem('travelgrid_user', JSON.stringify(data.user));
+                setIsLoading(false);
+                return { success: true };
+            } else {
+                setIsLoading(false);
+                return { success: false, error: data.message };
+            }
+        } catch (err) {
             setIsLoading(false);
-            return { success: true };
-        } else {
-            setIsLoading(false);
-            return { success: false, error: 'Invalid email or password' };
+            return { success: false, error: 'Something went wrong' };
         }
     };
 
     const signup = async (userData) => {
         setIsLoading(true);
 
-        // Simulate API call delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        try {
+            // First register the user
+            const res = await fetch('http://localhost:5000/api/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            });
 
-        // Check if email already exists
-        const emailExists = mockUsers.some(u => u.email === userData.email);
+            const data = await res.json();
 
-        if (emailExists) {
+            if (!res.ok) {
+                setIsLoading(false);
+                return { success: false, error: data.message };
+            }
+
+            // Immediately login with the same credentials
+            const loginRes = await fetch('http://localhost:5000/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: userData.email,
+                    password: userData.password
+                })
+            });
+
+            const loginData = await loginRes.json();
+
+            if (loginRes.ok) {
+                setUser(loginData.user);
+                localStorage.setItem('travelgrid_user', JSON.stringify(loginData.user));
+                setIsLoading(false);
+                return { success: true };
+            } else {
+                setIsLoading(false);
+                return { success: false, error: loginData.message || 'Login failed after signup' };
+            }
+
+        } catch (err) {
             setIsLoading(false);
-            return { success: false, error: 'Email already exists' };
+            return { success: false, error: 'Something went wrong during signup' };
         }
-
-        // Create new user
-        const newUser = {
-            id: Date.now(),
-            email: userData.email,
-            name: userData.name,
-            avatar: `https://randomuser.me/api/portraits/${userData.name.toLowerCase().includes('jane') || userData.name.toLowerCase().includes('maria') ? 'women' : 'men'}/${Math.floor(Math.random() * 90) + 1}.jpg`
-        };
-
-        setUser(newUser);
-        localStorage.setItem('travelgrid_user', JSON.stringify(newUser));
-        setIsLoading(false);
-        return { success: true };
     };
 
     const logout = () => {
         setUser(null);
         localStorage.removeItem('travelgrid_user');
+        toast.success('Logged out successfully 👋');
+    };
+
+    const updateUser = (updatedUser) => {
+        setUser(updatedUser);
+        localStorage.setItem('travelgrid_user', JSON.stringify(updatedUser));
     };
 
     const value = {
         user,
-        isLoading,
         login,
         signup,
         logout,
+        updateUser,
+        isLoading,
         isAuthenticated: !!user
     };
 
@@ -121,3 +129,4 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
+

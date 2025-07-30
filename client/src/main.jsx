@@ -1,24 +1,22 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { Toaster } from 'react-hot-toast';
 import './index.css';
 import App from './App.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-// Pages & Components
+import Trips from './pages/Trips';
 import TravelGuidesCarousel from './pages/TravelGuidesProfiles.jsx';
 import Contact from './components/Contact.jsx';
 import Home from './pages/Home';
 import Discover from './pages/Discover';
-import Trips from './pages/Trips';
 import Review from './pages/Review';
-import Forums from './pages/Forums';
 import Contributors from './pages/Contributors';
 import About from './pages/About';
 import Hotels from './pages/Hotels';
 import HotelDetails from './pages/HotelDetails';
 import TicketBooking from './pages/TicketBooking';
 import TravelPackages from './pages/TravelPackages';
-import HotelBookingPage from './pages/HotelBookingPage';
+import PackageDetails from './pages/PackageDetails';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
@@ -36,6 +34,10 @@ import NetworkError from './components/ErrorHandle/NetworkError';
 import ServerError from './components/ErrorHandle/ServerError';
 import { AuthProvider } from './context/AuthContext';
 import Blog from './pages/Blog';
+import TripCalculatorPage from './pages/TripCalculator';
+import DiscovermoreDestination from './pages/DiscovermoreDestination';
+import Feedback from './pages/Feedback';
+import TravelForum from './pages/TravelForum';
 
 const router = createBrowserRouter([
   { path: '/login', element: <Login /> },
@@ -49,26 +51,30 @@ const router = createBrowserRouter([
       { path: '/about', element: <About /> },
       { path: '/blog', element: <Blog /> },
       { path: '/discover', element: <Discover /> },
-      // { path: '/trips', element: <Trips /> },
+      { path: '/trips', element: <Trips /> },
       { path: '/review', element: <Review /> },
       // { path: '/forums', element: <Forums /> },
+      { path: '/forum', element: <TravelForum /> }, // ✅ Added this route
       { path: '/contributors', element: <Contributors /> },
       { path: '/hotels', element: <Hotels /> },
       { path: '/hotels/:id', element: <HotelDetails /> },
       { path: '/ticket', element: <TicketBooking /> },
       { path: '/guides', element: <TravelGuidesCarousel /> },
       { path: '/packages', element: <TravelPackages /> },
+      { path: '/discovermore', element: <DiscovermoreDestination /> },
       { path: '/faq', element: <FAQ /> },
       { path: '/contact', element: <Contact /> },
+      { path: '/feedback', element: <Feedback /> },
       { path: '/privacy', element: <PrivacyPolicy /> },
       { path: '/terms', element: <TermsAndConditions /> },
+      { path: '/trip-calculator', element: <TripCalculatorPage /> },
       {
         path: '/dashboard',
         element: (
           <ProtectedRoute>
             <Dashboard />
           </ProtectedRoute>
-        ),
+        )
       },
       {
         path: '/dashboard/trips',
@@ -97,6 +103,7 @@ const router = createBrowserRouter([
       { path: '/network-error', element: <NetworkError /> },
       { path: '/server-error', element: <ServerError /> },
       { path: '*', element: <NotFound /> },
+      { path: '/package/:id', element: <PackageDetails /> },
     ],
   },
 ]);
@@ -106,6 +113,18 @@ createRoot(document.getElementById('root')).render(
     <ErrorBoundary>
       <AuthProvider>
         <RouterProvider router={router} />
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          toastOptions={{
+            duration: 5000,
+            style: {
+              background: '#333',
+              color: '#fff',
+              fontSize: '16px',
+            },
+          }}
+        />
       </AuthProvider>
     </ErrorBoundary>
   </StrictMode>

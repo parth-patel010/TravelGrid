@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import Navbar from "../components/Custom/Navbar";
 import {
   Users,
@@ -10,6 +13,7 @@ import {
   Car,
   ArrowRightLeft,
 } from "lucide-react";
+import toast from "react-hot-toast";
 
 const tripModes = [
   { label: "One-Way", value: "oneWay" },
@@ -34,7 +38,20 @@ function TicketBooking() {
     passengers: 1,
     cabin: "Economy",
   });
+
   const [submitted, setSubmitted] = useState(false);
+  const [booked, setBooked] = useState(false); //adding a booked state variable to keep track if booked or not
+
+  //Function to get today's date for validating depart date for ticker
+  const getToday=()=>{
+    const today = new Date();
+    return today.toISOString().split('T')[0]
+  }
+
+  const confirmBooking = () => {
+    //function called when flight booked.
+    setBooked(true);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,35 +63,95 @@ function TicketBooking() {
 
     // Validate required fields
     if (!form.from.trim()) {
-      alert("Please enter a departure city");
+      toast.error("Please enter a departure city");
       return;
     }
 
     if (!form.to.trim()) {
-      alert("Please enter a destination city");
+      toast.error("Please enter a destination city");
       return;
     }
 
     if (!form.depart) {
-      alert("Please select a departure date");
+      toast.error("Please select a departure date");
       return;
     }
 
     if (tripMode === "roundTrip" && !form.return) {
-      alert("Please select a return date");
+      toast.error("Please select a return date");
       return;
     }
 
     if (!form.passengers || form.passengers < 1) {
-      alert("Please select number of passengers");
+      toast.error("Please select number of passengers");
       return;
     }
 
     setSubmitted(true);
   };
 
+  const handleDownload = async () => {
+    // Hide buttons temporarily
+    const buttons = document.querySelector(".pdf-buttons");
+    const prevDisplay = buttons?.style.display;
+    if (buttons) buttons.style.display = "none";
+
+    const el = document.getElementById("ticket-content");
+    if (!el) return;
+
+    const clone = el.cloneNode(true);
+
+    // 🧹 Remove buttons from clone only
+    const buttonsToRemove = clone.querySelectorAll("button");
+    buttonsToRemove.forEach((btn) => btn.remove());
+
+    // Styling
+    clone.style.fontFamily = "Arial, sans-serif";
+    clone.style.padding = "30px";
+    clone.style.width = "600px";
+    clone.style.fontSize = "28px";
+    clone.style.maxWidth = "600px";
+    clone.style.margin = "0 auto";
+
+    const removeClasses = (node) => {
+      if (node instanceof HTMLElement) {
+        node.className = "";
+      } else if (node instanceof SVGElement) {
+        node.setAttribute("class", "");
+      }
+      for (let child of node.children) {
+        removeClasses(child);
+      }
+    };
+    removeClasses(clone);
+
+    document.body.appendChild(clone);
+
+    try {
+      const canvas = await html2canvas(clone, { backgroundColor: "#fff" });
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, "PNG", 10, 10);
+
+      // Add border around the full page
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      pdf.setLineWidth(1); // Border thickness
+      pdf.rect(5, 5, pageWidth - 10, pageHeight - 10); // x, y, width, height
+
+      pdf.save("ticket.pdf");
+    } catch (err) {
+      toast.error("Unable to Generate At this Moment")
+    } finally {
+      document.body.removeChild(clone);
+      // Restore button display
+      if (buttons) buttons.style.display = prevDisplay || "";
+    }
+  };
+
   const resetForm = () => {
     setSubmitted(false);
+    setBooked(false);
     setForm({
       from: "",
       to: "",
@@ -199,7 +276,7 @@ function TicketBooking() {
                   className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                 />
               </div>
-
+              
               {/* Depart */}
               <div className="relative col-span-2 md:col-span-1">
                 <CalendarDays
@@ -229,6 +306,7 @@ function TicketBooking() {
                       name="return"
                       required
                       value={form.return}
+                      min={form.depart}
                       onChange={handleChange}
                       className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                     />
