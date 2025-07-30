@@ -6,6 +6,7 @@ require('dotenv').config();
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const postRoutes = require('./routes/postRoutes')
+const saveRoutes = require('./routes/saveRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -32,6 +33,7 @@ app.get('/',(req,res)=>{
 app.get('/api/health', (req, res) => {
   res.status(200).json({ message: 'API is running smoothly!' });
 });
+// Authentication Routes
 app.use('/api/auth', authRoutes);
 //hotel bookings 
 app.use("/api/bookings", bookingRoutes);
@@ -39,6 +41,8 @@ app.use("/api/bookings", bookingRoutes);
 //Posts Route
 app.use('/api/post',postRoutes);
 
+//save Route
+app.use('/api/save', saveRoutes);
 
 // 404 Not Found middleware
 app.use((req,res,next)=>{
