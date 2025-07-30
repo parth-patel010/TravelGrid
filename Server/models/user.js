@@ -32,6 +32,17 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    savedPlaces: [
+      {
+        placeId: {
+          type: String, 
+          required: true
+        },
+        name: String,
+        description: String,
+        image: String
+      }
+    ],
   },
   {
     timestamps: true, // Adds createdAt and updatedAt fields
