@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Eye, EyeOff, Mail, Lock, LogIn, AlertCircle } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import GoogleLoginButton from '../components/Auth/GoogleLogin';
 
 import Navbar from '@/components/Custom/Navbar';
 import Footer from '@/components/Custom/Footer';
@@ -54,6 +55,10 @@ const Login = () => {
     } else {
       toast.error(result.error || 'Login failed');
     }
+  };
+
+  const handleGoogleSuccess = () => {
+    navigate(from, { replace: true });
   };
 
   return (
@@ -139,7 +144,24 @@ const Login = () => {
                   </>
                 )}
               </button>
-            </form>
+
+            {/* Divider */}
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-white/20"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-black/50 text-gray-300">Or continue with</span>
+              </div>
+            </div>
+
+            {/* Google Login Button */}
+            <GoogleLoginButton 
+              onSuccess={handleGoogleSuccess}
+              buttonText="Continue with Google"
+              className="w-full"
+            />
+          </form>
 
             {/* Footer */}
             <div className="mt-6 text-center">

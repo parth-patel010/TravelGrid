@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Eye, EyeOff, Mail, Lock, User, UserPlus, AlertCircle, CheckCircle } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import GoogleLoginButton from '../components/Auth/GoogleLogin';
 
 
 const Signup = () => {
@@ -80,6 +81,10 @@ const Signup = () => {
     } else {
       toast.error(result.error || 'Signup failed');
     }
+  };
+
+  const handleGoogleSuccess = () => {
+    navigate('/', { replace: true });
   };
 
   const getPasswordStrength = () => {
@@ -247,6 +252,23 @@ const Signup = () => {
                 </>
               )}
             </button>
+
+            {/* Divider */}
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-white/20"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-black/50 text-gray-300">Or continue with</span>
+              </div>
+            </div>
+
+            {/* Google Signup Button */}
+            <GoogleLoginButton 
+              onSuccess={handleGoogleSuccess}
+              buttonText="Continue with Google"
+              className="w-full"
+            />
           </form>
 
           {/* Footer */}

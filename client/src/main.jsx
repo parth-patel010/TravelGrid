@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import './index.css';
 import App from './App.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import Trips from './pages/Trips';
 import TravelGuidesCarousel from './pages/TravelGuidesProfiles.jsx';
 import Contact from './components/Contact.jsx';
@@ -113,21 +114,23 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary>
-      <AuthProvider>
-        <RouterProvider router={router} />
-        <Toaster
-          position="top-center"
-          reverseOrder={false}
-          toastOptions={{
-            duration: 5000,
-            style: {
-              background: '#333',
-              color: '#fff',
-              fontSize: '16px',
-            },
-          }}
-        />
-      </AuthProvider>
+      <GoogleOAuthProvider clientId="1047267709802-k05pdjqojcal19h24fd75opev1evaf6j.apps.googleusercontent.com">
+        <AuthProvider>
+          <RouterProvider router={router} />
+          <Toaster
+            position="top-center"
+            reverseOrder={false}
+            toastOptions={{
+              duration: 5000,
+              style: {
+                background: '#333',
+                color: '#fff',
+                fontSize: '16px',
+              },
+            }}
+          />
+        </AuthProvider>
+      </GoogleOAuthProvider>
     </ErrorBoundary>
   </StrictMode>
 );
