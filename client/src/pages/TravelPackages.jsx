@@ -1,4 +1,4 @@
-import { Package } from "lucide-react";
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { packages } from "../data/PackageData";
@@ -109,9 +109,20 @@ const TravelPackages = () => {
 					<h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
 						Discover Our <span className="text-pink-400">Travel Packages</span>
 					</h1>
-					<p className="text-lg md:text-xl text-pink-200 max-w-2xl mx-auto">
+					<p className="text-lg md:text-xl text-pink-200 max-w-2xl mx-auto mb-6">
 						Handpicked vacation deals crafted for unforgettable experiences.
 					</p>
+
+					{/* Custom Travel Plan Generator Button */}
+					<div className="flex justify-center mb-8">
+						<button
+							onClick={() => navigate('/travel-plan-generator')}
+							className="bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center"
+						>
+							<span className="mr-2">🎯</span>
+							Create Custom Travel Plan
+						</button>
+					</div>
 
 					{/* Filter dropdowns */}
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 w-full bg-pink-900 p-4 rounded-xl shadow-lg text-white mt-4">
@@ -236,7 +247,8 @@ const TravelPackages = () => {
 						filteredPackages.map((pkg) => (
 							<div
 								key={pkg.id}
-								className="backdrop-blur-sm bg-white/5 border border-pink-400/20 rounded-2xl shadow-xl hover:bg-white/8 transition-shadow duration-300 hover:shadow-2xl cursor-pointer">
+								className="backdrop-blur-sm bg-white/5 border border-pink-400/20 rounded-2xl shadow-xl hover:bg-white/8 transition-shadow duration-300 hover:shadow-2xl cursor-pointer"
+								onClick={() => navigate(`/package/${pkg.id}`)}>
 								<img
 									src={pkg.image}
 									alt={pkg.title}
@@ -260,7 +272,7 @@ const TravelPackages = () => {
 												}`}
 												fill="currentColor"
 												viewBox="0 0 20 20">
-												<path d="..." />
+												<path d="M9.049 2.927a1 1 0 011.902 0l1.517 4.674a1 1 0 00.95.69h4.911c.969 0 1.371 1.24.588 1.81l-3.978 2.89a1 1 0 00-.364 1.118l1.517 4.674c.3.921-.755 1.688-1.538 1.118l-3.978-2.89a1 1 0 00-1.176 0l-3.978 2.89c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.364-1.118l-3.978-2.89c-.784-.57-.38-1.81.588-1.81h4.912a1 1 0 00.95-.69l1.517-4.674z" />
 											</svg>
 										))}
 									</div>
@@ -299,7 +311,6 @@ const TravelPackages = () => {
 											className="bg-gradient-to-r from-pink-600 to-pink-500 text-white px-5 py-2 rounded-lg font-semibold transition-all transform hover:scale-105">
 											Book Now
 										</button>
-										{/* You can add a Save button here if needed */}
 									</div>
 								</div>
 							</div>
@@ -316,3 +327,4 @@ const TravelPackages = () => {
 };
 
 export default TravelPackages;
+```
