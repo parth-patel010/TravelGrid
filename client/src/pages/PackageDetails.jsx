@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect , useState } from "react";
 import { useParams } from "react-router-dom";
 import { packages } from "../data/PackageData";
+import PackageDetailsSkeleton from "../components/Loaders/PackageDetailsSkeleton";
 import {
   FaStar,
   FaCalendarAlt,
@@ -63,6 +64,18 @@ const Accordion = ({ title, content, variant = "default" }) => {
 };
 
 const PackageDetails = () => {
+
+  const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setLoading(false);
+  }, 1200); // ⏳ fake delay or replace with API fetch
+
+  return () => clearTimeout(timer);
+}, []);
+
+
   const { id } = useParams();
   const packageData = packages.find((pkg) => pkg.id.toString() === id);
   const [selectedPackage, setSelectedPackage] = useState(null);
@@ -108,6 +121,11 @@ const PackageDetails = () => {
     faqs,
     image,
   } = packageData;
+
+  if (loading) {
+  return <PackageDetailsSkeleton />;
+}
+
 
   return (
     <div className="bg-gradient-to-br from-gray-900 via-[#1f1d2b] to-pink-900 text-white min-h-screen pb-16">
