@@ -27,7 +27,8 @@ const HeroSection = ({ onSearch }) => {
   ];
 
   return (
-    <section className="relative w-screen min-h-[80vh] flex items-center justify-center overflow-hidden mt-[4.5rem] md:mt-[5rem]">
+    // removed margin-top to avoid unnecessary space
+    <section className="relative w-screen min-h-[80vh] flex items-center justify-center overflow-hidden"> 
      <div
   className="absolute inset-0 bg-cover bg-center opacity-90 z-10"
   style={{
@@ -39,7 +40,7 @@ const HeroSection = ({ onSearch }) => {
 
 
       {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-opacity-30 z-15" />
+      <div className="absolute inset-0 bg-opacity-30 z-15 "/>
       
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
