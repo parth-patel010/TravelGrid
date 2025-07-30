@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Typewriter from "typewriter-effect";
 import { X } from "lucide-react";
+import toast from "react-hot-toast";
 
 const HeroSection = ({ onSearch }) => {
   const [location, setLocation] = useState("");
@@ -10,7 +11,7 @@ const HeroSection = ({ onSearch }) => {
     const isLoggedIn = false;
 
     if(!isLoggedIn){
-      alert("Please sign in to search for destinations.");
+      toast.error("Please sign in to search for destinations.");
       return;
     }
     onSearch({ location, category });

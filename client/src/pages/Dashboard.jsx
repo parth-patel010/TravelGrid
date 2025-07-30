@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { useDashboardData } from '../context/DashboardDataContext';
 import { MapPin, Calendar, Heart, LogOut, Edit, Save, X } from 'lucide-react';
 import defaultAvatar from '../assets/defaultprofile.svg';
+import toast from 'react-hot-toast';
 
 
 const Dashboard = () => {
@@ -56,24 +57,24 @@ const Dashboard = () => {
     const handleSave = () => {
         // Validate required fields
         if (!editData.name.trim()) {
-            alert('Name cannot be empty!');
+            toast.error('Name cannot be empty!');
             return;
         }
         
         if (!editData.email.trim()) {
-            alert('Email cannot be empty!');
+            toast.error('Email cannot be empty!');
             return;
         }
         
         // Basic email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(editData.email.trim())) {
-            alert('Please enter a valid email address!');
+            toast.error('Please enter a valid email address!');
             return;
         }
         
-        // Show backend pending alert
-        alert('Backend is pending! Profile update functionality will be implemented soon.');
+        // Show backend pending toast
+        toast.error('Backend is pending! Profile update functionality will be implemented soon.');
         setIsEditing(false);
     };
 
