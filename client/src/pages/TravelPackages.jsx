@@ -327,4 +327,4 @@ const TravelPackages = () => {
 };
 
 export default TravelPackages;
-```
+export default TravelPackages;
