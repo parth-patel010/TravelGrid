@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Navbar from "../components/Custom/Navbar";
@@ -12,6 +13,7 @@ import {
   Car,
   ArrowRightLeft,
 } from "lucide-react";
+import toast from "react-hot-toast";
 
 const tripModes = [
   { label: "One-Way", value: "oneWay" },
@@ -61,27 +63,27 @@ function TicketBooking() {
 
     // Validate required fields
     if (!form.from.trim()) {
-      alert("Please enter a departure city");
+      toast.error("Please enter a departure city");
       return;
     }
 
     if (!form.to.trim()) {
-      alert("Please enter a destination city");
+      toast.error("Please enter a destination city");
       return;
     }
 
     if (!form.depart) {
-      alert("Please select a departure date");
+      toast.error("Please select a departure date");
       return;
     }
 
     if (tripMode === "roundTrip" && !form.return) {
-      alert("Please select a return date");
+      toast.error("Please select a return date");
       return;
     }
 
     if (!form.passengers || form.passengers < 1) {
-      alert("Please select number of passengers");
+      toast.error("Please select number of passengers");
       return;
     }
 
@@ -139,7 +141,7 @@ function TicketBooking() {
 
       pdf.save("ticket.pdf");
     } catch (err) {
-      alert("Unable to Generate At this Moment")
+      toast.error("Unable to Generate At this Moment")
     } finally {
       document.body.removeChild(clone);
       // Restore button display
@@ -278,6 +280,12 @@ function TicketBooking() {
                 >
                   Download Ticket
                 </button>
+                <Link
+                  to="/feedback"
+                  className="mt-4 ml-4 px-6 py-3 bg-green-600 hover:bg-green-700 rounded-full text-white font-semibold inline-block"
+                >
+                  Share Feedback
+                </Link>
               </div>
             ) : (
               //if it is not booked yet, show these booking options.
