@@ -1,3 +1,9 @@
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { FaStar, FaCheckCircle, FaTimesCircle, FaChevronDown, FaCalendarAlt, FaRupeeSign } from "react-icons/fa";
+import Navbar from "../components/Custom/Navbar";
+import { packages } from "../data/PackageData";
+
 import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { packages } from "../data/PackageData";
