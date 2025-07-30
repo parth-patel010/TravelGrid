@@ -4,15 +4,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Custom/Navbar';
 import Footer from '../components/Custom/Footer';
 import hotels from '../data/hotels';
-<<<<<<< HEAD
 import BookingModal from './BookingModal';
 import { AuthProvider,useAuth } from '../context/AuthContext';
-
-
-
-=======
 import toast from 'react-hot-toast';
->>>>>>> upstream/main
 /**
  * HotelDetails.jsx
  * ----------------
@@ -113,11 +107,7 @@ console.log("Logged-in user from useAuth:", user);
           </p>
 
           <button
-<<<<<<< HEAD
            onClick={() => setShowModal(true)}
-=======
-            onClick={() => toast.error('Booking functionality coming soon!')}
->>>>>>> upstream/main
             className="bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 cursor-pointer"
           >
             Proceed to Book

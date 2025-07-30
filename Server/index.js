@@ -14,26 +14,15 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 
 // Middleware
-const allowedOrigins = process.env.NODE_ENV === 'production'
-  ? ['https://travel-grid.vercel.app']
-  : ['http://localhost:5173'];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: process.env.NODE_ENV === 'production'
+    ? 'https://travel-grid.vercel.app'
+    : '*',
   credentials: true
 }));
 
 
-
 app.use(express.json());
-
-
 
 app.get('/',(req,res)=>{
   res.send("Hello world")
