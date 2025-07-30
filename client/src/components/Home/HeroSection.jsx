@@ -28,8 +28,8 @@ const HeroSection = ({ onSearch }) => {
   ];
 
   return (
-    // removed margin-top to avoid unnecessary space
-    <section className="relative w-screen min-h-[80vh] flex items-center justify-center overflow-hidden"> 
+    // added margin top because Hero section doesnt look good
+    <section className="relative w-screen min-h-[80vh] flex items-center justify-center mt-30 overflow-hidden"> 
      <div
   className="absolute inset-0 bg-cover bg-center opacity-90 z-10"
   style={{
@@ -69,7 +69,7 @@ const HeroSection = ({ onSearch }) => {
 
 
           {/* Right Side - Search Bar and Filters */}
-          <div className="flex-1 w-full max-w-md">
+          <div className="flex-1 w-full max-w-md ">
             <div className="bg-white rounded-2xl shadow-2xl p-6 space-y-4">
               {/* Search Bar */}
               <div className="space-y-3">
