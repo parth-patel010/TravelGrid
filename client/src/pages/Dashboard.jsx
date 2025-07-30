@@ -327,8 +327,9 @@ useEffect(() => {
                         Plan your next trip or discover new destinations around the world!
                     </p>
                     <button
-                        onClick={() => navigate('/discover')}
+                        onClick={() => navigate('/DiscovermoreDestination')}
                         className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 cursor-pointer"
+                        
                     >
                         Discover New Places
                     </button>
