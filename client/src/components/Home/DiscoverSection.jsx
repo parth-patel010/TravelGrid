@@ -47,7 +47,7 @@ const DiscoverSection = () => {
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-2">
         {destinations.map((place, index) => (
-          <DiscoverCard index={index} place={place} handleBookNowClick={() => navigate(`/package/${index+5}`)} />  //handled book now funtionality by providing path of package's respective pages(index+5 for matching index).
+          <DiscoverCard key={index} index={index} place={place} handleBookNowClick={() => navigate(`/package/${index+5}`)} />  //handled book now funtionality by providing path of package's respective pages(index+5 for matching index).
         ))}
       </div>
 
