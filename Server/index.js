@@ -4,7 +4,10 @@ require('dotenv').config();
 
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
+
 const bookingRouter = require('./routes/bookingRoutes');
+
+const postRoutes = require('./routes/postRoutes')
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,12 +19,20 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 
+app.get('/',(req,res)=>{
+  res.send("Hello world")
+})
+
 // Routes
 app.get('/api/health', (req, res) => {
   res.status(200).json({ message: 'API is running smoothly!' });
 });
 app.use('/api/auth', authRoutes);
 app.use('/api/bookings', bookingRouter)
+
+//Posts Route
+app.use('/api/post',postRoutes);
+
 
 // 404 Not Found middleware
 app.use((req,res,next)=>{

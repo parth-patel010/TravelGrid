@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Custom/Navbar';
 import Footer from '../components/Custom/Footer';
 import hotels from '../data/hotels';
+import toast from 'react-hot-toast';
 /**
  * HotelDetails.jsx
  * ----------------
@@ -80,7 +81,7 @@ function HotelDetails() {
           </p>
 
           <button
-            onClick={() => alert('Booking functionality coming soon!')}
+            onClick={() => toast.error('Booking functionality coming soon!')}
             className="bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 cursor-pointer"
           >
             Proceed to Book
