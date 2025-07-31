@@ -75,6 +75,7 @@ console.log("Logged-in user from useAuth:", user);
   }
 
   return (
+
     // AnimatePresence for smooth transitions between the loader and actual content appearance
   <AnimatePresence mode="wait">
     {loading ? (
@@ -92,7 +93,7 @@ console.log("Logged-in user from useAuth:", user);
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-black to-pink-900 overflow-x-hidden">
+        <div className="flex flex-col w-full bg-gradient-to-br from-black to-pink-900 overflow-x-hidden">
           <Navbar />
           <main className="flex flex-col flex-1 w-full items-center">
             {/* Hero image */}
@@ -113,11 +114,12 @@ console.log("Logged-in user from useAuth:", user);
             </section>
 
             {/* Details */}
-            <section className="max-w-4xl w-full px-4 py-12 text-pink-100">
+            <section className="max-w-4xl w-full px-4 py-16 mb-10 md:mb-16 text-pink-100">
               <h2 className="text-2xl font-bold mb-4 text-white">About</h2>
               <p className="leading-relaxed mb-8 text-pink-200 whitespace-pre-line">
                 {hotel.description}
               </p>
+
 
               <button
                onClick={() => setShowModal(true)}
