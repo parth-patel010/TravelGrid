@@ -4,6 +4,7 @@ from typing import List, Dict
 from dotenv import load_dotenv
 
 load_dotenv()
+GITHUB_TOKEN = "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"
 GITHUB_API_URL = "https://api.github.com"
 REPO = "Adarsh-Chaubey03/TravelGrid"
 CONTRIB_FILE = "Contributor-data.md"
