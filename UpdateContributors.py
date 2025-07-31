@@ -11,10 +11,9 @@ REPO = "Adarsh-Chaubey03/TravelGrid"
 CONTRIB_FILE = "Contributor-data.md"
 
 def get_github_token() -> str:
-    """Retrieve GitHub token from environment or fallback value."""
-    token = GITHUB_TOKEN
-    if not token or token.startswith("github_pat_"):
-        print("Warning: Using hardcoded token or no token found. Set GITHUB_TOKEN in .env for security.")
+    token = os.getenv("GITHUB_TOKEN")
+    if not token:
+        raise ValueError("GITHUB_TOKEN environment variable is not set. Please set it in your environment or .env file.")
     return token
 
 def github_api_get(endpoint: str, params: dict = None) -> dict:
