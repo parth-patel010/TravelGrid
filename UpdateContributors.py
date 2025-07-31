@@ -23,20 +23,22 @@ def github_api_get(endpoint: str, params: dict = None) -> dict:
     try:
         response = requests.get(f"{GITHUB_API_URL}{endpoint}", headers=headers, params=params, timeout=10)
         response.raise_for_status()
+        print(f"DEBUG: API request to {endpoint} succeeded with status {response.status_code}")
         return response.json()
     except requests.exceptions.RequestException as e:
-        print(f"API Error: {e}")
+        print(f"DEBUG: API Error for {endpoint}: {e}")
         raise
 
 def fetch_contributors() -> List[Dict]:
     """Fetch the list of contributors from the repository."""
     try:
         contributors = github_api_get(f"/repos/{REPO}/contributors")
+        print(f"DEBUG: Fetched {len(contributors)} contributors: {contributors}")
         if not contributors:
-            print("No contributors found.")
+            print("DEBUG: No contributors found.")
         return contributors
     except Exception as e:
-        print(f"Error fetching contributors: {e}")
+        print(f"DEBUG: Error fetching contributors: {e}")
         return []
 
 def fetch_pull_requests() -> List[Dict]:
@@ -47,17 +49,25 @@ def fetch_pull_requests() -> List[Dict]:
         params = {"state": "all", "per_page": 100, "page": page}
         try:
             batch = github_api_get(f"/repos/{REPO}/pulls", params=params)
+            print(f"DEBUG: Fetched PR page {page}: {len(batch)} items")
             if not batch:
+                print(f"DEBUG: No more PRs found after page {page}.")
                 break
             prs.extend(batch)
             page += 1
-        except Exception:
+        except Exception as e:
+            print(f"DEBUG: Error fetching PR page {page}: {e}")
             break
+    print(f"DEBUG: Total PRs fetched: {len(prs)}")
     return prs
 
 def build_contributor_table(contributors: List[Dict], prs: List[Dict]) -> str:
     """Generate a markdown table of contributors with PR details."""
     rows = []
+    if not contributors:
+        print("DEBUG: No contributors to process.")
+        return "# Contributors\n\n| Name | GitHub Handle | PR Link | Score |\n|------|---------------|---------|-------|\n"
+    
     for contrib in contributors:
         name = contrib.get("login", "-")
         handle = f"@{name}"
@@ -65,18 +75,21 @@ def build_contributor_table(contributors: List[Dict], prs: List[Dict]) -> str:
         pr_links = ", ".join(f"[#{pr['number']}]({pr['html_url']})" for pr in user_prs) if user_prs else "-"
         score = len(user_prs)
         rows.append(f"| {name} | {handle} | {pr_links} | {score} |")
+        print(f"DEBUG: Processed {name}: PRs = {len(user_prs)}, Score = {score}")
     
     table_header = "# Contributors\n\n| Name | GitHub Handle | PR Link | Score |\n|------|---------------|---------|-------|\n"
-    return table_header + "\n".join(rows) + "\n"
+    table_content = "\n".join(rows)
+    print(f"DEBUG: Generated table content:\n{table_content}")
+    return table_header + table_content + "\n"
 
 def update_contributor_md(table_md: str):
     """Update the contributor markdown file with the generated table."""
     try:
         with open(CONTRIB_FILE, "w", encoding="utf-8") as f:
             f.write(table_md)
-        print(f"Successfully updated {CONTRIB_FILE}.")
+        print(f"DEBUG: Successfully updated {CONTRIB_FILE}.")
     except IOError as e:
-        print(f"Error writing to {CONTRIB_FILE}: {e}")
+        print(f"DEBUG: Error writing to {CONTRIB_FILE}: {e}")
 
 def main():
     """Main function to fetch and update contributor data."""
