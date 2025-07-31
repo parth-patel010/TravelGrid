@@ -29,7 +29,7 @@ const HeroSection = ({ onSearch }) => {
 
   return (
     // added margin top because Hero section doesnt look good
-    <section className="relative w-screen min-h-[80vh] flex items-center justify-center mt-30 overflow-hidden"> 
+    <section className="relative w-screen min-h-[80vh] flex items-center justify-center overflow-hidden"> 
      <div
   className="absolute inset-0 bg-cover bg-center opacity-90 z-10"
   style={{
