@@ -57,6 +57,40 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    // Google authentication
+    const googleLogin = async (googleUser) => {
+        setIsLoading(true);
+
+        try {
+            const res = await fetch('http://localhost:5000/api/auth/google', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: googleUser.email,
+                    name: googleUser.name,
+                    picture: googleUser.picture,
+                    googleId: googleUser.sub
+                })
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                setUser(data.user);
+                localStorage.setItem('travelgrid_user', JSON.stringify(data.user));
+                setIsLoading(false);
+                toast.success('Successfully logged in with Google! 🎉');
+                return { success: true };
+            } else {
+                setIsLoading(false);
+                return { success: false, error: data.message };
+            }
+        } catch (err) {
+            setIsLoading(false);
+            return { success: false, error: 'Something went wrong with Google authentication' };
+        }
+    };
+
     const signup = async (userData) => {
         setIsLoading(true);
 
@@ -90,7 +124,7 @@ export const AuthProvider = ({ children }) => {
             if (loginRes.ok) {
                 setUser(loginData.user);
                 localStorage.setItem('travelgrid_user', JSON.stringify(loginData.user));
-                localStorage.setItem('token', data.token);
+                localStorage.setItem('token', loginData.token);
                 setIsLoading(false);
                 return { success: true };
             } else {
@@ -120,6 +154,7 @@ export const AuthProvider = ({ children }) => {
         user,
         login,
         signup,
+        googleLogin,
         logout,
         updateUser,
         isLoading,

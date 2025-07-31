@@ -5,6 +5,9 @@ require('dotenv').config();
 
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
+
+const bookingRouter = require('./routes/bookingRoutes');
+
 const postRoutes = require('./routes/postRoutes')
 const saveRoutes = require('./routes/saveRoutes');
 
@@ -35,8 +38,8 @@ app.get('/api/health', (req, res) => {
 });
 // Authentication Routes
 app.use('/api/auth', authRoutes);
-//hotel bookings 
-app.use("/api/bookings", bookingRoutes);
+
+app.use('/api/bookings', bookingRouter)
 
 //Posts Route
 app.use('/api/post',postRoutes);
