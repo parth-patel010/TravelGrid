@@ -3,7 +3,12 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { FaStar, FaCheckCircle, FaTimesCircle, FaChevronDown, FaCalendarAlt, FaRupeeSign } from "react-icons/fa";
 import Navbar from "../components/Custom/Navbar";
 import { packages } from "../data/PackageData";
+
+
+
+
 import PackageDetailsSkeleton from "../components/Loaders/PackageDetailsSkeleton";
+
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-hot-toast";
 
