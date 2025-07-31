@@ -5,7 +5,7 @@ import { Menu, X, User, LogOut, LogIn } from "lucide-react";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isScrolled,setIsScrolled]=useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { user, logout, isAuthenticated } = useAuth();
 
@@ -21,7 +21,7 @@ const Navbar = () => {
     { name: "Guides", path: "/guides" },
     { name: "Travel Plans", path: "/travel-plan-generator" },
     { name: "Contact", path: "/contact" },
-    { name: "Trip Expense Calculator", path: "/trip-calculator"},
+    { name: "Trip Expense Calculator", path: "/trip-calculator" },
     { name: "Feedback", path: "/feedback" },
   ];
 
@@ -30,26 +30,26 @@ const Navbar = () => {
     setIsSidebarOpen(false);
   };
 
-  const handleScroll=()=>{
-    if(window.scrollY>0){
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
       return setIsScrolled(true);
-    }else{
+    } else {
       return setIsScrolled(false);
     }
-  }
+  };
 
-  useEffect(()=>{
-    window.addEventListener("scroll",handleScroll);
-    return ()=>{
-      window.removeEventListener(scroll,handleScroll)
-    }
-  },[])
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <>
       {/* Sticky Translucent Navbar */}
-      <nav className="box-border w-full fixed top-0 left-0 z-50 backdrop-blur-md border-b border-white/10 bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2a1a2e] px-4 sm:px-6">
-        <div className="w-full max-w-full mx-auto flex justify-between items-center py-3">
+      <nav className="box-border w-full fixed top-0 left-0 z-50 h-20 backdrop-blur-md border-b border-white/10 bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2a1a2e] px-4 sm:px-6">
+        <div className="w-full max-w-full mx-auto flex justify-between items-center py-0.5">
           {/* Logo */}
           <Link
             to="/"
@@ -69,6 +69,8 @@ const Navbar = () => {
                   location.pathname === link.path
                     ? "bg-pink-500/20 text-white shadow-md"
                     : ""
+                } ${link.name === "Home" ? "ml-4" : ""} ${
+                  link.name === "Feedback" ? "mr-6" : ""
                 }`}
               >
                 {link.name}
