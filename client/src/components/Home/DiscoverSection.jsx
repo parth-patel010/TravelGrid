@@ -33,7 +33,7 @@ const DiscoverSection = () => {
   };
 
   const handleDiscoverMore = () => {
-    navigate("/discovermore")
+    navigate("/destinations")
   }
 
   return (
