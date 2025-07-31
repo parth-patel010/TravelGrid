@@ -22,6 +22,7 @@ const Navbar = () => {
     { name: "Travel Plans", path: "/travel-plan-generator" },
     { name: "Contact", path: "/contact" },
     { name: "Trip Expense Calculator", path: "/trip-calculator"},
+    { name: "Currency Converter", path: "/currencyconverter" },
     { name: "Feedback", path: "/feedback" },
   ];
 

@@ -36,6 +36,7 @@ import ServerError from './components/ErrorHandle/ServerError';
 import { AuthProvider } from './context/AuthContext';
 import Blog from './pages/Blog';
 import TripCalculatorPage from './pages/TripCalculator';
+import CurrencyConverter from './pages/currencyconverter';
 import DiscovermoreDestination from './pages/DiscovermoreDestination';
 import Feedback from './pages/Feedback';
 import TravelPlanGenerator from './pages/TravelPlanGenerator';
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
       { path: '/about', element: <About /> },
       { path: '/blog', element: <Blog /> },
       { path: '/discover', element: <Discover /> },
+      { path: '/currencyconverter', element: <CurrencyConverter /> },
       { path: '/trips', element: <Trips /> },
       { path: '/review', element: <Review /> },
       // { path: '/forums', element: <Forums /> },
