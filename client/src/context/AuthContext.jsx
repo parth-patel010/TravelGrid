@@ -44,6 +44,7 @@ export const AuthProvider = ({ children }) => {
             if (res.ok) {
                 setUser(data.user);
                 localStorage.setItem('travelgrid_user', JSON.stringify(data.user));
+                localStorage.setItem('token', data.token);
                 setIsLoading(false);
                 return { success: true };
             } else {
@@ -53,6 +54,40 @@ export const AuthProvider = ({ children }) => {
         } catch (err) {
             setIsLoading(false);
             return { success: false, error: 'Something went wrong' };
+        }
+    };
+
+    // Google authentication
+    const googleLogin = async (googleUser) => {
+        setIsLoading(true);
+
+        try {
+            const res = await fetch('http://localhost:5000/api/auth/google', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: googleUser.email,
+                    name: googleUser.name,
+                    picture: googleUser.picture,
+                    googleId: googleUser.sub
+                })
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                setUser(data.user);
+                localStorage.setItem('travelgrid_user', JSON.stringify(data.user));
+                setIsLoading(false);
+                toast.success('Successfully logged in with Google! 🎉');
+                return { success: true };
+            } else {
+                setIsLoading(false);
+                return { success: false, error: data.message };
+            }
+        } catch (err) {
+            setIsLoading(false);
+            return { success: false, error: 'Something went wrong with Google authentication' };
         }
     };
 
@@ -89,6 +124,7 @@ export const AuthProvider = ({ children }) => {
             if (loginRes.ok) {
                 setUser(loginData.user);
                 localStorage.setItem('travelgrid_user', JSON.stringify(loginData.user));
+                localStorage.setItem('token', data.token);
                 setIsLoading(false);
                 return { success: true };
             } else {
@@ -105,6 +141,7 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         setUser(null);
         localStorage.removeItem('travelgrid_user');
+        localStorage.removeItem('token');
         toast.success('Logged out successfully 👋');
     };
 
@@ -117,6 +154,7 @@ export const AuthProvider = ({ children }) => {
         user,
         login,
         signup,
+        googleLogin,
         logout,
         updateUser,
         isLoading,
@@ -129,4 +167,5 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
+
 
