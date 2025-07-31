@@ -42,6 +42,7 @@ import Feedback from './pages/Feedback';
 import TravelPlanGenerator from './pages/TravelPlanGenerator';
 import TravelForum from './pages/TravelForum';
 import AuthLayout from './components/AuthLayout';
+import TrendingSpots from './pages/TrendingSpots.jsx';
 
 const router = createBrowserRouter([
   { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
@@ -52,6 +53,14 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: '/', element: <Home /> },
+      {
+        path: "/trending-spots", // Add this route
+        element: <TrendingSpots />
+      },
+      {
+        path: "/trending", // Alternative route
+        element: <TrendingSpots />
+      },
       { path: '/about', element: <About /> },
       { path: '/blog', element: <Blog /> },
       { path: '/discover', element: <Discover /> },
@@ -74,6 +83,8 @@ const router = createBrowserRouter([
       { path: '/terms', element: <TermsAndConditions /> },
       { path: '/trip-calculator', element: <TripCalculatorPage /> },
       { path: '/travel-plan-generator', element: <TravelPlanGenerator /> },
+      { path: '/trending-spots', element: <TrendingSpots /> }, // ✅ Add this route
+      { path: '/trending', element: <TrendingSpots /> }, // ✅ Alternative route
       {
         path: '/dashboard',
         element: (
