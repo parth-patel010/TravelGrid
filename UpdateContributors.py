@@ -33,10 +33,8 @@ def fetch_contributors() -> List[Dict]:
     """Fetch the list of contributors from the repository."""
     try:
         contributors = github_api_get(f"/repos/{REPO}/contributors")
-        print(f"DEBUG: Fetched {len(contributors)} contributors: {contributors}")
-        if not contributors:
-            print("DEBUG: No contributors found.")
-        return contributors
+        print(f"DEBUG: Fetched contributors: {contributors}")
+        return contributors if contributors else []
     except Exception as e:
         print(f"DEBUG: Error fetching contributors: {e}")
         return []
@@ -63,11 +61,11 @@ def fetch_pull_requests() -> List[Dict]:
 
 def build_contributor_table(contributors: List[Dict], prs: List[Dict]) -> str:
     """Generate a markdown table of contributors with PR details."""
-    rows = []
     if not contributors:
         print("DEBUG: No contributors to process.")
         return "# Contributors\n\n| Name | GitHub Handle | PR Link | Score |\n|------|---------------|---------|-------|\n"
     
+    rows = []
     for contrib in contributors:
         name = contrib.get("login", "-")
         handle = f"@{name}"
