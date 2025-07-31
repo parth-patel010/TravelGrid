@@ -27,21 +27,22 @@ const HeroSection = ({ onSearch }) => {
     "Transportation"
   ];
 
-  return (
-    <section className="relative w-full min-h-[90vh] flex items-center justify-center py-20 overflow-hidden"> 
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-50 z-10"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1695045038427-3acc1c0df23c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzl8fG5pZ2h0JTIwYmVhY2h8ZW58MHx8MHx8fDA%3D')",
-        }}
-      ></div>
+  return (    <section className="relative w-screen min-h-[80vh] flex items-center justify-center overflow-hidden mt-[4.5rem] md:mt-[1rem]">
+     <div
+  className="absolute inset-0 bg-cover bg-center opacity-90 z-10"
+  style={{
+    backgroundImage:
+      "url('https://images.unsplash.com/photo-1695045038427-3acc1c0df23c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzl8fG5pZ2h0JTIwYmVhY2h8ZW58MHx8MHx8fDA%3D')",
+      
+  }}
+></div>
+
 
       {/* Overlay for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50 z-15"/>
       
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
+        <div className="flex flex-col lg:flex-row items-center md:items-start  justify-between gap-8 lg:gap-16">
           
           <div className="flex-1 text-center lg:text-left text-white">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight leading-tight font-[Playfair Display]">

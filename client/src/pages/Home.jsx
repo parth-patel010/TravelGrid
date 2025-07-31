@@ -8,11 +8,13 @@ import TravelGuides from '../components/Home/TravelGuides'
 import Testimonials from '../components/Home/Testimonials'
 import Chatbot from '@/components/Chatbot'
 
+import Carousel from '@/components/Home/Carousel'
 function Home() {
     const [searchFilter, setSearchFilter] = useState(null);
     return (
-        <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-black via-gray-900 to-pink-900 overflow-x-hidden">
-            <main className="flex flex-col flex-1 items-center justify-start w-full h-full">
+        <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-black to-pink-900 overflow-x-hidden">
+            <main className="flex flex-col flex-1 items-center justify-start w-full h-full px-4">
+                <Carousel/>
                 <HeroSection onSearch={setSearchFilter} />
                 <FeatureCards />
                 <FeaturedPackages />
