@@ -40,11 +40,12 @@ import DiscovermoreDestination from './pages/DiscovermoreDestination';
 import Feedback from './pages/Feedback';
 import TravelPlanGenerator from './pages/TravelPlanGenerator';
 import TravelForum from './pages/TravelForum';
+import AuthLayout from './components/AuthLayout';
 
 const router = createBrowserRouter([
-  { path: '/login', element: <Login /> },
-  { path: '/signup', element: <Signup /> },
-  { path: '/forgot-password', element: <ForgotPassword /> },
+  { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
+  { path: '/signup', element: <AuthLayout><Signup /></AuthLayout> },
+  { path: '/forgot-password', element: <AuthLayout><ForgotPassword /></AuthLayout> },
   {
     path: '/',
     element: <App />,
