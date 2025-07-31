@@ -57,14 +57,14 @@ const handleLike = async (hotel) => {
 
 
   return (
-    <div className="flex flex-col min-h-screen w-full  overflow-x-hidden">
+    <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-black to-pink-900  overflow-x-hidden">
 
       {<Navbar lightBackground />}   {/*Added props of lightBackground to this page.*/}
 
 
       <main className="flex flex-col flex-1 w-full items-center">
         {/* Hero + Search */}
-        <section className="w-full py-24 flex flex-col items-center text-center px-4 bg-gradient-to-br from-pink-50 to-purple-50">
+        <section className="w-full py-24 flex flex-col items-center text-center px-4 bg-gradient-to-br from-black to-pink-900">
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">
             Explore World-Class <span className="text-pink-600">Hotels</span>
           </h1>

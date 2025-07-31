@@ -53,7 +53,15 @@ exports.googleAuth = async (req, res) => {
 
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
 
-    res.status(200).json({
+    const options = {
+      httpOnly : true,
+      secure : true
+    }
+
+    return res
+          .status(200)
+          .cookie("token",token, options)
+          .json({
       message: '✅ Google authentication successful',
       token,
       user: {
@@ -66,7 +74,7 @@ exports.googleAuth = async (req, res) => {
     });
   } catch (err) {
     console.error('Google auth error:', err);
-    res.status(500).json({ message: 'Server Error during Google authentication' });
+    return res.status(500).json({ message: 'Server Error during Google authentication' });
   }
 };
 
@@ -118,9 +126,16 @@ exports.registerUser = async (req, res) => {
 
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
 
-    res.status(201).json({
+    const options = {
+      httpOnly : true,
+      secure : true
+    }
+
+    return res
+          .status(201)
+          .cookie("token",token,options)
+          .json({
       message: '✅ User registered',
-      token,
       user: {
         id: user._id,
         name: user.name,
@@ -129,7 +144,7 @@ exports.registerUser = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Server Error' });
+    return res.status(500).json({ message: 'Server Error' });
   }
 };
 
@@ -154,24 +169,55 @@ exports.loginUser = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch =  bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
 
-    res.status(200).json({
-      message: '✅ Login successful',
-      token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email
-      }
+    const options = {
+      httpOnly : true,
+      secure : true
+    }
+    return res
+            .status(200)
+            .cookie("token",token,options)
+            .json({
+                   message: '✅ Login successful',
+                   user: {
+                     id: user._id,
+                     name: user.name,
+                     email: user.email
+                   }
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Server Error' });
+    return res.status(500).json({ message: 'Server Error' });
   }
 };
+
+// logout user
+exports.logoutUser = async(req,res) => {
+  // just remove the token
+  try {
+    return res
+            .status(200)
+            .clearCookie("token",{
+              httpOnly : true,
+              secure : true
+            })
+            .json({
+              message : "User logged out successfully!",
+              success : true
+            })
+  } 
+  catch (error) {
+    return res
+            .status(500)
+            .json({
+              message : "Error logging out the user!",
+              success : false
+            })
+  }
+}

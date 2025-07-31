@@ -124,7 +124,7 @@ export const AuthProvider = ({ children }) => {
             if (loginRes.ok) {
                 setUser(loginData.user);
                 localStorage.setItem('travelgrid_user', JSON.stringify(loginData.user));
-                localStorage.setItem('token', data.token);
+                localStorage.setItem('token', loginData.token);
                 setIsLoading(false);
                 return { success: true };
             } else {

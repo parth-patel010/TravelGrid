@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect , useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { FaStar, FaCheckCircle, FaTimesCircle, FaChevronDown, FaCalendarAlt, FaRupeeSign } from "react-icons/fa";
 import Navbar from "../components/Custom/Navbar";
 import { packages } from "../data/PackageData";
+
+
+
+
+import PackageDetailsSkeleton from "../components/Loaders/PackageDetailsSkeleton";
+
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-hot-toast";
 
@@ -59,6 +65,18 @@ const Accordion = ({ title, content, variant = "default" }) => {
 };
 
 const PackageDetails = () => {
+
+  const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setLoading(false);
+  }, 1200); // ⏳ fake delay or replace with API fetch
+
+  return () => clearTimeout(timer);
+}, []);
+
+
   const { id } = useParams();
   const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth();
@@ -118,6 +136,11 @@ const PackageDetails = () => {
     faqs,
     image,
   } = packageData;
+
+  if (loading) {
+  return <PackageDetailsSkeleton />;
+}
+
 
   return (
     <div className="bg-gradient-to-br from-gray-900 via-[#1f1d2b] to-pink-900 text-white min-h-screen pb-16">

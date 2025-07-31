@@ -42,8 +42,8 @@ const TripExpenseCalculator = () => {
         const COLORS = ['#f43f5e', '#fb7185', '#fda4af', '#fecdd4', '#fbcfe8', '#f9a8d4'];
 
     return (
-    <div className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl shadow-2xl p-8 border border-pink-100 max-w-xl mx-auto my-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
+    <div className="bg-white/10 backdrop-blur-md  rounded-2xl shadow-2xl p-8 border-white/20 max-w-xl mx-auto my-8 mt-20 text-white">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
             Trip Expense Calculator
         </h2>
 
@@ -71,7 +71,7 @@ const TripExpenseCalculator = () => {
             label={category}
             value={expense[category]}
             onChange={(val) => handleChange(category, val)}
-            inputClassName="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 transition-all outline-none bg-white"
+            inputClassName="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 transition-all outline-none bg-slate-800"
             />
         ))}
 
@@ -91,19 +91,19 @@ const TripExpenseCalculator = () => {
         )}
 
         <div className="mt-8 text-center">
-            <p className="text-lg font-semibold text-gray-800">
+            <p className="text-lg font-semibold">
             Total Cost:
             <span className="ml-2 text-pink-600">
                 ₹{displayedTotal.toFixed(2)}
             </span>
-            <span className="ml-1 text-gray-500 text-sm">
+            <span className="ml-1 text-sm">
                 ({mode === "group" ? "Per Person" : "Individual Total"})
             </span>
             </p>
         </div>
 
         <div className="mt-2 p-8">
-            <h3 className="text-2xl font-bold text-center mb-2 text-gray-900">Expense Breakdown</h3>
+            <h3 className="text-2xl font-bold text-center mb-2 ">Expense Breakdown</h3>
             <ResponsiveContainer width="100%" height={height==true?450:0} >
                 <PieChart margin={{ top: 30, bottom: 60 }}>
                     <Pie
