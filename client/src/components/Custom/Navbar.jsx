@@ -8,7 +8,7 @@ const Navbar = () => {
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const { user, logout, isAuthenticated } = useAuth();
+  const { logout, isAuthenticated } = useAuth();
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -25,6 +25,7 @@ const Navbar = () => {
 
   const moreLinks = [
     { name: "Travel Plans", path: "/travel-plan-generator" },
+    { name: "Trending Spots", path: "/trending-spots" },
     { name: "Contact", path: "/contact" },
     { name: "Trip Expense Calculator", path: "/trip-calculator" },
     { name: "Feedback", path: "/feedback" },
@@ -44,17 +45,9 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleMouseEnter = () => {
-    setIsMoreOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsMoreOpen(false);
-  };
-
-  const handleMoreClick = () => {
-    setIsMoreOpen((prev) => !prev);
-  };
+  const handleMouseEnter = () => setIsMoreOpen(true);
+  const handleMouseLeave = () => setIsMoreOpen(false);
+  const handleMoreClick = () => setIsMoreOpen((prev) => !prev);
 
   return (
     <>
@@ -68,7 +61,6 @@ const Navbar = () => {
             TravelGrid
           </Link>
 
-          
           <div className="hidden md:flex gap-8 items-center text-pink-500 font-medium flex-1 justify-center">
             {navLinks.map((link) => (
               <Link
@@ -84,7 +76,6 @@ const Navbar = () => {
               </Link>
             ))}
 
-            
             <div
               className="relative"
               onMouseEnter={handleMouseEnter}
@@ -98,7 +89,7 @@ const Navbar = () => {
                 More <ChevronDown size={16} />
               </button>
               {isMoreOpen && (
-                <div className="absolute p-[10px] bg-white border-white/10 text-white mt-1 shadow-lg rounded-lg w-48 z-20 bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2a1a2e] backdrop-blur-md">
+                <div className="absolute p-[10px] mt-1 shadow-lg rounded-lg w-48 z-20 bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2a1a2e] text-white backdrop-blur-md">
                   {moreLinks.map((link) => (
                     <Link
                       key={link.name}
@@ -113,7 +104,6 @@ const Navbar = () => {
             </div>
           </div>
 
-          
           <div className="hidden md:flex gap-4 items-center text-pink-500 font-medium">
             {isAuthenticated ? (
               <>
@@ -136,14 +126,13 @@ const Navbar = () => {
             )}
           </div>
 
-          
           <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="md:hidden text-pink-500">
             {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </nav>
 
-      
+      {/* Mobile Overlay */}
       <div
         className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 md:hidden ${
           isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -151,7 +140,7 @@ const Navbar = () => {
         onClick={() => setIsSidebarOpen(false)}
       />
 
-      
+      {/* Mobile Sidebar */}
       <div
         className={`fixed top-0 right-0 h-full w-[80vw] sm:w-[60vw] max-w-[320px] bg-black z-50 transition-transform duration-300 ease-in-out transform ${
           isSidebarOpen ? "translate-x-0" : "translate-x-full"
@@ -172,7 +161,6 @@ const Navbar = () => {
               </Link>
             ))}
 
-            
             <div>
               <button
                 className="w-full flex justify-between items-center py-2 px-3 rounded hover:bg-pink-500/10"
