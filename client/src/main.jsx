@@ -64,7 +64,7 @@ const router = createBrowserRouter([
       { path: '/about', element: <About /> },
       { path: '/blog', element: <Blog /> },
       { path: '/discover', element: <Discover /> },
-      { path: '/currencyconverter', element: <CurrencyConverter /> },
+      { path: '/currency-converter', element: <CurrencyConverter /> },
       { path: '/trips', element: <Trips /> },
       { path: '/review', element: <Review /> },
       // { path: '/forums', element: <Forums /> },
