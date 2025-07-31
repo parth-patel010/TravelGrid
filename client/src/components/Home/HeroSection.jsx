@@ -27,7 +27,7 @@ const HeroSection = ({ onSearch }) => {
   ];
 
   return (
-    <section className="relative w-screen min-h-[80vh] flex items-center justify-center overflow-hidden mt-[4.5rem] md:mt-[5rem]">
+    <section className="relative w-screen min-h-[80vh] flex items-center justify-center overflow-hidden mt-[4.5rem] md:mt-[1rem]">
      <div
   className="absolute inset-0 bg-cover bg-center opacity-90 z-10"
   style={{
@@ -42,7 +42,7 @@ const HeroSection = ({ onSearch }) => {
       <div className="absolute inset-0 bg-opacity-30 z-15" />
       
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
+        <div className="flex flex-col lg:flex-row items-center md:items-start  justify-between gap-8 lg:gap-16">
           
          <div className="flex-1 text-center lg:text-left text-white">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 tracking-tight leading-tight font-[Playfair Display]">
