@@ -1,46 +1,38 @@
 import React, { useState } from "react";
 import { MessageCircle, ChevronDown, ChevronUp } from "lucide-react";
+import toast from "react-hot-toast";
 
-const forumData = [
+const forumTopics = [
   {
     id: 1,
-    title: "Best time to visit Himachal?",
-    description: "Planning a trip to Himachal. What’s the best season to go?",
+    title: "Best travel hacks for solo travelers",
+    description: "Share your favorite tips for solo adventures.",
     replies: [
-      "March to June is ideal if you want pleasant weather.",
-      "I visited in October and it was beautiful and less crowded!",
+      "Always keep digital copies of your documents.",
+      "Pack light and use a universal adapter.",
     ],
   },
   {
     id: 2,
-    title: "Budget trip to Goa",
-    description: "Any recommendations for budget-friendly stays in Goa?",
+    title: "How to plan a budget-friendly trip to Leh",
+    description: "Looking for affordable travel and stay options.",
     replies: [
-      "Check out Zostel or Hosteller – affordable and clean.",
-      "You can also stay near Anjuna beach for cheap guesthouses.",
+      "Travel by bus and stay in hostels for best rates.",
+      "Book flights early and try local guesthouses.",
     ],
   },
   {
     id: 3,
-    title: "Hidden gems in Kerala",
-    description: "Share some offbeat places to explore in Kerala.",
+    title: "Top 5 underrated places in South India",
+    description: "Suggest hidden gems for my next trip.",
     replies: [
-      "Try Vagamon – it’s quiet and green.",
-      "I’d recommend Aranmula and Thenmala too!",
-    ],
-  },
-  {
-    id: 4,
-    title: "Best travel backpack?",
-    description: "Looking for a lightweight, durable backpack for 1-week trips.",
-    replies: [
-      "Wildcraft and Quechua are both great options.",
-      "Make sure it has good back support and rain cover.",
+      "Try Chettinad, Hampi, and Gokarna.",
+      "Araku Valley and Yercaud are beautiful too!",
     ],
   },
 ];
 
-export default function TravelForum() {
+export default function Forum() {
   const [openReplies, setOpenReplies] = useState({});
 
   const toggleReplies = (id) => {
@@ -51,34 +43,34 @@ export default function TravelForum() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white p-6 lg:p-12">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-pink-50 p-6 lg:p-12">
       <div className="max-w-5xl mx-auto space-y-10">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-blue-900 mb-2 mt-2.5">Travel Forum</h1>
-          <p className="text-gray-600 text-lg">
-            Ask questions, share advice, and connect with travel lovers like you!
+          <p className="text-gray-700 text-lg">
+            Connect with fellow travelers, ask questions, and share your experiences!
           </p>
         </div>
 
-        {forumData.map((post) => (
+        {forumTopics.map((topic) => (
           <div
-            key={post.id}
+            key={topic.id}
             className="bg-white rounded-xl shadow-md p-6 transition hover:shadow-lg"
           >
             <div className="flex justify-between items-start">
               <div>
                 <h2 className="text-xl font-semibold mb-1 text-blue-800">
-                  {post.title}
+                  {topic.title}
                 </h2>
-                <p className="text-gray-600">{post.description}</p>
+                <p className="text-gray-600">{topic.description}</p>
               </div>
               <div
                 className="flex items-center gap-2 text-gray-500 cursor-pointer"
-                onClick={() => toggleReplies(post.id)}
+                onClick={() => toggleReplies(topic.id)}
               >
                 <MessageCircle className="w-5 h-5" />
-                {post.replies.length}
-                {openReplies[post.id] ? (
+                {topic.replies.length}
+                {openReplies[topic.id] ? (
                   <ChevronUp className="w-4 h-4" />
                 ) : (
                   <ChevronDown className="w-4 h-4" />
@@ -86,11 +78,11 @@ export default function TravelForum() {
               </div>
             </div>
 
-            {openReplies[post.id] && (
+            {openReplies[topic.id] && (
               <div className="mt-4 border-t pt-3 space-y-2">
-                {post.replies.map((reply, index) => (
+                {topic.replies.map((reply, idx) => (
                   <div
-                    key={index}
+                    key={idx}
                     className="text-sm text-gray-700 bg-blue-50 p-3 rounded-md"
                   >
                     💬 {reply}
@@ -103,7 +95,7 @@ export default function TravelForum() {
 
         <div className="flex justify-center mt-10">
           <button
-            onClick={() => alert("Feature coming soon")}
+            onClick={() => toast.error("Feature coming soon")}
             className="bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 px-6 rounded-xl transition duration-300"
           >
             + Ask a New Question

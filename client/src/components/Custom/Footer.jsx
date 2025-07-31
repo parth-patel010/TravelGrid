@@ -169,7 +169,7 @@ const Footer = () => {
                     Hotels
                   </Link>
                   <Link
-                    to="/forums"
+                    to="/forum"
                     onClick={scrollToTop}
                     className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
                   >
