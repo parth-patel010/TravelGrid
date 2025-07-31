@@ -56,9 +56,9 @@ const Signup = () => {
       return false;
     }
 
-    if (passwordStrength === "Weak") {
-    setError("Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character.");
-      return;
+    if (passwordStrength === "weak") {
+      setError("Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character.");
+      return false;
     }
 
     if (formData.password !== formData.confirmPassword) {
