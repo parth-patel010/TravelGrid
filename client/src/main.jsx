@@ -63,7 +63,7 @@ const router = createBrowserRouter([
       { path: '/ticket', element: <TicketBooking /> },
       { path: '/guides', element: <TravelGuidesCarousel /> },
       { path: '/packages', element: <TravelPackages /> },
-      { path: '/discovermore', element: <DiscovermoreDestination /> },
+      { path: '/destinations', element: <DiscovermoreDestination /> },
       { path: '/faq', element: <FAQ /> },
       { path: '/contact', element: <Contact /> },
       { path: '/feedback', element: <Feedback /> },
