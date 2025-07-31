@@ -65,10 +65,10 @@ const handleLike = async (hotel) => {
       <main className="flex flex-col flex-1 w-full items-center">
         {/* Hero + Search */}
         <section className="w-full py-24 flex flex-col items-center text-center px-4 bg-gradient-to-br from-black to-pink-900">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
             Explore World-Class <span className="text-pink-600">Hotels</span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mb-8">
+          <p className="text-lg md:text-xl text-white max-w-2xl mb-8">
             Browse and book from our curated list of the top luxury hotels worldwide.
           </p>
           <div className="w-full max-w-lg">
