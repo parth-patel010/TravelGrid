@@ -20,6 +20,7 @@ const Navbar = () => {
     { name: "Hotels", path: "/hotels" },
     { name: "Guides", path: "/guides" },
     { name: "Travel Plans", path: "/travel-plan-generator" },
+    { name: "Trending Spots", path: "/trending-spots" },
     { name: "Contact", path: "/contact" },
     { name: "Trip Expense Calculator", path: "/trip-calculator"},
     { name: "Feedback", path: "/feedback" },
