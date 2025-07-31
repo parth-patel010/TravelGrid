@@ -1,9 +1,12 @@
-import React from 'react';
-import { useEffect , useState} from 'react';
+import React,{useState,useContext} from 'react';
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Custom/Navbar';
 import Footer from '../components/Custom/Footer';
 import hotels from '../data/hotels';
+import BookingModal from './BookingModal';
+import { AuthProvider,useAuth } from '../context/AuthContext';
+import toast from 'react-hot-toast';
 import HotelDetailsSkeleton from '../components/Loaders/HotelDetailsSkeleton';
 import { motion, AnimatePresence } from 'framer-motion';
 /**
@@ -27,6 +30,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 function HotelDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+const { user } = useAuth();
+console.log("Logged-in user from useAuth:", user);
+
+
 
   const [loading, setLoading] = useState(true);
 
@@ -112,11 +120,18 @@ function HotelDetails() {
               </p>
 
               <button
-                onClick={() => alert('Booking functionality coming soon!')}
+               onClick={() => setShowModal(true)}
                 className="bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 cursor-pointer"
               >
                 Proceed to Book
               </button>
+          {showModal && user && (
+            <BookingModal
+              hotelId={hotel.id}
+               userId={user?.id}
+              onClose={() => setShowModal(false)}
+            />
+          )}
             </section>
           </main>
           {/* <Footer /> */}
