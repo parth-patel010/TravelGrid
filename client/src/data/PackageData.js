@@ -1134,6 +1134,334 @@ export const packages = [
       answer: "Yes! The sessions are tailored for all levels – beginners to advanced practitioners."
     },
   ]
-}
+},
+	{// adding 4 new packages from home page's fetures travel packages
+		id: 9,
+		title: "Santorini Escape – Greece",
+		location: "Santorini",
+		duration: "3 Days / 2 Nights",
+		country: "Greece",
+		continent: "Europe",
+		season: "Spring",
+		price: 12999,
+		rating: 4.5,
+		reviewCount: 86,
+		description:
+			"Discover the charm of Santorini with its whitewashed villages, breathtaking sunsets, and crystal-clear waters on this idyllic Greek getaway.",
+		image:
+			"https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
+		highlights: [
+			"Sunset views in Oia",
+			"Luxury cliffside hotel",
+			"Traditional Greek dinner",
+			"Catamaran cruise",
+			"Volcanic hot springs visit",
+		],
+		itinerary: [
+			{
+				day: 1,
+				title: "Arrival & Sunset Welcome",
+				description:
+					"Arrive in Santorini, transfer to hotel, explore Oia village, and enjoy a welcome dinner with a sunset view.",
+				activities: [
+					"Airport transfer",
+					"Oia village walk",
+					"Sunset photography",
+					"Greek welcome dinner",
+				],
+			},
+			{
+				day: 2,
+				title: "Island Cruise & Culture",
+				description:
+					"Full-day catamaran cruise to explore beaches and hot springs, followed by wine tasting.",
+				activities: [
+					"Catamaran cruise",
+					"Red & White beach visit",
+					"Volcanic hot springs dip",
+					"Local winery tour",
+				],
+			},
+			{
+				day: 3,
+				title: "Farewell",
+				description:
+					"Free morning for shopping or spa, check-out and transfer to airport.",
+				activities: [
+					"Morning leisure",
+					"Check-out",
+					"Souvenir shopping",
+					"Airport drop",
+				],
+			},
+		],
+		inclusions: [
+			"2 nights accommodation",
+			"Breakfasts and 1 traditional dinner",
+			"Catamaran cruise with lunch",
+			"Airport transfers",
+			"Local wine tasting session",
+		],
+		exclusions: [
+			"International airfare",
+			"Travel insurance",
+			"Extra meals and drinks",
+			"Personal expenses",
+		],
+		reviews: [
+			{
+				name: "Emily",
+				rating: 5,
+				comment: "Magical sunsets and beautiful experience!",
+				date: "2 weeks ago",
+			},
+		],
+		faqs: [
+			{
+				question: "Is transport included within Santorini?",
+				answer: "Yes, airport transfers and day tours are included.",
+			},
+		],
+	},
+	{
+		id: 10,
+		title: "Alpine Adventure – Switzerland",
+		location: "Swiss Alps",
+		duration: "3 Days / 2 Nights",
+		country: "Switzerland",
+		continent: "Europe",
+		season: "Winter",
+		price: 18899,
+		rating: 4.8,
+		reviewCount: 102,
+		description:
+			"An exhilarating escape to the snow-capped Alps with scenic train rides, ski adventures, and cozy mountain lodges.",
+		image:
+			"https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=400&q=80",
+		highlights: [
+			"Scenic Glacier Express ride",
+			"Stay in mountain chalet",
+			"Skiing & snowboarding",
+			"Alpine spa experience",
+			"Swiss fondue dinner",
+		],
+		itinerary: [
+			{
+				day: 1,
+				title: "Arrival & Glacier Express",
+				description:
+					"Arrive in Zurich, board Glacier Express for panoramic ride, check-in to alpine lodge.",
+				activities: [
+					"Train journey",
+					"Alpine photography",
+					"Lodge check-in",
+					"Evening bonfire",
+				],
+			},
+			{
+				day: 2,
+				title: "Snow Sports & Spa",
+				description:
+					"Enjoy winter sports followed by a relaxing spa and traditional Swiss dinner.",
+				activities: [
+					"Skiing/snowboarding",
+					"Snowshoe trek",
+					"Hot tub & sauna",
+					"Swiss fondue night",
+				],
+			},
+			{
+				day: 3,
+				title: "Farewell",
+				description:
+					"Breakfast with mountain views, check-out and return train to Zurich.",
+				activities: [
+					"Mountain view breakfast",
+					"Check-out",
+					"Scenic return ride",
+					"Airport drop",
+				],
+			},
+		],
+		inclusions: [
+			"2 nights chalet stay",
+			"Daily breakfast and 1 dinner",
+			"Glacier Express tickets",
+			"Winter sports gear",
+			"Access to alpine spa",
+		],
+		exclusions: [
+			"International flights",
+			"Meals not mentioned",
+			"Travel insurance",
+			"Personal expenses",
+		],
+		reviews: [
+			{
+				name: "Liam",
+				rating: 5,
+				comment: "Perfect winter escape! Loved the train ride.",
+				date: "1 week ago",
+			},
+		],
+		faqs: [
+			{
+				question: "Do I need prior skiing experience?",
+				answer:
+					"No, beginners are welcome and trainers are available at the resort.",
+			},
+		],
+	},
+	{
+		id: 11,
+		title: "Safari Journey – Kenya",
+		location: "Maasai Mara",
+		duration: "2 Days / 1 Night",
+		country: "Kenya",
+		continent: "Africa",
+		season: "Autumn",
+		price: 20199,
+		rating: 4.7,
+		reviewCount: 68,
+		description:
+			"Embark on a thrilling safari through the Maasai Mara and witness Africa’s iconic wildlife in their natural habitat.",
+		image:
+			"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=80",
+		highlights: [
+			"Game drives with expert guides",
+			"Luxury safari tent stay",
+			"Bonfire dinner under the stars",
+			"Wildlife photography",
+		],
+		itinerary: [
+			{
+				day: 1,
+				title: "Arrival & First Safari",
+				description:
+					"Arrive at Nairobi, drive to Maasai Mara, check-in and evening game drive.",
+				activities: [
+					"Scenic transfer",
+					"Evening safari",
+					"Campfire dinner",
+					"Wildlife orientation",
+				],
+			},
+			{
+				day: 2,
+				title: "Morning Game Drive & Departure",
+				description:
+					"Early morning safari followed by breakfast and return to Nairobi.",
+				activities: [
+					"Sunrise game drive",
+					"Big Five spotting",
+					"Safari camp breakfast",
+					"Transfer to airport",
+				],
+			},
+		],
+		inclusions: [
+			"1 night safari camp stay",
+			"2 game drives",
+			"Meals and drinks",
+			"Transfers from Nairobi",
+			"Park entry fees",
+		],
+		exclusions: [
+			"International flights",
+			"Vaccination requirements",
+			"Tips and gratuities",
+			"Travel insurance",
+		],
+		reviews: [
+			{
+				name: "Noah",
+				rating: 5,
+				comment: "Unforgettable! Saw lions up close!",
+				date: "3 weeks ago",
+			},
+		],
+		faqs: [
+			{
+				question: "Is the safari safe for kids?",
+				answer:
+					"Yes, but it's best suited for children above 6 years old. Safety instructions must be followed strictly.",
+			},
+		],
+	},
+	{
+		id: 12,
+		title: "Bali Bliss – Indonesia",
+		location: "Bali",
+		duration: "2 Days / 1 Night",
+		country: "Indonesia",
+		continent: "Asia",
+		season: "Summer",
+		price: 9999,
+		rating: 4.6,
+		reviewCount: 91,
+		description:
+			"Unwind in tropical paradise with lush landscapes, cultural richness, and rejuvenating beach vibes in beautiful Bali.",
+		image:
+			"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80",
+		highlights: [
+			"Balinese temple visit",
+			"Beachfront resort stay",
+			"Traditional dance show",
+			"Balinese spa session",
+		],
+		itinerary: [
+			{
+				day: 1,
+				title: "Arrival & Culture Tour",
+				description:
+					"Arrive in Bali, explore local temples and enjoy a traditional Balinese performance in the evening.",
+				activities: [
+					"Airport pickup",
+					"Uluwatu temple visit",
+					"Kecak dance performance",
+					"Beach dinner",
+				],
+			},
+			{
+				day: 2,
+				title: "Leisure & Departure",
+				description:
+					"Morning spa and beach time, check-out, and transfer to airport.",
+				activities: [
+					"Balinese massage",
+					"Private beach walk",
+					"Resort breakfast",
+					"Airport drop-off",
+				],
+			},
+		],
+		inclusions: [
+			"1 night resort stay",
+			"All meals",
+			"Cultural show tickets",
+			"Airport transfers",
+			"Complimentary spa session",
+		],
+		exclusions: [
+			"Flights to/from Bali",
+			"Extra spa services",
+			"Shopping and personal expenses",
+		],
+		reviews: [
+			{
+				name: "Maya",
+				rating: 5,
+				comment: "So relaxing and beautiful. Bali never disappoints.",
+				date: "1 month ago",
+			},
+		],
+		faqs: [
+			{
+				question: "Do I need a visa for Bali?",
+				answer:
+					"Most countries receive a free visa-on-arrival valid for up to 30 days. Check with your local embassy.",
+			},
+		],
+	}
 ];
 

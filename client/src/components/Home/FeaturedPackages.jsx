@@ -1,33 +1,40 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const packages = [
   {
     name: "Santorini Escape",
     location: "Greece",
-    price: "From $1,299",
+    price: "From ₹12,999",
     image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
   },
   {
     name: "Alpine Adventure",
     location: "Switzerland",
-    price: "From $1,899",
+    price: "From ₹18,899",
     image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=400&q=80",
   },
   {
     name: "Safari Journey",
     location: "Kenya",
-    price: "From $2,199",
+    price: "From ₹20,199",
     image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=80",
   },
   {
     name: "Bali Bliss",
     location: "Indonesia",
-    price: "From $999",
+    price: "From ₹9,999",
     image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80",
   },
 ];
 
-const FeaturedPackages = () => (
+
+
+const FeaturedPackages = () => {
+  const navigate = useNavigate();
+
+
+  return(
   <section className="w-full py-20">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-16">
@@ -61,7 +68,8 @@ const FeaturedPackages = () => (
                 {pkg.name}
               </h3>
               <p className="text-gray-300 mb-4 group-hover:text-gray-200 transition-colors duration-300">{pkg.location}</p>
-              <button className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl">
+              <button className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl"
+                onClick={()=>navigate(`/package/${i+9}`)}>
                 Book Now
               </button>
             </div>
@@ -70,6 +78,6 @@ const FeaturedPackages = () => (
       </div>
     </div>
   </section>
-);
+);};
 
 export default FeaturedPackages; 
