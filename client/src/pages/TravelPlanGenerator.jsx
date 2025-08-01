@@ -91,8 +91,8 @@ const TravelPlanGenerator = () => {
     
     // Instant generation - no delay needed
     const plan = createTravelPlan(formData);
-    setGeneratedPlan(plan);
-    setIsGenerating(false);
+      setGeneratedPlan(plan);
+      setIsGenerating(false);
   };
 
   const createTravelPlan = (data) => {
