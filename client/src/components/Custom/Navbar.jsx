@@ -13,18 +13,19 @@ const Navbar = () => {
     setIsSidebarOpen(false);
   }, [location.pathname]);
 
-  const navLinks = [
+ const navLinks = [
     { name: "Home", path: "/" },
     { name: "Ticket", path: "/ticket" },
     { name: "Packages", path: "/packages" },
     { name: "Hotels", path: "/hotels" },
     { name: "Guides", path: "/guides" },
     { name: "Travel Plans", path: "/travel-plan-generator" },
-    { name: "Trending Spots", path: "/trending-spots" },
+    { name: "Trending Spots", path: "/trending-spots"}, 
     { name: "Contact", path: "/contact" },
-    { name: "Trip Expense Calculator", path: "/trip-calculator" },
+    { name: "Trip Expense Calculator", path: "/trip-calculator"},
+    { name: "Currency Converter", path: "/currencyconverter" }, 
     { name: "Feedback", path: "/feedback" },
-  ];
+];
 
   const handleLogout = () => {
     logout();
