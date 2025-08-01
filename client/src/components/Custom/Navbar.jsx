@@ -87,7 +87,7 @@ const Navbar = () => {
               link.subitems ? (
                 <div className="relative group" key={link.name}>
                   <button className="py-1 px-2 text-md rounded-sm hover:text-pink-500 hover:shadow-lg transition-all duration-300 flex">
-                    {link.name} <ChevronDown/>
+                    {link.name} <ChevronDown fontSize={16}/>
                   </button>
                   {/* Add Dropdown */}
                   <div className="absolute left-0 mt-0 opacity-0 min-w-[180px] text-white rounded-lg bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2c1a31] shadow-md group-hover:opacity-100 group-hover: translate-y-2 transition-all duration-300 z-50 p-2">
@@ -225,27 +225,6 @@ const Navbar = () => {
               )
             )}
 
-            <div>
-              <button
-                className="w-full flex justify-between items-center py-2 px-3 rounded hover:bg-pink-500/10"
-                onClick={() => setIsMoreOpen(!isMoreOpen)}
-              >
-                More <ChevronDown size={18} className={`transform transition-transform ${isMoreOpen ? "rotate-180" : ""}`} />
-              </button>
-              {isMoreOpen && (
-                <div className="pl-4 mt-1 flex flex-col gap-2">
-                  {moreLinks.map((link) => (
-                    <Link
-                      key={link.name}
-                      to={link.path}
-                      className="py-1 px-2 text-sm rounded hover:bg-pink-500/10"
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
 
             {isAuthenticated ? (
               <>
