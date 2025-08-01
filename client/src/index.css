@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* It is used to make custom scrollbar in the Dashboard cards */
 .custom-scroll::-webkit-scrollbar {
   width: 6px;

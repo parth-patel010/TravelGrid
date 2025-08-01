@@ -1,8 +1,16 @@
-import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect , useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { FaStar, FaCheckCircle, FaTimesCircle, FaChevronDown, FaCalendarAlt, FaRupeeSign } from "react-icons/fa";
 import Navbar from "../components/Custom/Navbar";
 import { packages } from "../data/PackageData";
+
+
+
+
+import PackageDetailsSkeleton from "../components/Loaders/PackageDetailsSkeleton";
+
+import { useAuth } from "../context/AuthContext";
+import { toast } from "react-hot-toast";
 
 // For FAQs and Itinerary
 const Accordion = ({ title, content, variant = "default" }) => {
@@ -57,7 +65,21 @@ const Accordion = ({ title, content, variant = "default" }) => {
 };
 
 const PackageDetails = () => {
+
+  const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setLoading(false);
+  }, 1200); // ⏳ fake delay or replace with API fetch
+
+  return () => clearTimeout(timer);
+}, []);
+
+
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { isAuthenticated, user } = useAuth();
   const packageData = packages.find((pkg) => pkg.id.toString() === id);
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
@@ -65,11 +87,23 @@ const PackageDetails = () => {
     name: "",
     email: "",
     travelers: 1,
+    date: "",
   });
 
   const openForm = (pkg) => {
+    if (!isAuthenticated) {
+      toast.error("Please login to book this package");
+      navigate("/login", { state: { from: { pathname: `/package/${id}` } } });
+      return;
+    }
+    
     setSelectedPackage(pkg);
-    setFormData({ name: "", email: "", travelers: 1 });
+    setFormData({ 
+      name: user?.name || "", 
+      email: user?.email || "", 
+      travelers: 1,
+      date: ""
+    });
     setBookingConfirmed(false);
   };
 
@@ -102,6 +136,11 @@ const PackageDetails = () => {
     faqs,
     image,
   } = packageData;
+
+  if (loading) {
+  return <PackageDetailsSkeleton />;
+}
+
 
   return (
     <div className="bg-gradient-to-br from-gray-900 via-[#1f1d2b] to-pink-900 text-white min-h-screen pb-16">
@@ -301,8 +340,8 @@ const PackageDetails = () => {
                       name="name"
                       value={formData.name}
                       required
-                      onChange={handleFormChange}
-                      className="w-full border px-3 py-2 rounded-md"
+                      readOnly
+                      className="w-full border px-3 py-2 rounded-md bg-gray-100"
                     />
                   </div>
                   <div>
@@ -314,8 +353,8 @@ const PackageDetails = () => {
                       name="email"
                       value={formData.email}
                       required
-                      onChange={handleFormChange}
-                      className="w-full border px-3 py-2 rounded-md"
+                      readOnly
+                      className="w-full border px-3 py-2 rounded-md bg-gray-100"
                     />
                   </div>
                   <div>
@@ -336,7 +375,7 @@ const PackageDetails = () => {
                     <label className="block text-sm font-semibold">Date</label>
                     <input
                       type="date"
-                      name="Date"
+                      name="date"
                       value={formData.date}
                       required
                       onChange={handleFormChange}
@@ -357,7 +396,7 @@ const PackageDetails = () => {
                   Booking Confirmed!
                 </h2>
                 <p className="mt-2">
-                  Thank you, {formData.name}. Your booking on {formData.Date} is
+                  Thank you, {formData.name}. Your booking for {selectedPackage.title} on {formData.date} is
                   successful.
                 </p>
                 <div className="mt-4 space-y-2">

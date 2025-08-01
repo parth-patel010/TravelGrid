@@ -4,13 +4,13 @@ import { Toaster } from 'react-hot-toast';
 import './index.css';
 import App from './App.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import Trips from './pages/Trips';
 import TravelGuidesCarousel from './pages/TravelGuidesProfiles.jsx';
 import Contact from './components/Contact.jsx';
 import Home from './pages/Home';
 import Discover from './pages/Discover';
 import Review from './pages/Review';
-import Forums from './pages/Forums';
 import Contributors from './pages/Contributors';
 import About from './pages/About';
 import Hotels from './pages/Hotels';
@@ -18,7 +18,6 @@ import HotelDetails from './pages/HotelDetails';
 import TicketBooking from './pages/TicketBooking';
 import TravelPackages from './pages/TravelPackages';
 import PackageDetails from './pages/PackageDetails';
-import HotelBookingPage from './pages/HotelBookingPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
@@ -37,23 +36,35 @@ import ServerError from './components/ErrorHandle/ServerError';
 import { AuthProvider } from './context/AuthContext';
 import Blog from './pages/Blog';
 import TripCalculatorPage from './pages/TripCalculator';
+import CurrencyConverter from './pages/currencyconverter';
 import DiscovermoreDestination from './pages/DiscovermoreDestination';
 import Feedback from './pages/Feedback';
 import TravelPlanGenerator from './pages/TravelPlanGenerator';
 import TravelForum from './pages/TravelForum';
+import AuthLayout from './components/AuthLayout';
+import TrendingSpots from './pages/TrendingSpots.jsx';
 
 const router = createBrowserRouter([
-  { path: '/login', element: <Login /> },
-  { path: '/signup', element: <Signup /> },
-  { path: '/forgot-password', element: <ForgotPassword /> },
+  { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
+  { path: '/signup', element: <AuthLayout><Signup /></AuthLayout> },
+  { path: '/forgot-password', element: <AuthLayout><ForgotPassword /></AuthLayout> },
   {
     path: '/',
     element: <App />,
     children: [
       { path: '/', element: <Home /> },
+      {
+        path: "/trending-spots", // Add this route
+        element: <TrendingSpots />
+      },
+      {
+        path: "/trending", // Alternative route
+        element: <TrendingSpots />
+      },
       { path: '/about', element: <About /> },
       { path: '/blog', element: <Blog /> },
       { path: '/discover', element: <Discover /> },
+      { path: '/currency-converter', element: <CurrencyConverter /> },
       { path: '/trips', element: <Trips /> },
       { path: '/review', element: <Review /> },
       // { path: '/forums', element: <Forums /> },
@@ -64,7 +75,7 @@ const router = createBrowserRouter([
       { path: '/ticket', element: <TicketBooking /> },
       { path: '/guides', element: <TravelGuidesCarousel /> },
       { path: '/packages', element: <TravelPackages /> },
-      { path: '/discovermore', element: <DiscovermoreDestination /> },
+      { path: '/destinations', element: <DiscovermoreDestination /> },
       { path: '/faq', element: <FAQ /> },
       { path: '/contact', element: <Contact /> },
       { path: '/feedback', element: <Feedback /> },
@@ -72,6 +83,8 @@ const router = createBrowserRouter([
       { path: '/terms', element: <TermsAndConditions /> },
       { path: '/trip-calculator', element: <TripCalculatorPage /> },
       { path: '/travel-plan-generator', element: <TravelPlanGenerator /> },
+      { path: '/trending-spots', element: <TrendingSpots /> }, // ✅ Add this route
+      { path: '/trending', element: <TrendingSpots /> }, // ✅ Alternative route
       {
         path: '/dashboard',
         element: (
@@ -115,21 +128,23 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary>
-      <AuthProvider>
-        <RouterProvider router={router} />
-        <Toaster
-          position="top-center"
-          reverseOrder={false}
-          toastOptions={{
-            duration: 5000,
-            style: {
-              background: '#333',
-              color: '#fff',
-              fontSize: '16px',
-            },
-          }}
-        />
-      </AuthProvider>
+      <GoogleOAuthProvider clientId="1047267709802-k05pdjqojcal19h24fd75opev1evaf6j.apps.googleusercontent.com">
+        <AuthProvider>
+          <RouterProvider router={router} />
+          <Toaster
+            position="top-center"
+            reverseOrder={false}
+            toastOptions={{
+              duration: 5000,
+              style: {
+                background: '#333',
+                color: '#fff',
+                fontSize: '16px',
+              },
+            }}
+          />
+        </AuthProvider>
+      </GoogleOAuthProvider>
     </ErrorBoundary>
   </StrictMode>
 );

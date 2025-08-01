@@ -5,32 +5,35 @@ function DiscoverCard({
     place,
     handleBookNowClick
 }) {
-  return (
-    <div
-        key={index}
-        className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300"
-    >
-        <img
-            src={place.image}
-            alt={place.name}
-            className="w-full h-48 object-cover"
-        />
-        <div className="p-4">
-            <h3 className="text-xl font-semibold text-black mb-2">
-            {place.name}
-            </h3>
-            <p className="text-gray-600 text-sm">{place.description}</p>
+    return (
+        <div
+            key={index}
+            className="group rounded-xl overflow-hidden transition-all duration-500"
+        >
+            <div className="relative overflow-hidden">
+                <img
+                    src={place.image}
+                    alt={place.name}
+                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            </div>
+            <div className="p-4">
+                <h3 className="text-xl font-semibold text-fuchsia-500 mb-2 group-hover:text-pink-400 transition-colors duration-300">
+                    {place.name}
+                </h3>
+                <p className="text-gray-700 text-sm group-hover:text-gray-500 transition-colors duration-300 leading-relaxed">{place.description}</p>
+            </div>
+            <div className="p-4">
+                <button
+                    onClick={handleBookNowClick}
+                    className="mt-auto w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl"
+                >
+                    Book Now
+                </button>
+            </div>
         </div>
-        <div className="p-4">
-            <button
-                onClick={handleBookNowClick} // Attach the redirect function
-                className="mt-auto w-full bg-zinc-800 hover:bg-zinc-900 text-white font-semibold py-2 px-4 rounded-xl transition-colors duration-200 transform hover:scale-105 cursor-pointer"
-            >
-                Book Now
-            </button>
-        </div>
-    </div>
-  )
+    )
 }
 
 export default DiscoverCard;

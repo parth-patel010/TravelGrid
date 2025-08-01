@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import ExpenseInputRow from "./ExpenseInputRow";
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
+import 'jspdf-autotable';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 const TripExpenseCalculator = () => {
     const [expense, setExpense] = useState({
         transport: "",
@@ -14,12 +18,14 @@ const TripExpenseCalculator = () => {
 
     const [mode, setMode] = useState("Individual");
     const [numPeople, setNumPeople] = useState(1);
+    const [height, setheight] = useState(false);
 
     const handleChange = (category, value) => {
         setExpense((prev) => ({
-        ...prev,
-        [category]: value,
+            ...prev,
+            [category]: value,
         }));
+        setheight(true);
     };
 
     const total = Object.values(expense).reduce(
@@ -35,13 +41,76 @@ const TripExpenseCalculator = () => {
         .map(([category, value]) => ({
             name: category.charAt(0).toUpperCase() + category.slice(1),
             value: Number(value),
-        }))
+        }));
 
-        const COLORS = ['#f43f5e', '#fb7185', '#fda4af', '#fecdd4', '#fbcfe8', '#f9a8d4'];
+    const COLORS = ['#f43f5e', '#fb7185', '#fda4af', '#fecdd4', '#fbcfe8', '#f9a8d4'];
+
+    // ----------- PDF Export -------------
+const handleDownloadPDF = () => {
+  const doc = new jsPDF();
+
+  doc.setFontSize(18);
+  doc.text("Trip Expense Report", 14, 22);
+
+  const tableColumn = ["Category", "Amount (₹)"];
+  const tableRows = [];
+
+  Object.entries(expense).forEach(([key, val]) => {
+    if (Number(val) > 0) {
+      tableRows.push([
+        key.charAt(0).toUpperCase() + key.slice(1),
+        Number(val).toFixed(2),
+      ]);
+    }
+  });
+
+  tableRows.push([
+    mode === "group" ? "Total (Per Person)" : "Total",
+    displayedTotal.toFixed(2),
+  ]);
+
+  autoTable(doc, {
+    startY: 30,
+    head: [tableColumn],
+    body: tableRows,
+  });
+
+  doc.save("Trip_Expense_Report.pdf");
+};
+
+    // ----------- Excel Export -------------
+    const handleDownloadExcel = () => {
+        const data = Object.entries(expense)
+            .filter(([, val]) => Number(val) > 0)
+            .map(([key, val]) => ({
+                Category: key.charAt(0).toUpperCase() + key.slice(1),
+                Amount: Number(val),
+            }));
+
+        data.push({
+            Category: mode === "group" ? "Total (Per Person)" : "Total",
+            Amount: displayedTotal,
+        });
+
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Expenses");
+
+        const excelBuffer = XLSX.write(workbook, {
+            bookType: "xlsx",
+            type: "array",
+        });
+
+        const fileData = new Blob([excelBuffer], {
+            type: "application/octet-stream",
+        });
+
+        saveAs(fileData, "Trip_Expense_Report.xlsx");
+    };
 
     return (
-    <div className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl shadow-2xl p-8 border border-pink-100 max-w-xl mx-auto my-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
+    <div className="bg-white/10 backdrop-blur-md  rounded-2xl shadow-2xl p-8 border-white/20 max-w-xl mx-auto my-8 mt-20 text-white">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
             Trip Expense Calculator
         </h2>
 
@@ -69,7 +138,7 @@ const TripExpenseCalculator = () => {
             label={category}
             value={expense[category]}
             onChange={(val) => handleChange(category, val)}
-            inputClassName="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 transition-all outline-none bg-white"
+            inputClassName="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 transition-all outline-none bg-slate-800"
             />
         ))}
 
@@ -89,20 +158,36 @@ const TripExpenseCalculator = () => {
         )}
 
         <div className="mt-8 text-center">
-            <p className="text-lg font-semibold text-gray-800">
+            <p className="text-lg font-semibold">
             Total Cost:
             <span className="ml-2 text-pink-600">
                 ₹{displayedTotal.toFixed(2)}
             </span>
-            <span className="ml-1 text-gray-500 text-sm">
+            <span className="ml-1 text-sm">
                 ({mode === "group" ? "Per Person" : "Individual Total"})
             </span>
             </p>
         </div>
 
-        <div className="mt-12 p-8">
-            <h3 className="text-2xl font-bold text-center mb-2 text-gray-900">Expense Breakdown</h3>
-            <ResponsiveContainer width="100%" height={450} >
+        {/* Download Buttons */}
+        <div className="mt-6 flex justify-center gap-4">
+            <button
+                onClick={handleDownloadPDF}
+                className="bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold px-4 py-2 rounded-xl hover:opacity-90 transition"
+            >
+                Download PDF
+            </button>
+            <button
+                onClick={handleDownloadExcel}
+                className="bg-pink-100 text-pink-700 font-semibold px-4 py-2 rounded-xl hover:bg-pink-200 transition"
+            >
+                Download Excel
+            </button>
+        </div>
+
+        <div className="mt-8 p-8">
+            <h3 className="text-2xl font-bold text-center mb-2">Expense Breakdown</h3>
+            <ResponsiveContainer width="100%" height={height ? 450 : 0}>
                 <PieChart margin={{ top: 30, bottom: 60 }}>
                     <Pie
                         data={chartData}
