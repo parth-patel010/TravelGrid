@@ -15,9 +15,34 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, 'Password is required'],
-      minlength: 6,
+      required: function() {
+        return !this.googleId; // Password is required only if not a Google user
+      },
+      minlength: 8,
     },
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true, // Allows multiple null values
+    },
+    picture: {
+      type: String,
+    },
+    isGoogleUser: {
+      type: Boolean,
+      default: false,
+    },
+    savedPlaces: [
+      {
+        placeId: {
+          type: String, 
+          required: true
+        },
+        name: String,
+        description: String,
+        image: String
+      }
+    ],
   },
   {
     timestamps: true, // Adds createdAt and updatedAt fields

@@ -49,15 +49,23 @@ const TravelGuides = () => {
   };
 
   return (
+ bg-change
     <section className="w-full bg-gradient-to-br from-[#f5ede3] to-[#e8ddd1] py-16">
+
       <div className="max-w-6xl mx-auto px-4 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-black mb-10">
-          Meet Our Top Travel Guides
-        </h2>
+        <div className="mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Meet Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">Top Travel Guides</span>
+          </h2>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            Connect with experienced local guides who will make your journey truly unforgettable.
+          </p>
+        </div>
 
         <div className="relative">
           <button
             onClick={prev}
+bg-change
             className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full hover:bg-[#f3e7da] hover:shadow-lg"
           >
             <ChevronLeft className="w-6 h-6 text-[#a9673b]" />
@@ -67,6 +75,7 @@ const TravelGuides = () => {
             className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full hover:bg-[#f3e7da] hover:shadow-lg"
           >
             <ChevronRight className="w-6 h-6 text-[#a9673b]" />
+
           </button>
 
           <div className="overflow-hidden px-12">
@@ -92,9 +101,11 @@ const TravelGuides = () => {
                     transition={{ duration: 0.4 }}
                     whileHover={{
                       y: -10,
-                      boxShadow: "0 20px 30px -10px rgba(0, 0, 0, 0.25)",
+                      boxShadow: "0 20px 40px -10px rgba(236, 72, 153, 0.3)",
                     }}
+ bg-change
                     className={`flex-shrink-0 w-[280px] md:w-[300px] h-[400px] bg-gradient-to-br from-[#f1e3d3] to-[#f4e8da] rounded-2xl p-4 flex flex-col items-center transition-all duration-100 ease-in-out cursor-pointer ${
+
                       isCenter ? "z-10 scale-100" : "opacity-80"
                     }`}
                   >
@@ -103,24 +114,28 @@ const TravelGuides = () => {
                       <img
                         src={guide.image}
                         alt={guide.name}
+ bg-change
                         className="w-24 h-24 rounded-full object-cover border-4 border-[#d4976c] mb-1 mt-[-8px]"
+
                       />
-                      <h3 className="text-[18px] font-semibold text-gray-900 mb-1">
+                      <h3 className="text-[18px] font-semibold text-white mb-2 group-hover:text-pink-300 transition-colors duration-300">
                         {guide.name}
                       </h3>
+bg-change
                       <p className="text-[#b26a3b] text-[15px] font-medium mb-1">
+
                         {guide.expertise}
                       </p>
-                      <p className="text-gray-700 text-[15px] leading-snug px-2 mb-2">
+                      <p className="text-gray-300 text-[15px] leading-snug px-2 mb-4 group-hover:text-gray-200 transition-colors duration-300">
                         {guide.bio}
                       </p>
                     </div>
 
-                    {/* Button slightly moved up */}
+                    {/* Button */}
                     <div className="mt-2 mb-1">
                       <button
                         onClick={() => handleguide(guide.name)}
-                        className="bg-zinc-800 hover:bg-zinc-900 text-white text-sm font-medium py-2 px-5 rounded-xl transition-transform transform hover:scale-105"
+                        className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white text-sm font-medium py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                       >
                         View Profile
                       </button>

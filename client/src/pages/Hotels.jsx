@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 import Navbar from '../components/Custom/Navbar';
 import Footer from '../components/Custom/Footer';
 import hotels from '../data/hotels';
@@ -17,19 +18,61 @@ function Hotels() {
     );
   });
 
+// Function to handle saving a hotel to the user's dashboard
+const handleLike = async (hotel) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    alert("You must be logged in to save places.");
+    return;
+  }
+
+  const body = {
+    placeId: hotel.id, 
+    name: hotel.name,
+    location: hotel.location,
+    description: hotel.description,
+  };
+
+  try {
+    const res = await fetch('http://localhost:5000/api/save/save-place', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      toast.success('Place saved successfully to dashboard!');
+    } else {
+      toast.error(data.message || '⚠️ This place is already saved.');
+    }
+  } catch (err) {
+    console.error('Save failed:', err);
+    toast.error('🚨 Failed to save place. Please try again.');
+  }
+};
+
+
   return (
+ bg-change
     <div className="flex flex-col min-h-screen w-full  overflow-x-hidden bg-gradient-to-br from-[#f6f0d6] via-[#f3eada] to-[#e9dfd1]">
 
-      { <Navbar lightBackground/> }   {/*Added props of lightBackground to this page.*/}
+
+      {<Navbar lightBackground />}   {/*Added props of lightBackground to this page.*/}
 
 
       <main className="flex flex-col flex-1 w-full items-center">
         {/* Hero + Search */}
+ bg-change
         <section className="w-full py-24 flex flex-col items-center text-center px-4 style={{ backgroundColor: '#efe6db' }}">
           <h1 className="text-4xl md:text-5xl font-extrabold text-[#3f3226] mb-4">
             Explore World-Class <span className="text-[#a07b4f]">Hotels</span>
           </h1>
           <p className="text-lg md:text-xl text-[#4b3a2d] max-w-2xl mb-8">
+
             Browse and book from our curated list of the top luxury hotels worldwide.
           </p>
           <div className="w-full max-w-lg">
@@ -71,6 +114,14 @@ function Hotels() {
                 >
                   Book Hotel
                 </button>
+                {/* Button to save places */}
+                <button
+                  onClick={() => handleLike(hotel)}
+                  className="mt-2 bg-pink-100 hover:bg-pink-200 text-pink-600 px-4 py-2 rounded-lg text-sm font-semibold transition"
+                >
+                  ❤️ Save to Dashboard
+                </button>
+
               </div>
             </div>
           ))}

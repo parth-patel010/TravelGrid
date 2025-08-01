@@ -8,7 +8,7 @@ const features = [
       </svg>
     ),
     title: "Great Prices",
-    desc: "Save more on every trip."
+    desc: "Save more on every trip with our exclusive deals and discounts."
   },
   {
     icon: (
@@ -17,7 +17,7 @@ const features = [
       </svg>
     ),
     title: "Loved by Travelers",
-    desc: "Trusted by thousands worldwide."
+    desc: "Trusted by thousands of travelers worldwide with 4.9/5 ratings."
   },
   {
     icon: (
@@ -26,7 +26,7 @@ const features = [
       </svg>
     ),
     title: "Easy Booking",
-    desc: "Book flights and hotels in seconds."
+    desc: "Book flights, hotels, and experiences in seconds with our streamlined process."
   },
   {
     icon: (
@@ -35,12 +35,13 @@ const features = [
       </svg>
     ),
     title: "24/7 Support",
-    desc: "We're here whenever you need us."
+    desc: "We're here whenever you need us with round-the-clock customer support."
   }
 ];
 
 const FeatureCards = () => {
   return (
+ bg-change
    <section className="w-full bg-gradient-to-b from-[#3e1f24] to-[#100708] text-white py-16">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
@@ -50,6 +51,7 @@ const FeatureCards = () => {
           </h2>
           <p className="text-lg text-neutral-200 max-w-2xl mx-auto">
             Experience the best in travel with our comprehensive platform designed for modern travelers.
+
           </p>
         </div>
         
@@ -57,19 +59,29 @@ const FeatureCards = () => {
           {features.map((feature, index) => (
             <div
               key={index}
+ bg-change
               className="text-center groupbg-white/10 backdrop-blur-sm rounded-lg p-6 transition-all duration-300 hover:shadow-xl hover:bg-white/20"
             >
               <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-6 group-hover:bg-white\30 transition-colors duration-200">
                 <div className="text-white">
                   {feature.icon}
+
                 </div>
+                <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-pink-300 transition-colors duration-300">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
+                  {feature.desc}
+                </p>
               </div>
+bg-change
               <h3 className="text-xl font-semibold text-white mb-3">
                 {feature.title}
               </h3>
               <p className="text-neutral-200 leading-relaxed">
                 {feature.desc}
               </p>
+
             </div>
           ))}
         </div>
