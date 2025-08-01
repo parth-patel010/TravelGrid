@@ -43,6 +43,7 @@ const Navbar = () => {
       name: "Tools",
       subitems: [
         { label: "Trip Expense Calculator", path: "/trip-calculator" },
+        { label: "Packing Checklist", path: "/packing-checklist" },
         { label: "Feedback", path: "/feedback" },
       ],
     },
@@ -190,7 +191,7 @@ const Navbar = () => {
             {/* Add Nav item with toggle */}
             {navLinks.map((link) =>
               link.subitems ? (
-                <div className="flex flex-col justify-between items-start">
+                <div key={link.name} className="flex flex-col justify-between items-start">
                   <button
                     className="py-1 px-2 rounded hover:bg-pink-500 transition-all duration-200 w-full flex justify-between items-center "
                     onClick={() => toggleGroup(link.name)}
@@ -260,7 +261,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
