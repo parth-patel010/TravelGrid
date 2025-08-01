@@ -148,9 +148,9 @@ const Feedback = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: '#f7ece2' }}>
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-pink-600 via-pink-700 to-pink-800 text-white py-24 px-4 relative overflow-hidden">
+       <div className="bg-gradient-to-br from-rose-400 via-rose-500 to-rose-600 text-white py-24 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-black bg-opacity-10"></div>
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <h1 className="text-5xl font-bold mb-6 leading-tight mt-6">
@@ -167,10 +167,10 @@ const Feedback = () => {
       <div className="max-w-6xl mx-auto px-4 -mt-12 relative z-20 pb-20">
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Feedback Info */}
-          <div className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl shadow-2xl p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">
-              Why Your Feedback Matters
-            </h3>
+ bg-change
+          <div className="bg-[#fff8f3] rounded-2xl shadow-2xl p-8">
+              <h3 className="text-2xl font-bold text-[#6b3e2e] mb-8 text-center">Why Your Feedback Matters</h3>
+
             <div className="space-y-6">
               <div className="flex items-center p-4 bg-green-50 hover:bg-green-100 rounded-xl transition-colors">
                 <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center text-white text-xl mr-4">
@@ -224,11 +224,12 @@ const Feedback = () => {
           </div>
 
           {/* Feedback Form */}
-          <div className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl shadow-2xl p-8 border border-pink-100">
-            <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
-              Tell Us What You Think
-            </h2>
+ bg-change
+           <div className="bg-[#fff8f3] rounded-2xl shadow-2xl p-8 border border-rose-200">
+          <h2 className="text-2xl font-bold text-[#6b3e2e] mb-8 text-center">Tell Us What You Think</h2>
 
+            
+ main
             {isSubmitted ? (
               <div className="text-center py-12">
                 <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white text-3xl mx-auto mb-6">
@@ -243,6 +244,101 @@ const Feedback = () => {
                 </p>
               </div>
             ) : (
+ bg-change
+                             <form onSubmit={handleSubmit} className="space-y-6">
+
+                
+
+
+
+                                 {/* Package/Destination and Hotel */}
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                   <div>
+                     <label className="block text-sm font-semibold text-gray-700 mb-2">Package</label>
+                     <select
+                       name="package"
+                       value={formData.package}
+                       onChange={handleChange}
+                       className="w-full px-4 py-3 border-2 border-rose-200 rounded-xl focus:border-rose-400 focus:ring-4 focus:ring-rose-100 transition-all outline-none bg-white"
+                       style={{ direction: 'ltr' }}
+                     >
+                       <option value="">Select your package</option>
+                       {travelPackages.map((pkg) => (
+                         <option key={pkg.value} value={pkg.value}>
+                           {pkg.icon} {pkg.label}
+                         </option>
+                       ))}
+                     </select>
+                   </div>
+                   <div>
+                     <label className="block text-sm font-semibold text-gray-700 mb-2">Hotel (if booked)</label>
+                     <select
+                       name="hotel"
+                       value={formData.hotel}
+                       onChange={handleChange}
+                        className="w-full px-4 py-3 border-2 border-rose-200 rounded-xl focus:border-rose-400 focus:ring-4 focus:ring-rose-100 transition-all outline-none bg-white"
+                       style={{ direction: 'ltr' }}
+                     >
+                       <option value="">Select your hotel</option>
+                       {hotels.map((hotel) => (
+                         <option key={hotel.value} value={hotel.value}>
+                           {hotel.icon} {hotel.label} - {hotel.location}
+                         </option>
+                       ))}
+                     </select>
+                   </div>
+                 </div>
+
+                                 {/* Message */}
+                 <div>
+                   <label className="block text-sm font-semibold text-gray-700 mb-2">Your Feedback *</label>
+                   <textarea
+                     name="message"
+                     rows="3"
+                     value={formData.message}
+                     onChange={handleChange}
+                     className="w-full px-4 py-3 border-2 border-rose-200 rounded-xl focus:border-rose-400 focus:ring-4 focus:ring-rose-100 transition-all outline-none resize-none bg-white"
+                  placeholder="Tell us about your experience, suggestions, or any issues you encountered..."
+                     required
+                   />
+                 </div>
+
+                 {/* Rating */}
+                 <div className="text-center">
+
+                   <div className="flex items-center justify-center space-x-2">
+                     {[1, 2, 3, 4, 5].map((star) => (
+                       <button
+                         key={star}
+                         type="button"
+                         onClick={() => handleRatingClick(star)}
+                         onMouseEnter={() => setHoveredRating(star)}
+                         onMouseLeave={() => setHoveredRating(0)}
+                         className="p-2 hover:scale-110 transition-transform"
+                       >
+                         <Star
+                           size={32}
+                           className={`${
+                             star <= (hoveredRating || formData.rating)
+                               ? 'fill-yellow-400 text-yellow-400'
+                               : 'text-gray-300'
+                           }`}
+                         />
+                       </button>
+                     ))}
+                   </div>
+                   <p className="text-sm text-gray-500 mt-2">
+                     {formData.rating === 0 && 'Rate your experience'}
+                     {formData.rating === 1 && 'Poor'}
+                     {formData.rating === 2 && 'Fair'}
+                     {formData.rating === 3 && 'Good'}
+                     {formData.rating === 4 && 'Very Good'}
+                     {formData.rating === 5 && 'Excellent'}
+                   </p>
+                 </div>
+
+                 {/* Submit Button */}
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Package/Destination and Hotel */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -437,9 +533,10 @@ const Feedback = () => {
                 </div>
 
                 {/* Submit Button */}
+ main
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white py-4 px-6 rounded-xl font-semibold transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center justify-center gap-2"
+                    className="w-full bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-400 hover:to-rose-500 text-white py-4 px-6 rounded-xl font-semibold transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center justify-center gap-2"
                 >
                   <Send size={20} />
                   Submit Feedback

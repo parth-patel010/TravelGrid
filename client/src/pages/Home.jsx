@@ -11,7 +11,9 @@ import Chatbot from '@/components/Chatbot'
 function Home() {
     const [searchFilter, setSearchFilter] = useState(null);
     return (
-        <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-black via-gray-900 to-pink-900 overflow-x-hidden">
+ bg-change
+        <div className="flex flex-col min-h-screen w-full  overflow-x-hidden bg-black">
+
             <main className="flex flex-col flex-1 items-center justify-start w-full h-full">
                 <HeroSection onSearch={setSearchFilter} />
                 <FeatureCards />

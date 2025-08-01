@@ -43,30 +43,41 @@ export default function Forum() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-pink-50 p-6 lg:p-12">
+ bg-change
+    <div
+  className="min-h-screen p-6 lg:p-12"
+  style={{
+    background: "linear-gradient(135deg, #2a001f, #4a0030, #3b002a)",
+    color: "#f6f0e6",
+  }}
+>
       <div className="max-w-5xl mx-auto space-y-10">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-blue-900 mb-2 mt-2.5">Travel Forum</h1>
-          <p className="text-gray-700 text-lg">
-            Connect with fellow travelers, ask questions, and share your experiences!
+          <h1 className="text-4xl font-bold text-pink-300 mb-2 mt-2.5 drop-shadow-md">
+        Travel Forum</h1>
+          <p className="text-pink-100 text-lg">
+            Ask questions, share advice, and connect with travel lovers like you!
+
           </p>
         </div>
 
         {forumTopics.map((topic) => (
           <div
-            key={topic.id}
-            className="bg-white rounded-xl shadow-md p-6 transition hover:shadow-lg"
+ bg-change
+            key={post.id}
+              className="bg-[#fef6fb] bg-opacity-10 rounded-xl shadow-md p-6 border border-pink-100/20 transition hover:shadow-lg hover:bg-opacity-20"
           >
             <div className="flex justify-between items-start">
               <div>
-                <h2 className="text-xl font-semibold mb-1 text-blue-800">
-                  {topic.title}
+                <h2 className="text-xl font-semibold mb-1 text-pink-200">
+                  {post.title}
                 </h2>
-                <p className="text-gray-600">{topic.description}</p>
+               <p className="text-[#735f4d]">{post.description}</p>
               </div>
               <div
-                className="flex items-center gap-2 text-gray-500 cursor-pointer"
-                onClick={() => toggleReplies(topic.id)}
+                className="flex items-center gap-2 text-[#967d6e] cursor-pointer"
+                onClick={() => toggleReplies(post.id)}
+
               >
                 <MessageCircle className="w-5 h-5" />
                 {topic.replies.length}
@@ -78,12 +89,14 @@ export default function Forum() {
               </div>
             </div>
 
-            {openReplies[topic.id] && (
-              <div className="mt-4 border-t pt-3 space-y-2">
-                {topic.replies.map((reply, idx) => (
+ bg-change
+            {openReplies[post.id] && (
+              <div className="mt-4 border-t pt-3 space-y-2 border-[#d4bdae]">
+                {post.replies.map((reply, index) => (
                   <div
-                    key={idx}
-                    className="text-sm text-gray-700 bg-blue-50 p-3 rounded-md"
+                    key={index}
+                     className="text-sm text-[#5c4636] bg-[#f3e6dc] p-3 rounded-md"
+
                   >
                     💬 {reply}
                   </div>
@@ -95,8 +108,10 @@ export default function Forum() {
 
         <div className="flex justify-center mt-10">
           <button
-            onClick={() => toast.error("Feature coming soon")}
-            className="bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 px-6 rounded-xl transition duration-300"
+ bg-change
+            onClick={() => alert("Feature coming soon")}
+            className="bg-[#6b3e2e] hover:bg-[#884f3b] text-white font-semibold py-3 px-6 rounded-xl transition duration-300"
+
           >
             + Ask a New Question
           </button>

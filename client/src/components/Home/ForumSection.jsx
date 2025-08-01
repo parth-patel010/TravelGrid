@@ -26,19 +26,22 @@ const ForumSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="w-full py-20 text-center">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="mb-16">
-          <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">
-            Join the <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">Conversation</span>
-          </h2>
-          <p className="text-gray-300 text-base md:text-lg mb-12 px-4 max-w-2xl mx-auto leading-relaxed">
-            Connect with fellow travelers, ask questions, and share your experiences in our buzzing travel community!
-          </p>
-        </div>
+ bg-change
+   <section className="w-full bg-gradient-to-br from-amber-900 via-zinc-900 to-neutral-950 py-16 text-center">
+      <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
+        Join the Conversation
+      </h2>
+      <p className="text-white/80 text-base md:text-lg mb-12 px-4 max-w-2xl mx-auto">
+        Connect with fellow travelers, ask questions, and share your experiences in our buzzing travel community!
+      </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-          {topics.map((topic, index) => (
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4 text-left">
+        {topics.map((topic, index) => (
+          <div
+            key={index}
+            className="bg-white/10 backdrop-blur-md rounded-2xl shadow-xl hover:shadow-2xl p-6 border border-white/20 hover:scale-[1.02] transition duration-300 ease-in-out relative text-white"
+          >
+
             <div
               key={index}
               className="group bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:border-white/40 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 relative"
@@ -53,17 +56,23 @@ const ForumSection = () => {
               </h3>
               <p className="text-gray-300 text-sm group-hover:text-gray-200 transition-colors duration-300">{topic.replies} replies</p>
             </div>
-          ))}
-        </div>
+ bg-change
+            <h3 className="text-lg font-semibold mt-6 mb-3">
+              {topic.title}
+            </h3>
+            <p className="text-sm text-white/80">{topic.replies} replies</p>
+          </div>
+        ))}
+      </div>
 
-        <div className="mt-16">
-          <button
-            onClick={() => navigate('/forum')}
-            className="py-3 px-8 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
-          >
-            Visit Forum
-          </button>
-        </div>
+      <div className="mt-16">
+        <button
+          onClick={() => navigate('/forum')} // ✅ Step 3
+          className="py-3 px-8 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-full shadow-lg hover:scale-105 transition duration-300 cursor-pointer"
+        >
+          Visit Forum
+        </button>
+
       </div>
     </section>
   );

@@ -37,16 +37,14 @@ const DiscoverSection = () => {
   }
 
   return (
-    <section className="w-full py-20 text-center">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="mb-16">
-          <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">
-            Discover <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">New Destinations</span>
-          </h2>
-          <p className="text-gray-300 text-base md:text-lg mb-10 leading-relaxed">
-            Explore trending places, hidden gems, and must-visit spots curated just for you.
-          </p>
-        </div>
+ bg-change
+    <section className="w-full bg-gradient-to-br from-[#f5e1d6] to-[#fbeee8] py-16 text-center">
+      <h2 className="text-2xl md:text-3xl font-bold mb-4 text-black">
+        Discover New Destinations
+      </h2>
+      <p className="text-gray-700 text-base md:text-lg mb-10">
+        Explore trending places, hidden gems, and must-visit spots curated just for you.
+      </p>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-2 mb-16">
           {destinations.map((place, index) => (
@@ -54,20 +52,21 @@ const DiscoverSection = () => {
           ))}
         </div>
 
-        <div className="mt-16">
-          <h3 className="text-xl md:text-2xl font-semibold mb-4 text-white">
-            Ready to plan your next adventure?
-          </h3>
-          <p className="text-gray-300 mb-6 leading-relaxed">
-            Discover more travel ideas, tips, and personalized recommendations.
-          </p>
-          <button
-            onClick={handleDiscoverMore}
-            className="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium rounded-full shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
-          >
-            Discover More Destinations
-          </button>
-        </div>
+ bg-change
+      <div className="mt-16">
+        <h3 className="text-xl md:text-2xl font-semibold mb-4 text-black">
+          Ready to plan your next adventure?
+        </h3>
+        <p className="text-gray-700 mb-6">
+          Discover more travel ideas, tips, and personalized recommendations.
+        </p>
+        <button
+          onClick={handleDiscoverMore}
+           className="px-8 py-3 bg-gradient-to-r from-[#bb7154] to-[#d69786] text-white font-medium rounded-full shadow-lg hover:scale-105 transition duration-300 cursor-pointer"
+        >
+          Discover More Destinations
+        </button>
+
       </div>
     </section>
   );

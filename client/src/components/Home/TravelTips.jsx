@@ -22,8 +22,8 @@ const TravelTips = () => {
   }, []);
 
   return (
-    <div className="text-center p-4 bg-blue-100 rounded-xl shadow-md">
-      <h2 className="text-xl font-semibold">Travel Tip:</h2>
+    <div className="text-center p-4 bg-gradient-to-br from-[#f5e1d6] to-[#fbeee8] rounded-xl shadow-md">
+      <h2 className="text-xl font-semibold text-zinc-800">Travel Tip:</h2>
       <p id="travel-tip" className="mt-2 text-gray-700">Always carry a power bank while exploring remote places.</p>
     </div>
   );
