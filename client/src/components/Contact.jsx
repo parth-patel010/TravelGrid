@@ -25,7 +25,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       
       {/* Navbar at the top */}
       <Navbar />
@@ -48,7 +48,7 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-12">
           
           {/* Contact Info */}
-          <div className="bg-white rounded-2xl shadow-2xl p-8">
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl p-8 border border-white/20 text-white">
             <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Contact Information</h3>
             <div className="space-y-6">
               {contactCards.map((card, index) => (
@@ -67,7 +67,7 @@ const Contact = () => {
           </div>
           
           {/* Contact Form */}
-          <div className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl shadow-2xl p-8 border border-pink-100">
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl p-8 border border-white/20 text-white">
             <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Send us a Message</h2>
             
             {isSubmitted ? (
@@ -101,7 +101,7 @@ const Contact = () => {
                         name={field.name}
                         value={formData[field.name]}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 transition-all outline-none bg-white"
+                        className="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 transition-all outline-none bg-white/10 text-white placeholder-white/70"
                         placeholder={field.placeholder}
                         required
                       />
