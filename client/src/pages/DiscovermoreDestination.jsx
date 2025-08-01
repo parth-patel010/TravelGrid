@@ -66,22 +66,28 @@ function DiscovermoreDestination() {
             image: "https://images.unsplash.com/photo-1634874634941-78abc0a00298?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNvb3JnJTIwa2FybmF0a2F8ZW58MHx8MHx8fDA%3D"
         }
     ];
-  return (
-    <section className="w-full bg-gradient-to-br from-blue-50 to-pink-50 py-16 text-center">
-      <h2 className="text-2xl md:text-3xl font-bold mb-4 text-black">
-        Discover New Destinations
-      </h2>
-      <p className="text-gray-600 text-base md:text-lg mb-10">
-        Explore trending places, hidden gems, and must-visit spots curated just for you.
-      </p>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-2">
-        {destinations.map((place, index) => (
-          <DiscoverCard index={index} place={place} handleBookNowClick={handleBookNowClick} />
-        ))}
-      </div>
-    </section>
-  )
+    return (
+        <section className="w-full bg-gradient-to-br text-cyan-950 py-16 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-black mt-6">
+                Discover New Destinations
+            </h2>
+            <p className="text-gray-800 text-base md:text-lg mb-10">
+                Explore trending places, hidden gems, and must-visit spots curated just for you.
+            </p>
+
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-2">
+                {destinations.map((place, index) => (
+                    <DiscoverCard
+                        key={index}
+                        index={index}
+                        place={place}
+                        handleBookNowClick={handleBookNowClick}
+                    />
+                ))}
+            </div>
+        </section>
+    )
 }
 
 export default DiscovermoreDestination;
