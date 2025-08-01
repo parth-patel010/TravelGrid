@@ -15,7 +15,7 @@ const Navbar = () => {
     setIsSidebarOpen(false);
   }, [location.pathname]);
 
-  const navLinks = [
+ const navLinks = [
     { name: "Home", path: "/" },
     { name: "Ticket", path: "/ticket" },
     { name: "Packages", path: "/packages" },
@@ -25,11 +25,12 @@ const Navbar = () => {
 
   const moreLinks = [
     { name: "Travel Plans", path: "/travel-plan-generator" },
-    { name: "Trending Spots", path: "/trending-spots" },
+    { name: "Trending Spots", path: "/trending-spots"}, 
     { name: "Contact", path: "/contact" },
-    { name: "Trip Expense Calculator", path: "/trip-calculator" },
+    { name: "Trip Expense Calculator", path: "/trip-calculator"},
+    { name: "Currency Converter", path: "/currencyconverter" }, 
     { name: "Feedback", path: "/feedback" },
-  ];
+];
 
   const handleLogout = () => {
     logout();
@@ -61,7 +62,9 @@ const Navbar = () => {
             TravelGrid
           </Link>
 
+
           <div className="hidden md:flex gap-8 items-center text-pink-500 font-medium flex-1 justify-center">
+
             {navLinks.map((link) => (
               <Link
                 key={link.name}
