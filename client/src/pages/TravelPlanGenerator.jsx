@@ -111,7 +111,7 @@ const TravelPlanGenerator = () => {
       <Navbar />
       <main className="flex flex-col flex-1 w-full items-center pt-24">
         <section className="w-full py-12 text-center px-4">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 mt-6">
             Create Your <span className="text-pink-400">Travel Plan</span>
             </h1>
           <p className="text-lg md:text-xl text-pink-200 max-w-2xl mx-auto mb-4">

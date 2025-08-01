@@ -153,7 +153,7 @@ const Feedback = () => {
       <div className="bg-gradient-to-br from-pink-600 via-pink-700 to-pink-800 text-white py-24 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-black bg-opacity-10"></div>
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h1 className="text-5xl font-bold mb-6 leading-tight">
+          <h1 className="text-5xl font-bold mb-6 leading-tight mt-6">
             Share Your <span className="text-yellow-400">Feedback</span>
           </h1>
           <p className="text-xl opacity-95 max-w-2xl mx-auto">
