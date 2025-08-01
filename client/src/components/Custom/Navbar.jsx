@@ -53,7 +53,7 @@ const Navbar = () => {
     setIsSidebarOpen(false);
   };
 
-  const handleScroll = () => {
+ const handleScroll = () => {
     setIsScrolled(window.scrollY > 0);
   };
 
@@ -184,6 +184,7 @@ const Navbar = () => {
             </button>
           </div>
 
+
           {/* Nav Links */}
           <div className="flex flex-col gap-4">
             {/* Add Nav item with toggle */}
@@ -230,6 +231,7 @@ const Navbar = () => {
               <>
                 <Link
                   to="/dashboard"
+
                   className="flex gap-2 items-center py-2 px-3 rounded hover:bg-pink-500/30 transition-all duration-200"
                 >
                   <User size={18} /> Dashboard
@@ -242,6 +244,7 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
+
                   className="flex gap-2 items-center py-2 px-3 rounded font-medium hover:bg-pink-500 transition-all duration-200"
                 >
                   <LogIn size={18} /> Login
@@ -257,7 +260,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

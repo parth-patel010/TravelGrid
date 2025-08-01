@@ -28,6 +28,7 @@ const HeroSection = ({ onSearch }) => {
   ];
 
   return (
+
     <section className="relative w-full min-h-[90vh] flex items-center justify-center py-20 overflow-hidden"> 
       <div
         className="absolute inset-0 bg-cover bg-center opacity-50 z-10"
