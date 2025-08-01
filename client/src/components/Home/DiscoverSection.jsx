@@ -37,11 +37,11 @@ const DiscoverSection = () => {
   }
 
   return (
-    <section className="w-full bg-gradient-to-br from-blue-50 to-pink-50 py-16 text-center">
+    <section className="w-full bg-gradient-to-br from-[#f5e1d6] to-[#fbeee8] py-16 text-center">
       <h2 className="text-2xl md:text-3xl font-bold mb-4 text-black">
         Discover New Destinations
       </h2>
-      <p className="text-gray-600 text-base md:text-lg mb-10">
+      <p className="text-gray-700 text-base md:text-lg mb-10">
         Explore trending places, hidden gems, and must-visit spots curated just for you.
       </p>
 
@@ -55,12 +55,12 @@ const DiscoverSection = () => {
         <h3 className="text-xl md:text-2xl font-semibold mb-4 text-black">
           Ready to plan your next adventure?
         </h3>
-        <p className="text-gray-600 mb-6">
+        <p className="text-gray-700 mb-6">
           Discover more travel ideas, tips, and personalized recommendations.
         </p>
         <button
           onClick={handleDiscoverMore}
-          className="px-8 py-3 bg-gradient-to-r from-blue-600 to-pink-500 text-white font-medium rounded-full shadow-lg hover:scale-105 transition duration-300 cursor-pointer"
+           className="px-8 py-3 bg-gradient-to-r from-[#bb7154] to-[#d69786] text-white font-medium rounded-full shadow-lg hover:scale-105 transition duration-300 cursor-pointer"
         >
           Discover More Destinations
         </button>

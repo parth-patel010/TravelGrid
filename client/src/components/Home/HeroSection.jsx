@@ -68,7 +68,7 @@ const HeroSection = ({ onSearch }) => {
 
           {/* Right Side - Search Bar and Filters */}
           <div className="flex-1 w-full max-w-md">
-            <div className="bg-white rounded-2xl shadow-2xl p-6 space-y-4">
+            <div className="bg-[#f4e7d4] rounded-2xl shadow-2xl p-6 space-y-4">
               {/* Search Bar */}
               <div className="space-y-3">
                 <div className="relative">
@@ -77,7 +77,7 @@ const HeroSection = ({ onSearch }) => {
                     placeholder="Ex: Borivali, Mumbai, India"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 placeholder-gray-400"
+                    className="w-full px-4 py-3 border border-[#d2bfae] rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 placeholder-gray-500"
                   />
                 </div>
                 
@@ -85,7 +85,7 @@ const HeroSection = ({ onSearch }) => {
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 appearance-none bg-white"
+                    className="w-full px-4 py-3 border border-[#d2bfae] rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 appearance-none bg-[#f4e7d4]"
                   >
                     {categories.map((cat) => (
                       <option key={cat} value={cat}>
@@ -102,15 +102,15 @@ const HeroSection = ({ onSearch }) => {
                 
                 <button
                   onClick={handleSearch}
-                  className="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-102 cursor-pointer"
+                  className="w-full bg-[#d38d6a] hover:bg-[#c37753] text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-102 cursor-pointer"
                 >
                   Search
                 </button>
               </div>
 
               {/* Category Filters */}
-              <div className="pt-4 border-t border-gray-100">
-                <p className="text-sm font-medium text-gray-600 mb-3">Quick Filters:</p>
+              <div className="pt-4 border-t border-[#d2bfae]">
+                <p className="text-sm font-medium text-gray-700 mb-3">Quick Filters:</p>
                 <div className="flex flex-wrap gap-2">
                   {["Restaurants", "Events", "Shopping"].map((filter) => (
                     <button
@@ -119,13 +119,13 @@ const HeroSection = ({ onSearch }) => {
                         setCategory(filter);
                         handleSearch();
                       }}
-                      className="px-3 py-2 bg-gray-50 hover:bg-gray-100 text-gray-700 text-sm font-medium rounded-lg transition-colors duration-200 cursor-pointer"
+                     className="px-3 py-2 bg-white hover:bg-[#f6f0e0] text-gray-700 text-sm font-medium rounded-lg transition-colors duration-200 cursor-pointer"
                     >
                       {filter}
                     </button>
                   ))}
                   {/*added the Dynamic Clear button */}
-                  {category=="All Categories"?null:<button className="px-3 py-2 inline-flex items-center gap-1 bg-pink-500 hover:bg-pink-600 text-white text-sm font-medium rounded-lg transition-colors duration-200" onClick={()=>{setCategory("All Categories")}}>Clear <X size={16} className="relative top-[1px]"/></button>}
+                  {category=="All Categories"?null:<button className="px-3 py-2 inline-flex items-center gap-1 bg-[#d38d6a] hover:bg-[#c37753] text-white text-sm font-medium rounded-lg transition-colors duration-200"  onClick={()=>{setCategory("All Categories")}}>Clear <X size={16} className="relative top-[1px]"/></button>}
                 </div>
               </div>
             </div>

@@ -24,30 +24,30 @@ const packages = [
 ];
 
 const FeaturedPackages = () => (
-  <section className="w-full bg-gradient-to-br from-blue-50 to-pink-50 py-16">
+  <section className="w-full bg-gradient-to-br from-[#3e1f24] to-[#100708] py-16">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 className="text-3xl md:text-4xl font-bold text-black mb-8 text-center">
+      <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
         Featured Travel Packages
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {packages.map((pkg, i) => (
           <div
             key={i}
-            className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden flex flex-col"
+            className="bg-white/10 backdrop-blur-md rounded-2xl shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 overflow-hidden flex flex-col  border border-white/20"
           >
             <img
               src={pkg.image}
               alt={pkg.name}
               className="w-full h-40 object-cover"
             />
-            <div className="p-5 flex-1 flex flex-col justify-between">
+            <div className="p-5 flex-1 flex flex-col justify-between text-white">
               <div>
-                <h3 className="text-xl font-semibold mb-1 text-gray-800">
+                <h3 className="text-xl font-semibold mb-1">
                   {pkg.name}
                 </h3>
-                <p className="text-gray-500 mb-4">{pkg.location}</p>
+                <p className="text-sm text-white/80 mb-4">{pkg.location}</p>
               </div>
-              <button className="mt-auto w-full bg-zinc-800 hover:bg-zinc-900 text-white font-semibold py-2 px-4 rounded-xl transition-colors duration-200 transform hover:scale-105 cursor-pointer">Book Now</button>
+              <button className="mt-auto w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-2 px-4 rounded-xl transition-colors duration-200 transform hover:scale-105 cursor-pointer">Book Now</button>
             </div>
           </div>
         ))}
