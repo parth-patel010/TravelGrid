@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import DiscoverCard from "../DiscoverCard.jsx";
 
 const destinations = [
@@ -26,44 +26,48 @@ const destinations = [
 ];
 
 const DiscoverSection = () => {
-  const navigate = useNavigate(); // Initialize the navigate hook
+  const navigate = useNavigate();
 
-  const handleBookNowClick = () => {  //No need for this function now
-    navigate(`/package/${pkg.id}`); // Redirect to specific package when clicked
+  const handleBookNowClick = () => {
+    navigate(`/package/${pkg.id}`);
   };
 
   const handleDiscoverMore = () => {
-    navigate("/discovermore")
+    navigate("/destinations")
   }
 
   return (
-    <section className="w-full bg-gradient-to-br from-blue-50 to-pink-50 py-16 text-center">
-      <h2 className="text-2xl md:text-3xl font-bold mb-4 text-black">
-        Discover New Destinations
-      </h2>
-      <p className="text-gray-600 text-base md:text-lg mb-10">
-        Explore trending places, hidden gems, and must-visit spots curated just for you.
-      </p>
+    <section className="w-full py-20 text-center">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="mb-16">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">
+            Discover <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">New Destinations</span>
+          </h2>
+          <p className="text-gray-300 text-base md:text-lg mb-10 leading-relaxed">
+            Explore trending places, hidden gems, and must-visit spots curated just for you.
+          </p>
+        </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-2">
-        {destinations.map((place, index) => (
-          <DiscoverCard key={index} index={index} place={place} handleBookNowClick={() => navigate(`/package/${index+5}`)} />  //handled book now funtionality by providing path of package's respective pages(index+5 for matching index).
-        ))}
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-2 mb-16">
+          {destinations.map((place, index) => (
+            <DiscoverCard key={index} index={index} place={place} handleBookNowClick={() => navigate(`/package/${index+5}`)} />
+          ))}
+        </div>
 
-      <div className="mt-16">
-        <h3 className="text-xl md:text-2xl font-semibold mb-4 text-black">
-          Ready to plan your next adventure?
-        </h3>
-        <p className="text-gray-600 mb-6">
-          Discover more travel ideas, tips, and personalized recommendations.
-        </p>
-        <button
-          onClick={handleDiscoverMore}
-          className="px-8 py-3 bg-gradient-to-r from-blue-600 to-pink-500 text-white font-medium rounded-full shadow-lg hover:scale-105 transition duration-300 cursor-pointer"
-        >
-          Discover More Destinations
-        </button>
+        <div className="mt-16">
+          <h3 className="text-xl md:text-2xl font-semibold mb-4 text-white">
+            Ready to plan your next adventure?
+          </h3>
+          <p className="text-gray-300 mb-6 leading-relaxed">
+            Discover more travel ideas, tips, and personalized recommendations.
+          </p>
+          <button
+            onClick={handleDiscoverMore}
+            className="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium rounded-full shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+          >
+            Discover More Destinations
+          </button>
+        </div>
       </div>
     </section>
   );
