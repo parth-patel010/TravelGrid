@@ -49,9 +49,7 @@ const TravelGuides = () => {
   };
 
   return (
- bg-change
-    <section className="w-full bg-gradient-to-br from-[#f5ede3] to-[#e8ddd1] py-16">
-
+    <section className="w-full py-20">
       <div className="max-w-6xl mx-auto px-4 text-center">
         <div className="mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
@@ -65,17 +63,15 @@ const TravelGuides = () => {
         <div className="relative">
           <button
             onClick={prev}
-bg-change
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full hover:bg-[#f3e7da] hover:shadow-lg"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/10 backdrop-blur-md border border-white/20 shadow-lg p-3 rounded-full hover:bg-white/20 hover:border-white/40 transition-all duration-300"
           >
-            <ChevronLeft className="w-6 h-6 text-[#a9673b]" />
+            <ChevronLeft className="w-6 h-6 text-white" />
           </button>
           <button
             onClick={next}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full hover:bg-[#f3e7da] hover:shadow-lg"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/10 backdrop-blur-md border border-white/20 shadow-lg p-3 rounded-full hover:bg-white/20 hover:border-white/40 transition-all duration-300"
           >
-            <ChevronRight className="w-6 h-6 text-[#a9673b]" />
-
+            <ChevronRight className="w-6 h-6 text-white" />
           </button>
 
           <div className="overflow-hidden px-12">
@@ -103,9 +99,7 @@ bg-change
                       y: -10,
                       boxShadow: "0 20px 40px -10px rgba(236, 72, 153, 0.3)",
                     }}
- bg-change
-                    className={`flex-shrink-0 w-[280px] md:w-[300px] h-[400px] bg-gradient-to-br from-[#f1e3d3] to-[#f4e8da] rounded-2xl p-4 flex flex-col items-center transition-all duration-100 ease-in-out cursor-pointer ${
-
+                    className={`flex-shrink-0 w-[280px] md:w-[300px] h-[400px] bg-white/10 backdrop-blur-md rounded-2xl p-6 flex flex-col items-center transition-all duration-300 ease-in-out cursor-pointer border border-white/20 hover:border-white/40 ${
                       isCenter ? "z-10 scale-100" : "opacity-80"
                     }`}
                   >
@@ -114,16 +108,12 @@ bg-change
                       <img
                         src={guide.image}
                         alt={guide.name}
- bg-change
-                        className="w-24 h-24 rounded-full object-cover border-4 border-[#d4976c] mb-1 mt-[-8px]"
-
+                        className="w-24 h-24 rounded-full object-cover border-4 border-pink-400 mb-4 group-hover:border-pink-300 transition-colors duration-300"
                       />
                       <h3 className="text-[18px] font-semibold text-white mb-2 group-hover:text-pink-300 transition-colors duration-300">
                         {guide.name}
                       </h3>
-bg-change
-                      <p className="text-[#b26a3b] text-[15px] font-medium mb-1">
-
+                      <p className="text-pink-300 text-[15px] font-medium mb-3">
                         {guide.expertise}
                       </p>
                       <p className="text-gray-300 text-[15px] leading-snug px-2 mb-4 group-hover:text-gray-200 transition-colors duration-300">

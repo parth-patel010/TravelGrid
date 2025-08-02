@@ -109,23 +109,21 @@ const handleDownloadPDF = () => {
     };
 
     return (
- bg-change
-    <div className="bg-gradient-to-br from-[#fef8f4] to-[#fcefe4] rounded-2xl shadow-2xl p-8 border border-[#f9e7dc] max-w-xl mx-auto my-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
-
+    <div className="bg-white/10 backdrop-blur-md  rounded-2xl shadow-2xl p-8 border-white/20 max-w-xl mx-auto my-8 mt-20 text-white">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
             Trip Expense Calculator
         </h2>
 
         <div className="flex justify-center mb-6">
-        <div className="inline-flex bg-[#fae7de] rounded-full p-1">
+        <div className="inline-flex bg-pink-100 rounded-full p-1">
             {["Individual", "group"].map((option) => (
             <button
               key={option}
               onClick={() => setMode(option)}
               className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
                 mode === option
-                  ? "bg-gradient-to-r from-[#f7a593] to-[#ec7373] text-white shadow-md"
-                  : "text-[#d26767]"
+                  ? "bg-gradient-to-r from-pink-400 to-rose-500 text-white shadow-md"
+                  : "text-pink-600"
               }`}
             >
               {option === "Individual" ? "Individual" : "group"}
@@ -140,9 +138,7 @@ const handleDownloadPDF = () => {
             label={category}
             value={expense[category]}
             onChange={(val) => handleChange(category, val)}
- bg-change
-            inputClassName="w-full px-4 py-3 border-2 border-[#f3cfc0] rounded-xl focus:border-[#ec9488] focus:ring-4 focus:ring-[#f8e5dc] transition-all outline-none bg-white"
-
+            inputClassName="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 transition-all outline-none bg-slate-800"
             />
         ))}
 
@@ -156,7 +152,7 @@ const handleDownloadPDF = () => {
                 min="1"
                 value={numPeople}
                 onChange={(e) => setNumPeople(Number(e.target.value))}
-                className="w-24 px-4 py-2 border-2 border-[#f3cfc0] rounded-xl focus:border-[#ec9488] focus:ring-4 focus:ring-[#f8e5dc] outline-none bg-white"
+                className="w-24 px-4 py-2 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 outline-none bg-white"
             />
         </div>
         )}
@@ -164,10 +160,10 @@ const handleDownloadPDF = () => {
         <div className="mt-8 text-center">
             <p className="text-lg font-semibold">
             Total Cost:
- bg-change
-             <span className="ml-2 text-[#e46e6e]">₹{displayedTotal.toFixed(2)}</span>
-            <span className="ml-1 text-gray-500 text-sm">
-
+            <span className="ml-2 text-pink-600">
+                ₹{displayedTotal.toFixed(2)}
+            </span>
+            <span className="ml-1 text-sm">
                 ({mode === "group" ? "Per Person" : "Individual Total"})
             </span>
             </p>

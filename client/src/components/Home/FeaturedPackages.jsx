@@ -28,14 +28,6 @@ const packages = [
   },
 ];
 
- bg-change
-const FeaturedPackages = () => (
-  <section className="w-full bg-gradient-to-br from-[#3e1f24] to-[#100708] py-16">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
-        Featured Travel Packages
-      </h2>
-
 
 
 const FeaturedPackages = () => {
@@ -54,28 +46,32 @@ const FeaturedPackages = () => {
         </p>
       </div>
       
- main
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {packages.map((pkg, i) => (
           <div
             key={i}
-bg-change
-            className="bg-white/10 backdrop-blur-md rounded-2xl shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 overflow-hidden flex flex-col  border border-white/20"
+            className="group relative bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 hover:border-white/40 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20"
           >
-            <img
-              src={pkg.image}
-              alt={pkg.name}
-              className="w-full h-40 object-cover"
-            />
-            <div className="p-5 flex-1 flex flex-col justify-between text-white">
-              <div>
-                <h3 className="text-xl font-semibold mb-1">
-                  {pkg.name}
-                </h3>
-                <p className="text-sm text-white/80 mb-4">{pkg.location}</p>
+            <div className="relative overflow-hidden">
+              <img
+                src={pkg.image}
+                alt={pkg.name}
+                className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              <div className="absolute bottom-4 left-4 right-4">
+                <p className="text-pink-300 text-sm font-medium">{pkg.price}</p>
               </div>
-              <button className="mt-auto w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-2 px-4 rounded-xl transition-colors duration-200 transform hover:scale-105 cursor-pointer">Book Now</button>
-
+            </div>
+            <div className="p-6">
+              <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-pink-300 transition-colors duration-300">
+                {pkg.name}
+              </h3>
+              <p className="text-gray-300 mb-4 group-hover:text-gray-200 transition-colors duration-300">{pkg.location}</p>
+              <button className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl"
+                onClick={()=>navigate(`/package/${i+9}`)}>
+                Book Now
+              </button>
             </div>
           </div>
         ))}

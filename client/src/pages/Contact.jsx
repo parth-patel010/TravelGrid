@@ -24,10 +24,10 @@ const Contact = () => {
   ];
 
   return (
-   <div className="min-h-screen bg-gradient-to-b from-[#0c0104] via-[#3a0c22] to-[#5e0e3d]">
+    <div className="min-h-screen bg-gray-50">
       
       {/* Hero Section */}
-     <div className="bg-[#f6f0d6] rounded-2xl shadow-2xl p-8 border border-yellow-100 relative-m-4">
+      <div className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white py-24 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-black bg-opacity-10"></div>
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <h1 className="text-5xl font-bold mb-6 leading-tight">
@@ -63,7 +63,7 @@ const Contact = () => {
           </div>
           
           {/* Contact Form */}
-           <div className="bg-[#f6f0d6] rounded-2xl shadow-2xl p-8 border border-yellow-100">
+          <div className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl shadow-2xl p-8 border border-pink-100">
             <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Send us a Message</h2>
             
             {isSubmitted ? (
@@ -87,7 +87,7 @@ const Contact = () => {
                         rows="6"
                         value={formData[field.name]}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border-2 border-yellow-300 rounded-xl focus:border-yellow-500 focus:ring-4 focus:ring-yellow-100 transition-all outline-none resize-none bg-white"
+                        className="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 transition-all outline-none resize-none bg-white"
                         placeholder={field.placeholder}
                         required
                       />
@@ -97,7 +97,7 @@ const Contact = () => {
                         name={field.name}
                         value={formData[field.name]}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border-2 border-yellow-300 rounded-xl focus:border-yellow-500 focus:ring-4 focus:ring-yellow-100 transition-all outline-none resize-none bg-white"
+                        className="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 transition-all outline-none bg-white"
                         placeholder={field.placeholder}
                         required
                       />
@@ -107,7 +107,7 @@ const Contact = () => {
                 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-white font-bold py-4 rounded-xl transition-all transform hover:scale-105 hover:shadow-lg"
+                  className="w-full bg-gradient-to-r from-pink-400 to-rose-500 hover:from-pink-500 hover:to-rose-600 text-white font-bold py-4 rounded-xl transition-all transform hover:scale-105 hover:shadow-lg"
                 >
                   Send Message
                 </button>

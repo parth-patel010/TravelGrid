@@ -41,17 +41,14 @@ const features = [
 
 const FeatureCards = () => {
   return (
- bg-change
-   <section className="w-full bg-gradient-to-b from-[#3e1f24] to-[#100708] text-white py-16">
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Why Choose TravelGrid?
+    <section className="w-full py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">TravelGrid</span>?
           </h2>
-          <p className="text-lg text-neutral-200 max-w-2xl mx-auto">
-            Experience the best in travel with our comprehensive platform designed for modern travelers.
-
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            Experience the best in travel with our comprehensive platform designed for modern travelers seeking unforgettable adventures.
           </p>
         </div>
         
@@ -59,13 +56,13 @@ const FeatureCards = () => {
           {features.map((feature, index) => (
             <div
               key={index}
- bg-change
-              className="text-center groupbg-white/10 backdrop-blur-sm rounded-lg p-6 transition-all duration-300 hover:shadow-xl hover:bg-white/20"
+              className="group relative"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-6 group-hover:bg-white\30 transition-colors duration-200">
-                <div className="text-white">
-                  {feature.icon}
-
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:border-white/40 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg">
+                  <div className="text-white">
+                    {feature.icon}
+                  </div>
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-pink-300 transition-colors duration-300">
                   {feature.title}
@@ -74,14 +71,6 @@ const FeatureCards = () => {
                   {feature.desc}
                 </p>
               </div>
-bg-change
-              <h3 className="text-xl font-semibold text-white mb-3">
-                {feature.title}
-              </h3>
-              <p className="text-neutral-200 leading-relaxed">
-                {feature.desc}
-              </p>
-
             </div>
           ))}
         </div>

@@ -67,9 +67,7 @@ const HeroSection = ({ onSearch }) => {
 
           {/* Right Side - Search Bar and Filters */}
           <div className="flex-1 w-full max-w-md">
- bg-change
-            <div className="bg-[#f4e7d4] rounded-2xl shadow-2xl p-6 space-y-4">
-
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl p-6 space-y-4 border border-white/20">
               {/* Search Bar */}
               <div className="space-y-3">
                 <div className="relative">
@@ -78,9 +76,7 @@ const HeroSection = ({ onSearch }) => {
                     placeholder="Ex: Borivali, Mumbai, India"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
- bg-change
-                    className="w-full px-4 py-3 border border-[#d2bfae] rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 placeholder-gray-500"
-
+                    className="w-full px-4 py-3 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-gray-700 placeholder-gray-500 transition-all duration-300"
                   />
                 </div>
                 
@@ -88,9 +84,7 @@ const HeroSection = ({ onSearch }) => {
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
- bg-change
-                    className="w-full px-4 py-3 border border-[#d2bfae] rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 appearance-none bg-[#f4e7d4]"
-
+                    className="w-full px-4 py-3 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-gray-700 appearance-none transition-all duration-300"
                   >
                     {categories.map((cat) => (
                       <option key={cat} value={cat}>
@@ -107,19 +101,15 @@ const HeroSection = ({ onSearch }) => {
                 
                 <button
                   onClick={handleSearch}
- bg-change
-                  className="w-full bg-[#d38d6a] hover:bg-[#c37753] text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-102 cursor-pointer"
-
+                  className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl"
                 >
                   Search
                 </button>
               </div>
 
               {/* Category Filters */}
- bg-change
-              <div className="pt-4 border-t border-[#d2bfae]">
-                <p className="text-sm font-medium text-gray-700 mb-3">Quick Filters:</p>
-
+              <div className="pt-4 border-t border-white/20">
+                <p className="text-sm font-medium text-white/80 mb-3">Quick Filters:</p>
                 <div className="flex flex-wrap gap-2">
                   {["Restaurants", "Events", "Shopping"].map((filter) => (
                     <button
@@ -128,17 +118,13 @@ const HeroSection = ({ onSearch }) => {
                         setCategory(filter);
                         handleSearch();
                       }}
- bg-change
-                     className="px-3 py-2 bg-white hover:bg-[#f6f0e0] text-gray-700 text-sm font-medium rounded-lg transition-colors duration-200 cursor-pointer"
-
+                      className="px-3 py-2 bg-white/20 hover:bg-white/30 text-white text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer backdrop-blur-sm"
                     >
                       {filter}
                     </button>
                   ))}
                   {/*added the Dynamic Clear button */}
-bg-change
-                  {category=="All Categories"?null:<button className="px-3 py-2 inline-flex items-center gap-1 bg-[#d38d6a] hover:bg-[#c37753] text-white text-sm font-medium rounded-lg transition-colors duration-200"  onClick={()=>{setCategory("All Categories")}}>Clear <X size={16} className="relative top-[1px]"/></button>}
-
+                  {category=="All Categories"?null:<button className="px-3 py-2 inline-flex items-center gap-1 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white text-sm font-medium rounded-lg transition-all duration-200" onClick={()=>{setCategory("All Categories")}}>Clear <X size={16} className="relative top-[1px]"/></button>}
                 </div>
               </div>
             </div>
