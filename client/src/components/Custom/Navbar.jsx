@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { Menu, X, User, LogOut, LogIn, ChevronDown } from "lucide-react";
+
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
@@ -9,6 +10,8 @@ const Navbar = () => {
   const location = useLocation();
   const { user, logout, isAuthenticated } = useAuth();
   const [expanded, setExpanded] = useState(null);
+
+  //expanding nav sub-items in mobile screen
   const toggleGroup = (item) => {
     setExpanded((pre) => (pre === item ? null : item));
   };
@@ -19,13 +22,6 @@ const Navbar = () => {
 
  const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Destinations", path: "/destinations" },
-    { name: "Hotels", path: "/hotels" },
-    { name: "Hotel Map", path: "/hotel-map" },
-    { name: "Forums", path: "/forums" },
-    { name: "Packages", path: "/packages" },
-    { name: "Trip Calculator", path: "/trip-calculator" },
-    { name: "Contact", path: "/contact" },
     { name: "Trending Spots", path: "/trending-spots" },
     {
       name: "Booking",
@@ -52,7 +48,6 @@ const Navbar = () => {
       ],
     },
   ];
-  
 
   const handleLogout = () => {
     logout();
@@ -74,9 +69,10 @@ const Navbar = () => {
 
   return (
     <>
+      {/* Sticky Translucent Navbar */}
       <nav className="box-border w-full fixed top-0 left-0 z-50 h-20 backdrop-blur-md border-b border-white/10 bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2c1a31] shadow-md px-4 sm:px-6">
         <div className="w-full max-w-full mx-auto flex justify-between items-center gap-4 px-2 py-6">
-
+          {/* Logo */}
           <Link
             to="/"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -85,6 +81,7 @@ const Navbar = () => {
             TravelGrid
           </Link>
 
+          {/* Desktop Nav Links - Centered */}
           <div className="hidden md:flex items-center gap-4 text-gray-200 font-medium flex-1 justify-center">
             {navLinks.map((link) =>
               // Add Nav - Links and SubLinks
@@ -93,6 +90,7 @@ const Navbar = () => {
                   <button className="py-1 px-2 text-md rounded-sm hover:text-pink-500 hover:shadow-lg transition-all duration-300 flex">
                     {link.name} <ChevronDown fontSize={16}/>
                   </button>
+                  {/* Add Dropdown */}
                   <div className="absolute left-0 mt-0 opacity-0 min-w-[180px] text-white rounded-lg bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2c1a31] shadow-md group-hover:opacity-100 group-hover: translate-y-2 transition-all duration-300 z-50 p-2">
                     {link.subitems.map((item) => (
                       <Link
@@ -149,6 +147,7 @@ const Navbar = () => {
             )}
           </div>
 
+          {/* Hamburger Menu for Mobile */}
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             className="md:hidden text-pink-400 hover:text-pink-500 transition-colors duration-200 p-1 rounded-md hover:bg-pink-500/20 cursor-pointer"
@@ -158,17 +157,22 @@ const Navbar = () => {
         </div>
       </nav>
 
+      {/* Mobile Overlay */}
       <div
         className={`fixed inset-0 bg-black/10 z-40 transition-opacity duration-300 md:hidden ${
           isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsSidebarOpen(false)}
       />
+
+      {/* Mobile Sidebar */}
+      {/* Update bg color and layout, Regroup nav items*/}
       <div
         className={`fixed top-0 right-0 h-full w-[80vw] sm:w-[60vw] max-w-[320px] bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2c1a31] z-[1002] transition-transform duration-300 ease-in-out transform ${
           isSidebarOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
+        {/* Remove Header as it is already exist */}
         <div className="p-5 flex flex-col h-full text-gray-300">
           {/* Close Button */}
           <div className="flex justify-end items-center mb-6 p-2 border-b border-gray-600">
@@ -181,7 +185,10 @@ const Navbar = () => {
             </button>
           </div>
 
+
+          {/* Nav Links */}
           <div className="flex flex-col gap-4">
+            {/* Add Nav item with toggle */}
             {navLinks.map((link) =>
               link.subitems ? (
                 <div key={link.name} className="flex flex-col justify-between items-start">
@@ -194,6 +201,7 @@ const Navbar = () => {
                       {expanded === link.name ? "-" : "+"}
                     </span>
                   </button>
+                  {/* Add Sub Nav-items */}
                   {expanded === link.name && (
                     <div className="w-full flex flex-col px-4 py-2 justify-start items-center border-t border-pink-800">
                       {link.subitems.map((item) => (
