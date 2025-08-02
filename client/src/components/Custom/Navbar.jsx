@@ -37,6 +37,7 @@ const Navbar = () => {
         { label: "Travel Plans", path: "/travel-plan-generator" },
         { label: "Guide", path: "/guides" },
         { label: "Contact", path: "/contact" },
+        { label: "Hotel / Flight Review Summarizer", path: "/Summarizer" },
       ],
     },
     {
