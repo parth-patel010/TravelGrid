@@ -237,10 +237,15 @@ const Footer = () => {
                       </svg>
                     </div>
                     <div>
-                      <p className="text-gray-300 text-sm">123 Travel Street</p>
-                      <p className="text-gray-300 text-sm">
-                        Adventure City, AC 12345
-                      </p>
+                        <a
+                          href="https://www.google.com/maps?q=123+Travel+Street,+Adventure+City,+AC+12345"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-300 text-sm hover:underline block"
+                        >
+                          123 Travel Street<br />
+                          Adventure City, AC 12345
+                        </a>
                     </div>
                   </div>
 
