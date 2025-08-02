@@ -44,6 +44,7 @@ const Navbar = () => {
       subitems: [
         { label: "Trip Expense Calculator", path: "/trip-calculator" },
         { label: "Packing Checklist", path: "/packing-checklist" },
+        { label: "Travel Recommendations", path: "/recommendation" },
         { label: "Feedback", path: "/feedback" },
       ],
     },
