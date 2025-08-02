@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const testimonials = [
   {
@@ -27,6 +28,20 @@ const testimonials = [
   },
 ];
 
+// Animation variants
+const cardVariant = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.2,
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  }),
+};
+
 const Testimonials = () => (
   <section className="w-full py-20">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,11 +53,16 @@ const Testimonials = () => (
           Join thousands of satisfied travelers who have discovered amazing destinations with TravelGrid.
         </p>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {testimonials.map((t, i) => (
-          <div
+          <motion.div
             key={i}
+            custom={i}
+            variants={cardVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
             className="group bg-white/10 backdrop-blur-md rounded-2xl p-6 flex flex-col items-center text-center border border-white/20 hover:border-white/40 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20"
           >
             <img
@@ -64,11 +84,11 @@ const Testimonials = () => (
                 </svg>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
   </section>
 );
 
-export default Testimonials; 
+export default Testimonials;

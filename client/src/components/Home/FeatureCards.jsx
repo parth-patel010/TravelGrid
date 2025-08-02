@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const features = [
   {
@@ -39,31 +40,62 @@ const features = [
   }
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.2, duration: 0.6 }
+  })
+};
+
 const FeatureCards = () => {
   return (
-    <section className="w-full py-20">
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      className="w-full py-20"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">TravelGrid</span>?
-          </h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+        <motion.div className="text-center mb-16">
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold text-white mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            Why Choose{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+              TravelGrid
+            </span>
+            ?
+          </motion.h2>
+          <motion.p
+            className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
             Experience the best in travel with our comprehensive platform designed for modern travelers seeking unforgettable adventures.
-          </p>
-        </div>
-        
+          </motion.p>
+        </motion.div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
-            <div
+            <motion.div
               key={index}
+              custom={index}
+              variants={cardVariants}
               className="group relative"
             >
               <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:border-white/40 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg">
-                  <div className="text-white">
-                    {feature.icon}
-                  </div>
-                </div>
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl mb-6 transition-all duration-300 shadow-lg"
+                >
+                  <div className="text-white">{feature.icon}</div>
+                </motion.div>
                 <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-pink-300 transition-colors duration-300">
                   {feature.title}
                 </h3>
@@ -71,12 +103,12 @@ const FeatureCards = () => {
                   {feature.desc}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
-export default FeatureCards; 
+export default FeatureCards;

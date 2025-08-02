@@ -40,6 +40,9 @@ As a **GSSoC 2025** project, TravelGrid provides contributors with an opportunit
 - **Hotel Reservations**: Browse and book hotels based on your preferences.
 - **Travel Guides**: Discover curated guides to plan your ideal trip.
 - **Travel Packages**: Choose pre-designed packages or customize your own.
+- **Travel Packing Checklist**: Comprehensive packing tool with 60+ default items, progress tracking, and export options (PDF, Excel, Text).
+- **Trip Expense Calculator**: Calculate and track travel expenses with detailed breakdowns.
+- **Travel Plan Generator**: AI-powered travel itinerary planning.
 - **Responsive Design**: Enjoy a consistent experience across desktops, tablets, and mobile devices.
 - **Interactive UI**: A modern, user-friendly interface built with React, Tailwind CSS, and ShadCN.
 

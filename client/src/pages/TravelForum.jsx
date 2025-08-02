@@ -43,7 +43,7 @@ export default function Forum() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-pink-50 p-6 lg:p-12">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-pink-50 p-6 lg:p-12 flex justify-center items-center">
       <div className="max-w-5xl mx-auto space-y-10">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-blue-900 mb-2 mt-2.5">Travel Forum</h1>
