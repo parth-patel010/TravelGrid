@@ -28,13 +28,6 @@ const testimonials = [
 ];
 
 const Testimonials = () => (
- bg-change
-  <section className="w-full bg-gradient-to-br from-yellow-900 via-zinc-900 to-neutral-950 py-16">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
-        What Our Users Say
-      </h2>
-
   <section className="w-full py-20">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-16">
@@ -46,29 +39,24 @@ const Testimonials = () => (
         </p>
       </div>
       
- main
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {testimonials.map((t, i) => (
           <div
             key={i}
- bg-change
-            className="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 p-6 flex flex-col items-center text-center text-white"
-
+            className="group bg-white/10 backdrop-blur-md rounded-2xl p-6 flex flex-col items-center text-center border border-white/20 hover:border-white/40 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20"
           >
             <img
               src={t.avatar}
               alt={t.name}
- bg-change
-              className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-yellow-400"
+              className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-pink-400 group-hover:border-pink-300 transition-colors duration-300"
             />
-            <h3 className="text-lg font-semibold mb-1 text-white">{t.name}</h3>
-            <p className="text-white/80 text-sm mb-3">{t.review}</p>
-            <div className="flex gap-1 mb-1">
+            <h3 className="text-lg font-semibold mb-2 text-white group-hover:text-pink-300 transition-colors duration-300">{t.name}</h3>
+            <p className="text-gray-300 text-sm mb-4 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">{t.review}</p>
+            <div className="flex gap-1">
               {[...Array(5)].map((_, idx) => (
                 <svg
                   key={idx}
-                  className={`w-5 h-5 ${idx < t.rating ? 'text-yellow-400' : 'text-gray-400'}`}
-
+                  className={`w-5 h-5 ${idx < t.rating ? 'text-yellow-400' : 'text-gray-500'}`}
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
