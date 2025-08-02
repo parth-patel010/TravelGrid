@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
 import { DashboardDataProvider } from "./context/DashboardDataContext";
-import { MapProvider } from "./context/MapContext"; // Import the MapProvider
 import Navbar from "./components/Custom/Navbar";
 import Footer from "./components/Custom/Footer";
+
+
 import Spinner from './components/Spinner';
 import ErrorBoundary from './components/ErrorHandle/ErrorBoundary';
 import GoToTopButton from './components/GoToTopButton';
@@ -22,29 +23,22 @@ function App() {
   }, [location]);
 
   return (
-    <AuthProvider>
       <AppProvider>
         <DashboardDataProvider>
-          <MapProvider> {/* Add MapProvider here */}
-            <div className="flex flex-col min-h-screen">
-              {loading && <Spinner />}
-              <Navbar />
-              <div className="flex-grow">
-                <ErrorBoundary>
-                  <Outlet />
-                </ErrorBoundary>
-              </div>
-              <GoToTopButton />
-              <Footer />
+          <div className="flex flex-col min-h-screen">
+            {loading && <Spinner />}
+            <Navbar />
+            <div className="flex-grow">
+              <ErrorBoundary>
+                <Outlet />
+              </ErrorBoundary>
             </div>
-          </MapProvider
             <GoToTopButton />
             <FeedbackButton />
             <Footer />
           </div>
         </DashboardDataProvider>
       </AppProvider>
-    </AuthProvider>
   );
 }
 
