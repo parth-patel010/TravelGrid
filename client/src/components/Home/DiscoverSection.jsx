@@ -1,24 +1,28 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import DiscoverCard from "../DiscoverCard.jsx";
 
 const destinations = [
   {
+    id: 1, // Added unique id
     name: "Manali, Himachal",
     description: "A beautiful hill station known for its scenic beauty and adventure sports.",
     image: "https://images.unsplash.com/photo-1712388430474-ace0c16051e2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFuYWxpfGVufDB8fDB8fHww"
   },
   {
+    id: 2, // Added unique id
     name: "Jaipur, Rajasthan",
     description: "The Pink City with rich history, forts, and vibrant culture.",
     image: "https://images.unsplash.com/photo-1603262110263-fb0112e7cc33?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8amFpcHVyfGVufDB8fDB8fHww"
   },
   {
+    id: 3, // Added unique id
     name: "Goa",
     description: "Popular beach destination with nightlife, water sports, and culture.",
     image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z29hfGVufDB8fDB8fHww"
   },
   {
+    id: 4, // Added unique id
     name: "Rishikesh, Uttarakhand",
     description: "The yoga capital of the world, nestled on the banks of the Ganges.",
     image: "https://plus.unsplash.com/premium_photo-1697730398251-40cd8dc57e0b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmlzaGlrZXNofGVufDB8fDB8fHww"
@@ -26,15 +30,15 @@ const destinations = [
 ];
 
 const DiscoverSection = () => {
-  const navigate = useNavigate(); // Initialize the navigate hook
+  const navigate = useNavigate();
 
   const handleBookNowClick = () => {
-    navigate("/packages"); // Redirect to /packages when clicked
+    navigate("/packages");
   };
 
   const handleDiscoverMore = () => {
-    navigate("/discovermore")
-  }
+    navigate("/discovermore");
+  };
 
   return (
     <section className="w-full bg-gradient-to-br from-blue-50 to-pink-50 py-16 text-center">
@@ -46,8 +50,12 @@ const DiscoverSection = () => {
       </p>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-2">
-        {destinations.map((place, index) => (
-          <DiscoverCard index={index} place={place} handleBookNowClick={handleBookNowClick} />
+        {destinations.map((place) => (
+          <DiscoverCard 
+            key={place.id} // Added key prop using the unique id
+            place={place} 
+            handleBookNowClick={handleBookNowClick} 
+          />
         ))}
       </div>
 

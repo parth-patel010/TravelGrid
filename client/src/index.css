@@ -1,7 +1,15 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* It is used to make custom scrollbar in the Dashboard cards */
+/* Ensure the map doesn't overflow or overlap navbar */
+.leaflet-container {
+  height: 400px;
+  width: 100%;
+  position: relative;
+  z-index: 0; /* map stays below navbar */
+}
+
+/* Custom scrollbar for dashboard cards */
 .custom-scroll::-webkit-scrollbar {
   width: 6px;
 }

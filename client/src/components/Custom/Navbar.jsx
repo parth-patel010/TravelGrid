@@ -14,13 +14,15 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Ticket", path: "/ticket" },
-    { name: "Packages", path: "/packages" },
+    { name: "Destinations", path: "/destinations" },
     { name: "Hotels", path: "/hotels" },
-    { name: "Guides", path: "/guides" },
+    { name: "Hotel Map", path: "/hotel-map" },
+    { name: "Forums", path: "/forums" },
+    { name: "Packages", path: "/packages" },
+    { name: "Trip Calculator", path: "/trip-calculator" },
     { name: "Contact", path: "/contact" },
-    { name: "Trip Expense Calculator", path: "/trip-calculator"},
   ];
+  
 
   const handleLogout = () => {
     logout();
