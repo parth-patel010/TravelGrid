@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const features = [
   {
@@ -8,7 +9,7 @@ const features = [
       </svg>
     ),
     title: "Great Prices",
-    desc: "Save more on every trip."
+    desc: "Save more on every trip with our exclusive deals and discounts."
   },
   {
     icon: (
@@ -17,7 +18,7 @@ const features = [
       </svg>
     ),
     title: "Loved by Travelers",
-    desc: "Trusted by thousands worldwide."
+    desc: "Trusted by thousands of travelers worldwide with 4.9/5 ratings."
   },
   {
     icon: (
@@ -26,7 +27,7 @@ const features = [
       </svg>
     ),
     title: "Easy Booking",
-    desc: "Book flights and hotels in seconds."
+    desc: "Book flights, hotels, and experiences in seconds with our streamlined process."
   },
   {
     icon: (
@@ -35,46 +36,79 @@ const features = [
       </svg>
     ),
     title: "24/7 Support",
-    desc: "We're here whenever you need us."
+    desc: "We're here whenever you need us with round-the-clock customer support."
   }
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.2, duration: 0.6 }
+  })
+};
+
 const FeatureCards = () => {
   return (
-    <section className="w-full bg-white py-16">
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      className="w-full py-20"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Why Choose TravelGrid?
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Experience the best in travel with our comprehensive platform designed for modern travelers.
-          </p>
-        </div>
-        
+        <motion.div className="text-center mb-16">
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold text-white mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            Why Choose{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+              TravelGrid
+            </span>
+            ?
+          </motion.h2>
+          <motion.p
+            className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
+            Experience the best in travel with our comprehensive platform designed for modern travelers seeking unforgettable adventures.
+          </motion.p>
+        </motion.div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
-            <div
+            <motion.div
               key={index}
-              className="text-center group"
+              custom={index}
+              variants={cardVariants}
+              className="group relative"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-6 group-hover:bg-gray-200 transition-colors duration-200">
-                <div className="text-black">
-                  {feature.icon}
-                </div>
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:border-white/40 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20">
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl mb-6 transition-all duration-300 shadow-lg"
+                >
+                  <div className="text-white">{feature.icon}</div>
+                </motion.div>
+                <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-pink-300 transition-colors duration-300">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
+                  {feature.desc}
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                {feature.title}
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                {feature.desc}
-              </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
-export default FeatureCards; 
+export default FeatureCards;
