@@ -152,7 +152,7 @@ const handleDownloadPDF = () => {
                 min="1"
                 value={numPeople}
                 onChange={(e) => setNumPeople(Number(e.target.value))}
-                className="w-24 px-4 py-2 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 outline-none bg-white"
+                className="w-24 px-4 py-2 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 outline-none "
             />
         </div>
         )}
