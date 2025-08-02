@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const genAI = new GoogleGenerativeAI("AIzaSyAlH6fGlkav2uGJckN3diEO1HGAhzztYME");
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 
 // Function to clean markdown (##, **, etc.)
 const cleanMarkdown = (text) => {
