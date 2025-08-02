@@ -27,6 +27,7 @@ const bookingSchema = new mongoose.Schema({
         required : [true, "Please enter the number of people"],
     },
     status : {
+        type: String,
         enum : ["Pending","Cancelled","Completed", "Confirmed"],
         default : "Pending",
     }

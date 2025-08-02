@@ -43,6 +43,7 @@ import TravelPlanGenerator from './pages/TravelPlanGenerator';
 import TravelForum from './pages/TravelForum';
 import AuthLayout from './components/AuthLayout';
 import TrendingSpots from './pages/TrendingSpots.jsx';
+import PackingChecklistPage from './pages/PackingChecklist.jsx';
 
 const router = createBrowserRouter([
   { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
@@ -83,6 +84,7 @@ const router = createBrowserRouter([
       { path: '/terms', element: <TermsAndConditions /> },
       { path: '/trip-calculator', element: <TripCalculatorPage /> },
       { path: '/travel-plan-generator', element: <TravelPlanGenerator /> },
+      { path: '/packing-checklist', element: <PackingChecklistPage /> },
       { path: '/trending-spots', element: <TrendingSpots /> }, // ✅ Add this route
       { path: '/trending', element: <TrendingSpots /> }, // ✅ Alternative route
       {
