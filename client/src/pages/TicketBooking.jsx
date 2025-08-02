@@ -162,6 +162,13 @@ function TicketBooking() {
     });
   };
 
+  
+  const pluralMap = {
+      bus: "Buses",
+      train: "Trains",
+      flight: "Flights"
+    };
+
   return (
     <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-black to-pink-900 overflow-x-hidden">
       <Navbar />
@@ -374,7 +381,7 @@ function TicketBooking() {
               type="submit"
               className="w-full mt-4 py-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold rounded-xl text-lg tracking-wide shadow-lg transition-all hover:shadow-pink-700/50"
             >
-              Search {travelType.charAt(0).toUpperCase() + travelType.slice(1)}s
+              Search {pluralMap[travelType] || (travelType.charAt(0).toUpperCase() + travelType.slice(1) + 's')}
             </button>
           </form>
         </div>
