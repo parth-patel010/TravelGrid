@@ -33,7 +33,7 @@ function App() {
                 <Outlet />
               </ErrorBoundary>
             </div>
-            <GoToTopButton />
+            <GoToTopButton /> 
             <FeedbackButton />
             <Footer />
           </div>
