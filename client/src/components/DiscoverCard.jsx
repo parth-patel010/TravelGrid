@@ -1,10 +1,16 @@
 import React from 'react'
+import { useState } from "react";
+
+
 
 function DiscoverCard({
     index,
     place,
     handleBookNowClick
 }) {
+
+    const [wishlisted, setWishlisted] = useState(false);
+
     return (
         <div
             key={index}
@@ -16,6 +22,10 @@ function DiscoverCard({
                     alt={place.name}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
+    
+
+
+        
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
             </div>
             <div className="p-4">
