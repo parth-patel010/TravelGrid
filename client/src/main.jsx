@@ -44,6 +44,7 @@ import TravelForum from './pages/TravelForum';
 import AuthLayout from './components/AuthLayout';
 import TrendingSpots from './pages/TrendingSpots.jsx';
 import PackingChecklistPage from './pages/PackingChecklist.jsx';
+import Summarizer from './components/Summarizer';
 
 const router = createBrowserRouter([
   { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
@@ -80,6 +81,7 @@ const router = createBrowserRouter([
       { path: '/faq', element: <FAQ /> },
       { path: '/contact', element: <Contact /> },
       { path: '/feedback', element: <Feedback /> },
+      { path: '/Summarizer', element: <Summarizer /> },
       { path: '/privacy', element: <PrivacyPolicy /> },
       { path: '/terms', element: <TermsAndConditions /> },
       { path: '/trip-calculator', element: <TripCalculatorPage /> },
