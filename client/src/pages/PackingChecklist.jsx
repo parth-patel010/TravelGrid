@@ -1,4 +1,4 @@
-import PackingChecklist from "@/components/TravelPackingChecklist/PackingChecklist";
+import PackingChecklist from "../components/TravelPackingChecklist/PackingChecklist";
 import React from "react";
 
 const PackingChecklistPage = () => {

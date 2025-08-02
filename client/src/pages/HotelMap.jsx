@@ -7,7 +7,7 @@ import NearbyAttractions from '../components/NearbyAttractions';
 import {
   StarIcon, MapPinIcon, SparklesIcon, CheckCircleIcon, SunIcon,
   FlagIcon, GiftIcon, BookOpenIcon, ShieldCheckIcon, LockClosedIcon, CreditCardIcon
-} from '@heroicons/react/24/outline';
+} from '../heroicons/react/24/outline';
 
 // 🎯 Custom animated pink marker
 const pinkGlowMarker = L.divIcon({

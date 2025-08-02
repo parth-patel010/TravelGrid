@@ -4,9 +4,8 @@ import { useAuth } from '../context/AuthContext';
 import { Eye, EyeOff, Mail, Lock, LogIn, AlertCircle } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import GoogleLoginButton from '../components/Auth/GoogleLogin';
-
-import Navbar from '@/components/Custom/Navbar';
-import Footer from '@/components/Custom/Footer';
+import Navbar from "../components/Custom/Navbar";
+import Footer from "../components/Custom/Footer";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',

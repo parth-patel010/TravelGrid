@@ -5,41 +5,30 @@ import DiscoverCard from "../DiscoverCard.jsx";
 
 const destinations = [
   {
-    id: 1, // Added unique id
+    id: 1,
     name: "Manali, Himachal",
     description: "A beautiful hill station known for its scenic beauty and adventure sports.",
     image: "https://images.unsplash.com/photo-1712388430474-ace0c16051e2?w=600&auto=format&fit=crop&q=60"
   },
   {
-    id: 2, // Added unique id
+    id: 2,
     name: "Jaipur, Rajasthan",
     description: "The Pink City with rich history, forts, and vibrant culture.",
     image: "https://images.unsplash.com/photo-1603262110263-fb0112e7cc33?w=600&auto=format&fit=crop&q=60"
   },
   {
-    id: 3, // Added unique id
+    id: 3,
     name: "Goa",
     description: "Popular beach destination with nightlife, water sports, and culture.",
     image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=600&auto=format&fit=crop&q=60"
   },
   {
-    id: 4, // Added unique id
+    id: 4,
     name: "Rishikesh, Uttarakhand",
     description: "The yoga capital of the world, nestled on the banks of the Ganges.",
     image: "https://plus.unsplash.com/premium_photo-1697730398251-40cd8dc57e0b?w=600&auto=format&fit=crop&q=60"
   },
 ];
-
-
-const DiscoverSection = () => {
-  const navigate = useNavigate();
-
-  const handleBookNowClick = () => {
-    navigate("/packages");
-  };
-
-  const handleDiscoverMore = () => {
-    navigate("/discovermore");
 
 const container = {
   hidden: {},
@@ -58,9 +47,12 @@ const item = {
 const DiscoverSection = () => {
   const navigate = useNavigate();
 
+  const handleBookNowClick = () => {
+    navigate("/packages");
+  };
+
   const handleDiscoverMore = () => {
     navigate("/destinations");
-
   };
 
   return (
@@ -71,6 +63,7 @@ const DiscoverSection = () => {
       className="w-full py-20 text-center"
     >
       <div className="max-w-7xl mx-auto px-4">
+        {/* Heading */}
         <div className="mb-16">
           <motion.h2
             className="text-2xl md:text-3xl font-bold mb-6 text-white"
@@ -93,43 +86,24 @@ const DiscoverSection = () => {
           </motion.p>
         </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-2">
-        {destinations.map((place) => (
-          <DiscoverCard 
-            key={place.id} // Added key prop using the unique id
-            place={place} 
-            handleBookNowClick={handleBookNowClick} 
-          />
-        ))}
-      </div>
-
-      <div className="mt-16">
-        <h3 className="text-xl md:text-2xl font-semibold mb-4 text-black">
-          Ready to plan your next adventure?
-        </h3>
-        <p className="text-gray-600 mb-6">
-          Discover more travel ideas, tips, and personalized recommendations.
-        </p>
-        <button
-          onClick={handleDiscoverMore}
-          className="px-8 py-3 bg-gradient-to-r from-blue-600 to-pink-500 text-white font-medium rounded-full shadow-lg hover:scale-105 transition duration-300 cursor-pointer"
+        {/* Cards */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-4 gap-8 px-2 mb-16"
           variants={container}
           initial="hidden"
           animate="show"
         >
-          {destinations.map((place, index) => (
-            <motion.div key={index} variants={item}>
+          {destinations.map((place) => (
+            <motion.div key={place.id} variants={item}>
               <DiscoverCard
-                index={index}
                 place={place}
-                handleBookNowClick={() => navigate(`/package/${index + 5}`)}
+                handleBookNowClick={handleBookNowClick}
               />
             </motion.div>
           ))}
         </motion.div>
 
+        {/* CTA Section */}
         <div className="mt-16">
           <motion.h3
             className="text-xl md:text-2xl font-semibold mb-4 text-white"

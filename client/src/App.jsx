@@ -1,15 +1,16 @@
-
 import { useState, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
 import { DashboardDataProvider } from "./context/DashboardDataContext";
-import { MapProvider } from "./context/MapContext"; // Import the MapProvider
+import { MapProvider } from "./context/MapContext";
+import { AuthProvider } from "./context/AuthContext"; // ✅ Import fix
+
 import Navbar from "./components/Custom/Navbar";
 import Footer from "./components/Custom/Footer";
-import Spinner from './components/Spinner';
-import ErrorBoundary from './components/ErrorHandle/ErrorBoundary';
-import GoToTopButton from './components/GoToTopButton';
-import FeedbackButton from './components/FeedbackButton';
+import Spinner from "./components/Spinner";
+import ErrorBoundary from "./components/ErrorHandle/ErrorBoundary";
+import GoToTopButton from "./components/GoToTopButton";
+import FeedbackButton from "./components/FeedbackButton";
 
 function App() {
   const location = useLocation();
@@ -25,23 +26,27 @@ function App() {
     <AuthProvider>
       <AppProvider>
         <DashboardDataProvider>
-          <MapProvider> {/* Add MapProvider here */}
+          <MapProvider>
             <div className="flex flex-col min-h-screen">
+              {/* Show spinner when route changes */}
               {loading && <Spinner />}
+              
+              {/* Navbar */}
               <Navbar />
+
+              {/* Main Content */}
               <div className="flex-grow">
                 <ErrorBoundary>
                   <Outlet />
                 </ErrorBoundary>
               </div>
+
+              {/* Buttons and Footer */}
               <GoToTopButton />
+              <FeedbackButton />
               <Footer />
             </div>
-          </MapProvider
-            <GoToTopButton />
-            <FeedbackButton />
-            <Footer />
-          </div>
+          </MapProvider>
         </DashboardDataProvider>
       </AppProvider>
     </AuthProvider>

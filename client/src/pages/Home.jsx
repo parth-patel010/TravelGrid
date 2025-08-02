@@ -6,7 +6,7 @@ import DiscoverSection from '../components/Home/DiscoverSection'
 import FeaturedPackages from '../components/Home/FeaturedPackages'
 import TravelGuides from '../components/Home/TravelGuides'
 import Testimonials from '../components/Home/Testimonials'
-import Chatbot from '@/components/Chatbot'
+import Chatbot from '../components/Chatbot'
 
 function Home() {
     const [searchFilter, setSearchFilter] = useState(null);
