@@ -46,7 +46,7 @@ const Navbar = () => {
   const { wishlist } = useWishlist();
 
   const token = localStorage.getItem("token");
-  const isLoggedIn = isAuthenticated && token;
+  const isLoggedIn = !!(isAuthenticated && token && user);
 
   const toggleGroup = (item) => {
     setExpanded((prev) => (prev === item ? null : item));
@@ -82,9 +82,8 @@ const Navbar = () => {
     <>
       {/* Top Navbar */}
       <nav
-        className={`box-border w-full fixed top-0 left-0 z-50 h-20 backdrop-blur-md border-b border-white/10 bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2c1a31] shadow-md px-4 sm:px-6 transition-colors duration-200 ${
-          isScrolled ? "shadow-xl" : ""
-        }`}
+        className={`box-border w-full fixed top-0 left-0 z-50 h-20 backdrop-blur-md border-b border-white/10 bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2c1a31] shadow-md px-4 sm:px-6 transition-colors duration-200 ${isScrolled ? "shadow-xl" : ""
+          }`}
       >
         <div className="w-full max-w-full mx-auto flex justify-between items-center gap-4 px-2 py-6">
           {/* Logo */}
@@ -117,10 +116,9 @@ const Navbar = () => {
                         key={item.label}
                         to={item.path}
                         className={({ isActive }) =>
-                          `py-2 px-4 text-md hover:bg-gradient-to-r from-pink-500 to-pink-600 hover:text-white block transition-all rounded-md duration-200 ${
-                            isActive
-                              ? "bg-gradient-to-r from-pink-700 to-pink-500 text-white"
-                              : ""
+                          `py-2 px-4 text-md hover:bg-gradient-to-r from-pink-500 to-pink-600 hover:text-white block transition-all rounded-md duration-200 ${isActive
+                            ? "bg-gradient-to-r from-pink-700 to-pink-500 text-white"
+                            : ""
                           }`
                         }
                       >
@@ -135,10 +133,9 @@ const Navbar = () => {
                   to={link.path}
                   end
                   className={({ isActive }) =>
-                    `${linkBaseClasses} ${
-                      isActive
-                        ? "bg-gradient-to-r from-pink-700 to-pink-500 shadow-md text-white"
-                        : ""
+                    `${linkBaseClasses} ${isActive
+                      ? "bg-gradient-to-r from-pink-700 to-pink-500 shadow-md text-white"
+                      : ""
                     }`
                   }
                 >
@@ -209,17 +206,15 @@ const Navbar = () => {
 
       {/* Overlay */}
       <div
-        className={`fixed inset-0 bg-black/10 z-40 transition-opacity duration-300 md:hidden ${
-          isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 bg-black/10 z-40 transition-opacity duration-300 md:hidden ${isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
         onClick={() => setIsSidebarOpen(false)}
       />
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full w-[80vw] sm:w-[60vw] max-w-[320px] bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2c1a31] z-[1002] transition-transform duration-300 ease-in-out transform ${
-          isSidebarOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-full w-[80vw] sm:w-[60vw] max-w-[320px] bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2c1a31] z-[1002] transition-transform duration-300 ease-in-out transform ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         <div className="p-5 flex flex-col h-full text-gray-300">
           <div className="flex justify-end mb-6 border-b border-gray-600">
