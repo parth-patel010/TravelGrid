@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { Menu, X, User, LogOut, LogIn, ChevronDown } from "lucide-react";
+import { useWishlist } from '../../context/WishlistContext'; // path may vary
+
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -48,7 +50,10 @@ const Navbar = () => {
         { label: "Feedback", path: "/feedback" },
       ],
     },
-  ];
+
+    { name: "Wishlist", path: "/wishlist" },
+];
+  
 
   const handleLogout = async () => {
     try {
@@ -62,6 +67,12 @@ const Navbar = () => {
   const handleScroll = () => {
     setIsScrolled(window.scrollY > 0);
   };
+
+
+
+  const { wishlist } = useWishlist();
+
+
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -137,6 +148,7 @@ const Navbar = () => {
               )
             )}
           </div>
+  
 
           <div className="hidden md:flex gap-4 items-center text-pink-500 font-medium">
             {isAuthenticated ? (
@@ -236,6 +248,7 @@ const Navbar = () => {
                       ))}
                     </div>
                   )}
+     
                 </div>
               ) : (
                 <NavLink
