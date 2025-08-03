@@ -142,8 +142,9 @@ const Footer = () => {
 
                 </div>
               </div>
+
               {/* Quick Links */}
-              <div className="space-y-6 text-center md:text-left">
+              <div className="space-y-6">
                 <h4 className="text-lg font-semibold text-white border-b border-gray-600 pb-2 text-center">
                   Quick Links
                 </h4>
@@ -151,68 +152,84 @@ const Footer = () => {
                   <Link
                     to="/"
                     onClick={scrollToTop}
-                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center w-[110px]"
+                    className="w-[110px] text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
                   >
-                    <span className="w-2 h-2 bg-pink-500 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
-                    Home
+                    <span className="w-4 flex justify-center">
+                      <span className="w-2 h-2 bg-pink-500 rounded-full group-hover:scale-150 transition-transform"></span>
+                    </span>
+                    <span className="ml-3">Home</span>
                   </Link>
                   <Link
                     to="/about"
                     onClick={scrollToTop}
-                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group  w-[110px]"
+                    className="w-[110px] text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
                   >
-                    <span className="w-2 h-2 bg-pink-400 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
-                    About Us
+                    <span className="w-4 flex justify-center">
+                      <span className="w-2 h-2 bg-pink-400 rounded-full group-hover:scale-150 transition-transform"></span>
+                    </span>
+                    <span className="ml-3">About Us</span>
                   </Link>
                   <Link
                     to="/trips"
                     onClick={scrollToTop}
-                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group  w-[110px]"
+                    className="w-[110px] text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
                   >
-                    <span className="w-2 h-2 bg-pink-500 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
-                    Trips
+                    <span className="w-4 flex justify-center">
+                      <span className="w-2 h-2 bg-pink-500 rounded-full group-hover:scale-150 transition-transform"></span>
+                    </span>
+                    <span className="ml-3">Trips</span>
                   </Link>
                   <Link
                     to="/destinations"
                     onClick={scrollToTop}
-                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group  w-[110px]"
+                    className="w-[110px] text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
                   >
-                    <span className="w-2 h-2 bg-pink-400 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
-                    Destinations
+                    <span className="w-4 flex justify-center">
+                      <span className="w-2 h-2 bg-pink-400 rounded-full group-hover:scale-150 transition-transform"></span>
+                    </span>
+                    <span className="ml-3">Destinations</span>
                   </Link>
                   <Link
                     to="/hotels"
                     onClick={scrollToTop}
-                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group  w-[110px]"
+                    className="w-[110px] text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
                   >
-                    <span className="w-2 h-2 bg-pink-500 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
-                    Hotels
+                    <span className="w-4 flex justify-center">
+                      <span className="w-2 h-2 bg-pink-500 rounded-full group-hover:scale-150 transition-transform"></span>
+                    </span>
+                    <span className="ml-3">Hotels</span>
                   </Link>
                   <Link
                     to="/forum"
                     onClick={scrollToTop}
-                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group  w-[110px]"
+                    className="w-[110px] text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
                   >
-                    <span className="w-2 h-2 bg-pink-400 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
-                    Forums
+                    <span className="w-4 flex justify-center">
+                      <span className="w-2 h-2 bg-pink-400 rounded-full group-hover:scale-150 transition-transform"></span>
+                    </span>
+                    <span className="ml-3">Forums</span>
                   </Link>
                   <Link
                     to="/feedback"
                     onClick={scrollToTop}
-                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group  w-[110px]"
+                    className="w-[110px] text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
                   >
-                    <span className="w-2 h-2 bg-pink-500 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
-                    Feedback
+                    <span className="w-4 flex justify-center">
+                      <span className="w-2 h-2 bg-pink-500 rounded-full group-hover:scale-150 transition-transform"></span>
+                    </span>
+                    <span className="ml-3">Feedback</span>
                   </Link>
                 </nav>
               </div>
+
+
               {/* Contact Info */}
               <div className="space-y-6">
                 <h4 className="text-lg font-semibold text-white border-b border-gray-600 pb-2 text-center">
                   Contact Info
                 </h4>
-                <div className="space-y-4 flex flex-col items-center ml-[8px]">
-                  <div className="flex items-start space-x-3 justify-center">
+                <div className="space-y-4 flex flex-col justify-center items-center">
+                  <div className="flex items-start space-x-3">
                     <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                       <svg
                         className="w-4 h-4 text-white"
@@ -234,13 +251,15 @@ const Footer = () => {
                         />
                       </svg>
                     </div>
-                    <div className="text-center">
+                    <div>
                       <p className="text-gray-300 text-sm">123 Travel Street</p>
-                      <p className="text-gray-300 text-sm">Adventure City, AC 12345</p>
+                      <p className="text-gray-300 text-sm">
+                        Adventure City, AC 12345
+                      </p>
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-3 justify-center mr-[32px]">
+                  <div className="flex items-start space-x-3 mr-[36px]">
                     <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                       <svg
                         className="w-4 h-4 text-white"
@@ -256,13 +275,13 @@ const Footer = () => {
                         />
                       </svg>
                     </div>
-                    <div className="text-center">
+                    <div>
                       <p className="text-gray-300 text-sm">+1 (555) 123-4567</p>
                       <p className="text-gray-300 text-sm">Mon-Fri 9AM-6PM</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-3 justify-center">
+                  <div className="flex items-start space-x-3">
                     <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                       <svg
                         className="w-4 h-4 text-white"
@@ -278,13 +297,18 @@ const Footer = () => {
                         />
                       </svg>
                     </div>
-                    <div className="text-center">
-                      <p className="text-gray-300 text-sm">hello@travelgrid.com</p>
-                      <p className="text-gray-300 text-sm">support@travelgrid.com</p>
+                    <div>
+                      <p className="text-gray-300 text-sm">
+                        hello@travelgrid.com
+                      </p>
+                      <p className="text-gray-300 text-sm">
+                        support@travelgrid.com
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
+
               {/* Newsletter */}
               <div className="space-y-6">
                 <h4 className="text-lg font-semibold text-white border-b border-gray-600 pb-2 text-center">
@@ -351,6 +375,7 @@ const Footer = () => {
                 </div>
               </div>
             </div>
+
             {/* Bottom Section */}
             <div className="border-t border-gray-700 mt-12 pt-8">
               <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0">
@@ -386,21 +411,22 @@ const Footer = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex items-center justify-center space-x-2 text-gray-400 text-sm">
-                <span>Made with</span>
-                <svg
-                  className="w-4 h-4 text-red-500"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                </svg>
-                <span>by TravelGrid Team</span>
-              </div>
+               <div className="flex items-center justify-center space-x-2 text-gray-400 text-sm">
+                  <span>Made with</span>
+                  <svg
+                    className="w-4 h-4 text-red-500"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg>
+                  <span>by TravelGrid Team</span>
+                </div>
             </div>
           </div>
         </div>
       </footer>
+
       {/* Toast Notification */}
       {toast.show && (
         <div className="fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-2 duration-300">
