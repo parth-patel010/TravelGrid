@@ -48,6 +48,7 @@ import Summarizer from './components/Summarizer';
 import Recommendation from './components/recommendation';
 import Wishlist from './pages/Wishlist';
 import { WishlistProvider } from "./context/WishlistContext";
+import PetTravel from './pages/PetTravel';
 
 
 const router = createBrowserRouter([
@@ -132,6 +133,7 @@ const router = createBrowserRouter([
       { path: '/server-error', element: <ServerError /> },
       { path: '*', element: <NotFound /> },
       { path: '/package/:id', element: <PackageDetails /> },
+      { path: '/pettravel', element: <PetTravel />}
     ],
   },
 ]);

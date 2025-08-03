@@ -52,6 +52,7 @@ const Navbar = () => {
     },
 
     { name: "Wishlist", path: "/wishlist" },
+    { name: "Pet Travel Guide", path: "/pettravel" },
 ];
   
 
