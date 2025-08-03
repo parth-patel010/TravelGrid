@@ -3,7 +3,8 @@ import { Outlet, useLocation } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
 import { DashboardDataProvider } from "./context/DashboardDataContext";
 import { MapProvider } from "./context/MapContext";
-import { AuthProvider } from "./context/AuthContext"; // ✅ Import fix
+import { AuthProvider } from "./context/AuthContext";
+import { WishlistProvider } from "./context/WishlistContext";
 
 import Navbar from "./components/Custom/Navbar";
 import Footer from "./components/Custom/Footer";
@@ -24,31 +25,33 @@ function App() {
 
   return (
     <AuthProvider>
-      <AppProvider>
-        <DashboardDataProvider>
-          <MapProvider>
-            <div className="flex flex-col min-h-screen">
-              {/* Show spinner when route changes */}
-              {loading && <Spinner />}
-              
-              {/* Navbar */}
-              <Navbar />
+      <WishlistProvider>
+        <AppProvider>
+          <DashboardDataProvider>
+            <MapProvider>
+              <div className="flex flex-col min-h-screen">
+                {/* Show spinner when route changes */}
+                {loading && <Spinner />}
 
-              {/* Main Content */}
-              <div className="flex-grow">
-                <ErrorBoundary>
-                  <Outlet />
-                </ErrorBoundary>
+                {/* Navbar */}
+                <Navbar />
+
+                {/* Main Content */}
+                <div className="flex-grow">
+                  <ErrorBoundary>
+                    <Outlet />
+                  </ErrorBoundary>
+                </div>
+
+                {/* Buttons and Footer */}
+                <GoToTopButton />
+                <FeedbackButton />
+                <Footer />
               </div>
-
-              {/* Buttons and Footer */}
-              <GoToTopButton />
-              <FeedbackButton />
-              <Footer />
-            </div>
-          </MapProvider>
-        </DashboardDataProvider>
-      </AppProvider>
+            </MapProvider>
+          </DashboardDataProvider>
+        </AppProvider>
+      </WishlistProvider>
     </AuthProvider>
   );
 }

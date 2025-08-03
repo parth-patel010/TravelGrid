@@ -172,7 +172,7 @@ useEffect(() => {
 
     return (
 
-        <div className="min-h-screen mt-6 bg-gradient-to-br from-black to-pink-900 px-4 sm:px-8 md:px-16 py-10 md:py-20">
+        <div className="min-h-screen bg-gradient-to-br from-black to-pink-900 px-4 sm:px-8 md:px-16 py-10 md:py-20">
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 mb-6 border border-white/20">

@@ -1,17 +1,18 @@
 import { StrictMode, lazy, Suspense } from 'react';
-import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import { Toaster } from 'react-hot-toast';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import App from './App.jsx';
 import Spinner from './components/Spinner';
 import ErrorBoundary from './components/ErrorHandle/ErrorBoundary';
-import { AuthProvider } from './context/AuthContext';
-import { MapProvider } from './context/MapContext';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { AuthProvider } from './context/AuthContext';
+import { WishlistProvider } from './context/WishlistContext';
 import AuthLayout from './components/AuthLayout';
+import ProtectedRoute from './components/Auth/ProtectedRoute';
 
-// Lazy imports
+// Lazy imports for pages
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Blog = lazy(() => import('./pages/Blog'));
@@ -30,7 +31,15 @@ const Contact = lazy(() => import('./components/Contact'));
 const PrivacyPolicy = lazy(() => import('./pages/Privacypolicy'));
 const TermsAndConditions = lazy(() => import('./pages/Terms&Conditions'));
 const TripCalculatorPage = lazy(() => import('./pages/TripCalculator'));
-const HotelMapPage = lazy(() => import('./pages/HotelMapPage'));
+const CurrencyConverter = lazy(() => import('./pages/currencyconverter'));
+const Feedback = lazy(() => import('./pages/Feedback'));
+const TravelPlanGenerator = lazy(() => import('./pages/TravelPlanGenerator'));
+const TravelForum = lazy(() => import('./pages/TravelForum'));
+const TrendingSpots = lazy(() => import('./pages/TrendingSpots.jsx'));
+const PackingChecklistPage = lazy(() => import('./pages/PackingChecklist.jsx'));
+const Summarizer = lazy(() => import('./components/Summarizer'));
+const Recommendation = lazy(() => import('./components/recommendation'));
+const Wishlist = lazy(() => import('./pages/Wishlist'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const TripsPlanned = lazy(() => import('./pages/TripsPlanned'));
 const SavedPlaces = lazy(() => import('./pages/SavedPlaces'));
@@ -42,15 +51,7 @@ const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
 const NetworkError = lazy(() => import('./components/ErrorHandle/NetworkError'));
 const ServerError = lazy(() => import('./components/ErrorHandle/ServerError'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-const HotelBookingPage = lazy(() => import('./pages/HotelBookingPage'));
-const CurrencyConverter = lazy(() => import('./pages/currencyconverter'));
-const Feedback = lazy(() => import('./pages/Feedback'));
-const TravelPlanGenerator = lazy(() => import('./pages/TravelPlanGenerator'));
-const TravelForum = lazy(() => import('./pages/TravelForum'));
-const TrendingSpots = lazy(() => import('./pages/TrendingSpots.jsx'));
-const PackingChecklistPage = lazy(() => import('./pages/PackingChecklist.jsx'));
 
-// Router config
 const router = createBrowserRouter([
   { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
   { path: '/signup', element: <AuthLayout><Signup /></AuthLayout> },
@@ -58,39 +59,53 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <ErrorBoundary />,
     children: [
       { path: '/', element: <Suspense fallback={<Spinner />}><Home /></Suspense> },
       { path: '/about', element: <Suspense fallback={<Spinner />}><About /></Suspense> },
       { path: '/blog', element: <Suspense fallback={<Spinner />}><Blog /></Suspense> },
       { path: '/discover', element: <Suspense fallback={<Spinner />}><Discover /></Suspense> },
+      { path: '/currency-converter', element: <Suspense fallback={<Spinner />}><CurrencyConverter /></Suspense> },
       { path: '/trips', element: <Suspense fallback={<Spinner />}><Trips /></Suspense> },
       { path: '/review', element: <Suspense fallback={<Spinner />}><Review /></Suspense> },
+      { path: '/forum', element: <Suspense fallback={<Spinner />}><TravelForum /></Suspense> },
       { path: '/contributors', element: <Suspense fallback={<Spinner />}><Contributors /></Suspense> },
       { path: '/hotels', element: <Suspense fallback={<Spinner />}><Hotels /></Suspense> },
       { path: '/hotels/:id', element: <Suspense fallback={<Spinner />}><HotelDetails /></Suspense> },
       { path: '/ticket', element: <Suspense fallback={<Spinner />}><TicketBooking /></Suspense> },
       { path: '/guides', element: <Suspense fallback={<Spinner />}><TravelGuidesCarousel /></Suspense> },
       { path: '/packages', element: <Suspense fallback={<Spinner />}><TravelPackages /></Suspense> },
-      { path: '/discovermore', element: <Suspense fallback={<Spinner />}><DiscovermoreDestination /></Suspense> },
+      { path: '/destinations', element: <Suspense fallback={<Spinner />}><DiscovermoreDestination /></Suspense> },
       { path: '/faq', element: <Suspense fallback={<Spinner />}><FAQ /></Suspense> },
       { path: '/contact', element: <Suspense fallback={<Spinner />}><Contact /></Suspense> },
+      { path: '/feedback', element: <Suspense fallback={<Spinner />}><Feedback /></Suspense> },
+      { path: '/recommendation', element: <Suspense fallback={<Spinner />}><Recommendation /></Suspense> },
+      { path: '/Summarizer', element: <Suspense fallback={<Spinner />}><Summarizer /></Suspense> },
       { path: '/privacy', element: <Suspense fallback={<Spinner />}><PrivacyPolicy /></Suspense> },
       { path: '/terms', element: <Suspense fallback={<Spinner />}><TermsAndConditions /></Suspense> },
       { path: '/trip-calculator', element: <Suspense fallback={<Spinner />}><TripCalculatorPage /></Suspense> },
-      { path: '/hotel-map', element: <Suspense fallback={<Spinner message="Loading map..." />}><HotelMapPage /></Suspense> },
-      { path: '/currency-converter', element: <Suspense fallback={<Spinner />}><CurrencyConverter /></Suspense> },
-      { path: '/feedback', element: <Suspense fallback={<Spinner />}><Feedback /></Suspense> },
-      { path: '/forum', element: <Suspense fallback={<Spinner />}><TravelForum /></Suspense> },
       { path: '/travel-plan-generator', element: <Suspense fallback={<Spinner />}><TravelPlanGenerator /></Suspense> },
       { path: '/packing-checklist', element: <Suspense fallback={<Spinner />}><PackingChecklistPage /></Suspense> },
+      { path: '/wishlist', element: <Suspense fallback={<Spinner />}><Wishlist /></Suspense> },
       { path: '/trending-spots', element: <Suspense fallback={<Spinner />}><TrendingSpots /></Suspense> },
-      { path: '/dashboard', element: <Suspense fallback={<Spinner />}><Dashboard /></Suspense> },
-      { path: '/dashboard/trips', element: <Suspense fallback={<Spinner />}><TripsPlanned /></Suspense> },
-      { path: '/dashboard/saved', element: <Suspense fallback={<Spinner />}><SavedPlaces /></Suspense> },
-      { path: '/dashboard/countries', element: <Suspense fallback={<Spinner />}><CountriesVisited /></Suspense> },
+      { path: '/trending', element: <Suspense fallback={<Spinner />}><TrendingSpots /></Suspense> },
+
+      {
+        path: '/dashboard',
+        element: <ProtectedRoute><Dashboard /></ProtectedRoute>
+      },
+      {
+        path: '/dashboard/trips',
+        element: <ProtectedRoute><TripsPlanned /></ProtectedRoute>
+      },
+      {
+        path: '/dashboard/saved',
+        element: <ProtectedRoute><SavedPlaces /></ProtectedRoute>
+      },
+      {
+        path: '/dashboard/countries',
+        element: <ProtectedRoute><CountriesVisited /></ProtectedRoute>
+      },
       { path: '/package/:id', element: <Suspense fallback={<Spinner />}><PackageDetails /></Suspense> },
-      { path: '/hotel-booking', element: <Suspense fallback={<Spinner />}><HotelBookingPage /></Suspense> },
       { path: '/network-error', element: <Suspense fallback={<Spinner />}><NetworkError /></Suspense> },
       { path: '/server-error', element: <Suspense fallback={<Spinner />}><ServerError /></Suspense> },
       { path: '*', element: <Suspense fallback={<Spinner />}><NotFound /></Suspense> },
@@ -98,14 +113,12 @@ const router = createBrowserRouter([
   },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-
-root.render(
+createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
         <AuthProvider>
-          <MapProvider>
+          <WishlistProvider>
             <RouterProvider router={router} />
             <Toaster
               position="top-center"
@@ -119,7 +132,7 @@ root.render(
                 },
               }}
             />
-          </MapProvider>
+          </WishlistProvider>
         </AuthProvider>
       </GoogleOAuthProvider>
     </ErrorBoundary>
