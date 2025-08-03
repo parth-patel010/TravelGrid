@@ -10,6 +10,7 @@ const bookingRouter = require('./routes/bookingRoutes');
 
 const postRoutes = require('./routes/postRoutes')
 const saveRoutes = require('./routes/saveRoutes');
+const tripRoutes =  require( './routes/trips.js');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -46,6 +47,9 @@ app.use('/api/post',postRoutes);
 
 //save Route
 app.use('/api/save', saveRoutes);
+
+// Trip Routes
+app.use('/api', tripRoutes);
 
 // 404 Not Found middleware
 app.use((req,res,next)=>{
