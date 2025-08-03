@@ -151,7 +151,7 @@ const Footer = () => {
                   <Link
                     to="/"
                     onClick={scrollToTop}
-                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
+                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center w-[110px]"
                   >
                     <span className="w-2 h-2 bg-pink-500 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
                     Home
@@ -159,7 +159,7 @@ const Footer = () => {
                   <Link
                     to="/about"
                     onClick={scrollToTop}
-                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
+                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group  w-[110px]"
                   >
                     <span className="w-2 h-2 bg-pink-400 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
                     About Us
@@ -167,7 +167,7 @@ const Footer = () => {
                   <Link
                     to="/trips"
                     onClick={scrollToTop}
-                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
+                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group  w-[110px]"
                   >
                     <span className="w-2 h-2 bg-pink-500 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
                     Trips
@@ -175,7 +175,7 @@ const Footer = () => {
                   <Link
                     to="/destinations"
                     onClick={scrollToTop}
-                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
+                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group  w-[110px]"
                   >
                     <span className="w-2 h-2 bg-pink-400 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
                     Destinations
@@ -183,7 +183,7 @@ const Footer = () => {
                   <Link
                     to="/hotels"
                     onClick={scrollToTop}
-                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
+                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group  w-[110px]"
                   >
                     <span className="w-2 h-2 bg-pink-500 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
                     Hotels
@@ -191,7 +191,7 @@ const Footer = () => {
                   <Link
                     to="/forum"
                     onClick={scrollToTop}
-                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
+                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group  w-[110px]"
                   >
                     <span className="w-2 h-2 bg-pink-400 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
                     Forums
@@ -199,7 +199,7 @@ const Footer = () => {
                   <Link
                     to="/feedback"
                     onClick={scrollToTop}
-                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
+                    className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group  w-[110px]"
                   >
                     <span className="w-2 h-2 bg-pink-500 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
                     Feedback
@@ -208,11 +208,11 @@ const Footer = () => {
               </div>
               {/* Contact Info */}
               <div className="space-y-6">
-                <h4 className="text-lg font-semibold text-white border-b border-gray-600 pb-2">
+                <h4 className="text-lg font-semibold text-white border-b border-gray-600 pb-2 text-center">
                   Contact Info
                 </h4>
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-3">
+                <div className="space-y-4 flex flex-col items-center ml-[8px]">
+                  <div className="flex items-start space-x-3 justify-center">
                     <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                       <svg
                         className="w-4 h-4 text-white"
@@ -234,22 +234,13 @@ const Footer = () => {
                         />
                       </svg>
                     </div>
-
-                    <div>
-                        <a
-                          href="https://www.google.com/maps?q=123+Travel+Street,+Adventure+City,+AC+12345"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-gray-300 text-sm hover:underline block"
-                        >
-                          123 Travel Street<br />
-                          Adventure City, AC 12345
-                        </a>
-
+                    <div className="text-center">
+                      <p className="text-gray-300 text-sm">123 Travel Street</p>
+                      <p className="text-gray-300 text-sm">Adventure City, AC 12345</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-3">
+                  <div className="flex items-start space-x-3 justify-center mr-[32px]">
                     <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                       <svg
                         className="w-4 h-4 text-white"
@@ -265,14 +256,14 @@ const Footer = () => {
                         />
                       </svg>
                     </div>
-                    <div className="text-center md:text-left">
+                    <div className="text-center">
                       <p className="text-gray-300 text-sm">+1 (555) 123-4567</p>
                       <p className="text-gray-300 text-sm">Mon-Fri 9AM-6PM</p>
                     </div>
                   </div>
 
-                  <div className="flex flex-col items-center md:items-start space-y-2">
-                    <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0" style={{minWidth: '32px', width: '32px', height: '32px'}}>
+                  <div className="flex items-start space-x-3 justify-center">
+                    <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                       <svg
                         className="w-4 h-4 text-white"
                         fill="none"
@@ -287,20 +278,16 @@ const Footer = () => {
                         />
                       </svg>
                     </div>
-                    <div className="text-center md:text-left">
-                      <p className="text-gray-300 text-sm">
-                        hello@travelgrid.com
-                      </p>
-                      <p className="text-gray-300 text-sm">
-                        support@travelgrid.com
-                      </p>
+                    <div className="text-center">
+                      <p className="text-gray-300 text-sm">hello@travelgrid.com</p>
+                      <p className="text-gray-300 text-sm">support@travelgrid.com</p>
                     </div>
                   </div>
                 </div>
               </div>
               {/* Newsletter */}
               <div className="space-y-6">
-                <h4 className="text-lg font-semibold text-white border-b border-gray-600 pb-2">
+                <h4 className="text-lg font-semibold text-white border-b border-gray-600 pb-2 text-center">
                   Newsletter
                 </h4>
                 <p className="text-gray-300 text-sm leading-relaxed">
