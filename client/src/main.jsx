@@ -48,6 +48,7 @@ import Summarizer from './components/Summarizer';
 import Recommendation from './components/recommendation';
 import Wishlist from './pages/Wishlist';
 import { WishlistProvider } from "./context/WishlistContext";
+import LocationDetail from './pages/LocationDetail';
 
 
 const router = createBrowserRouter([
@@ -95,6 +96,7 @@ const router = createBrowserRouter([
       {path: '/wishlist',element: <Wishlist />,},
       { path: '/trending-spots', element: <TrendingSpots /> }, // ✅ Add this route
       { path: '/trending', element: <TrendingSpots /> }, // ✅ Alternative route
+
       {
 
         path: '/dashboard',
@@ -132,6 +134,7 @@ const router = createBrowserRouter([
       { path: '/server-error', element: <ServerError /> },
       { path: '*', element: <NotFound /> },
       { path: '/package/:id', element: <PackageDetails /> },
+      { path: '/location/:locationId', element: <LocationDetail />} 
     ],
   },
 ]);
