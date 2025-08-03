@@ -9,6 +9,10 @@ import { AuthProvider,useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 import HotelDetailsSkeleton from '../components/Loaders/HotelDetailsSkeleton';
 import { motion, AnimatePresence } from 'framer-motion';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import BookingPDF from '../components/PDF/BookingPDF'; // make sure this path is correct
+
+
 /**
  * HotelDetails.jsx
  * ----------------
@@ -28,6 +32,13 @@ import { motion, AnimatePresence } from 'framer-motion';
  */
 // build function to get the hotel details from the hotels.js file 
 function HotelDetails() {
+  const generateBookingId = () => {
+  const timestamp = Date.now(); // e.g., 1691234567890
+  const random = Math.floor(Math.random() * 9000 + 1000); // e.g., 4567
+  return `BOOK-${timestamp}-${random}`;
+};
+  
+
   const { id } = useParams();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -37,6 +48,11 @@ console.log("Logged-in user from useAuth:", user);
 
 
   const [loading, setLoading] = useState(true);
+  const [bookingConfirmed, setBookingConfirmed] = useState(false);
+const [bookingId, setBookingId] = useState('');
+const [qrDataUrl, setQrDataUrl] = useState('');
+  // You can use uuid or custom function
+
 
 
   // Ensure the page starts at the top whenever a new hotel is viewed
@@ -121,12 +137,39 @@ console.log("Logged-in user from useAuth:", user);
               </p>
 
 
-              <button
-               onClick={() => setShowModal(true)}
-                className="bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 cursor-pointer"
-              >
-                Proceed to Book
-              </button>
+             {!bookingConfirmed ? (
+  <button
+    onClick={() => {
+      const id = generateBookingId();
+      setBookingId(id);
+      setBookingConfirmed(true);
+      toast.success("Booking Confirmed!");
+    }}
+    className="bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 cursor-pointer"
+  >
+    Proceed to Book
+  </button>
+) : (
+  <div className="flex flex-col gap-4">
+    <p className="text-green-300 font-semibold">Booking Confirmed ✅</p>
+    <PDFDownloadLink
+      document={<BookingPDF user={user} hotel={hotel} bookingId={bookingId} />}
+      fileName={`Booking-${bookingId}.pdf`}
+    >
+      {({ loading }) =>
+        loading ? (
+          <p className="text-pink-200">Generating PDF...</p>
+        ) : (
+          <button className="bg-pink-600 text-white px-8 py-3 rounded-lg hover:bg-pink-700 transition">
+            Download Booking PDF
+          </button>
+        )
+      }
+    </PDFDownloadLink>
+  </div>
+)}
+
+
           {showModal && user && (
             <BookingModal
               hotelId={hotel.id}
