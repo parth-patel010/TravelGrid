@@ -13,68 +13,60 @@ if (!JWT_SECRET) {
   process.exit(1);
 }
 
-// Google Authentication
+
 exports.googleAuth = async (req, res) => {
+  const { token } = req.body;
+
   try {
-    const { email, name, picture, googleId } = req.body;
+    // 1. Verify token with Google
+    const response = await fetch(
+      `https://oauth2.googleapis.com/tokeninfo?id_token=${token}`
+    );
+    const googleUser = await response.json();
 
-    if (!email || !name || !googleId) {
-      return res.status(400).json({ message: 'Google authentication data is incomplete' });
+    if (!googleUser.email) {
+      return res.status(400).json({ success: false, error: "Invalid Google token" });
     }
 
-    // Email validation
-    if (!validator.isEmail(email)) {
-      return res.status(400).json({ message: 'Invalid email format' });
-    }
-
-    const normalizedEmail = email.toLowerCase();
-    
-    // Check if user already exists
-    let user = await User.findOne({ email: normalizedEmail });
+    // 2. Find existing user
+    let user = await User.findOne({ email: googleUser.email });
 
     if (!user) {
-      // Create new user with Google data
+      // Create new Google user
       user = await User.create({
-        name,
-        email: normalizedEmail,
-        googleId,
-        picture,
+        name: googleUser.name || "Google User",
+        email: googleUser.email,
+        picture: googleUser.picture,
+        googleId: googleUser.sub,
         isGoogleUser: true
       });
-    } else {
-      // Update existing user with Google data if not already a Google user
-      if (!user.googleId) {
-        user.googleId = googleId;
-        user.picture = picture;
-        user.isGoogleUser = true;
-        await user.save();
-      }
+    } else if (!user.googleId) {
+      // Update existing user (normal signup → Google login later)
+      user.googleId = googleUser.sub;
+      user.isGoogleUser = true;
+      user.picture = googleUser.picture; // update picture
+      await user.save();
     }
 
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+    // 3. Generate JWT
+    const userToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
 
-    const options = {
-      httpOnly : true,
-      secure : true
-    }
-
-    return res
-          .status(200)
-          .cookie("token",token, options)
-          .json({
-      message: '✅ Google authentication successful',
-      token,
+    // 4. Send response
+    res.json({
+      success: true,
+      token: userToken,
       user: {
         id: user._id,
         name: user.name,
         email: user.email,
         picture: user.picture,
-        isGoogleUser: user.isGoogleUser
-      }
+      },
     });
-  } catch (err) {
-    console.error('Google auth error:', err);
-    return res.status(500).json({ message: 'Server Error during Google authentication' });
+  } catch (error) {
+    console.error("Google Auth Error:", error);
+    res.status(500).json({ success: false, error: "Server error" });
   }
 };
 
@@ -84,35 +76,18 @@ exports.registerUser = async (req, res) => {
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
-      return res.status(400).json({ message: 'All fields are required' });
+      return res.status(400).json({ success: false, error: 'All fields are required' });
     }
 
-    // Email validation
     if (!validator.isEmail(email)) {
-      return res.status(400).json({ message: 'Invalid email format' });
-    }
-
-    // Password strength validation (special char optional)
-    if (
-      !validator.isStrongPassword(password, {
-        minLength: 8,
-        minLowercase: 1,
-        minUppercase: 1,
-        minNumbers: 1,
-        minSymbols: 0 // special character optional
-      })
-    ) {
-      return res.status(400).json({
-        message:
-          'Password must have at least 8 chars, 1 uppercase, 1 lowercase and 1 number'
-      });
+      return res.status(400).json({ success: false, error: 'Invalid email format' });
     }
 
     const normalizedEmail = email.toLowerCase();
     const existingUser = await User.findOne({ email: normalizedEmail });
 
     if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ success: false, error: 'User already exists' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -122,29 +97,23 @@ exports.registerUser = async (req, res) => {
       email: normalizedEmail,
       password: hashedPassword
     });
-    console.log('User saved to DB:', user);
 
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '7d' });
 
-    const options = {
-      httpOnly : true,
-      secure : true
-    }
-
-    return res
-          .status(201)
-          .cookie("token",token,options)
-          .json({
-      message: '✅ User registered',
+    return res.status(201).json({
+      success: true,
+      message: 'User registered',
+      token,
       user: {
         id: user._id,
         name: user.name,
         email: user.email
       }
     });
+
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: 'Server Error' });
+    return res.status(500).json({ success: false, error: 'Server Error' });
   }
 };
 
@@ -154,46 +123,47 @@ exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({ message: 'All fields are required' });
+      return res.status(400).json({ success: false, error: 'All fields are required' });
     }
 
-    // Email validation
     if (!validator.isEmail(email)) {
-      return res.status(400).json({ message: 'Invalid email format' });
+      return res.status(400).json({ success: false, error: 'Invalid email format' });
     }
 
     const normalizedEmail = email.toLowerCase();
     const user = await User.findOne({ email: normalizedEmail });
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ success: false, error: 'User not found' });
     }
 
-    const isMatch =  bcrypt.compare(password, user.password);
+    // Agar Google user hai toh normal login se block karo
+    if (user.isGoogleUser) {
+      return res.status(400).json({ success: false, error: 'Please login with Google' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      return res.status(401).json({ success: false, error: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '7d' });
 
-    const options = {
-      httpOnly : true,
-      secure : true
-    }
-    return res
-            .status(200)
-            .cookie("token",token,options)
-            .json({
-                   message: '✅ Login successful',
-                   user: {
-                     id: user._id,
-                     name: user.name,
-                     email: user.email
-                   }
+    return res.status(200).json({
+      success: true,
+      message: 'Login successful',
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        picture: user.picture
+      }
     });
+
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: 'Server Error' });
+    return res.status(500).json({ success: false, error: 'Server Error' });
   }
 };
 

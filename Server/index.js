@@ -10,6 +10,7 @@ const bookingRouter = require('./routes/bookingRoutes');
 
 const postRoutes = require('./routes/postRoutes')
 const saveRoutes = require('./routes/saveRoutes');
+const tripRoutes =  require( './routes/trips.js');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -18,12 +19,28 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 
 // Middleware
+const allowedOrigins = [
+  "http://localhost:5173", // Vite dev
+  "http://localhost:3000", // CRA dev
+  "https://travel-grid.vercel.app" // Production
+];
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production'
-    ? 'https://travel-grid.vercel.app'
-    : '*',
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
+
+app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+  res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+  next();
+});
 
 
 app.use(express.json());
@@ -46,6 +63,9 @@ app.use('/api/post',postRoutes);
 
 //save Route
 app.use('/api/save', saveRoutes);
+
+// Trip Routes
+app.use('/api', tripRoutes);
 
 // 404 Not Found middleware
 app.use((req,res,next)=>{
