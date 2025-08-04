@@ -44,6 +44,22 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const location = useLocation();
+
+  const getActiveParentTab = () => {
+    for (const link of navLinks) {
+      if (link.subitems) {
+        for (const sub of link.subitems) {
+          if (location.pathname.startsWith(sub.path)) {
+            return link.name;
+          }
+        }
+      }
+    }
+    return null;
+  };
+
+  const activeParentTab = getActiveParentTab();
+
   const { user, logout, isAuthenticated } = useAuth();
   const { wishlist } = useWishlist();
   const { isDarkMode } = useTheme();
@@ -113,9 +129,11 @@ const Navbar = () => {
               link.subitems ? (
                 <div className="relative group" key={link.name}>
                   <button
-                    className="py-1 px-2 text-md rounded-sm hover:text-pink-500 hover:shadow-lg transition-all duration-300 flex items-center gap-1"
-                    aria-haspopup="menu"
-                    aria-expanded="false"
+                    className={`py-1.5 px-4 text-md font-medium rounded-sm transition-all duration-300 flex items-center gap-1 ${
+                      activeParentTab === link.name
+                        ? "bg-gradient-to-r from-pink-700 to-pink-500 shadow-md text-white"
+                        : "hover:text-pink-500 hover:shadow-sm text-gray-200"
+                    }`}
                   >
                     {link.name} <ChevronDown fontSize={16} />
                   </button>
