@@ -53,7 +53,6 @@ const Footer = () => {
         <div className="relative z-10">
           <div className="container mx-auto px-4 py-16">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 text-left">
-              
               {/* Company Info */}
               <div className="space-y-6">
                 <div className="flex items-center space-x-3">
@@ -72,16 +71,15 @@ const Footer = () => {
                 {/* Social Media Links */}
                 <div className="flex space-x-4">
                   {/* Icons like Twitter, Pinterest, YouTube, Contributors */}
-                  {/* ... No changes needed here ... */}
                 </div>
               </div>
 
               {/* Quick Links */}
               <div className="space-y-6">
-                <h4 className="text-lg font-semibold text-white border-b border-gray-600 pb-2">
+                <h4 className="text-lg font-semibold text-white border-b border-gray-600 pb-2 text-center">
                   Quick Links
                 </h4>
-                <nav className="flex flex-col space-y-3 items-start">
+                <nav className="flex flex-col space-y-3 items-center">
                   {[
                     { name: "Home", path: "/" },
                     { name: "About Us", path: "/about" },
@@ -97,8 +95,10 @@ const Footer = () => {
                       onClick={scrollToTop}
                       className="text-gray-300 hover:text-pink-300 transition-all duration-300 text-sm flex items-center group"
                     >
-                      <span className="w-2 h-2 bg-pink-500 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
-                      {link.name}
+                      <span className="w-4 flex justify-center">
+                        <span className="w-2 h-2 bg-pink-500 rounded-full group-hover:scale-150 transition-transform"></span>
+                      </span>
+                      <span className="ml-3">{link.name}</span>
                     </Link>
                   ))}
                 </nav>
@@ -106,17 +106,22 @@ const Footer = () => {
 
               {/* Contact Info */}
               <div className="space-y-6">
-                <h4 className="text-lg font-semibold text-white border-b border-gray-600 pb-2">
+                <h4 className="text-lg font-semibold text-white border-b border-gray-600 pb-2 text-center">
                   Contact Info
                 </h4>
-                <div className="space-y-4">
+                <div className="space-y-4 flex flex-col justify-center items-center">
                   <div className="flex items-start space-x-3">
-                    <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center mt-1">
-                      {/* Location icon */}
+                    <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
                     </div>
-                    <div className="text-left">
-                      <a href="https://www.google.com/maps?q=123+Travel+Street,+Adventure+City,+AC+12345"
-                        target="_blank" rel="noopener noreferrer"
+                    <div>
+                      <a
+                        href="https://www.google.com/maps?q=123+Travel+Street,+Adventure+City,+AC+12345"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-gray-300 text-sm hover:underline block"
                       >
                         123 Travel Street<br />
@@ -126,20 +131,24 @@ const Footer = () => {
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center mt-1">
-                      {/* Phone icon */}
+                    <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
                     </div>
-                    <div className="text-left">
+                    <div>
                       <p className="text-gray-300 text-sm">+1 (555) 123-4567</p>
                       <p className="text-gray-300 text-sm">Mon-Fri 9AM-6PM</p>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center mt-1">
-                      {/* Email icon */}
+                    <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
                     </div>
-                    <div className="text-left">
+                    <div>
                       <p className="text-gray-300 text-sm">hello@travelgrid.com</p>
                       <p className="text-gray-300 text-sm">support@travelgrid.com</p>
                     </div>
@@ -149,7 +158,7 @@ const Footer = () => {
 
               {/* Newsletter */}
               <div className="space-y-6">
-                <h4 className="text-lg font-semibold text-white border-b border-gray-600 pb-2">
+                <h4 className="text-lg font-semibold text-white border-b border-gray-600 pb-2 text-center">
                   Newsletter
                 </h4>
                 <p className="text-gray-300 text-sm leading-relaxed">
@@ -169,7 +178,10 @@ const Footer = () => {
                       {/* Envelope icon */}
                     </div>
                   </div>
-                  <button type="submit" className="w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white py-3 px-4 rounded-lg text-sm font-medium flex items-center justify-center space-x-2">
+                  <button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white py-3 px-4 rounded-lg text-sm font-medium flex items-center justify-center space-x-2"
+                  >
                     <span>Subscribe</span>
                     {/* Send icon */}
                   </button>
@@ -180,7 +192,7 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Footer Bottom */}
+            {/* Bottom Section */}
             <div className="border-t border-gray-700 mt-12 pt-8">
               <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0">
                 <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
@@ -188,17 +200,25 @@ const Footer = () => {
                     © 2025 TravelGrid. All rights reserved.
                   </p>
                   <div className="flex space-x-4 text-sm">
-                    <Link to="/privacy" className="text-gray-400 hover:text-pink-300 transition-colors">Privacy Policy</Link>
-                    <Link to="/terms" className="text-gray-400 hover:text-pink-300 transition-colors">Terms of Service</Link>
-                    <Link to="/contact" className="text-gray-400 hover:text-pink-300 transition-colors">Contact</Link>
-                    <Link to="/feedback" className="text-gray-400 hover:text-pink-300 transition-colors">Feedback</Link>
+                    <Link to="/privacy" className="text-gray-400 hover:text-pink-300 transition-colors">
+                      Privacy Policy
+                    </Link>
+                    <Link to="/terms" className="text-gray-400 hover:text-pink-300 transition-colors">
+                      Terms of Service
+                    </Link>
+                    <Link to="/contact" className="text-gray-400 hover:text-pink-300 transition-colors">
+                      Contact
+                    </Link>
+                    <Link to="/feedback" className="text-gray-400 hover:text-pink-300 transition-colors">
+                      Feedback
+                    </Link>
                   </div>
                 </div>
               </div>
               <div className="flex items-center justify-center space-x-2 text-gray-400 text-sm mt-4">
                 <span>Made with</span>
                 <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 21.35l-1.45-1.32C5.4..." />
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                 </svg>
                 <span>by TravelGrid Team</span>
               </div>
@@ -210,7 +230,11 @@ const Footer = () => {
       {/* Toast Notification */}
       {toast.show && (
         <div className="fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-2 duration-300">
-          <div className={`max-w-sm w-full bg-white rounded-lg shadow-xl border-l-4 p-4 flex items-center space-x-3 ${toast.type === "success" ? "border-green-500" : "border-red-500"}`}>
+          <div
+            className={`max-w-sm w-full bg-white rounded-lg shadow-xl border-l-4 p-4 flex items-center space-x-3 ${
+              toast.type === "success" ? "border-green-500" : "border-red-500"
+            }`}
+          >
             <div className="flex-shrink-0">
               {toast.type === "success" ? (
                 <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
@@ -223,7 +247,13 @@ const Footer = () => {
               )}
             </div>
             <div className="flex-1">
-              <p className={`text-sm font-medium ${toast.type === "success" ? "text-green-800" : "text-red-800"}`}>{toast.message}</p>
+              <p
+                className={`text-sm font-medium ${
+                  toast.type === "success" ? "text-green-800" : "text-red-800"
+                }`}
+              >
+                {toast.message}
+              </p>
             </div>
             <button onClick={hideToast} className="text-gray-400 hover:text-gray-600 transition-colors">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">

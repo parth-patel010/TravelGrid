@@ -1,4 +1,4 @@
-import TripExpenseCalculator from "@/components/TripExpenseCalculator/ExpenseCalculator";
+import TripExpenseCalculator from "..//components/TripExpenseCalculator/ExpenseCalculator";
 import React from "react";
 
 const TripCalculatorPage = () => {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/Custom/Navbar";
 import Footer from "../components/Custom/Footer";
-import TravelTips from "@/components/Home/TravelTips";
+import TravelTips from "../components/Home/TravelTips";
 import toast from "react-hot-toast";
 
 const blogs = [

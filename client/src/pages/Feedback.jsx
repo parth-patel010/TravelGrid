@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { Star, Send } from "lucide-react";
 import toast from "react-hot-toast";
+import { useAuth } from "@/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Feedback = () => {
   // Add CSS to force dropdown to open downward
+  const { user, isAuthenticated, isLoading } = useAuth();
+  const navigate = useNavigate();
+
   React.useEffect(() => {
     const style = document.createElement("style");
     style.textContent = `
@@ -28,17 +33,34 @@ const Feedback = () => {
   const [hoveredRating, setHoveredRating] = useState(0);
   const [isHotelDropdownOpen, setIsHotelDropdownOpen] = useState(false);
   const [isPackageDropdownOpen, setIsPackageDropdownOpen] = useState(false);
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleRatingClick = (rating) => {
+    //ensure user is authenticated
+    if (!isAuthenticated) {
+      setShowLoginPrompt(true);
+      toast.error("Please login to rate your experience");
+      return;
+    }
     setFormData({ ...formData, rating });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    //ensure user is authenticated
+    if (!isAuthenticated) {
+      setShowLoginPrompt(true);
+      toast.error("Please login to submit feedback. Reloading...");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+      return;
+    }
 
     if (!formData.message || formData.rating === 0) {
       toast.error("Please provide your feedback and rating");
