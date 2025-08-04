@@ -1,12 +1,9 @@
 import React, { useEffect , useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { FaStar, FaCheckCircle, FaTimesCircle, FaChevronDown, FaCalendarAlt, FaRupeeSign } from "react-icons/fa";
+import { FaStar, FaCheckCircle, FaTimesCircle, FaChevronDown, FaCalendarAlt, FaRupeeSign, FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import Navbar from "../components/Custom/Navbar";
 import { packages } from "../data/PackageData";
 import { useWishlist } from '../context/WishlistContext';
-
-
-
 
 
 
@@ -216,15 +213,15 @@ const handleAddToWishlist = (pkg) => {
           </button>
 
           <button
-  onClick={() => handleAddToWishlist(packageData)}
-  disabled={wishlist.some(item => item.id === packageData.id)}
-  className={`mt-2 self-start px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105
-    ${wishlist.some(item => item.id === packageData.id)
-      ? "bg-gray-400 cursor-not-allowed text-white"
-      : "bg-gradient-to-r from-pink-500 to-pink-400 hover:from-pink-400 hover:to-pink-500 text-white"}`}
->
-  {wishlist.some(item => item.id === packageData.id) ? "Added to Wishlist" : "Add to Wishlist"}
-</button>
+            onClick={() => handleAddToWishlist(packageData)}
+            disabled={wishlist.some(item => item.id === packageData.id)}
+            className={`mt-2 self-start px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105
+              ${wishlist.some(item => item.id === packageData.id)
+                ? "bg-gray-400 cursor-not-allowed text-white"
+                : "bg-gradient-to-r from-pink-500 to-pink-400 hover:from-pink-400 hover:to-pink-500 text-white"}`}
+           >
+            {wishlist.some(item => item.id === packageData.id) ? "Added to Wishlist" : "Add to Wishlist"}
+          </button>
 
         </div>
         {/* Description */}
@@ -313,9 +310,7 @@ const handleAddToWishlist = (pkg) => {
                     {review.name[0].toUpperCase()}
                   </div>
                   <div>
-                    <p className="text-white font-medium text-base">
-                      {review.name}
-                    </p>
+                    <p className="text-white font-medium text-base">{review.name}</p>
                     <p className="text-xs text-gray-400">{review.date}</p>
                   </div>
                 </div>
@@ -323,15 +318,29 @@ const handleAddToWishlist = (pkg) => {
                 <blockquote className="mt-3 text-pink-100 text-sm italic border-l-3 border-pink-600/0 group-hover:border-pink-600 pl-4">
                   {review.comment}
                 </blockquote>
+
                 <div className="flex items-center mt-3 text-yellow-400 text-sm">
                   {Array.from({ length: review.rating }).map((_, idx) => (
                     <FaStar key={idx} />
                   ))}
                 </div>
+
+                {/* 👍 Like / 👎 Dislike buttons */}
+                <div className="flex items-center gap-4 mt-3 text-white">
+                  <button className="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-pink-600/40 transition">
+                    <FaThumbsUp className="text-green-400" />
+                    {/*<span className="text-sm">Like</span>*/}
+                  </button>
+                  <button className="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-pink-600/40 transition">
+                    <FaThumbsDown className="text-red-400" />
+                    {/*<span className="text-sm">Dislike</span>*/}
+                  </button>
+                </div>
               </div>
             ))}
           </div>
         </div>
+
 
         {/* FAQs */}
         <div className="backdrop-blur-sm bg-white/5 border border-pink-400/20 p-6 rounded-2xl shadow-lg">
