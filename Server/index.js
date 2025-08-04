@@ -7,7 +7,7 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 
 const bookingRouter = require('./routes/bookingRoutes');
-
+const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes')
 const saveRoutes = require('./routes/saveRoutes');
 const tripRoutes =  require( './routes/trips.js');
@@ -60,6 +60,9 @@ app.use('/api/bookings', bookingRouter)
 
 //Posts Route
 app.use('/api/post',postRoutes);
+
+// profile update route
+app.use('/api/users', userRoutes);
 
 //save Route
 app.use('/api/save', saveRoutes);

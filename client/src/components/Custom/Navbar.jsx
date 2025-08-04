@@ -49,7 +49,8 @@ const Navbar = () => {
   const { isDarkMode } = useTheme();
 
   const token = localStorage.getItem("token");
-  const isLoggedIn = !!(isAuthenticated && token && user);
+  const isLoggedIn = Boolean(user && isAuthenticated);
+
 
   const toggleGroup = (item) => {
     setExpanded((prev) => (prev === item ? null : item));
