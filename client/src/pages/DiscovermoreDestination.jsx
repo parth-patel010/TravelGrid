@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import DiscoverCard from '@/components/DiscoverCard';
+import DiscoverCard from '../components/DiscoverCard';
 
 function DiscovermoreDestination() {
     const navigate = useNavigate();

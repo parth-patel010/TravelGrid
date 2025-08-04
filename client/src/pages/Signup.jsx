@@ -13,8 +13,8 @@ import {
 } from "lucide-react";
 import { toast } from "react-hot-toast";
 import GoogleLoginButton from "../components/Auth/GoogleLogin";
-import Navbar from "@/components/Custom/Navbar";
-import Footer from "@/components/Custom/Footer";
+import Navbar from "../components/Custom/Navbar";
+import Footer from "../components/Custom/Footer";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
