@@ -1,11 +1,13 @@
 // imports
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useTheme } from "../../context/ThemeContext";
 
 // Footer component
 const Footer = () => {
   const [email, setEmail] = useState("");
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
+  const { isDarkMode } = useTheme();
 
   const showToast = (message, type = "success") => {
     setToast({ show: true, message, type });
@@ -46,7 +48,11 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="relative bg-gradient-to-br from-black to-pink-900 text-white">
+      <footer className={`relative text-white transition-all duration-300 ${
+        isDarkMode 
+          ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900' 
+          : 'bg-gradient-to-br from-gray-900 via-pink-900 to-gray-900'
+      }`}>
         {/* Background pattern */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml,...')] opacity-20" />
 
@@ -171,7 +177,11 @@ const Footer = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your email"
-                      className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                      className={`w-full px-4 py-3 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm transition-all duration-300 ${
+                        isDarkMode 
+                          ? 'bg-slate-800 border-slate-600' 
+                          : 'bg-gray-800 border-gray-600'
+                      }`}
                       required
                     />
                     <div className="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -180,7 +190,7 @@ const Footer = () => {
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white py-3 px-4 rounded-lg text-sm font-medium flex items-center justify-center space-x-2"
+                    className="w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white py-3 px-4 rounded-lg text-sm font-medium flex items-center justify-center space-x-2 transition-all duration-300"
                   >
                     <span>Subscribe</span>
                     {/* Send icon */}
@@ -231,7 +241,11 @@ const Footer = () => {
       {toast.show && (
         <div className="fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-2 duration-300">
           <div
-            className={`max-w-sm w-full bg-white rounded-lg shadow-xl border-l-4 p-4 flex items-center space-x-3 ${
+            className={`max-w-sm w-full rounded-lg shadow-xl border-l-4 p-4 flex items-center space-x-3 transition-all duration-300 ${
+              isDarkMode 
+                ? 'bg-slate-800 text-white border-slate-600' 
+                : 'bg-white text-gray-900 border-gray-200'
+            } ${
               toast.type === "success" ? "border-green-500" : "border-red-500"
             }`}
           >
@@ -249,7 +263,7 @@ const Footer = () => {
             <div className="flex-1">
               <p
                 className={`text-sm font-medium ${
-                  toast.type === "success" ? "text-green-800" : "text-red-800"
+                  toast.type === "success" ? "text-green-400" : "text-red-400"
                 }`}
               >
                 {toast.message}

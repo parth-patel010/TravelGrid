@@ -1,15 +1,14 @@
 import React from 'react'
 import { useState } from "react";
-
-
+import { useTheme } from "../context/ThemeContext";
 
 function DiscoverCard({
     index,
     place,
     handleBookNowClick
 }) {
-
     const [wishlisted, setWishlisted] = useState(false);
+    const { isDarkMode } = useTheme();
 
     return (
         <div
@@ -23,16 +22,15 @@ function DiscoverCard({
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
     
-
-
-        
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
             </div>
             <div className="p-4">
                 <h3 className="text-xl font-semibold text-fuchsia-500 mb-2 group-hover:text-pink-400 transition-colors duration-300">
                     {place.name}
                 </h3>
-                <p className="text-gray-500 text-sm group-hover:text-black transition-colors duration-300 leading-relaxed">{place.description}</p>
+                <p className={`text-sm group-hover:text-black transition-colors duration-300 leading-relaxed ${
+                    isDarkMode ? 'text-gray-300' : 'text-gray-500'
+                }`}>{place.description}</p>
             </div>
             <div className="p-4">
                 <button

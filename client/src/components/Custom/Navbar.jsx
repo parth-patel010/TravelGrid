@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useWishlist } from "../../context/WishlistContext";
+import { useTheme } from "../../context/ThemeContext";
 import { Menu, X, User, LogOut, LogIn, ChevronDown } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -44,6 +46,7 @@ const Navbar = () => {
   const location = useLocation();
   const { user, logout, isAuthenticated } = useAuth();
   const { wishlist } = useWishlist();
+  const { isDarkMode } = useTheme();
 
   const token = localStorage.getItem("token");
   const isLoggedIn = !!(isAuthenticated && token && user);
@@ -82,8 +85,11 @@ const Navbar = () => {
     <>
       {/* Top Navbar */}
       <nav
-        className={`box-border w-full fixed top-0 left-0 z-50 h-20 backdrop-blur-md border-b border-white/10 bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2c1a31] shadow-md px-4 sm:px-6 transition-colors duration-200 ${isScrolled ? "shadow-xl" : ""
-          }`}
+        className={`box-border w-full fixed top-0 left-0 z-50 h-20 backdrop-blur-md border-b transition-all duration-300 px-4 sm:px-6 ${
+          isDarkMode 
+            ? "bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-slate-700 text-white" 
+            : "bg-gradient-to-r from-white via-gray-50 to-white border-gray-200 text-gray-900"
+        } ${isScrolled ? "shadow-xl" : "shadow-md"}`}
       >
         <div className="w-full max-w-full mx-auto flex justify-between items-center gap-4 px-2 py-6">
           {/* Logo */}
@@ -99,7 +105,9 @@ const Navbar = () => {
           </NavLink>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-4 text-gray-200 font-medium flex-1 justify-center">
+          <div className={`hidden md:flex items-center gap-4 font-medium flex-1 justify-center ${
+            isDarkMode ? "text-gray-200" : "text-gray-700"
+          }`}>
             {navLinks.map((link) =>
               link.subitems ? (
                 <div className="relative group" key={link.name}>
@@ -110,16 +118,21 @@ const Navbar = () => {
                   >
                     {link.name} <ChevronDown fontSize={16} />
                   </button>
-                  {/* added invisible and group hover visible it prevents dropdown from being hoverable when hidden */}
-                  <div className="absolute left-0 mt-2 opacity-0 invisible group-hover:visible group-hover:opacity-100 group-hover:translate-y-2 transition-all duration-300 z-50 p-2 min-w-[180px] text-white rounded-lg bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2c1a31] shadow-md">
+                  {/* Dropdown menu */}
+                  <div className={`absolute left-0 mt-2 opacity-0 invisible group-hover:visible group-hover:opacity-100 group-hover:translate-y-2 transition-all duration-300 z-50 p-2 min-w-[180px] rounded-lg shadow-lg ${
+                    isDarkMode 
+                      ? "bg-slate-800 text-white border border-slate-700" 
+                      : "bg-white text-gray-900 border border-gray-200"
+                  }`}>
                     {link.subitems.map((item) => (
                       <NavLink
                         key={item.label}
                         to={item.path}
                         className={({ isActive }) =>
-                          `py-2 px-4 text-md hover:bg-gradient-to-r from-pink-500 to-pink-600 hover:text-white block transition-all rounded-md duration-200 ${isActive
-                            ? "bg-gradient-to-r from-pink-700 to-pink-500 text-white"
-                            : ""
+                          `py-2 px-4 text-md hover:bg-gradient-to-r from-pink-500 to-pink-600 hover:text-white block transition-all rounded-md duration-200 ${
+                            isActive
+                              ? "bg-gradient-to-r from-pink-700 to-pink-500 text-white"
+                              : ""
                           }`
                         }
                       >
@@ -146,8 +159,11 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Desktop Auth Buttons */}
+          {/* Desktop Auth Buttons and Theme Toggle */}
           <div className="hidden md:flex gap-4 items-center text-pink-500 font-medium">
+            {/* Theme Toggle */}
+            <ThemeToggle />
+            
             {isLoggedIn ? (
               <>
                 <NavLink
@@ -195,30 +211,39 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Toggle */}
-          <button
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
-            className="md:hidden text-pink-400 hover:text-pink-500 transition-colors duration-200 p-1 rounded-md hover:bg-pink-500/20 cursor-pointer"
-          >
-            {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
+            <button
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
+              className="text-pink-400 hover:text-pink-500 transition-colors duration-200 p-1 rounded-md hover:bg-pink-500/20 cursor-pointer"
+            >
+              {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </nav>
 
       {/* Overlay */}
       <div
-        className={`fixed inset-0 bg-black/10 z-40 transition-opacity duration-300 md:hidden ${isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
+        className={`fixed inset-0 z-40 transition-opacity duration-300 md:hidden ${
+          isDarkMode ? "bg-black/50" : "bg-black/10"
+        } ${isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         onClick={() => setIsSidebarOpen(false)}
       />
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full w-[80vw] sm:w-[60vw] max-w-[320px] bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2c1a31] z-[1002] transition-transform duration-300 ease-in-out transform ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+        className={`fixed top-0 right-0 h-full w-[80vw] sm:w-[60vw] max-w-[320px] z-[1002] transition-transform duration-300 ease-in-out transform ${
+          isDarkMode 
+            ? "bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-gray-200" 
+            : "bg-gradient-to-r from-white via-gray-50 to-white text-gray-900"
+        } ${isSidebarOpen ? "translate-x-0" : "translate-x-full"}`}
       >
-        <div className="p-5 flex flex-col h-full text-gray-300">
-          <div className="flex justify-end mb-6 border-b border-gray-600">
+        <div className="p-5 flex flex-col h-full">
+          <div className={`flex justify-end mb-6 border-b ${
+            isDarkMode ? "border-gray-600" : "border-gray-300"
+          }`}>
             <button
               onClick={() => setIsSidebarOpen(false)}
               className="text-pink-500 hover:text-pink-400 p-1 rounded-md hover:bg-pink-500/10"
@@ -243,7 +268,9 @@ const Navbar = () => {
                     </span>
                   </button>
                   {expanded === link.name && (
-                    <div className="w-full flex flex-col px-4 py-2 border-t border-pink-800">
+                    <div className={`w-full flex flex-col px-4 py-2 border-t ${
+                      isDarkMode ? "border-pink-800" : "border-pink-200"
+                    }`}>
                       {link.subitems.map((item) => (
                         <NavLink
                           key={item.label}
