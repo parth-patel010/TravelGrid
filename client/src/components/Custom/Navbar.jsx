@@ -112,7 +112,8 @@ const Navbar = () => {
                   >
                     {link.name} <ChevronDown fontSize={16} />
                   </button>
-                  <div className="absolute left-0 mt-0 opacity-0 min-w-[180px] text-white rounded-lg bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2c1a31] shadow-md group-hover:opacity-100 group-hover:translate-y-2 transition-all duration-300 z-50 p-2">
+                  {/* added invisible and group hover visible it prevents dropdown from being hoverable when hidden */}
+                  <div className="absolute left-0 mt-2 opacity-0 invisible group-hover:visible group-hover:opacity-100 group-hover:translate-y-2 transition-all duration-300 z-50 p-2 min-w-[180px] text-white rounded-lg bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#2c1a31] shadow-md">
                     {link.subitems.map((item) => (
                       <NavLink
                         key={item.label}
