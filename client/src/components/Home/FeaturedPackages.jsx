@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTheme } from "../../context/ThemeContext";
 
 const packages = [
   {
@@ -44,6 +45,7 @@ const cardVariants = {
 
 const FeaturedPackages = () => {
   const navigate = useNavigate();
+  const { isDarkMode } = useTheme();
 
   return (
     <motion.section
@@ -59,13 +61,17 @@ const FeaturedPackages = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2 className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-300 ${
+            isDarkMode ? 'text-white' : 'text-gray-900'
+          }`}>
             Featured{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
               Travel Packages
             </span>
           </h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          <p className={`text-lg max-w-2xl mx-auto leading-relaxed transition-all duration-300 ${
+            isDarkMode ? 'text-gray-300' : 'text-gray-600'
+          }`}>
             Discover handpicked destinations and exclusive deals curated for unforgettable experiences.
           </p>
         </motion.div>
@@ -79,7 +85,11 @@ const FeaturedPackages = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="group relative bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 hover:border-white/40 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20"
+              className={`group relative backdrop-blur-md rounded-2xl overflow-hidden border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 ${
+                isDarkMode 
+                  ? 'bg-white/10 border-white/20 hover:border-white/40' 
+                  : 'bg-white/80 border-gray-200 hover:border-pink-300'
+              }`}
             >
               <div className="relative overflow-hidden">
                 <img
@@ -94,10 +104,14 @@ const FeaturedPackages = () => {
               </div>
 
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-pink-300 transition-colors duration-300">
+                <h3 className={`text-xl font-semibold mb-2 group-hover:text-pink-300 transition-colors duration-300 ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>
                   {pkg.name}
                 </h3>
-                <p className="text-gray-300 mb-4 group-hover:text-gray-200 transition-colors duration-300">
+                <p className={`mb-4 group-hover:text-gray-200 transition-colors duration-300 ${
+                  isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                }`}>
                   {pkg.location}
                 </p>
                 <motion.button

@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import DiscoverCard from "../DiscoverCard.jsx";
+import { useTheme } from "../../context/ThemeContext";
 
 const destinations = [
   {
@@ -46,6 +47,7 @@ const item = {
 
 const DiscoverSection = () => {
   const navigate = useNavigate();
+  const { isDarkMode } = useTheme();
 
   const handleBookNowClick = () => {
     navigate("/packages");
@@ -66,7 +68,9 @@ const DiscoverSection = () => {
         {/* Heading */}
         <div className="mb-16">
           <motion.h2
-            className="text-2xl md:text-3xl font-bold mb-6 text-white"
+            className={`text-2xl md:text-3xl font-bold mb-6 transition-all duration-300 ${
+              isDarkMode ? 'text-white' : 'text-gray-900'
+            }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -77,7 +81,9 @@ const DiscoverSection = () => {
             </span>
           </motion.h2>
           <motion.p
-            className="text-gray-300 text-base md:text-lg mb-10 leading-relaxed"
+            className={`text-base md:text-lg mb-10 leading-relaxed transition-all duration-300 ${
+              isDarkMode ? 'text-gray-300' : 'text-gray-600'
+            }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
@@ -106,7 +112,9 @@ const DiscoverSection = () => {
         {/* CTA Section */}
         <div className="mt-16">
           <motion.h3
-            className="text-xl md:text-2xl font-semibold mb-4 text-white"
+            className={`text-xl md:text-2xl font-semibold mb-4 transition-all duration-300 ${
+              isDarkMode ? 'text-white' : 'text-gray-900'
+            }`}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -114,7 +122,9 @@ const DiscoverSection = () => {
             Ready to plan your next adventure?
           </motion.h3>
           <motion.p
-            className="text-gray-300 mb-6 leading-relaxed"
+            className={`mb-6 leading-relaxed transition-all duration-300 ${
+              isDarkMode ? 'text-gray-300' : 'text-gray-600'
+            }`}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
