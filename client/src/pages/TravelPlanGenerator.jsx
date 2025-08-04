@@ -85,22 +85,56 @@ const TravelPlanGenerator = () => {
     }
 
     setIsGenerating(true);
-    
+
     // Performance test for demonstration
     fastTravelPlanner.performanceTest();
-    
-    // Instant generation - no delay needed
+
     const plan = createTravelPlan(formData);
-      setGeneratedPlan(plan);
-      setIsGenerating(false);
+    setGeneratedPlan(plan);
+
+    // Save to DB
+    const tripData = {
+      country: formData.country,
+      destination: formData.destination,
+      numberOfDays: formData.numberOfDays,
+      startDate: formData.startDate,
+      interests: formData.interests,
+      plan,
+    };
+
+    saveTripToDatabase(tripData); // POST trip to backend
+    setIsGenerating(false);
   };
+
 
   const createTravelPlan = (data) => {
     const { destination, numberOfDays, startDate, interests } = data;
-    
+
     // Use AI-powered travel planner to generate intelligent plan
     return fastTravelPlanner.generateTravelPlan(destination, numberOfDays, interests, startDate);
   };
+
+  const saveTripToDatabase = async (tripData) => {
+    try {
+      const res = await fetch("http://localhost:5000/api/trips", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(tripData),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        console.log("✅ Trip saved:", data);
+      } else {
+        console.error("❌ Save failed:", data.message);
+      }
+    } catch (error) {
+      console.error("🚨 Error saving trip:", error);
+    }
+  };
+
 
   const downloadPDF = () => {
     generateTravelPlanPDF(generatedPlan);
@@ -113,7 +147,7 @@ const TravelPlanGenerator = () => {
         <section className="w-full py-12 text-center px-4">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 mt-6">
             Create Your <span className="text-pink-400">Travel Plan</span>
-            </h1>
+          </h1>
           <p className="text-lg md:text-xl text-pink-200 max-w-2xl mx-auto mb-4">
             Generate personalized day-by-day travel itineraries based on your preferences.
           </p>
@@ -127,7 +161,7 @@ const TravelPlanGenerator = () => {
             {/* Form Section */}
             <div className="backdrop-blur-sm bg-white/5 border border-pink-400/20 rounded-2xl p-8">
               <h2 className="text-2xl font-bold text-white mb-6">Plan Details</h2>
-              
+
               <div className="space-y-6">
                 {/* Country Selection */}
                 <div>
@@ -175,7 +209,7 @@ const TravelPlanGenerator = () => {
                       Available cities in {formData.country}
                     </p>
                   )}
-                  
+
                   {/* Selected Location Display */}
                   {formData.country && formData.destination && (
                     <div className="mt-3 p-3 bg-pink-600/20 border border-pink-400/30 rounded-lg">
@@ -262,7 +296,7 @@ const TravelPlanGenerator = () => {
             {/* Generated Plan Section */}
             <div className="backdrop-blur-sm bg-white/5 border border-pink-400/20 rounded-2xl p-8">
               <h2 className="text-2xl font-bold text-white mb-6">Your Travel Plan</h2>
-              
+
               {generatedPlan ? (
                 <div className="space-y-6">
                   {/* Plan Header */}
@@ -291,7 +325,7 @@ const TravelPlanGenerator = () => {
                         <h4 className="text-lg font-semibold text-pink-300 mb-3">
                           {day.title}
                         </h4>
-                        
+
                         <div className="space-y-3">
                           <div>
                             <h5 className="text-pink-400 font-medium text-sm">Activities:</h5>
@@ -304,7 +338,7 @@ const TravelPlanGenerator = () => {
                               ))}
                             </ul>
                           </div>
-                          
+
                           <div className="grid grid-cols-1 gap-2 text-xs">
                             <div>
                               <span className="text-pink-400 font-medium">Breakfast:</span>
