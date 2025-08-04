@@ -1,27 +1,33 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { FaHeart } from "react-icons/fa";
+import { useWishlist } from '../../context/WishlistContext';
 
 const packages = [
   {
+    id: 1,
     name: "Santorini Escape",
     location: "Greece",
     price: "From ₹12,999",
     image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
   },
   {
+    id: 2,
     name: "Alpine Adventure",
     location: "Switzerland",
     price: "From ₹18,899",
     image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=400&q=80",
   },
   {
+    id: 3,
     name: "Safari Journey",
     location: "Kenya",
     price: "From ₹20,199",
     image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=80",
   },
   {
+    id: 4,
     name: "Bali Bliss",
     location: "Indonesia",
     price: "From ₹9,999",
@@ -44,6 +50,10 @@ const cardVariants = {
 
 const FeaturedPackages = () => {
   const navigate = useNavigate();
+  const { wishlist, addToWishlist, removeFromWishlist } = useWishlist();
+
+  const isWishlisted = (id) => wishlist.some(item => item.id === id);
+
 
   return (
     <motion.section
@@ -87,6 +97,21 @@ const FeaturedPackages = () => {
                   alt={pkg.name}
                   className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
+                {/*wishlist button */}
+                 <button
+                  onClick={() => {
+                    isWishlisted(pkg.id)
+                      ? removeFromWishlist(pkg.id)
+                      : addToWishlist(pkg);
+                  }}
+                  className="absolute top-3 right-3 text-white hover:scale-110 transition-transform duration-300 z-10"
+                >
+                  <FaHeart
+                    className={`text-xl ${
+                      isWishlisted(pkg.id) ? 'text-pink-500' : 'text-white/60'
+                    } transition-colors duration-300`}
+                  />
+                </button>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 <div className="absolute bottom-4 left-4 right-4">
                   <p className="text-pink-300 text-sm font-medium">{pkg.price}</p>
