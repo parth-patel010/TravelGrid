@@ -39,10 +39,10 @@ const HeroSection = ({ onSearch }) => {
       className="relative w-full min-h-[90vh] flex items-center justify-center py-20 overflow-hidden"
     >
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-50 z-10"
+        className="absolute inset-0 bg-cover bg-center opacity-100 z-10"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1695045038427-3acc1c0df23c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzl8fG5pZ2h0JTIwYmVhY2h8ZW58MHx8MHx8fDA%3D')",
+            "url('https://images.unsplash.com/photo-1695045038427-3acc1c0df23c?w=1920&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzl8fG5pZ2h0JTIwYmVhY2h8ZW58MHx8MHx8fDA%3D')",
         }}
       ></div>
 
