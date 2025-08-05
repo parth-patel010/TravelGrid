@@ -103,7 +103,7 @@ const HeroSection = ({ onSearch }) => {
                     onChange={(e) => setLocation(e.target.value)}
                     className={`w-full px-4 py-3 backdrop-blur-sm border rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-300 ${
                       isDarkMode 
-                        ? 'bg-white/90 text-gray-700 placeholder-gray-500 border-white/30' 
+                        ? 'bg-white/90 text-gray-950 placeholder-gray-950 border-white/30' 
                         : 'bg-white/90 text-gray-700 placeholder-gray-500 border-white/30'
                     }`}
                   />
@@ -115,7 +115,7 @@ const HeroSection = ({ onSearch }) => {
                     onChange={(e) => setCategory(e.target.value)}
                     className={`w-full px-4 py-3 backdrop-blur-sm border rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent appearance-none transition-all duration-300 ${
                       isDarkMode 
-                        ? 'bg-white/90 text-gray-700 border-white/30' 
+                        ? 'bg-white/90 text-gray-950 border-white/30' 
                         : 'bg-white/90 text-gray-700 border-white/30'
                     }`}
                   >
