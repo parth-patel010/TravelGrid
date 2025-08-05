@@ -15,134 +15,99 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Initialize auth state from localStorage
-  useEffect(() => {
-    const storedUser = localStorage.getItem('travelgrid_user');
-    const token = localStorage.getItem('token');
-
-    if (storedUser && token) {
-      try {
-        setUser(JSON.parse(storedUser));
-      } catch {
-        localStorage.removeItem('travelgrid_user');
-        localStorage.removeItem('token');
+  // Fetch user from cookie session
+  const fetchUser = async () => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/me`, {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setUser(data.user);
       }
-    } else {
-      setUser(null);
+    } catch (err) {
+      console.error("Auth check failed:", err);
+    } finally {
+      setIsLoading(false);
     }
+  };
 
-    setIsLoading(false);
+  useEffect(() => {
+    fetchUser();
   }, []);
+
+  // Signup
+  const signup = async ({ name, email, password }) => {
+    setIsLoading(true);
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) return { success: false, error: data.error || data.message };
+
+      setUser(data.user);
+      toast.success("Signup successful! 🎉");
+      return { success: true };
+    } catch (err) {
+      return { success: false, error: "Signup failed" };
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // Login
   const login = async (email, password) => {
     setIsLoading(true);
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // very important
         body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
+      if (!res.ok) return { success: false, error: data.error || data.message };
 
-      if (res.ok) {
-        setUser(data.user);
-        localStorage.setItem('travelgrid_user', JSON.stringify(data.user));
-        localStorage.setItem('token', data.token);
-        setIsLoading(false);
-        return { success: true };
-      } else {
-        setIsLoading(false);
-        return { success: false, error: data.message };
-      }
+      setUser(data.user);
+      toast.success("Login successful 👋");
+      return { success: true };
     } catch (err) {
+      return { success: false, error: "Login failed" };
+    } finally {
       setIsLoading(false);
-      return { success: false, error: 'Something went wrong' };
-    }
-  };
-
-  // Google Login
-  const googleLogin = async (token) => {
-    setIsLoading(true);
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/google`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        setUser(data.user);
-        localStorage.setItem('travelgrid_user', JSON.stringify(data.user));
-        localStorage.setItem('token', data.token);
-        setIsLoading(false);
-        toast.success('Successfully logged in with Google! 🎉');
-        return { success: true };
-      } else {
-        setIsLoading(false);
-        return { success: false, error: data.error };
-      }
-    } catch (err) {
-      setIsLoading(false);
-      return { success: false, error: 'Something went wrong with Google authentication' };
-    }
-  };
-
-  // Signup (register + auto-login)
-  const signup = async (userData) => {
-    setIsLoading(true);
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userData),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setIsLoading(false);
-        return { success: false, error: data.message };
-      }
-
-      // Auto login after signup
-      return await login(userData.email, userData.password);
-    } catch (err) {
-      setIsLoading(false);
-      return { success: false, error: 'Something went wrong during signup' };
     }
   };
 
   // Logout
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('travelgrid_user');
-    localStorage.removeItem('token');
-    toast.success('Logged out successfully 👋');
-  };
-
-  // Update user
-  const updateUser = (updatedUser) => {
-    setUser(updatedUser);
-    localStorage.setItem('travelgrid_user', JSON.stringify(updatedUser));
-  };
-
-  const value = {
-    user,
-    login,
-    signup,
-    googleLogin,
-    logout,
-    updateUser,
-    isLoading,
-    isAuthenticated: !!user && !!localStorage.getItem('token'), // token bhi check
+  const logout = async () => {
+    try {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+      setUser(null);
+      toast.success("Logged out 👋");
+    } catch {
+      toast.error("Logout failed");
+    }
   };
 
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={{
+      user,
+      isAuthenticated: !!user,
+      isLoading,
+      login,
+      signup,
+      logout
+    }}>
       {children}
     </AuthContext.Provider>
   );

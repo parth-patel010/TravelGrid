@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useTheme } from "../../context/ThemeContext";
 
 const features = [
   {
@@ -50,6 +51,8 @@ const cardVariants = {
 };
 
 const FeatureCards = () => {
+  const { isDarkMode } = useTheme();
+
   return (
     <motion.section
       initial="hidden"
@@ -60,7 +63,9 @@ const FeatureCards = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div className="text-center mb-16">
           <motion.h2
-            className="text-3xl md:text-4xl font-bold text-white mb-6"
+            className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-300 ${
+              isDarkMode ? 'text-white' : 'text-gray-900'
+            }`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -72,7 +77,9 @@ const FeatureCards = () => {
             ?
           </motion.h2>
           <motion.p
-            className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed"
+            className={`text-lg max-w-2xl mx-auto leading-relaxed transition-all duration-300 ${
+              isDarkMode ? 'text-gray-300' : 'text-gray-600'
+            }`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
@@ -89,17 +96,25 @@ const FeatureCards = () => {
               variants={cardVariants}
               className="group relative"
             >
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:border-white/40 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20">
+              <div className={`backdrop-blur-md rounded-2xl p-8 border transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
+                isDarkMode 
+                  ? 'bg-white/10 border-white/20 hover:border-white/40 hover:shadow-pink-500/20' 
+                  : 'bg-white/80 border-gray-200 hover:border-pink-300 hover:shadow-pink-500/20'
+              }`}>
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl mb-6 transition-all duration-300 shadow-lg"
                 >
                   <div className="text-white">{feature.icon}</div>
                 </motion.div>
-                <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-pink-300 transition-colors duration-300">
+                <h3 className={`text-xl font-semibold mb-4 group-hover:text-pink-300 transition-colors duration-300 ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>
                   {feature.title}
                 </h3>
-                <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
+                <p className={`leading-relaxed group-hover:text-gray-200 transition-colors duration-300 ${
+                  isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                }`}>
                   {feature.desc}
                 </p>
               </div>
