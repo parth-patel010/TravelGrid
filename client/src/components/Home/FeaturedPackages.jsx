@@ -77,17 +77,15 @@ const FeaturedPackages = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-300 ${
-            isDarkMode ? 'text-white' : 'text-gray-900'
-          }`}>
+          <h2 className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'
+            }`}>
             Featured{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
               Travel Packages
             </span>
           </h2>
-          <p className={`text-lg max-w-2xl mx-auto leading-relaxed transition-all duration-300 ${
-            isDarkMode ? 'text-gray-300' : 'text-gray-600'
-          }`}>
+          <p className={`text-lg max-w-2xl mx-auto leading-relaxed transition-all duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'
+            }`}>
             Discover handpicked destinations and exclusive deals curated for unforgettable experiences.
           </p>
         </motion.div>
@@ -101,11 +99,10 @@ const FeaturedPackages = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className={`group relative backdrop-blur-md rounded-2xl overflow-hidden border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 ${
-                isDarkMode 
-                  ? 'bg-white/10 border-white/20 hover:border-white/40' 
+              className={`group relative backdrop-blur-md rounded-2xl overflow-hidden border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 ${isDarkMode
+                  ? 'bg-white/10 border-white/20 hover:border-white/40'
                   : 'bg-white/80 border-gray-200 hover:border-pink-300'
-              }`}
+                }`}
             >
               <div className="relative overflow-hidden">
                 <img
@@ -114,7 +111,7 @@ const FeaturedPackages = () => {
                   className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 {/*wishlist button */}
-                 <button
+                <button
                   onClick={() => {
                     isWishlisted(pkg.id)
                       ? removeFromWishlist(pkg.id)
@@ -123,9 +120,8 @@ const FeaturedPackages = () => {
                   className="absolute top-3 right-3 text-white hover:scale-110 transition-transform duration-300 z-10"
                 >
                   <FaHeart
-                    className={`text-xl ${
-                      isWishlisted(pkg.id) ? 'text-pink-500' : 'text-white/60'
-                    } transition-colors duration-300`}
+                    className={`text-xl ${isWishlisted(pkg.id) ? 'text-pink-500' : 'text-white/60'
+                      } transition-colors duration-300`}
                   />
                 </button>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
@@ -136,13 +132,15 @@ const FeaturedPackages = () => {
 
               <div className="p-6">
                 <h3 className={`text-xl font-semibold mb-2 group-hover:text-pink-300 transition-colors duration-300 ${
-                  isDarkMode ? 'text-white' : 'text-gray-900'
-                }`}>
+                  isDarkMode
+                  ? 'text-white group-hover:text-pink-400'
+                  : 'text-gray-900 group-hover:text-pink-500'
+                  }`}>
                   {pkg.name}
                 </h3>
-                <p className={`mb-4 group-hover:text-gray-200 transition-colors duration-300 ${
-                  isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                }`}>
+                <p className={`mb-4 transition-colors group-hover:text-gray-800 duration-300 ${
+                  isDarkMode ? 'text-gray-300 group-hover:text-white' : 'text-gray-600'
+                  }`}>
                   {pkg.location}
                 </p>
                 <motion.button

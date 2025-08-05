@@ -55,17 +55,15 @@ const ForumSection = () => {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <h2 className={`text-2xl md:text-3xl font-bold mb-6 transition-all duration-300 ${
-            isDarkMode ? 'text-white' : 'text-gray-900'
-          }`}>
+          <h2 className={`text-2xl md:text-3xl font-bold mb-6 transition-all duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'
+            }`}>
             Join the{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
               Conversation
             </span>
           </h2>
-          <p className={`text-base md:text-lg mb-12 px-4 max-w-2xl mx-auto leading-relaxed transition-all duration-300 ${
-            isDarkMode ? 'text-gray-300' : 'text-gray-600'
-          }`}>
+          <p className={`text-base md:text-lg mb-12 px-4 max-w-2xl mx-auto leading-relaxed transition-all duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'
+            }`}>
             Connect with fellow travelers, ask questions, and share your experiences in our buzzing travel community!
           </p>
         </motion.div>
@@ -79,11 +77,10 @@ const ForumSection = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className={`group backdrop-blur-md rounded-xl p-6 border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 relative ${
-                isDarkMode 
-                  ? 'bg-white/10 border-white/20 hover:border-white/40' 
+              className={`group backdrop-blur-md rounded-xl p-6 border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 relative ${isDarkMode
+                  ? 'bg-white/10 border-white/20 hover:border-white/40'
                   : 'bg-white/80 border-gray-200 hover:border-pink-300'
-              }`}
+                }`}
             >
               <div
                 className={`absolute -top-4 left-4 text-xs font-semibold text-white px-3 py-1 rounded-full bg-gradient-to-r ${topic.tagColor} shadow-lg`}
@@ -91,13 +88,14 @@ const ForumSection = () => {
                 {topic.tag}
               </div>
               <h3 className={`text-lg font-semibold mt-6 mb-3 group-hover:text-pink-300 transition-colors duration-300 ${
-                isDarkMode ? 'text-white' : 'text-gray-900'
-              }`}>
+                isDarkMode 
+                  ? 'text-white group-hover:text-pink-400'
+                  : 'text-gray-900 group-hover:text-pink-500'
+                }`}>
                 {topic.title}
               </h3>
-              <p className={`text-sm group-hover:text-gray-200 transition-colors duration-300 ${
-                isDarkMode ? 'text-gray-300' : 'text-gray-600'
-              }`}>
+              <p className={`text-sm group-hover:text-gray-900 transition-colors duration-300 ${isDarkMode ? 'text-gray-300 group-hover:text-white' : 'text-gray-600'
+                }`}>
                 {topic.replies} replies
               </p>
             </motion.div>
