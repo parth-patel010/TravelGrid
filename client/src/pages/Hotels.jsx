@@ -70,7 +70,7 @@ function Hotels() {
           </div>
         </section>
 
-        <section className="max-w-7xl w-full px-4 pb-16 grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <section className="max-w-7xl w-full pt-12 px-4 pb-16 grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {filteredHotels.map((hotel) => (
             <div
               key={hotel.id}
