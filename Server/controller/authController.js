@@ -3,9 +3,7 @@ const jwt = require('jsonwebtoken');
 const validator = require('validator');
 const User = require('../models/user');
 
-const mongoose = require('mongoose');
-
-
+const mongoose = require('mongoose'); 
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
 if (!JWT_SECRET) {
@@ -22,6 +20,7 @@ exports.googleAuth = async (req, res) => {
     const response = await fetch(
       `https://oauth2.googleapis.com/tokeninfo?id_token=${token}`
     );
+
     const googleUser = await response.json();
 
     if (!googleUser.email) {
