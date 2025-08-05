@@ -29,7 +29,7 @@ function DiscoverCard({
                     {place.name}
                 </h3>
                 <p className={`text-sm group-hover:text-black transition-colors duration-300 leading-relaxed ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-500'
+                    isDarkMode ? 'text-gray-300 group-hover:text-white' : 'text-gray-500 group-hover:text-gray-800'
                 }`}>{place.description}</p>
             </div>
             <div className="p-4">
