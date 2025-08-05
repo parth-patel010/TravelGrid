@@ -8,7 +8,7 @@ import Navbar from '../components/Custom/Navbar';
 import './styles/HotelBookingForm.css';
 
 const HotelBookingForm = () => {
-  const location = useLocation();
+  const location = useLocation()  ;
   const navigate = useNavigate();
   const { user } = useAuth();
   const { hotel } = location.state || {};
