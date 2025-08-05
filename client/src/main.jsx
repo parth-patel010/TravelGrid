@@ -23,6 +23,7 @@ const Review = lazy(() => import('./pages/Review'));
 const Contributors = lazy(() => import('./pages/Contributors'));
 const Hotels = lazy(() => import('./pages/Hotels'));
 const HotelDetails = lazy(() => import('./pages/HotelDetails'));
+const HotelBookingForm = lazy(() => import('./pages/HotelBookingForm'));
 const TicketBooking = lazy(() => import('./pages/TicketBooking'));
 const TravelGuidesCarousel = lazy(() => import('./pages/TravelGuidesProfiles'));
 const TravelPackages = lazy(() => import('./pages/TravelPackages'));
@@ -72,6 +73,7 @@ const router = createBrowserRouter([
       { path: '/contributors', element: <Suspense fallback={<Spinner />}><Contributors /></Suspense> },
       { path: '/hotels', element: <Suspense fallback={<Spinner />}><Hotels /></Suspense> },
       { path: '/hotels/:id', element: <Suspense fallback={<Spinner />}><HotelDetails /></Suspense> },
+      { path: '/hotel-booking', element: <Suspense fallback={<Spinner />}><HotelBookingForm /></Suspense> },
       { path: '/ticket', element: <Suspense fallback={<Spinner />}><TicketBooking /></Suspense> },
       { path: '/guides', element: <Suspense fallback={<Spinner />}><TravelGuidesCarousel /></Suspense> },
       { path: '/packages', element: <Suspense fallback={<Spinner />}><TravelPackages /></Suspense> },
