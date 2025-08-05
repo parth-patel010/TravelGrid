@@ -132,13 +132,13 @@ const Navbar = () => {
                     className={`py-1.5 px-4 text-md font-medium rounded-sm transition-all duration-300 flex items-center gap-1 ${
                       activeParentTab === link.name
                         ? "bg-gradient-to-r from-pink-700 to-pink-500 shadow-md text-white"
-                        : "hover:text-pink-500 hover:shadow-sm text-gray-200"
+                        : `hover:text-pink-500 hover:shadow-sm ${isDarkMode ? "text-gray-200" : "text-gray-900"}`
                     }`}
                   >
                     {link.name} <ChevronDown fontSize={16} />
                   </button>
                   {/* Dropdown menu */}
-                  <div className={`absolute left-0 mt-2 opacity-0 invisible group-hover:visible group-hover:opacity-100 group-hover:translate-y-2 transition-all duration-300 z-50 p-2 min-w-[180px] rounded-lg shadow-lg ${
+                  <div className={`absolute left-0 mt-0 top-full opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-300 z-50 p-2 min-w-[180px] rounded-lg shadow-lg ${
                     isDarkMode 
                       ? "bg-slate-800 text-white border border-slate-700" 
                       : "bg-white text-gray-900 border border-gray-200"
