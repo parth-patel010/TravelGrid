@@ -18,6 +18,7 @@ const HotelBookingForm = () => {
     checkIn: '',
     checkOut: '',
     guests: 1,
+    guestName: '',
     specialRequests: '',
     contactNumber: '',
     email: user?.email || 'guest@example.com'
@@ -72,7 +73,7 @@ const HotelBookingForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    if (!bookingData.roomType || !bookingData.checkIn || !bookingData.checkOut || !bookingData.contactNumber) {
+    if (!bookingData.roomType || !bookingData.checkIn || !bookingData.checkOut || !bookingData.contactNumber || !bookingData.guestName) {
       toast.error('Please fill in all required fields');
       return;
     }
@@ -187,6 +188,20 @@ const HotelBookingForm = () => {
                     <option key={num} value={num} className="bg-gray-800">{num} Guest{num > 1 ? 's' : ''}</option>
                   ))}
                 </select>
+              </div>
+
+              {/* Guest Name */}
+              <div>
+                <label className="block text-lg font-semibold mb-2">Guest Name *</label>
+                <input
+                  type="text"
+                  name="guestName"
+                  value={bookingData.guestName}
+                  onChange={handleInputChange}
+                  placeholder="Enter guest name"
+                  className="w-full p-3 rounded-lg bg-white/10 border border-gray-400 text-white placeholder-gray-400"
+                  required
+                />
               </div>
 
               {/* Contact Information */}
@@ -311,6 +326,7 @@ const HotelBookingForm = () => {
               <h2 className="text-3xl font-bold text-green-400 mb-4">Booking Confirmed!</h2>
               <div className="bg-green-500/20 rounded-lg p-6 border border-green-400">
                 <p className="text-lg mb-2">Booking ID: <span className="font-mono font-bold">{bookingId}</span></p>
+                <p className="text-lg mb-2">Guest Name: <span className="font-semibold">{bookingData.guestName}</span></p>
                 <p className="text-lg mb-2">Hotel: <span className="font-semibold">{hotel.name}</span></p>
                 <p className="text-lg mb-2">Room: <span className="font-semibold">{roomTypes.find(r => r.id === bookingData.roomType)?.name}</span></p>
                 <p className="text-lg mb-2">Check-in: <span className="font-semibold">{bookingData.checkIn}</span></p>
