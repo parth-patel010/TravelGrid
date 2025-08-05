@@ -6,7 +6,7 @@ const TrendingSpots = () => {
   const [spots, setSpots] = useState([]);
   const [filter, setFilter] = useState('all');
   const [loading, setLoading] = useState(true);
-
+  const [visibleCount,setVisibleCount] = useState(9);
   // Mock data for trending spots
   const mockTrendingSpots = [
     {
@@ -198,6 +198,10 @@ const TrendingSpots = () => {
     }, 1000);
   }, []);
 
+  const handleLoadMoreSpots = ()=>{
+    setVisibleCount((prev)=>prev+9);
+  }
+
   const filteredSpots = filter === 'all' 
     ? spots 
     : spots.filter(spot => spot.category === filter);
@@ -296,7 +300,7 @@ const TrendingSpots = () => {
       {/* Spots Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredSpots.map((spot, index) => (
+          {filteredSpots.slice(0,visibleCount).map((spot, index) => (
             <div
               key={spot.id}
               className="bg-white/10 border border-pink-400/45 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl hover:bg-white/15 transition-all duration-300 group"
@@ -407,11 +411,14 @@ const TrendingSpots = () => {
         </div>
 
         {/* Load More Button */}
-        <div className="text-center mt-12">
-          <button className="bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 duration-200 cursor-pointer">
+        {visibleCount < filteredSpots.length && (
+          <div className="text-center mt-12">
+          <button onClick={handleLoadMoreSpots} className="bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 duration-200 cursor-pointer">
             Load More Trending Spots
           </button>
         </div>
+        )}
+        
       </div>
     </div>
   );
