@@ -182,6 +182,7 @@ const TravelPlanGenerator = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include", // 🔐 Send cookies
         body: JSON.stringify(tripData),
       });
 

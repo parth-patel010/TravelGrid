@@ -45,6 +45,13 @@ const userSchema = new mongoose.Schema(
         image: String,
       },
     ],
+
+     plannedTrips: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Trip',
+      },
+    ],
   },
   {
     timestamps: true, // createdAt, updatedAt
