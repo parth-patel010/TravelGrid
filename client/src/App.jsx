@@ -12,6 +12,7 @@ import Spinner from "./components/Spinner";
 import ErrorBoundary from "./components/ErrorHandle/ErrorBoundary";
 import GoToTopButton from "./components/GoToTopButton";
 import FeedbackButton from "./components/FeedbackButton";
+import Chatbot from "./components/Chatbot";
 
 function App() {
   const location = useLocation();
@@ -45,6 +46,7 @@ function App() {
 
                 {/* Buttons and Footer */}
                 <GoToTopButton />
+                <Chatbot />
                 <FeedbackButton />
                 <Footer />
               </div>
