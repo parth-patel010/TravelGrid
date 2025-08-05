@@ -85,7 +85,7 @@ const Footer = () => {
                 <h4 className="text-lg font-semibold text-white border-b border-gray-600 pb-2 text-center">
                   Quick Links
                 </h4>
-                <nav className="flex flex-col space-y-3 items-center">
+                <nav className="flex flex-col space-y-3 items-left">
                   {[
                     { name: "Home", path: "/" },
                     { name: "About Us", path: "/about" },
@@ -115,7 +115,7 @@ const Footer = () => {
                 <h4 className="text-lg font-semibold text-white border-b border-gray-600 pb-2 text-center">
                   Contact Info
                 </h4>
-                <div className="space-y-4 flex flex-col justify-center items-center">
+                <div className="space-y-4 flex flex-col justify-center items-left">
                   <div className="flex items-start space-x-3">
                     <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                       <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
