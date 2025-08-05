@@ -91,7 +91,6 @@ const Signup = () => {
     const result = await signup(formData);
 
     if (result.success) {
-      toast.success("Account created successfully! 🎉");
       navigate("/", { replace: true });
     } else {
       toast.error(result.error || "Signup failed");
