@@ -49,10 +49,8 @@ const Login = () => {
     const result = await login(formData.email, formData.password);
 
     if (result.success) {
-      toast.success('Logged in successfully! 🚀');
       navigate(from, { replace: true });
     } else {
-      toast.error(result.error || 'Login failed');
     }
   };
 
