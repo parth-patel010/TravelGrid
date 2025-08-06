@@ -3,10 +3,12 @@ import Typewriter from "typewriter-effect";
 import { X } from "lucide-react";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
+import { useTheme } from "../../context/ThemeContext";
 
 const HeroSection = ({ onSearch }) => {
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("All Categories");
+  const { isDarkMode } = useTheme();
 
   const handleSearch = () => {
     const isLoggedIn = false;
@@ -37,14 +39,18 @@ const HeroSection = ({ onSearch }) => {
       className="relative w-full min-h-[90vh] flex items-center justify-center py-20 overflow-hidden"
     >
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-50 z-10"
+        className="absolute inset-0 bg-cover bg-center opacity-100 z-10"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1695045038427-3acc1c0df23c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzl8fG5pZ2h0JTIwYmVhY2h8ZW58MHx8MHx8fDA%3D')",
+            "url('https://images.unsplash.com/photo-1695045038427-3acc1c0df23c?w=1920&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzl8fG5pZ2h0JTIwYmVhY2h8ZW58MHx8MHx8fDA%3D')",
         }}
       ></div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50 z-15" />
+      <div className={`absolute inset-0 z-15 ${
+        isDarkMode 
+          ? 'bg-gradient-to-b from-black/60 via-black/40 to-black/70' 
+          : 'bg-gradient-to-b from-black/30 via-black/20 to-black/50'
+      }`} />
 
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
@@ -83,7 +89,11 @@ const HeroSection = ({ onSearch }) => {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="flex-1 w-full max-w-md"
           >
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl p-6 space-y-4 border border-white/20">
+            <div className={`backdrop-blur-md rounded-2xl shadow-2xl p-6 space-y-4 border transition-all duration-300 ${
+              isDarkMode 
+                ? 'bg-white/10 border-white/20' 
+                : 'bg-white/90 border-white/30'
+            }`}>
               <div className="space-y-3">
                 <div className="relative">
                   <input
@@ -91,7 +101,11 @@ const HeroSection = ({ onSearch }) => {
                     placeholder="Ex: Borivali, Mumbai, India"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    className="w-full px-4 py-3 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-gray-700 placeholder-gray-500 transition-all duration-300"
+                    className={`w-full px-4 py-3 backdrop-blur-sm border rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-300 ${
+                      isDarkMode 
+                        ? 'bg-white/90 text-gray-950 placeholder-gray-950 border-white/30' 
+                        : 'bg-white/90 text-gray-700 placeholder-gray-500 border-white/30'
+                    }`}
                   />
                 </div>
 
@@ -99,7 +113,11 @@ const HeroSection = ({ onSearch }) => {
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full px-4 py-3 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-gray-700 appearance-none transition-all duration-300"
+                    className={`w-full px-4 py-3 backdrop-blur-sm border rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent appearance-none transition-all duration-300 ${
+                      isDarkMode 
+                        ? 'bg-white/90 text-gray-950 border-white/30' 
+                        : 'bg-white/90 text-gray-700 border-white/30'
+                    }`}
                   >
                     {categories.map((cat) => (
                       <option key={cat} value={cat}>{cat}</option>
@@ -123,7 +141,9 @@ const HeroSection = ({ onSearch }) => {
               </div>
 
               {/* Category Filters */}
-              <div className="pt-4 border-t border-white/20">
+              <div className={`pt-4 border-t ${
+                isDarkMode ? 'border-white/20' : 'border-white/20'
+              }`}>
                 <p className="text-sm font-medium text-white/80 mb-3">Quick Filters:</p>
                 <div className="flex flex-wrap gap-2">
                   {["Restaurants", "Events", "Shopping"].map((filter) => (

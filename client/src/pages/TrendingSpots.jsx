@@ -6,7 +6,7 @@ const TrendingSpots = () => {
   const [spots, setSpots] = useState([]);
   const [filter, setFilter] = useState('all');
   const [loading, setLoading] = useState(true);
-
+  const [visibleCount,setVisibleCount] = useState(9);
   // Mock data for trending spots
   const mockTrendingSpots = [
     {
@@ -88,7 +88,7 @@ const TrendingSpots = () => {
       id: 6,
       name: "Reykjavik, Iceland",
       country: "Iceland",
-      image: "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      image: "https://images.unsplash.com/photo-1606130503037-6a8ef67c9d2d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
       rating: 4.8,
       trending_score: 83,
       visitors_count: "1.2M",
@@ -163,7 +163,7 @@ const TrendingSpots = () => {
       id: 11,
       name: "Paris, France",
       country: "France",
-      image: "https://images.unsplash.com/photo-1502602898536-47ad22581b52?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      image: "https://images.unsplash.com/photo-1712647016816-7072674bd83f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
       rating: 4.7,
       trending_score: 84,
       visitors_count: "38M",
@@ -198,6 +198,10 @@ const TrendingSpots = () => {
     }, 1000);
   }, []);
 
+  const handleLoadMoreSpots = ()=>{
+    setVisibleCount((prev)=>prev+9);
+  }
+
   const filteredSpots = filter === 'all' 
     ? spots 
     : spots.filter(spot => spot.category === filter);
@@ -229,13 +233,13 @@ const TrendingSpots = () => {
       <div className="text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 mt-6">
-              Trending Spots
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 mt-8">
+              Trending <span className='text-pink-500'>Spots</span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-pink-200">
+            <p className="text-xl md:text-2xl mb-8 text-gray-200">
               Discover the hottest destinations everyone's talking about
             </p>
-            <div className="flex items-center justify-center space-x-2 text-pink-200">
+            <div className="flex items-center justify-center space-x-2 text-gray-300">
               <TrendingUp className="h-5 w-5" />
               <span>Updated daily based on bookings and reviews</span>
             </div>
@@ -251,10 +255,10 @@ const TrendingSpots = () => {
               <button
                 key={category.key}
                 onClick={() => setFilter(category.key)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-full whitespace-nowrap transition-colors ${
+                className={`flex items-center space-x-2 px-4 py-2 rounded-full whitespace-nowrap transition-colors duration-200 cursor-pointer ${
                   filter === category.key
-                    ? 'bg-pink-600 text-white'
-                    : 'text-pink-200 hover:text-white hover:bg-pink-800'
+                    ? 'bg-white text-pink-600 font-medium'
+                    : 'border-2 border-transparent hover:border-pink-500/15    text-pink-100  hover:bg-white/10'
                 }`}
               >
                 {typeof category.icon === 'string' ? (
@@ -273,20 +277,20 @@ const TrendingSpots = () => {
       <div className="border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-pink-400">{filteredSpots.length}+</div>
+            <div className="rounded-lg text-center py-2 hover:bg-pink-500/20 shadow-md transition-colors duration-200">
+              <div className="text-3xl font-bold text-blue-400">{filteredSpots.length}+</div>
               <div className="text-pink-200">Trending Destinations</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-pink-400">23%</div>
+            <div className="rounded-lg text-center py-2 hover:bg-pink-500/20 shadow-md transition-colors duration-200">
+              <div className="text-3xl font-bold text-green-400">23%</div>
               <div className="text-pink-200">Average Growth</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-pink-400">—</div>
+            <div className="rounded-lg text-center py-2 hover:bg-pink-500/20 shadow-md transition-colors duration-200">
+              <div className="text-3xl font-bold text-purple-400">—</div>
               <div className="text-pink-200">Monthly Searches</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-pink-400">4.7★</div>
+            <div className="rounded-lg text-center py-2 hover:bg-pink-500/20 shadow-md transition-colors duration-200">
+              <div className="text-3xl font-bold text-red-400">4.7★</div>
               <div className="text-pink-200">Average Rating</div>
             </div>
           </div>
@@ -296,10 +300,10 @@ const TrendingSpots = () => {
       {/* Spots Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredSpots.map((spot, index) => (
+          {filteredSpots.slice(0,visibleCount).map((spot, index) => (
             <div
               key={spot.id}
-              className="bg-white/95 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
+              className="bg-white/10 border border-pink-400/45 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl hover:bg-white/15 transition-all duration-300 group"
             >
               {/* Image Container */}
               <div className="relative h-64 overflow-hidden">
@@ -315,15 +319,15 @@ const TrendingSpots = () => {
                   </div>
                 </div>
                 <div className="absolute top-4 right-4 flex space-x-2">
-                  <button className="bg-white bg-opacity-90 hover:bg-opacity-100 p-2 rounded-full transition-all">
+                  <button className="bg-white bg-opacity-90 hover:bg-opacity-100 p-2 rounded-full transition-all cursor-pointer">
                     <Heart className="h-4 w-4 text-gray-600" />
                   </button>
-                  <button className="bg-white bg-opacity-90 hover:bg-opacity-100 p-2 rounded-full transition-all">
+                  <button className="bg-white bg-opacity-90 hover:bg-opacity-100 p-2 rounded-full transition-all cursor-pointer">
                     <Share2 className="h-4 w-4 text-gray-600" />
                   </button>
                 </div>
                 <div className="absolute bottom-4 right-4">
-                  <div className="bg-green-500 text-white px-2 py-1 rounded text-xs font-semibold">
+                  <div className="bg-green-600 text-white px-2 py-1 rounded text-xs font-semibold">
                     +{spot.growth_percentage}%
                   </div>
                 </div>
@@ -333,10 +337,10 @@ const TrendingSpots = () => {
               <div className="p-6">
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">
+                    <h3 className="text-xl font-bold text-gray-100 mb-1">
                       {spot.name}
                     </h3>
-                    <div className="flex items-center text-gray-600 text-sm">
+                    <div className="flex items-center text-gray-300 text-sm">
                       <MapPin className="h-4 w-4 mr-1" />
                       {spot.country}
                     </div>
@@ -344,21 +348,21 @@ const TrendingSpots = () => {
                   <div className="text-right">
                     <div className="flex items-center space-x-1 mb-1">
                       <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                      <span className="text-sm font-semibold">{spot.rating}</span>
+                      <span className="text-sm text-gray-300 font-semibold">{spot.rating}</span>
                     </div>
-                    <div className="text-xs text-gray-500">{spot.price_range}</div>
+                    <div className="text-xs text-gray-300">{spot.price_range}</div>
                   </div>
                 </div>
 
                 {/* Stats */}
                 <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
                   <div className="flex items-center space-x-2">
-                    <Users className="h-4 w-4 text-pink-600" />
-                    <span className="text-gray-600">{spot.visitors_count} visitors</span>
+                    <Users className="h-4 w-4 text-pink-400" />
+                    <span className="text-gray-300">{spot.visitors_count} visitors</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Calendar className="h-4 w-4 text-pink-600" />
-                    <span className="text-gray-600">{spot.best_time}</span>
+                    <Calendar className="h-4 w-4 text-pink-400" />
+                    <span className="text-gray-300">{spot.best_time}</span>
                   </div>
                 </div>
 
@@ -368,13 +372,13 @@ const TrendingSpots = () => {
                     {spot.highlights.slice(0, 2).map((highlight, idx) => (
                       <span
                         key={idx}
-                        className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-xs font-medium"
+                        className="bg-white text-pink-500 px-3 py-1 rounded-full text-xs font-medium"
                       >
                         {highlight}
                       </span>
                     ))}
                     {spot.highlights.length > 2 && (
-                      <span className="bg-pink-200 text-pink-800 px-3 py-1 rounded-full text-xs">
+                      <span className="bg-pink-100 text-gray-800 px-3 py-1 rounded-full text-xs font-medium">
                         +{spot.highlights.length - 2} more
                       </span>
                     )}
@@ -383,17 +387,17 @@ const TrendingSpots = () => {
 
                 {/* Bottom Stats */}
                 <div className="flex items-center justify-between pt-4 border-t border-pink-200">
-                  <div className="flex items-center space-x-2 text-sm text-gray-600">
+                  <div className="flex items-center space-x-2 text-sm text-gray-300">
                     <Eye className="h-4 w-4" />
                     <span>{spot.recent_reviews} recent reviews</span>
                   </div>
-                  <div className="text-sm font-semibold text-pink-600">
+                  <div className="text-sm font-semibold text-pink-500">
                     Trending Score: {spot.trending_score}
                   </div>
                 </div>
 
                 {/* CTA Button */}
-                <button className="w-full mt-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white py-3 px-6 rounded-lg font-semibold transition-all transform hover:scale-105">
+                <button className="w-full mt-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white py-3 px-6 rounded-lg font-semibold transition-all transform hover:scale-105 cursor-pointer duration-200">
                   Explore {spot.name}
                 </button>
               </div>
@@ -407,11 +411,14 @@ const TrendingSpots = () => {
         </div>
 
         {/* Load More Button */}
-        <div className="text-center mt-12">
-          <button className="bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105">
+        {visibleCount < filteredSpots.length && (
+          <div className="text-center mt-12">
+          <button onClick={handleLoadMoreSpots} className="bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 duration-200 cursor-pointer">
             Load More Trending Spots
           </button>
         </div>
+        )}
+        
       </div>
     </div>
   );
