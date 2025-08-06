@@ -28,10 +28,10 @@ import appStore from './app/store.js';
 //import Summarizer from './components/Summarizer';
 //import Recommendation from './components/recommendation';
 //import Wishlist from './pages/Wishlist';
-import { WishlistProvider } from "./context/WishlistContext";
-import PetTravel from './pages/PetTravel';
+//import { WishlistProvider } from "./context/WishlistContext";
+//import PetTravel from './pages/PetTravel';
 
-import ProtectedRoute from './components/Auth/ProtectedRoute';
+//import ProtectedRoute from './components/Auth/ProtectedRoute';
 
 
 // Lazy imports for pages
