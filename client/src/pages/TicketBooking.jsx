@@ -366,13 +366,33 @@ function TicketBooking() {
                 onChange={handleChange}
                 className="w-full p-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
               >
-                {["Economy", "Premium Economy", "Business", "First"].map(
-                  (c) => (
+                {travelType === "flight" &&
+                  ["Economy", "Premium Economy", "Business", "First"].map((c) => (
                     <option key={c} value={c}>
                       {c}
                     </option>
-                  )
-                )}
+                  ))}
+
+                {travelType === "train" &&
+                  ["Sleeper", "3A", "2A", "1A"].map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+
+                {travelType === "bus" &&
+                  ["Seater", "Sleeper", "AC", "Non-AC"].map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+
+                {travelType === "cab" &&
+                  ["Hatchback", "Sedan", "SUV", "Luxury"].map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
               </select>
             </div>
 
