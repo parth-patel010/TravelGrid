@@ -23,6 +23,16 @@ import ProtectedRoute from './components/Auth/ProtectedRoute';
 import { Provider } from 'react-redux';
 import appStore from './app/store.js';
 
+//import TrendingSpots from './pages/TrendingSpots.jsx';
+//import PackingChecklistPage from './pages/PackingChecklist.jsx';
+//import Summarizer from './components/Summarizer';
+//import Recommendation from './components/recommendation';
+//import Wishlist from './pages/Wishlist';
+import { WishlistProvider } from "./context/WishlistContext";
+import PetTravel from './pages/PetTravel';
+
+import ProtectedRoute from './components/Auth/ProtectedRoute';
+
 
 // Lazy imports for pages
 const Home = lazy(() => import('./pages/Home'));
@@ -120,11 +130,15 @@ const router = createBrowserRouter([
         element: <ProtectedRoute><CountriesVisited /></ProtectedRoute>
       },
 
+
+
       { path: '/pettravel', element: <PetTravel />},
+
       { path: '/package/:id', element: <Suspense fallback={<Spinner />}><PackageDetails /></Suspense> },
       { path: '/network-error', element: <Suspense fallback={<Spinner />}><NetworkError /></Suspense> },
       { path: '/server-error', element: <Suspense fallback={<Spinner />}><ServerError /></Suspense> },
       { path: '*', element: <Suspense fallback={<Spinner />}><NotFound /></Suspense> },
+
     ],
   },
 ]);

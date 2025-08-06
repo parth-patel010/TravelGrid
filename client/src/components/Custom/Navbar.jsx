@@ -68,6 +68,7 @@ const Navbar = () => {
   const isLoggedIn = Boolean(user && isAuthenticated);
 
 
+<<<<<<< HEAD
   const toggleGroup = (item) => {
     setExpanded((prev) => (prev === item ? null : item));
   };
@@ -107,13 +108,24 @@ const Navbar = () => {
       ],
     },
 
+=======
+>>>>>>> 3518c2ada223ee8215ff6c0d1e730480e0b7998f
     { name: "Wishlist", path: "/wishlist" },
     { name: "Pet Travel Guide", path: "/pettravel" },
 ];
   
 
+<<<<<<< HEAD
 =======
 >>>>>>> upstream/main
+=======
+
+  const toggleGroup = (item) => {
+    setExpanded((prev) => (prev === item ? null : item));
+  };
+
+
+>>>>>>> 3518c2ada223ee8215ff6c0d1e730480e0b7998f
   const handleLogout = async () => {
     try {
       await logout();
