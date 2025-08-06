@@ -135,7 +135,7 @@ const BookingPDF = ({ user, hotel, bookingId, bookingData, totalPrice, qrImage }
           <Text style={styles.sectionTitle}>Guest Information</Text>
           <View style={styles.row}>
             <Text style={styles.label}>Name:</Text>
-            <Text style={styles.value}>{user?.name || "Guest"}</Text>
+            <Text style={styles.value}>{bookingData?.guestName || user?.name || "Guest"}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>Email:</Text>

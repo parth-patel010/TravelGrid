@@ -8,7 +8,7 @@ import Navbar from '../components/Custom/Navbar';
 import './styles/HotelBookingForm.css';
 
 const HotelBookingForm = () => {
-  const location = useLocation();
+  const location = useLocation()  ;
   const navigate = useNavigate();
   const { user } = useAuth();
   const { hotel } = location.state || {};
@@ -18,7 +18,9 @@ const HotelBookingForm = () => {
     checkIn: '',
     checkOut: '',
     guests: 1,
+    guestName: '',
     specialRequests: '',
+    countryCode: '+91',
     contactNumber: '',
     email: user?.email || 'guest@example.com'
   });
@@ -26,12 +28,26 @@ const HotelBookingForm = () => {
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
   const [bookingId, setBookingId] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
+  const [errors, setErrors] = useState({});
 
   const roomTypes = [
     { id: 'standard', name: 'Standard Room', price: 1500, description: 'Comfortable room with basic amenities' },
     { id: 'deluxe', name: 'Deluxe Room', price: 2500, description: 'Spacious room with premium amenities' },
     { id: 'suite', name: 'Executive Suite', price: 3500, description: 'Luxury suite with separate living area' },
     { id: 'presidential', name: 'Presidential Suite', price: 4500, description: 'Ultimate luxury with panoramic views' }
+  ];
+
+  const countryCodes = [
+    { code: '+91', country: 'India', flag: '🇮🇳' },
+    { code: '+1', country: 'USA', flag: '🇺🇸' },
+    { code: '+44', country: 'UK', flag: '🇬🇧' },
+    { code: '+971', country: 'UAE', flag: '🇦🇪' },
+    { code: '+65', country: 'Singapore', flag: '🇸🇬' },
+    { code: '+61', country: 'Australia', flag: '🇦🇺' },
+    { code: '+49', country: 'Germany', flag: '🇩🇪' },
+    { code: '+33', country: 'France', flag: '🇫🇷' },
+    { code: '+81', country: 'Japan', flag: '🇯🇵' },
+    { code: '+86', country: 'China', flag: '🇨🇳' }
   ];
 
   const generateBookingId = () => {
@@ -67,18 +83,105 @@ const HotelBookingForm = () => {
       ...prev,
       [name]: value
     }));
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
+  };
+
+  // Validation functions
+  const validateName = (name) => {
+    const nameRegex = /^[a-zA-Z\s]{2,50}$/;
+    return nameRegex.test(name.trim());
+  };
+
+  const validatePhone = (countryCode, phone) => {
+    // Remove spaces and dashes from phone number
+    const cleanPhone = phone.replace(/[\s-]/g, '');
+    
+    // Different validation patterns for different countries
+    const validationPatterns = {
+      '+91': /^[6-9]\d{9}$/, // India: 10 digits starting with 6-9
+      '+1': /^\d{10}$/, // USA: 10 digits
+      '+44': /^\d{10,11}$/, // UK: 10-11 digits
+      '+971': /^\d{8,9}$/, // UAE: 8-9 digits
+      '+65': /^\d{8}$/, // Singapore: 8 digits
+      '+61': /^\d{9}$/, // Australia: 9 digits
+      '+49': /^\d{10,12}$/, // Germany: 10-12 digits
+      '+33': /^\d{9,10}$/, // France: 9-10 digits
+      '+81': /^\d{10,11}$/, // Japan: 10-11 digits
+      '+86': /^\d{11}$/ // China: 11 digits
+    };
+    
+    const pattern = validationPatterns[countryCode];
+    return pattern ? pattern.test(cleanPhone) : /^\d{7,15}$/.test(cleanPhone); // Default: 7-15 digits
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    if (!bookingData.roomType || !bookingData.checkIn || !bookingData.checkOut || !bookingData.contactNumber) {
-      toast.error('Please fill in all required fields');
-      return;
+    // Clear all previous errors
+    setErrors({});
+    const newErrors = {};
+
+    // Check required fields
+    if (!bookingData.guestName) {
+      newErrors.guestName = 'Guest name is required';
+    } else if (!validateName(bookingData.guestName)) {
+      newErrors.guestName = 'Enter valid name (2-50 characters, letters only)';
     }
 
-    if (new Date(bookingData.checkIn) >= new Date(bookingData.checkOut)) {
-      toast.error('Check-out date must be after check-in date');
+    if (!bookingData.contactNumber) {
+      newErrors.contactNumber = 'Contact number is required';
+    } else if (!validatePhone(bookingData.countryCode, bookingData.contactNumber)) {
+      const countryName = countryCodes.find(c => c.code === bookingData.countryCode)?.country || 'selected country';
+      newErrors.contactNumber = `Enter valid phone number for ${countryName}`;
+    }
+
+    if (bookingData.email && !validateEmail(bookingData.email)) {
+      newErrors.email = 'Enter a valid email address';
+    }
+
+    if (!bookingData.roomType) {
+      newErrors.roomType = 'Please select a room type';
+    }
+
+    if (!bookingData.checkIn) {
+      newErrors.checkIn = 'Check-in date is required';
+    }
+
+    if (!bookingData.checkOut) {
+      newErrors.checkOut = 'Check-out date is required';
+    }
+
+    // Validate dates if both are provided
+    if (bookingData.checkIn && bookingData.checkOut) {
+      if (new Date(bookingData.checkIn) >= new Date(bookingData.checkOut)) {
+        newErrors.checkOut = 'Check-out date must be after check-in date';
+      }
+    }
+
+    // Check if check-in is not in the past
+    if (bookingData.checkIn) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (new Date(bookingData.checkIn) < today) {
+        newErrors.checkIn = 'Check-in date cannot be in the past';
+      }
+    }
+
+    // If there are errors, set them and return
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      toast.error('Please fix the errors below');
       return;
     }
 
@@ -132,7 +235,7 @@ const HotelBookingForm = () => {
                       className={`border-2 rounded-lg p-4 cursor-pointer transition-all ${
                         bookingData.roomType === room.id
                           ? 'border-pink-400 bg-pink-500/20'
-                          : 'border-gray-400 hover:border-pink-300'
+                          : errors.roomType ? 'border-red-400 hover:border-red-300' : 'border-gray-400 hover:border-pink-300'
                       }`}
                       onClick={() => setBookingData(prev => ({ ...prev, roomType: room.id }))}
                     >
@@ -144,6 +247,9 @@ const HotelBookingForm = () => {
                     </div>
                   ))}
                 </div>
+                {errors.roomType && (
+                  <p className="text-red-400 text-sm mt-2">{errors.roomType}</p>
+                )}
               </div>
 
               {/* Date Selection */}
@@ -156,9 +262,14 @@ const HotelBookingForm = () => {
                     value={bookingData.checkIn}
                     onChange={handleInputChange}
                     min={new Date().toISOString().split('T')[0]}
-                    className="w-full p-3 rounded-lg bg-white/10 border border-gray-400 text-white"
+                    className={`w-full p-3 rounded-lg bg-white/10 border text-white ${
+                      errors.checkIn ? 'border-red-400' : 'border-gray-400'
+                    }`}
                     required
                   />
+                  {errors.checkIn && (
+                    <p className="text-red-400 text-sm mt-1">{errors.checkIn}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-lg font-semibold mb-2">Check-out Date *</label>
@@ -168,9 +279,14 @@ const HotelBookingForm = () => {
                     value={bookingData.checkOut}
                     onChange={handleInputChange}
                     min={bookingData.checkIn || new Date().toISOString().split('T')[0]}
-                    className="w-full p-3 rounded-lg bg-white/10 border border-gray-400 text-white"
+                    className={`w-full p-3 rounded-lg bg-white/10 border text-white ${
+                      errors.checkOut ? 'border-red-400' : 'border-gray-400'
+                    }`}
                     required
                   />
+                  {errors.checkOut && (
+                    <p className="text-red-400 text-sm mt-1">{errors.checkOut}</p>
+                  )}
                 </div>
               </div>
 
@@ -189,30 +305,82 @@ const HotelBookingForm = () => {
                 </select>
               </div>
 
+              {/* Guest Name */}
+              <div>
+                <label className="block text-lg font-semibold mb-2">Guest Name *</label>
+                <input
+                  type="text"
+                  name="guestName"
+                  value={bookingData.guestName}
+                  onChange={handleInputChange}
+                  placeholder="Enter guest name"
+                  className={`w-full p-3 rounded-lg bg-white/10 border text-white placeholder-gray-400 ${
+                    errors.guestName ? 'border-red-400' : 'border-gray-400'
+                  }`}
+                  minLength="2"
+                  maxLength="50"
+                  pattern="[a-zA-Z\s]+"
+                  required
+                />
+                {errors.guestName && (
+                  <p className="text-red-400 text-sm mt-1">{errors.guestName}</p>
+                )}
+              </div>
+
               {/* Contact Information */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-lg font-semibold mb-2">Contact Number *</label>
-                  <input
-                    type="tel"
-                    name="contactNumber"
-                    value={bookingData.contactNumber}
-                    onChange={handleInputChange}
-                    placeholder="Enter your phone number"
-                    className="w-full p-3 rounded-lg bg-white/10 border border-gray-400 text-white placeholder-gray-400"
-                    required
-                  />
+                  <div className="flex gap-2">
+                    {/* Country Code Dropdown */}
+                    <select
+                      name="countryCode"
+                      value={bookingData.countryCode}
+                      onChange={handleInputChange}
+                      className={`p-3 rounded-lg bg-white/10 border text-white ${
+                        errors.contactNumber ? 'border-red-400' : 'border-gray-400'
+                      }`}
+                      style={{ minWidth: '120px' }}
+                    >
+                      {countryCodes.map((country) => (
+                        <option key={country.code} value={country.code} className="bg-gray-800">
+                          {country.flag} {country.code}
+                        </option>
+                      ))}
+                    </select>
+                    
+                    {/* Phone Number Input */}
+                    <input
+                      type="tel"
+                      name="contactNumber"
+                      value={bookingData.contactNumber}
+                      onChange={handleInputChange}
+                      placeholder="Phone number"
+                      className={`flex-1 p-3 rounded-lg bg-white/10 border text-white placeholder-gray-400 ${
+                        errors.contactNumber ? 'border-red-400' : 'border-gray-400'
+                      }`}
+                      required
+                    />
+                  </div>
+                  {errors.contactNumber && (
+                    <p className="text-red-400 text-sm mt-1">{errors.contactNumber}</p>
+                  )}
                 </div>
                 <div>
-                  <label className="block text-lg font-semibold mb-2">Email</label>
+                  <label className="block text-lg font-semibold mb-2">Email Address</label>
                   <input
                     type="email"
                     name="email"
                     value={bookingData.email}
                     onChange={handleInputChange}
-                    placeholder="Enter your email"
-                    className="w-full p-3 rounded-lg bg-white/10 border border-gray-400 text-white placeholder-gray-400"
+                    placeholder="Email address"
+                    className={`w-full p-3 rounded-lg bg-white/10 border text-white placeholder-gray-400 ${
+                      errors.email ? 'border-red-400' : 'border-gray-400'
+                    }`}
                   />
+                  {errors.email && (
+                    <p className="text-red-400 text-sm mt-1">{errors.email}</p>
+                  )}
                 </div>
               </div>
 
@@ -311,6 +479,7 @@ const HotelBookingForm = () => {
               <h2 className="text-3xl font-bold text-green-400 mb-4">Booking Confirmed!</h2>
               <div className="bg-green-500/20 rounded-lg p-6 border border-green-400">
                 <p className="text-lg mb-2">Booking ID: <span className="font-mono font-bold">{bookingId}</span></p>
+                <p className="text-lg mb-2">Guest Name: <span className="font-semibold">{bookingData.guestName}</span></p>
                 <p className="text-lg mb-2">Hotel: <span className="font-semibold">{hotel.name}</span></p>
                 <p className="text-lg mb-2">Room: <span className="font-semibold">{roomTypes.find(r => r.id === bookingData.roomType)?.name}</span></p>
                 <p className="text-lg mb-2">Check-in: <span className="font-semibold">{bookingData.checkIn}</span></p>
