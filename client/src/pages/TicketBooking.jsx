@@ -37,6 +37,7 @@ function TicketBooking() {
     return: "",
     passengers: 1,
     cabin: "Economy",
+    petFriendly: false //adding for pet friendly feature
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -100,6 +101,16 @@ function TicketBooking() {
     if (!el) return;
 
     const clone = el.cloneNode(true);
+    // Adding pet-friendly info
+    if (form.petFriendly) {
+      const petNote = document.createElement("div");
+      petNote.textContent = "🐾 Pet-friendly: Yes";
+      petNote.style.fontSize = "20px";
+      petNote.style.marginTop = "20px";
+      petNote.style.color = "#d63384"; 
+      clone.appendChild(petNote);
+    }
+
 
     // 🧹 Remove buttons from clone only
     const buttonsToRemove = clone.querySelectorAll("button");
@@ -395,6 +406,26 @@ function TicketBooking() {
                   ))}
               </select>
             </div>
+
+            <div className="flex items-center gap-3 mt-4 text-white">
+              <input
+                type="checkbox"
+                id="petFriendly"
+                name="petFriendly"
+                checked={form.petFriendly}
+                onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    petFriendly: e.target.checked,
+                  }))
+                }
+                className="accent-pink-600 w-5 h-5 rounded focus:ring-2 focus:ring-pink-500"
+              />
+              <label htmlFor="petFriendly" className="text-sm md:text-base font-medium">
+                I’m traveling with a pet
+              </label>
+            </div>
+
 
             {/* Submit button */}
             <button

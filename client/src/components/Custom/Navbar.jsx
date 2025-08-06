@@ -68,10 +68,64 @@ const Navbar = () => {
   const isLoggedIn = Boolean(user && isAuthenticated);
 
 
+<<<<<<< HEAD
   const toggleGroup = (item) => {
     setExpanded((prev) => (prev === item ? null : item));
   };
 
+<<<<<<< HEAD
+  useEffect(() => {
+    setIsSidebarOpen(false);
+  }, [location.pathname]);
+
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "Trending Spots", path: "/trending-spots" },
+    {
+      name: "Booking",
+      subitems: [
+        { label: "Ticket", path: "/ticket" },
+        { label: "Hotels", path: "/hotels" },
+        { label: "Packages", path: "/packages" },
+      ],
+    },
+    {
+      name: "Support",
+      subitems: [
+        { label: "Travel Plans", path: "/travel-plan-generator" },
+        { label: "Guide", path: "/guides" },
+        { label: "Contact", path: "/contact" },
+        { label: "Hotel / Flight Review Summarizer", path: "/Summarizer" },
+      ],
+    },
+    {
+      name: "Tools",
+      subitems: [
+        { label: "Trip Expense Calculator", path: "/trip-calculator" },
+        { label: "Packing Checklist", path: "/packing-checklist" },
+        { label: "Travel Recommendations", path: "/recommendation" },
+        { label: "Feedback", path: "/feedback" },
+      ],
+    },
+
+=======
+>>>>>>> 3518c2ada223ee8215ff6c0d1e730480e0b7998f
+    { name: "Wishlist", path: "/wishlist" },
+    { name: "Pet Travel Guide", path: "/pettravel" },
+];
+  
+
+<<<<<<< HEAD
+=======
+>>>>>>> upstream/main
+=======
+
+  const toggleGroup = (item) => {
+    setExpanded((prev) => (prev === item ? null : item));
+  };
+
+
+>>>>>>> 3518c2ada223ee8215ff6c0d1e730480e0b7998f
   const handleLogout = async () => {
     try {
       await logout();
