@@ -68,9 +68,8 @@ const DiscoverSection = () => {
         {/* Heading */}
         <div className="mb-16">
           <motion.h2
-            className={`text-2xl md:text-3xl font-bold mb-6 transition-all duration-300 ${
-              isDarkMode ? 'text-white' : 'text-gray-900'
-            }`}
+            className={`text-2xl md:text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'
+              }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -81,9 +80,8 @@ const DiscoverSection = () => {
             </span>
           </motion.h2>
           <motion.p
-            className={`text-base md:text-lg mb-10 leading-relaxed transition-all duration-300 ${
-              isDarkMode ? 'text-gray-300' : 'text-gray-600'
-            }`}
+            className={`text-base md:text-lg mb-10 leading-relaxed transition-all duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
@@ -94,13 +92,19 @@ const DiscoverSection = () => {
 
         {/* Cards */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-4 gap-8 px-2 mb-16"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-stretch mb-16"
           variants={container}
           initial="hidden"
           animate="show"
         >
           {destinations.map((place) => (
-            <motion.div key={place.id} variants={item}>
+            <motion.div
+              key={place.id}
+              variants={item}
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+              className="h-full"
+            >
               <DiscoverCard
                 place={place}
                 handleBookNowClick={handleBookNowClick}
@@ -109,12 +113,12 @@ const DiscoverSection = () => {
           ))}
         </motion.div>
 
+
         {/* CTA Section */}
         <div className="mt-16">
           <motion.h3
-            className={`text-xl md:text-2xl font-semibold mb-4 transition-all duration-300 ${
-              isDarkMode ? 'text-white' : 'text-gray-900'
-            }`}
+            className={`text-xl md:text-2xl font-semibold mb-4 transition-all duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'
+              }`}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -122,9 +126,8 @@ const DiscoverSection = () => {
             Ready to plan your next adventure?
           </motion.h3>
           <motion.p
-            className={`mb-6 leading-relaxed transition-all duration-300 ${
-              isDarkMode ? 'text-gray-300' : 'text-gray-600'
-            }`}
+            className={`mb-6 leading-relaxed transition-all duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              }`}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
