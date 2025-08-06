@@ -12,6 +12,8 @@ import { WishlistProvider } from './context/WishlistContext';
 import { ThemeProvider } from './context/ThemeContext';
 import AuthLayout from './components/AuthLayout';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
+import { Provider } from 'react-redux';
+import appStore from './app/store.js';
 
 // Lazy imports for pages
 const Home = lazy(() => import('./pages/Home'));
@@ -121,24 +123,25 @@ createRoot(document.getElementById('root')).render(
     <ErrorBoundary>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
         <ThemeProvider>
-          <AuthProvider>
-            <WishlistProvider>
-              <RouterProvider router={router} />
-              <Toaster
-                position="top-center"
-                reverseOrder={false}
-                toastOptions={{
-                  duration: 5000,
-                  style: {
-                    background: 'var(--card-bg)',
-                    color: 'var(--text-primary)',
-                    fontSize: '16px',
-                    border: '1px solid var(--border-primary)',
-                  },
-                }}
-              />
-            </WishlistProvider>
-          </AuthProvider>
+        <AuthProvider>
+          <WishlistProvider>
+            <Provider store={appStore}>
+            <RouterProvider router={router} />
+            <Toaster
+              position="top-center"
+              reverseOrder={false}
+              toastOptions={{
+                duration: 5000,
+                style: {
+                  background: '#333',
+                  color: '#fff',
+                  fontSize: '16px',
+                },
+              }}
+            />
+            </Provider>
+          </WishlistProvider>
+        </AuthProvider>
         </ThemeProvider>
       </GoogleOAuthProvider>
     </ErrorBoundary>
