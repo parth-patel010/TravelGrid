@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin, TrendingUp, Star, Users, Calendar, Heart, Share2, Eye } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';  //importing for locationdetails
 import Navbar from '../components/Custom/Navbar';
 
 const TrendingSpots = () => {
   const [spots, setSpots] = useState([]);
   const [filter, setFilter] = useState('all');
   const [loading, setLoading] = useState(true);
+<<<<<<< HEAD
+  const navigate = useNavigate();   //adding this hook
+
+=======
   const [visibleCount,setVisibleCount] = useState(9);
+>>>>>>> upstream/main
   // Mock data for trending spots
   const mockTrendingSpots = [
     {
@@ -214,6 +220,11 @@ const TrendingSpots = () => {
     { key: 'city', label: 'City', icon: '🏙️' }
   ];
 
+  //function to navigate to location detail
+  const handleExploreLocation = (locationId) =>{
+    navigate(`/location/${locationId}`);
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black to-pink-900 flex items-center justify-center">
@@ -397,7 +408,12 @@ const TrendingSpots = () => {
                 </div>
 
                 {/* CTA Button */}
+<<<<<<< HEAD
+                <button className="w-full mt-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white py-3 px-6 rounded-lg font-semibold transition-all transform hover:scale-105"
+                onClick={() => handleExploreLocation(spot.id)}>   {/*addning function to perform task when explore is clicked */}
+=======
                 <button className="w-full mt-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white py-3 px-6 rounded-lg font-semibold transition-all transform hover:scale-105 cursor-pointer duration-200">
+>>>>>>> upstream/main
                   Explore {spot.name}
                 </button>
               </div>

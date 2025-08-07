@@ -11,6 +11,13 @@ import { AuthProvider } from './context/AuthContext';
 import { WishlistProvider } from './context/WishlistContext';
 import { ThemeProvider } from './context/ThemeContext';
 import AuthLayout from './components/AuthLayout';
+//import TrendingSpots from './pages/TrendingSpots.jsx';
+//import PackingChecklistPage from './pages/PackingChecklist.jsx';
+//import Summarizer from './components/Summarizer';
+//import Recommendation from './components/recommendation';
+//import Wishlist from './pages/Wishlist';
+//import { WishlistProvider } from "./context/WishlistContext";
+import LocationDetail from './pages/LocationDetail';
 
 //import TrendingSpots from './pages/TrendingSpots.jsx';
 //import PackingChecklistPage from './pages/PackingChecklist.jsx';
@@ -129,6 +136,11 @@ const router = createBrowserRouter([
         path: '/dashboard/countries',
         element: <ProtectedRoute><CountriesVisited /></ProtectedRoute>
       },
+      /*{ path: '/network-error', element: <NetworkError /> },
+      { path: '/server-error', element: <ServerError /> },
+      { path: '*', element: <NotFound /> },
+      { path: '/package/:id', element: <PackageDetails /> },*/
+      { path: '/location/:locationId', element: <LocationDetail />},
 
 
 
