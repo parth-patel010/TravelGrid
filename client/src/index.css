@@ -162,3 +162,12 @@ body {
   color: var(--text-primary);
   border-color: var(--border-primary);
 }
+
+/* index.css or a global stylesheet */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

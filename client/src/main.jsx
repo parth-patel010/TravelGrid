@@ -36,8 +36,8 @@ const CurrencyConverter = lazy(() => import('./pages/currencyconverter'));
 const Feedback = lazy(() => import('./pages/Feedback'));
 const TravelPlanGenerator = lazy(() => import('./pages/TravelPlanGenerator'));
 const TravelForum = lazy(() => import('./pages/TravelForum'));
-const TrendingSpots = lazy(() => import('./pages/TrendingSpots.jsx'));
-const PackingChecklistPage = lazy(() => import('./pages/PackingChecklist.jsx'));
+const TrendingSpots = lazy(() => import('./pages/TrendingSpots'));
+const PackingChecklistPage = lazy(() => import('./pages/PackingChecklist'));
 const Summarizer = lazy(() => import('./components/Summarizer'));
 const Recommendation = lazy(() => import('./components/recommendation'));
 const Wishlist = lazy(() => import('./pages/Wishlist'));
@@ -52,6 +52,7 @@ const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
 const NetworkError = lazy(() => import('./components/ErrorHandle/NetworkError'));
 const ServerError = lazy(() => import('./components/ErrorHandle/ServerError'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const PetTravel = lazy(() => import('./pages/PetTravel'));
 
 const router = createBrowserRouter([
   { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
@@ -89,6 +90,7 @@ const router = createBrowserRouter([
       { path: '/wishlist', element: <Suspense fallback={<Spinner />}><Wishlist /></Suspense> },
       { path: '/trending-spots', element: <Suspense fallback={<Spinner />}><TrendingSpots /></Suspense> },
       { path: '/trending', element: <Suspense fallback={<Spinner />}><TrendingSpots /></Suspense> },
+      { path: '/pettravel', element: <Suspense fallback={<Spinner />}><PetTravel /></Suspense> },
 
       {
         path: '/dashboard',
