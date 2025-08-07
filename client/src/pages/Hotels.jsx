@@ -82,9 +82,20 @@ function Hotels() {
                 className="w-full h-56 object-cover object-center"
               />
               <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-2xl font-semibold text-gray-800 mb-1">
+              <div className="flex items-center gap-2 mb-1">
+                <h3 className="text-2xl font-semibold text-gray-800">
                   {hotel.name}
                 </h3>
+                {hotel.isPetFriendly && (
+                  <div
+                    className="text-pink-600 text-xl cursor-pointer"
+                    title="Pet-friendly hotel"
+                  >
+                    🐾
+                  </div>
+                )}
+              </div>
+              
                 <span className="text-pink-600 font-medium mb-3">
                   {hotel.location}
                 </span>
@@ -113,8 +124,6 @@ function Hotels() {
           )}
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

@@ -68,11 +68,13 @@ const Navbar = () => {
   const token = localStorage.getItem("token");
   const isLoggedIn = Boolean(user && isAuthenticated);
 
-
   const toggleGroup = (item) => {
     setExpanded((prev) => (prev === item ? null : item));
   };
 
+  useEffect(() => {
+    setIsSidebarOpen(false);
+  }, [location.pathname]);
   const handleLogout = async () => {
     try {
       await logout();
