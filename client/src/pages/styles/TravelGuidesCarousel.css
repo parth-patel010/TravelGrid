@@ -1,9 +1,8 @@
 .travel-guides-section {
   width: 100%;
   background: linear-gradient(to bottom right, #000000, #831843);
-  padding: 50px 20px;
+  padding: 20px 20px;
   text-align: center;
-  margin-top: -50px;
   min-height: 120vh;
 }
 
@@ -14,7 +13,19 @@
   margin-bottom: 0.5rem;
   margin-top: 3.5rem;
 }
+.main-span{
+  color: #fb64b6;
+}
+.search-tab{
+  position: relative;
+  border-radius:15px;
+  border: 3.5px solid transparent;
+  transition: border 0.3s;
+}
+.search-tab:hover{
+   border:3.5px solid #ec4899;
 
+}
 .sub-caption {
   font-size: 1rem;
   color: #f9a8d4;
@@ -180,8 +191,12 @@
   }
 
   .main-heading {
-    margin-top: 20px;
+    margin-top: 40px;
   }
+}
+
+.unique-heading-1 {
+  margin-top: 6rem; /* Adjust only for this heading */
 }
 
 /* Profile Section */

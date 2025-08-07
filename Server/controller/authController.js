@@ -1,80 +1,207 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const validator = require('validator');
 const User = require('../models/user');
+const mongoose = require('mongoose');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
+if (!JWT_SECRET) {
+  console.error('JWT_SECRET not set in environment variables');
+  process.exit(1);
+}
 
-// Register User
-exports.registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
+// Cookie helper
+const setTokenCookie = (res, userId) => {
+  const token = jwt.sign({ id: userId }, JWT_SECRET, {
+    expiresIn: '7d',
+  });
 
-  if (!name || !email || !password)
-    return res.status(400).json({ message: 'All fields are required' });
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "Lax",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+  });
+};
+
+// Google Auth
+exports.googleAuth = async (req, res) => {
+  const { token } = req.body;
 
   try {
-    // Check for existing user
-    const userExists = await User.findOne({ email });
-    if (userExists)
-      return res.status(400).json({ message: 'User already exists' });
+    const response = await fetch(
+      `https://oauth2.googleapis.com/tokeninfo?id_token=${token}`
+    );
+    const googleUser = await response.json();
 
-    // Hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    if (!googleUser.email) {
+      return res.status(400).json({ success: false, error: "Invalid Google token" });
+    }
 
-    // Save user
-    const user = await User.create({
-      name,
-      email,
-      password: hashedPassword,
-    });
+    let user = await User.findOne({ email: googleUser.email });
 
-    // Generate JWT
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+    if (!user) {
+      user = await User.create({
+        name: googleUser.name || "Google User",
+        email: googleUser.email,
+        picture: googleUser.picture,
+        googleId: googleUser.sub,
+        isGoogleUser: true,
+      });
+    } else if (!user.googleId) {
+      user.googleId = googleUser.sub;
+      user.isGoogleUser = true;
+      user.picture = googleUser.picture;
+      await user.save();
+    }
 
-    res.status(201).json({
-      message: '✅ User registered',
-      token,
+    setTokenCookie(res, user._id);
+
+    return res.status(200).json({
+      success: true,
       user: {
         id: user._id,
         name: user.name,
         email: user.email,
-      },
+        picture: user.picture,
+      }
     });
+
+  } catch (error) {
+    console.error("Google Auth Error:", error);
+    res.status(500).json({ success: false, error: "Server error" });
+  }
+};
+
+// Register User
+exports.registerUser = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    if (!name || !email || !password) {
+      return res.status(400).json({ success: false, error: 'All fields are required' });
+    }
+
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({ success: false, error: 'Invalid email format' });
+    }
+
+    const normalizedEmail = email.toLowerCase();
+    const existingUser = await User.findOne({ email: normalizedEmail });
+
+    if (existingUser) {
+      return res.status(400).json({ success: false, error: 'User already exists' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await User.create({
+      name,
+      email: normalizedEmail,
+      password: hashedPassword
+    });
+
+    setTokenCookie(res, user._id);
+
+    return res.status(201).json({
+      success: true,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email
+      }
+    });
+
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Server Error' });
+    return res.status(500).json({ success: false, error: 'Server Error' });
   }
 };
 
 // Login User
 exports.loginUser = async (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password)
-    return res.status(400).json({ message: 'All fields are required' });
-
   try {
-    const user = await User.findOne({ email });
-    if (!user)
-      return res.status(404).json({ message: 'User not found' });
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ success: false, error: 'All fields are required' });
+    }
+
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({ success: false, error: 'Invalid email format' });
+    }
+
+    const normalizedEmail = email.toLowerCase();
+    const user = await User.findOne({ email: normalizedEmail });
+
+    if (!user) {
+      return res.status(404).json({ success: false, error: 'User not found' });
+    }
+
+    if (user.isGoogleUser) {
+      return res.status(400).json({ success: false, error: 'Please login with Google' });
+    }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch)
-      return res.status(401).json({ message: 'Invalid credentials' });
+    if (!isMatch) {
+      return res.status(401).json({ success: false, error: 'Invalid credentials' });
+    }
 
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+    setTokenCookie(res, user._id);
 
-    res.status(200).json({
-      message: '✅ Login successful',
-      token,
+    return res.status(200).json({
+      success: true,
       user: {
         id: user._id,
         name: user.name,
         email: user.email,
-      },
+        picture: user.picture
+      }
     });
+
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Server Error' });
+    return res.status(500).json({ success: false, error: 'Server Error' });
+  }
+};
+
+// Logout User
+exports.logoutUser = async (req, res) => {
+  try {
+    return res
+      .clearCookie("token", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "Lax"
+      })
+      .status(200)
+      .json({
+        message: "User logged out successfully!",
+        success: true
+      });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error logging out the user!",
+      success: false
+    });
+  }
+};
+
+// @route   GET /api/auth/me
+// @access  Private
+exports.getCurrentUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user).select("-password"); // exclude password
+    if (!user) {
+      return res.status(404).json({ success: false, error: "User not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res.status(500).json({ success: false, error: "Server error" });
   }
 };

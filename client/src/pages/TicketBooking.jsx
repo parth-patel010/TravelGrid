@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import Navbar from "../components/Custom/Navbar";
 import {
   Users,
@@ -10,6 +13,7 @@ import {
   Car,
   ArrowRightLeft,
 } from "lucide-react";
+import toast from "react-hot-toast";
 
 const tripModes = [
   { label: "One-Way", value: "oneWay" },
@@ -33,8 +37,22 @@ function TicketBooking() {
     return: "",
     passengers: 1,
     cabin: "Economy",
+    petFriendly: false //adding for pet friendly feature
   });
+
   const [submitted, setSubmitted] = useState(false);
+  const [booked, setBooked] = useState(false); //adding a booked state variable to keep track if booked or not
+
+  //Function to get today's date for validating depart date for ticker
+  const getToday=()=>{
+    const today = new Date();
+    return today.toISOString().split('T')[0]
+  }
+
+  const confirmBooking = () => {
+    //function called when flight booked.
+    setBooked(true);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,38 +61,108 @@ function TicketBooking() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Validate required fields
     if (!form.from.trim()) {
-      alert("Please enter a departure city");
+      toast.error("Please enter a departure city");
       return;
     }
-    
+
     if (!form.to.trim()) {
-      alert("Please enter a destination city");
+      toast.error("Please enter a destination city");
       return;
     }
-    
+
     if (!form.depart) {
-      alert("Please select a departure date");
+      toast.error("Please select a departure date");
       return;
     }
-    
+
     if (tripMode === "roundTrip" && !form.return) {
-      alert("Please select a return date");
+      toast.error("Please select a return date");
       return;
     }
-    
+
     if (!form.passengers || form.passengers < 1) {
-      alert("Please select number of passengers");
+      toast.error("Please select number of passengers");
       return;
     }
-    
+
     setSubmitted(true);
+  };
+
+  const handleDownload = async () => {
+    // Hide buttons temporarily
+    const buttons = document.querySelector(".pdf-buttons");
+    const prevDisplay = buttons?.style.display;
+    if (buttons) buttons.style.display = "none";
+
+    const el = document.getElementById("ticket-content");
+    if (!el) return;
+
+    const clone = el.cloneNode(true);
+    // Adding pet-friendly info
+    if (form.petFriendly) {
+      const petNote = document.createElement("div");
+      petNote.textContent = "🐾 Pet-friendly: Yes";
+      petNote.style.fontSize = "20px";
+      petNote.style.marginTop = "20px";
+      petNote.style.color = "#d63384"; 
+      clone.appendChild(petNote);
+    }
+
+
+    // 🧹 Remove buttons from clone only
+    const buttonsToRemove = clone.querySelectorAll("button");
+    buttonsToRemove.forEach((btn) => btn.remove());
+
+    // Styling
+    clone.style.fontFamily = "Arial, sans-serif";
+    clone.style.padding = "30px";
+    clone.style.width = "600px";
+    clone.style.fontSize = "28px";
+    clone.style.maxWidth = "600px";
+    clone.style.margin = "0 auto";
+
+    const removeClasses = (node) => {
+      if (node instanceof HTMLElement) {
+        node.className = "";
+      } else if (node instanceof SVGElement) {
+        node.setAttribute("class", "");
+      }
+      for (let child of node.children) {
+        removeClasses(child);
+      }
+    };
+    removeClasses(clone);
+
+    document.body.appendChild(clone);
+
+    try {
+      const canvas = await html2canvas(clone, { backgroundColor: "#fff" });
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, "PNG", 10, 10);
+
+      // Add border around the full page
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      pdf.setLineWidth(1); // Border thickness
+      pdf.rect(5, 5, pageWidth - 10, pageHeight - 10); // x, y, width, height
+
+      pdf.save("ticket.pdf");
+    } catch (err) {
+      toast.error("Unable to Generate At this Moment")
+    } finally {
+      document.body.removeChild(clone);
+      // Restore button display
+      if (buttons) buttons.style.display = prevDisplay || "";
+    }
   };
 
   const resetForm = () => {
     setSubmitted(false);
+    setBooked(false);
     setForm({
       from: "",
       to: "",
@@ -84,6 +172,13 @@ function TicketBooking() {
       cabin: "Economy",
     });
   };
+
+  
+  const pluralMap = {
+      bus: "Buses",
+      train: "Trains",
+      flight: "Flights"
+    };
 
   return (
     <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-black to-pink-900 overflow-x-hidden">
@@ -95,14 +190,15 @@ function TicketBooking() {
           alt="City skyline"
           className="absolute inset-0 w-full h-full object-cover opacity-30 z-0"
         />
-         <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2">
-              Book Your <span className="text-pink-400">Perfect Trip</span>
-            </h1>
-            <p className="text-pink-200 text-sm md:text-base">
-              Search and compare prices for flights, trains, buses, and cabs all in one place
-            </p>
-          </div>
+        <div className="text-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2">
+            Book Your <span className="text-pink-400">Perfect Trip</span>
+          </h1>
+          <p className="text-pink-200 text-sm md:text-base">
+            Search and compare prices for flights, trains, buses, and cabs all
+            in one place
+          </p>
+        </div>
         <div className="relative z-10 w-full max-w-4xl bg-white/10 backdrop-blur-md border border-pink-400/30 rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 lg:p-12">
           {/* Travel type tabs - Fixed layout */}
           <div className="grid grid-cols-4 gap-2 sm:gap-3 mb-8">
@@ -141,125 +237,84 @@ function TicketBooking() {
           </div>
 
           {/* Form or Success Message */}
-          {submitted ? (
-            <div className="text-center text-pink-100">
-              <h3 className="text-3xl font-bold text-green-400 mb-4 flex items-center justify-center gap-2">
-                <ArrowRightLeft size={24} /> Booking Confirmed!
-              </h3>
-              <p className="max-w-xl mx-auto leading-relaxed">
-                You have booked a {travelType}{" "}
-                {tripMode === "roundTrip" ? "round-trip" : "one-way"} ticket
-                from
-                <span className="font-semibold text-white">
-                  {" "}
-                  {form.from}
-                </span>{" "}
-                to
-                <span className="font-semibold text-white">
-                  {" "}
-                  {form.to}
-                </span>{" "}
-                departing on
-                <span className="font-semibold text-white"> {form.depart}</span>
-                {tripMode === "roundTrip" && (
-                  <>
-                    {" "}
-                    and returning on
-                    <span className="font-semibold text-white">
-                      {" "}
-                      {form.return}
-                    </span>
-                  </>
-                )}
-                . Travellers:{" "}
-                <span className="font-semibold text-white">
-                  {form.passengers}
-                </span>{" "}
-                • Cabin:
-                <span className="font-semibold text-white"> {form.cabin}</span>.
-              </p>
-              <button
-                className="mt-8 px-6 py-3 bg-pink-600 hover:bg-pink-700 rounded-full text-white font-semibold"
-                onClick={resetForm}
-              >
-                New Search
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
-              {/* Core search panel - Mobile first approach */}
-              <div className="space-y-4 md:space-y-0 md:grid md:gap-4 md:grid-cols-5 md:items-end">
-                {/* From */}
-                <div className="relative block md:col-span-1">
-                  <MapPin
-                    className="absolute top-3 left-3 text-pink-400"
-                    size={18}
-                  />
-                  <input
-                    type="text"
-                    name="from"
-                    placeholder="From"
-                    required
-                    value={form.from}
-                    onChange={handleChange}
-                    className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
-                  />
-                </div>
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-6 sm:space-y-8 px-4 sm:px-6 md:px-10 max-w-5xl mx-auto"
+          >
+            {/* Core search panel */}
+            <div className="grid gap-4 md:grid-cols-5 md:items-end">
+              {/* From */}
+              <div className="relative col-span-2 md:col-span-1">
+                <MapPin
+                  className="absolute top-3 left-3 text-pink-400"
+                  size={18}
+                />
+                <input
+                  type="text"
+                  name="from"
+                  placeholder="From"
+                  required
+                  value={form.from}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
+                />
+              </div>
 
-                {/* Swap button - hidden on mobile */}
-                <div className="hidden md:flex md:col-span-1 items-center justify-center">
-                  <button
-                    type="button"
-                    title="Swap"
-                    onClick={() =>
-                      setForm((prev) => ({
-                        ...prev,
-                        from: prev.to,
-                        to: prev.from,
-                      }))
-                    }
-                    className="bg-pink-500 hover:bg-pink-600 text-white rounded-xl p-3 transition-all"
-                  >
-                    <ArrowRightLeft size={20} />
-                  </button>
-                </div>
+              {/* Swap button (visible on md and above) */}
+              <div className="hidden md:flex col-span-1 items-center justify-center">
+                <button
+                  type="button"
+                  title="Swap"
+                  onClick={() =>
+                    setForm((prev) => ({
+                      ...prev,
+                      from: prev.to,
+                      to: prev.from,
+                    }))
+                  }
+                  className="bg-pink-500 hover:bg-pink-600 text-white rounded-xl p-3 transition-all"
+                >
+                  <ArrowRightLeft size={20} />
+                </button>
+              </div>
 
-                {/* To */}
-                <div className="relative block md:col-span-1">
-                  <MapPin
-                    className="absolute top-3 left-3 text-pink-400"
-                    size={18}
-                  />
-                  <input
-                    type="text"
-                    name="to"
-                    placeholder="To"
-                    required
-                    value={form.to}
-                    onChange={handleChange}
-                    className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
-                  />
-                </div>
+              {/* To */}
+              <div className="relative col-span-2 md:col-span-1">
+                <MapPin
+                  className="absolute top-3 left-3 text-pink-400"
+                  size={18}
+                />
+                <input
+                  type="text"
+                  name="to"
+                  placeholder="To"
+                  required
+                  value={form.to}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
+                />
+              </div>
+              
+              {/* Depart */}
+              <div className="relative col-span-2 md:col-span-1">
+                <CalendarDays
+                  className="absolute top-3 left-3 text-pink-400"
+                  size={18}
+                />
+                <input
+                  type="date"
+                  name="depart"
+                  required
+                  value={form.depart}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
+                />
+              </div>
 
-                {/* Depart Date */}
-                <div className="relative block md:col-span-1">
-                  <CalendarDays
-                    className="absolute top-3 left-3 text-pink-400"
-                    size={18}
-                  />
-                  <input
-                    type="date"
-                    name="depart"
-                    required
-                    value={form.depart}
-                    onChange={handleChange}
-                    className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
-                  />
-                </div>
-
-                {/* Return Date (conditional) or Passengers for one-way */}
+              {/* Return or Passengers */}
+              <div className="relative col-span-2 md:col-span-1">
                 {tripMode === "roundTrip" ? (
-                  <div className="relative block md:col-span-1">
+                  <>
                     <CalendarDays
                       className="absolute top-3 left-3 text-pink-400"
                       size={18}
@@ -269,12 +324,13 @@ function TicketBooking() {
                       name="return"
                       required
                       value={form.return}
+                      min={form.depart}
                       onChange={handleChange}
                       className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                     />
-                  </div>
+                  </>
                 ) : (
-                  <div className="relative block md:col-span-1">
+                  <>
                     <Users
                       className="absolute top-3 left-3 text-pink-400"
                       size={18}
@@ -289,60 +345,96 @@ function TicketBooking() {
                       onChange={handleChange}
                       className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
                     />
-                  </div>
+                  </>
                 )}
               </div>
+            </div>
 
-              {/* Additional fields for round trip or larger screens */}
-              <div
-                className={`grid gap-4 sm:grid-cols-2 ${
-                  tripMode === "oneWay" ? "md:hidden" : ""
-                }`}
+            {/* Extra row for Passengers + Cabin */}
+            <div className="grid gap-4 sm:grid-cols-2">
+              {tripMode === "roundTrip" && (
+                <div className="relative">
+                  <Users
+                    className="absolute top-3 left-3 text-pink-400"
+                    size={18}
+                  />
+                  <input
+                    type="number"
+                    name="passengers"
+                    min="1"
+                    max="10"
+                    required
+                    value={form.passengers}
+                    onChange={handleChange}
+                    className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
+                    placeholder="Passengers"
+                  />
+                </div>
+              )}
+              <select
+                name="cabin"
+                value={form.cabin}
+                onChange={handleChange}
+                className="w-full p-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
               >
-                {tripMode === "roundTrip" && (
-                  <div className="relative block">
-                    <Users
-                      className="absolute top-3 left-3 text-pink-400"
-                      size={18}
-                    />
-                    <input
-                      type="number"
-                      name="passengers"
-                      min="1"
-                      max="10"
-                      required
-                      value={form.passengers}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
-                      placeholder="Passengers"
-                    />
-                  </div>
-                )}
-                <select
-                  name="cabin"
-                  value={form.cabin}
-                  onChange={handleChange}
-                  className="w-full p-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
-                >
-                  {["Economy", "Premium Economy", "Business", "First"].map(
-                    (c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    )
-                  )}
-                </select>
-              </div>
+                {travelType === "flight" &&
+                  ["Economy", "Premium Economy", "Business", "First"].map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
 
-              <button
-                type="submit"
-                className="w-full mt-4 py-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold rounded-xl text-lg tracking-wide shadow-lg transition-all hover:shadow-pink-700/50"
-              >
-                Search{" "}
-                {travelType.charAt(0).toUpperCase() + travelType.slice(1)}s
-              </button>
-            </form>
-          )}
+                {travelType === "train" &&
+                  ["Sleeper", "3A", "2A", "1A"].map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+
+                {travelType === "bus" &&
+                  ["Seater", "Sleeper", "AC", "Non-AC"].map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+
+                {travelType === "cab" &&
+                  ["Hatchback", "Sedan", "SUV", "Luxury"].map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+              </select>
+            </div>
+
+            <div className="flex items-center gap-3 mt-4 text-white">
+              <input
+                type="checkbox"
+                id="petFriendly"
+                name="petFriendly"
+                checked={form.petFriendly}
+                onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    petFriendly: e.target.checked,
+                  }))
+                }
+                className="accent-pink-600 w-5 h-5 rounded focus:ring-2 focus:ring-pink-500"
+              />
+              <label htmlFor="petFriendly" className="text-sm md:text-base font-medium">
+                I’m traveling with a pet
+              </label>
+            </div>
+
+
+            {/* Submit button */}
+            <button
+              type="submit"
+              className="w-full mt-4 py-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold rounded-xl text-lg tracking-wide shadow-lg transition-all hover:shadow-pink-700/50"
+            >
+              Search {pluralMap[travelType] || (travelType.charAt(0).toUpperCase() + travelType.slice(1) + 's')}
+            </button>
+          </form>
         </div>
       </main>
     </div>
