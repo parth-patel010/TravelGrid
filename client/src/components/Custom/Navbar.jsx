@@ -170,7 +170,7 @@ const Navbar = () => {
                   end
                   className={({ isActive }) =>
                     `${linkBaseClasses} ${isActive
-                      ? "bg-gradient-to-r from-pink-700 to-pink-500 shadow-md text-white"
+                      ? "bg-gradient-to-r from-pink-700 to-pink-500 shadow-md text-white hover:text-white"
                       : ""
                     }`
                   }
