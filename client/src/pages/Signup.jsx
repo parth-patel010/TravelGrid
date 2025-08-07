@@ -13,8 +13,8 @@ import {
 } from "lucide-react";
 import { toast } from "react-hot-toast";
 import GoogleLoginButton from "../components/Auth/GoogleLogin";
-import Navbar from "@/components/Custom/Navbar";
-import Footer from "@/components/Custom/Footer";
+import Navbar from "../components/Custom/Navbar";
+import Footer from "../components/Custom/Footer";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -76,6 +76,7 @@ const Signup = () => {
     }
 
     if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match.");
       return false;
     }
 
@@ -90,7 +91,6 @@ const Signup = () => {
     const result = await signup(formData);
 
     if (result.success) {
-      toast.success("Account created successfully! 🎉");
       navigate("/", { replace: true });
     } else {
       toast.error(result.error || "Signup failed");
@@ -207,39 +207,35 @@ const Signup = () => {
                   <div className="mt-2">
                     <div className="flex gap-1">
                       <div
-                        className={`h-1 flex-1 rounded ${
-                          passwordStrength === "weak"
+                        className={`h-1 flex-1 rounded ${passwordStrength === "weak"
                             ? "bg-red-500"
                             : passwordStrength === "medium"
-                            ? "bg-yellow-500"
-                            : "bg-green-500"
-                        }`}
+                              ? "bg-yellow-500"
+                              : "bg-green-500"
+                          }`}
                       ></div>
                       <div
-                        className={`h-1 flex-1 rounded ${
-                          passwordStrength === "medium"
+                        className={`h-1 flex-1 rounded ${passwordStrength === "medium"
                             ? "bg-yellow-500"
                             : passwordStrength === "strong"
-                            ? "bg-green-500"
-                            : "bg-gray-600"
-                        }`}
+                              ? "bg-green-500"
+                              : "bg-gray-600"
+                          }`}
                       ></div>
                       <div
-                        className={`h-1 flex-1 rounded ${
-                          passwordStrength === "strong"
+                        className={`h-1 flex-1 rounded ${passwordStrength === "strong"
                             ? "bg-green-500"
                             : "bg-gray-600"
-                        }`}
+                          }`}
                       ></div>
                     </div>
                     <p
-                      className={`text-xs mt-1 ${
-                        passwordStrength === "weak"
+                      className={`text-xs mt-1 ${passwordStrength === "weak"
                           ? "text-red-400"
                           : passwordStrength === "medium"
-                          ? "text-yellow-400"
-                          : "text-green-400"
-                      }`}
+                            ? "text-yellow-400"
+                            : "text-green-400"
+                        }`}
                     >
                       {passwordStrength === "weak" && "Weak password"}
                       {passwordStrength === "medium" && "Medium strength"}
@@ -351,7 +347,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
