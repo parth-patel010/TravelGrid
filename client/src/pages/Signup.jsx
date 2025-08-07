@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Eye, EyeOff, Mail, Lock, User, UserPlus, AlertCircle, CheckCircle } from 'lucide-react';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../firebase/firebase'; 
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -241,6 +243,30 @@ const Signup = () => {
               )}
             </button>
           </form>
+<div className="relative my-4">
+  <div className="absolute inset-0 flex items-center">
+    <div className="w-full border-t border-white/20" />
+  </div>
+  
+</div>
+
+<button
+  onClick={async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      console.log('Google user:', result.user);
+      navigate('/', { replace: true }); // Redirect on success
+    } catch (err) {
+      setError('Google Sign-in failed. Try again.');
+      console.error(err);
+    }
+  }}
+  type="button"
+  className="w-full bg-white text-black py-3 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 hover:bg-gray-200"
+>
+  <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google icon" className="w-5 h-5" />
+  Continue with Google
+</button>
 
           {/* Footer */}
           <div className="mt-6 text-center">
