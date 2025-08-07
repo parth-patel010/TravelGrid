@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MapPin, TrendingUp, Star, Users, Calendar, Heart, Share2, Eye } from 'lucide-react';
 import Navbar from '../components/Custom/Navbar';
 import { useTheme } from '../context/ThemeContext';
+import { useNavigate } from 'react-router-dom'; 
 
 const TrendingSpots = () => {
   const [spots, setSpots] = useState([]);
@@ -9,6 +10,7 @@ const TrendingSpots = () => {
   const [loading, setLoading] = useState(true);
   const [visibleCount, setVisibleCount] = useState(9);
 
+  const navigate = useNavigate();
   const { isDarkMode } = useTheme();
 
   // Mock data for trending spots
@@ -218,6 +220,11 @@ const TrendingSpots = () => {
     { key: 'city', label: 'City', icon: '🏙️' }
   ];
 
+   //function to navigate to location detail
+  const handleExploreLocation = (locationId) =>{
+    navigate(`/location/${locationId}`);
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--bg-primary)' }}>
@@ -252,7 +259,6 @@ const TrendingSpots = () => {
         </div>
       </section>
 
-      {/* Filter Tabs */}
       {/* Filter Tabs */}
       <div className="bg-pink-900 shadow-sm sticky top-0 z-10" style={{marginTop:"-5rem",marginBottom:"5rem"}}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -404,7 +410,8 @@ const TrendingSpots = () => {
                 </div>
 
                 {/* CTA Button */}
-                <button className="w-full mt-3 md:mt-4 py-2 md:py-3 px-4 md:px-6 rounded-lg font-semibold transition-all transform hover:scale-105 cursor-pointer duration-200 text-sm md:text-base" style={{ background: 'var(--button-primary)', color: '#fff' }}>
+                 <button className="w-full mt-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white py-3 px-6 rounded-lg font-semibold transition-all transform hover:scale-105 cursor-pointer duration-200"
+                onClick={() => handleExploreLocation(spot.id)}>
                   Explore {spot.name}
                 </button>
               </div>
