@@ -93,13 +93,13 @@ export default function Forum() {
         };
 
         setForumTopics(prev => [newQuestion, ...prev]);
-        
+
         setTimeout(() => {
           const newQuestionElement = document.querySelector(`[data-topic-id="${newQuestion.id}"]`);
           if (newQuestionElement) {
-            newQuestionElement.scrollIntoView({ 
-              behavior: 'smooth', 
-              block: 'center' 
+            newQuestionElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center'
             });
             newQuestionElement.classList.add('highlight-new-question');
             setTimeout(() => {
@@ -122,7 +122,7 @@ export default function Forum() {
     const now = new Date();
     const diffTime = Math.abs(now - date);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
+
     if (diffDays === 1) return 'Today';
     if (diffDays === 2) return 'Yesterday';
     if (diffDays <= 7) return `${diffDays - 1} days ago`;
@@ -155,7 +155,7 @@ export default function Forum() {
   const filteredAndSortedTopics = sortTopics(
     forumTopics.filter(topic => {
       const matchesCategory = selectedCategory === 'all' || topic.category === selectedCategory;
-      const matchesSearch = searchQuery === '' || 
+      const matchesSearch = searchQuery === '' ||
         topic.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         topic.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         topic.author.toLowerCase().includes(searchQuery.toLowerCase());
@@ -188,21 +188,21 @@ export default function Forum() {
 
         .glassmorphism {
           backdrop-filter: blur(12px);
-          background: ${isDarkMode 
-            ? 'rgba(30, 41, 59, 0.8)' 
-            : 'rgba(255, 255, 255, 0.8)'
-          };
-          border: 1px solid ${isDarkMode 
-            ? 'rgba(255, 255, 255, 0.1)' 
-            : 'rgba(255, 255, 255, 0.3)'
-          };
+          background: ${isDarkMode
+          ? 'rgba(30, 41, 59, 0.8)'
+          : 'rgba(255, 255, 255, 0.8)'
+        };
+          border: 1px solid ${isDarkMode
+          ? 'rgba(255, 255, 255, 0.1)'
+          : 'rgba(255, 255, 255, 0.3)'
+        };
         }
 
         .search-glow:focus-within {
-          box-shadow: 0 0 0 3px ${isDarkMode 
-            ? 'rgba(236, 72, 153, 0.3)' 
-            : 'rgba(59, 130, 246, 0.3)'
-          };
+          box-shadow: 0 0 0 3px ${isDarkMode
+          ? 'rgba(236, 72, 153, 0.3)'
+          : 'rgba(59, 130, 246, 0.3)'
+        };
         }
 
         .category-gradient-hover:hover {
@@ -211,62 +211,54 @@ export default function Forum() {
         }
       `}</style>
 
-      <div className={`min-h-screen mt-20 transition-all duration-300 ${
-        isDarkMode 
-          ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900' 
+      <div className={`min-h-screen mt-20 transition-all duration-300 ${isDarkMode
+          ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'
           : 'bg-gradient-to-br from-blue-50 via-white to-pink-50'
-      } p-4 lg:p-8`}>
+        } p-4 lg:p-8`}>
         <div className="max-w-7xl mx-auto space-y-8">
-          
+
           {/* Hero Header Section */}
           <div className="text-center relative overflow-hidden">
             <div className="absolute inset-0 opacity-10">
-              <div className={`w-full h-full bg-gradient-to-r ${
-                isDarkMode 
-                  ? 'from-pink-500 via-purple-500 to-blue-500' 
+              <div className={`w-full h-full bg-gradient-to-r ${isDarkMode
+                  ? 'from-pink-500 via-purple-500 to-blue-500'
                   : 'from-blue-500 via-purple-500 to-pink-500'
-              }`} />
+                }`} />
             </div>
             <div className="relative z-10 py-12">
-              <h1 className={`text-4xl md:text-6xl font-bold mb-6 ${
-                isDarkMode ? 'text-white' : 'text-gray-900'
-              }`}>
+              <h1 className={`text-4xl md:text-6xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>
                 Travel{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
                   Forum
                 </span>
               </h1>
-              <p className={`text-lg md:text-xl max-w-3xl mx-auto leading-relaxed ${
-                isDarkMode ? 'text-gray-300' : 'text-gray-700'
-              }`}>
+              <p className={`text-lg md:text-xl max-w-3xl mx-auto leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                }`}>
                 Connect with fellow travelers, share experiences, and discover insider tips from a community of passionate explorers around the globe.
               </p>
             </div>
           </div>
 
           {/* Search and Filter Section */}
-          <div className={`glassmorphism rounded-3xl p-6 shadow-xl border ${
-            isDarkMode ? 'border-gray-700' : 'border-gray-200'
-          }`}>
+          <div className={`glassmorphism rounded-3xl p-6 shadow-xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'
+            }`}>
             <div className="flex flex-col lg:flex-row gap-6">
               {/* Search Bar */}
               <div className="flex-1">
-                <div className={`relative search-glow rounded-2xl transition-all duration-300 ${
-                  isDarkMode ? 'bg-gray-800' : 'bg-white'
-                }`}>
-                  <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 ${
-                    isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                  }`} />
+                <div className={`relative search-glow rounded-2xl transition-all duration-300 ${isDarkMode ? 'bg-gray-800' : 'bg-white'
+                  }`}>
+                  <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                    }`} />
                   <input
                     type="text"
                     placeholder="Search discussions, topics, or authors..."
                     value={searchQuery}
                     onChange={(e) => handleSearch(e.target.value)}
-                    className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 transition-all duration-300 focus:outline-none ${
-                      isDarkMode 
-                        ? 'bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-pink-500' 
+                    className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 transition-all duration-300 focus:outline-none ${isDarkMode
+                        ? 'bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-pink-500'
                         : 'bg-white border-gray-200 text-gray-900 placeholder-gray-500 focus:border-blue-500'
-                    }`}
+                      }`}
                   />
                 </div>
               </div>
@@ -274,17 +266,15 @@ export default function Forum() {
               {/* Sort Dropdown */}
               <div className="lg:w-64">
                 <div className="relative">
-                  <Filter className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 ${
-                    isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                  }`} />
+                  <Filter className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                    }`} />
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 transition-all duration-300 focus:outline-none ${
-                      isDarkMode 
-                        ? 'bg-gray-800 border-gray-600 text-white focus:border-pink-500' 
+                    className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 transition-all duration-300 focus:outline-none ${isDarkMode
+                        ? 'bg-gray-800 border-gray-600 text-white focus:border-pink-500'
                         : 'bg-white border-gray-200 text-gray-900 focus:border-blue-500'
-                    }`}
+                      }`}
                   >
                     <option value="newest">Newest First</option>
                     <option value="oldest">Oldest First</option>
@@ -297,9 +287,8 @@ export default function Forum() {
           </div>
 
           {/* Stats and Actions Bar */}
-          <div className={`glassmorphism rounded-3xl p-6 shadow-xl border ${
-            isDarkMode ? 'border-gray-700' : 'border-gray-200'
-          }`}>
+          <div className={`glassmorphism rounded-3xl p-6 shadow-xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'
+            }`}>
             <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
               <div className="flex items-center gap-8">
                 <div className="text-center">
@@ -339,9 +328,8 @@ export default function Forum() {
           </div>
 
           {/* Category Filter */}
-          <div className={`glassmorphism rounded-3xl p-6 shadow-xl border ${
-            isDarkMode ? 'border-gray-700' : 'border-gray-200'
-          }`}>
+          <div className={`glassmorphism rounded-3xl p-6 shadow-xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'
+            }`}>
             <h3 className={`text-xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
               Browse by Category
             </h3>
@@ -350,13 +338,12 @@ export default function Forum() {
                 <button
                   key={category.value}
                   onClick={() => setSelectedCategory(category.value)}
-                  className={`category-gradient-hover p-4 rounded-2xl text-sm font-medium transition-all duration-300 flex flex-col items-center gap-2 ${
-                    selectedCategory === category.value
+                  className={`category-gradient-hover p-4 rounded-2xl text-sm font-medium transition-all duration-300 flex flex-col items-center gap-2 ${selectedCategory === category.value
                       ? `bg-gradient-to-r ${category.color} text-white shadow-lg transform scale-105`
                       : isDarkMode
                         ? 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-600'
                         : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
-                  }`}
+                    }`}
                 >
                   <span className="text-xl">{category.icon}</span>
                   <span className="text-xs text-center leading-tight">{category.label}</span>
@@ -369,7 +356,7 @@ export default function Forum() {
           {(searchQuery || selectedCategory !== 'all') && (
             <div className={`text-center py-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
               <p className="text-lg">
-                {filteredAndSortedTopics.length > 0 
+                {filteredAndSortedTopics.length > 0
                   ? `Found ${filteredAndSortedTopics.length} discussion${filteredAndSortedTopics.length !== 1 ? 's' : ''}`
                   : 'No discussions found'
                 }
@@ -388,9 +375,8 @@ export default function Forum() {
                   <div
                     key={topic.id}
                     data-topic-id={topic.id}
-                    className={`glassmorphism rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group border ${
-                      isDarkMode ? 'border-gray-700 hover:border-gray-600' : 'border-gray-200 hover:border-gray-300'
-                    }`}
+                    className={`glassmorphism rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group border ${isDarkMode ? 'border-gray-700 hover:border-gray-600' : 'border-gray-200 hover:border-gray-300'
+                      }`}
                   >
                     <div className="p-8">
                       <div className="flex justify-between items-start mb-6">
@@ -417,9 +403,8 @@ export default function Forum() {
                               {topic.views} views
                             </div>
                           </div>
-                          <h2 className={`text-2xl font-bold mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-pink-500 group-hover:to-purple-600 transition-all duration-300 ${
-                            isDarkMode ? 'text-white' : 'text-gray-900'
-                          }`}>
+                          <h2 className={`text-2xl font-bold mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-pink-500 group-hover:to-purple-600 transition-all duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'
+                            }`}>
                             {topic.title}
                           </h2>
                           <p className={`text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -427,11 +412,10 @@ export default function Forum() {
                           </p>
                         </div>
                         <div
-                          className={`flex items-center gap-3 cursor-pointer transition-all duration-300 ml-6 p-3 rounded-2xl ${
-                            isDarkMode 
-                              ? 'text-gray-400 hover:text-pink-400 hover:bg-gray-800' 
+                          className={`flex items-center gap-3 cursor-pointer transition-all duration-300 ml-6 p-3 rounded-2xl ${isDarkMode
+                              ? 'text-gray-400 hover:text-pink-400 hover:bg-gray-800'
                               : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50'
-                          }`}
+                            }`}
                           onClick={() => toggleReplies(topic.id)}
                         >
                           <MessageCircle className="w-6 h-6" />
@@ -452,23 +436,20 @@ export default function Forum() {
                           {topic.replies.map((reply, idx) => (
                             <div
                               key={idx}
-                              className={`p-6 rounded-2xl border ${
-                                isDarkMode 
-                                  ? 'bg-gray-800 border-gray-700' 
+                              className={`p-6 rounded-2xl border ${isDarkMode
+                                  ? 'bg-gray-800 border-gray-700'
                                   : 'bg-blue-50 border-blue-100'
-                              }`}
+                                }`}
                             >
                               <div className="flex items-center gap-3 mb-3">
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                                  isDarkMode 
-                                    ? 'bg-pink-600 text-white' 
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${isDarkMode
+                                    ? 'bg-pink-600 text-white'
                                     : 'bg-blue-200 text-blue-800'
-                                }`}>
+                                  }`}>
                                   {idx + 1}
                                 </div>
-                                <span className={`font-semibold ${
-                                  isDarkMode ? 'text-pink-400' : 'text-blue-600'
-                                }`}>
+                                <span className={`font-semibold ${isDarkMode ? 'text-pink-400' : 'text-blue-600'
+                                  }`}>
                                   Anonymous Traveler
                                 </span>
                               </div>
@@ -492,18 +473,17 @@ export default function Forum() {
                 );
               })
             ) : (
-              <div className={`glassmorphism rounded-3xl p-16 text-center shadow-xl border ${
-                isDarkMode ? 'border-gray-700' : 'border-gray-200'
-              }`}>
+              <div className={`glassmorphism rounded-3xl p-16 text-center shadow-xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'
+                }`}>
                 <MessageCircle className={`w-20 h-20 mx-auto mb-6 ${isDarkMode ? 'text-gray-600' : 'text-gray-400'}`} />
                 <h3 className={`text-2xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                  {searchQuery 
-                    ? 'No discussions found' 
+                  {searchQuery
+                    ? 'No discussions found'
                     : `No questions in ${getCategoryData(selectedCategory).label} yet`
                   }
                 </h3>
                 <p className={`text-lg mb-8 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                  {searchQuery 
+                  {searchQuery
                     ? 'Try adjusting your search terms or explore different categories.'
                     : `Be the first to start a conversation in ${getCategoryData(selectedCategory).label}!`
                   }
