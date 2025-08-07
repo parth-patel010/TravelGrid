@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin, TrendingUp, Star, Users, Calendar, Heart, Share2, Eye } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';  //importing for locationdetails
 import Navbar from '../components/Custom/Navbar';
 import { useTheme } from '../context/ThemeContext';
 
@@ -11,7 +10,6 @@ const TrendingSpots = () => {
   const [visibleCount, setVisibleCount] = useState(9);
 
   const { isDarkMode } = useTheme();
-
 
   // Mock data for trending spots
   const mockTrendingSpots = [
@@ -220,11 +218,6 @@ const TrendingSpots = () => {
     { key: 'city', label: 'City', icon: '🏙️' }
   ];
 
-  //function to navigate to location detail
-  const handleExploreLocation = (locationId) =>{
-    navigate(`/location/${locationId}`);
-  }
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--bg-primary)' }}>
@@ -237,7 +230,7 @@ const TrendingSpots = () => {
   }
 
   return (
-    <div className={`min-h-screen overflow-x-hidden transition-colors  duration-300 ${isDarkMode ? "bg-gradient-to-br from-pink-400 black via-gray-900 to-pink-900" : ""}`} style={{ color: 'var(--text-primary)',marginTop:"5rem" }}>
+    <div className="min-h-screen overflow-x-hidden transition-colors duration-300" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)',marginTop:"5rem" }}>
 
       <Navbar lightBackground />
 
@@ -259,9 +252,9 @@ const TrendingSpots = () => {
         </div>
       </section>
 
-
       {/* Filter Tabs */}
-      <div className={`bg-pink-900 shadow-sm  ${isDarkMode ? "" : ""}`} style={{marginTop:"-5rem", borderTop:"2px solid gray", position:"sticky" ,top:"0",zIndex:"10"}}>
+      {/* Filter Tabs */}
+      <div className="bg-pink-900 shadow-sm sticky top-0 z-10" style={{marginTop:"-5rem",marginBottom:"5rem"}}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-start md:justify-center space-x-2 md:space-x-4 py-3 md:py-4 overflow-x-auto scrollbar-hide">
             {categories.map((category) => (
@@ -290,19 +283,19 @@ const TrendingSpots = () => {
       <div className="border-b" style={{ borderColor: 'var(--border-primary)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            <div className="rounded-2xl border shadow-lg overflow-hidden transition-all duration-300 group p-4 md:p-6 text-center" style={{ background: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
+            <div className="border-white/20 hover:border-white/40 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 rounded-2xl border shadow-lg overflow-hidden transition-all duration-300 group p-4 md:p-6 text-center" style={{ background: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
               <div className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--accent-primary)' }}>{filteredSpots.length}+</div>
               <div className="text-sm md:text-base" style={{ color: 'var(--accent-secondary)' }}>Trending Destinations</div>
             </div>
-            <div className="rounded-2xl border shadow-lg overflow-hidden transition-all duration-300 group p-4 md:p-6 text-center" style={{ background: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
+            <div className="border-white/20 hover:border-white/40 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 rounded-2xl border shadow-lg overflow-hidden transition-all duration-300 group p-4 md:p-6 text-center" style={{ background: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
               <div className="text-2xl md:text-3xl font-bold text-green-400">23%</div>
               <div className="text-sm md:text-base" style={{ color: 'var(--accent-secondary)' }}>Average Growth</div>
             </div>
-            <div className="rounded-2xl border shadow-lg overflow-hidden transition-all duration-300 group p-4 md:p-6 text-center" style={{ background: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
+            <div className="border-white/20 hover:border-white/40 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 rounded-2xl border shadow-lg overflow-hidden transition-all duration-300 group p-4 md:p-6 text-center" style={{ background: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
               <div className="text-2xl md:text-3xl font-bold text-purple-400">—</div>
               <div className="text-sm md:text-base" style={{ color: 'var(--accent-secondary)' }}>Monthly Searches</div>
             </div>
-            <div className="rounded-2xl border shadow-lg overflow-hidden transition-all duration-300 group p-4 md:p-6 text-center" style={{ background: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
+            <div className="border-white/20 hover:border-white/40 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 rounded-2xl border shadow-lg overflow-hidden transition-all duration-300 group p-4 md:p-6 text-center" style={{ background: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
               <div className="text-2xl md:text-3xl font-bold text-red-400">4.7★</div>
               <div className="text-sm md:text-base" style={{ color: 'var(--accent-secondary)' }}>Average Rating</div>
             </div>
@@ -316,7 +309,7 @@ const TrendingSpots = () => {
           {filteredSpots.slice(0, visibleCount).map((spot, index) => (
             <div
               key={spot.id}
-              className="rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col h-full bg-white border border-gray-200"
+              className="border-white/20 hover:border-white/40 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col h-full bg-white border border-gray-200"
             >
               {/* Image Container */}
               <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
@@ -411,10 +404,7 @@ const TrendingSpots = () => {
                 </div>
 
                 {/* CTA Button */}
-
-                <button className="w-full mt-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white py-3 px-6 rounded-lg font-semibold transition-all transform hover:scale-105 cursor-pointer duration-200"
-                onClick={() => handleExploreLocation(spot.id)}>   {/*adding function to perform task when explore is clicked */}
-
+                <button className="w-full mt-3 md:mt-4 py-2 md:py-3 px-4 md:px-6 rounded-lg font-semibold transition-all transform hover:scale-105 cursor-pointer duration-200 text-sm md:text-base" style={{ background: 'var(--button-primary)', color: '#fff' }}>
                   Explore {spot.name}
                 </button>
               </div>
@@ -429,8 +419,9 @@ const TrendingSpots = () => {
           )}
         </div>
 
-       
-          <div className="text-center mt-8 md:mt-12 mb-5">
+        {/* Load More Button */}
+        {visibleCount < filteredSpots.length && (
+          <div className="text-center mt-8 md:mt-12">
             <button
               onClick={handleLoadMoreSpots}
               className="bg-gradient-to-r from-pink-600 to-pink-500 shadow-md hover:shadow-lg text-white px-6 md:px-8 py-2 md:py-3 rounded-lg font-semibold transition-all transform hover:scale-105 duration-200 cursor-pointer text-sm md:text-base"
@@ -438,6 +429,7 @@ const TrendingSpots = () => {
               Load More Trending Spots
             </button>
           </div>
+        )}
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ import LocationDetail from './pages/LocationDetail';
 //import Summarizer from './components/Summarizer';
 //import Recommendation from './components/recommendation';
 //import Wishlist from './pages/Wishlist';
-import PetTravel from './pages/PetTravel';
+// import PetTravel from './pages/PetTravel';
 
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import { Provider } from 'react-redux';
