@@ -19,10 +19,10 @@ function DiscoverCard({ index, place, handleBookNowClick }) {
 
             {/* Content */}
             <div className="p-4 flex-1">
-                <h3 className="text-xl font-bold text-fuchsia-600 group-hover:text-pink-500 transition-colors duration-300">
+                <h3 className="text-xl font-bold text-center text-white group-hover:text-pink-400 transition-colors duration-300">
                     {place.name}
                 </h3>
-                <p className="text-white-600 text-sm group-hover:text-white-800 transition-colors duration-300 leading-relaxed line-clamp-3">
+                <p className="text-sm text-center text-white group-hover:text-white transition-colors duration-300 leading-relaxed line-clamp-3 mt-2">
                     {place.description}
                 </p>
             </div>
@@ -37,7 +37,6 @@ function DiscoverCard({ index, place, handleBookNowClick }) {
                 </button>
             </div>
         </div>
-
     );
 }
 
