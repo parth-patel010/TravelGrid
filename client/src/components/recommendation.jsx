@@ -86,7 +86,7 @@ Provide the suggestions in plain text (no markdown) with bullet points and short
               onChange={(e) => handleChange('type', e.target.value)}
             />
             <input
-              className="p-3 rounded-lg bg-[#1a1a2e] text-white placeholder:text-pink-200 border border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all"
+              className="p-3 rounded-lg bg-[#1a1a2e] text-white placeholder:text-pink-200 border border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all md:col-span-2"
               placeholder="🏨 Hotel preference (e.g. budget, luxury)"
               onChange={(e) => handleChange('hotel', e.target.value)}
             />
