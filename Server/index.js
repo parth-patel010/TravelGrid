@@ -6,6 +6,7 @@ require('dotenv').config();
 const connectDB = require('./config/db');
 
 const authRoutes = require('./routes/authRoutes');
+const emailVerificationRoutes = require('./routes/emailVerificationRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes')
@@ -57,6 +58,9 @@ app.get('/api/health', (req, res) => {
 
 // Authentication Routes
 app.use('/api/auth', authRoutes);
+
+// Email Verification Routes
+app.use('/api/email', emailVerificationRoutes);
 
 app.use('/api/bookings', bookingRouter)
 
