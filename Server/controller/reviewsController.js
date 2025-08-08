@@ -1,6 +1,6 @@
-import Comment from "../models/reviews.js";
+const Comment = require("../models/reviews");
 
-export const addComment = async (req, res) => {
+const addComment = async (req, res) => {
   try {
     const { comment, stars } = req.body;
     const reviews = await Comment.create({
@@ -19,7 +19,7 @@ export const addComment = async (req, res) => {
   }
 };
 
-export const getAllComments = async (req, res) => {
+const getAllComments = async (req, res) => {
   try {
     const comments = await Comment.find().sort({ createdAt: -1 }); // latest first
     res.status(200).json(comments);
@@ -30,7 +30,7 @@ export const getAllComments = async (req, res) => {
   }
 };
 
-export default {
+module.exports = {
   addComment,
   getAllComments,
 }

@@ -82,6 +82,7 @@ const NetworkError = lazy(() => import('./components/ErrorHandle/NetworkError'))
 const ServerError = lazy(() => import('./components/ErrorHandle/ServerError'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const PetTravel = lazy(() => import('./pages/PetTravel'));
+const BookingHistory = lazy(() => import('./pages/BookingHistory'));
 
 const router = createBrowserRouter([
   { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
@@ -121,6 +122,7 @@ const router = createBrowserRouter([
       { path: '/trending-spots', element: <Suspense fallback={<Spinner />}><TrendingSpots /></Suspense> },
       { path: '/trending', element: <Suspense fallback={<Spinner />}><TrendingSpots /></Suspense> },
       { path: '/pettravel', element: <Suspense fallback={<Spinner />}><PetTravel /></Suspense> },
+      { path: '/booking-history', element: <Suspense fallback={<Spinner />}><BookingHistory /></Suspense> },
 
       {
         path: '/dashboard',
@@ -142,11 +144,11 @@ const router = createBrowserRouter([
       { path: '/server-error', element: <ServerError /> },
       { path: '*', element: <NotFound /> },
       { path: '/package/:id', element: <PackageDetails /> },*/
-      { path: '/location/:locationId', element: <LocationDetail />},
+      { path: '/location/:locationId', element: <LocationDetail /> },
 
 
 
-      { path: '/pettravel', element: <PetTravel />},
+      { path: '/pettravel', element: <PetTravel /> },
 
       { path: '/package/:id', element: <Suspense fallback={<Spinner />}><PackageDetails /></Suspense> },
       { path: '/network-error', element: <Suspense fallback={<Spinner />}><NetworkError /></Suspense> },
@@ -162,25 +164,25 @@ createRoot(document.getElementById('root')).render(
     <ErrorBoundary>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
         <ThemeProvider>
-        <AuthProvider>
-          <WishlistProvider>
-            <Provider store={appStore}>
-            <RouterProvider router={router} />
-            <Toaster
-              position="top-center"
-              reverseOrder={false}
-              toastOptions={{
-                duration: 5000,
-                style: {
-                  background: '#333',
-                  color: '#fff',
-                  fontSize: '16px',
-                },
-              }}
-            />
-            </Provider>
-          </WishlistProvider>
-        </AuthProvider>
+          <AuthProvider>
+            <WishlistProvider>
+              <Provider store={appStore}>
+                <RouterProvider router={router} />
+                <Toaster
+                  position="top-center"
+                  reverseOrder={false}
+                  toastOptions={{
+                    duration: 5000,
+                    style: {
+                      background: '#333',
+                      color: '#fff',
+                      fontSize: '16px',
+                    },
+                  }}
+                />
+              </Provider>
+            </WishlistProvider>
+          </AuthProvider>
         </ThemeProvider>
       </GoogleOAuthProvider>
     </ErrorBoundary>

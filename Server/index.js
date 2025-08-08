@@ -10,7 +10,7 @@ const bookingRouter = require('./routes/bookingRoutes');
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes')
 const saveRoutes = require('./routes/saveRoutes');
-const tripRoutes =  require( './routes/trips.js');
+const tripRoutes = require('./routes/trips.js');
 const reviewsRoutes = require('./routes/reviewRoutes.js');
 
 const app = express();
@@ -46,7 +46,7 @@ app.use((req, res, next) => {
 });
 
 
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
   res.send("Hello world")
 })
 
@@ -61,7 +61,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/bookings', bookingRouter)
 
 //Posts Route
-app.use('/api/post',postRoutes);
+app.use('/api/post', postRoutes);
 
 // profile update route
 app.use('/api/users', userRoutes);
@@ -76,13 +76,13 @@ app.use('/api', tripRoutes);
 app.use('/api/reviews', reviewsRoutes);
 
 // 404 Not Found middleware
-app.use((req,res,next)=>{
-  res.status(404).json({message:'Resource not found'});
+app.use((req, res, next) => {
+  res.status(404).json({ message: 'Resource not found' });
 });
 // Error handling middleware global
-app.use((err,req,res,next)=>{
+app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({message:"Internal Server Error"});
+  res.status(500).json({ message: "Internal Server Error" });
 
 });
 
