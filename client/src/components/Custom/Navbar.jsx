@@ -29,7 +29,7 @@ const Navbar = () => {
   return (
     <>
       {/* Sticky Translucent Navbar */}
-      <nav className="w-full fixed top-0 left-0 z-50 backdrop-blur-md bg-white/10 border-b border-white/20 px-4 py-3 flex justify-between items-center">
+      <nav className="w-full fixed top-0 left-0 z-50 backdrop-blur-md bg-black/90 border-b border-white/20 px-4 py-3 flex justify-between items-center">
         {/* Logo */}
         <Link
           to="/"
