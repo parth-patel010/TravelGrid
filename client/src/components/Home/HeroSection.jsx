@@ -1,13 +1,45 @@
 import React, { useState } from "react";
 import Typewriter from "typewriter-effect";
+
+import { X } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
+
+import BASE_URL from "../../config.js";
+
 import { X, ChevronDown, Check } from "lucide-react";
 import toast from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../../context/ThemeContext";
 
+
 const HeroSection = ({ onSearch }) => {
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("All Categories");
+
+ const { isAuthenticated, user } = useAuth();
+  const handleSearch = async () => {
+    if (!isAuthenticated) {
+      alert("Please sign in to search for destinations.");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${BASE_URL}/api/search`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ location, category }),
+      });
+
+      const data = await response.json();
+      console.log("Search results:", data);
+      onSearch(data); // pass results back to parent
+
+    } catch (error) {
+      console.error("Search error:", error);
+    }
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { isDarkMode } = useTheme();
 
@@ -20,6 +52,7 @@ const HeroSection = ({ onSearch }) => {
     }
 
     onSearch({ location, category });
+
   };
 
   const categories = [

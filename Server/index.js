@@ -6,6 +6,8 @@ require('dotenv').config();
 const connectDB = require('./config/db');
 
 const authRoutes = require('./routes/authRoutes');
+
+const searchRoutes = require('./routes/searchRoutes'); 
 const bookingRouter = require('./routes/bookingRoutes');
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes')
@@ -13,11 +15,12 @@ const saveRoutes = require('./routes/saveRoutes');
 const tripRoutes = require('./routes/trips.js');
 const reviewsRoutes = require('./routes/reviewRoutes.js');
 
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // DB Connection
-connectDB();
+// connectDB();
 
 // Middleware
 const allowedOrigins = [
@@ -58,6 +61,9 @@ app.get('/api/health', (req, res) => {
 // Authentication Routes
 app.use('/api/auth', authRoutes);
 
+app.use('/api/search', searchRoutes); 
+
+
 app.use('/api/bookings', bookingRouter)
 
 //Posts Route
@@ -85,6 +91,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: "Internal Server Error" });
 
 });
+
 
 // server
 app.listen(PORT, () => {
