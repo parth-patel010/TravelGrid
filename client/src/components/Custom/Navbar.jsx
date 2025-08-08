@@ -104,6 +104,34 @@ const Navbar = () => {
 
   return (
     <>
+
+      {/* Sticky Translucent Navbar */}
+      <nav className="w-full fixed top-0 left-0 z-50 backdrop-blur-md bg-black/90 border-b border-white/20 px-4 py-3 flex justify-between items-center">
+        {/* Logo */}
+        <Link
+          to="/"
+          className="text-2xl font-bold text-pink-500 tracking-tight hover:text-pink-600 transition-colors duration-200"
+        >
+          TravelGrid
+        </Link>
+
+        {/* Desktop Nav Links - Centered */}
+        <div className="hidden md:flex gap-8 items-center text-pink-500 font-medium flex-1 justify-center">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              to={link.path}
+              className={`px-4 py-2 rounded-lg hover:text-white hover:bg-pink-500 hover:shadow-lg transition-all duration-300 transform hover:scale-105 ${
+                location.pathname === link.path
+                  ? "bg-pink-500/20 text-white shadow-md"
+                  : ""
+              }`}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </div>
+
       {/* Top Navbar */}
       <nav
         className={`box-border w-full fixed top-0 left-0 z-50 h-20 backdrop-blur-md border-b transition-all duration-300 px-4 sm:px-6 ${isDarkMode
@@ -123,6 +151,7 @@ const Navbar = () => {
           >
             TravelGrid
           </NavLink>
+
 
           {/* Desktop Nav */}
           <div className={`hidden md:flex items-center gap-4 font-medium flex-1 justify-center ${isDarkMode ? "text-gray-200" : "text-gray-700"
