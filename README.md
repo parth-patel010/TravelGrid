@@ -27,6 +27,7 @@ This project is proudly part of **GirlScript Summer of Code 2025 (GSSoC)**, and 
     - [Running the Application](#running-the-application)
       - [Start the Backend Server](#start-the-backend-server)
       - [Start the Frontend (in a new terminal)](#start-the-frontend-in-a-new-terminal)
+    - [Environment Variables](#environment-variables)
   - [🤝 Contributing to TravelGrid](#-contributing-to-travelgrid)
     - [Contribution Guidelines](#contribution-guidelines)
     - [Task Assignment Process](#task-assignment-process)
@@ -124,6 +125,25 @@ cd client
 npm run dev
 # Client will run on http://localhost:5173
 ```
+
+### Environment Variables
+
+The backend requires certain environment variables to function properly. Create a `.env` file in the `Server` directory with the following variables:
+
+```
+# Required variables
+JWT_SECRET=your_jwt_secret_key_here
+MONGO_URI=your_mongodb_connection_string_here
+
+# Optional variables (with defaults)
+PORT=5000
+NODE_ENV=development
+```
+
+**Important Security Notes:**
+- Never commit your `.env` file to version control
+- Use strong, unique values for JWT_SECRET in production
+- The application will not start if required environment variables are missing
 
 ---
 

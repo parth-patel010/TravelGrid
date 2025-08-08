@@ -3,12 +3,7 @@ const jwt = require('jsonwebtoken');
 const validator = require('validator');
 const User = require('../models/user');
 const mongoose = require('mongoose');
-
-const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
-if (!JWT_SECRET) {
-  console.error('JWT_SECRET not set in environment variables');
-  process.exit(1);
-}
+const { JWT_SECRET } = require('../config/env');
 
 // Cookie helper
 const setTokenCookie = (res, userId) => {

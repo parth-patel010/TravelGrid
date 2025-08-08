@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const JWT_SECRET = process.env.JWT_SECRET;
+const { JWT_SECRET } = require('../config/env');
 
 exports.verifyJWT = async (req, res, next) => {
   try {

@@ -1,8 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser'); // <-- NEW
-require('dotenv').config();
 
+// Load environment variables through the config module
+const { PORT } = require('./config/env');
 const connectDB = require('./config/db');
 
 const authRoutes = require('./routes/authRoutes');
@@ -14,7 +15,6 @@ const tripRoutes =  require( './routes/trips.js');
 const reviewsRoutes = require('./routes/reviewRoutes.js');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
 // DB Connection
 connectDB();
