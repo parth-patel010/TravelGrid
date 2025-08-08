@@ -56,7 +56,7 @@ Provide the suggestions in plain text (no markdown) with bullet points and short
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#0f0f17] via-[#1f0f2f] to-[#1a051e] py-24 px-4">
       <div className="flex-grow flex items-center justify-center">
-        <div className="w-full max-w-3xl bg-[rgba(30,10,60,0.95)] backdrop-blur-sm text-white p-10 rounded-2xl shadow-2xl border border-pink-500">
+        <div className="w-full max-w-3xl bg-[rgba(153, 153, 153, 0.95)] backdrop-blur-sm text-white p-10 rounded-2xl shadow-2xl border border-pink-500">
           <h1 className="text-3xl font-semibold mb-2 flex items-center gap-2">
             <span role="img" aria-label="globe">🌐</span> Travel Recommendation Engine
           </h1>
