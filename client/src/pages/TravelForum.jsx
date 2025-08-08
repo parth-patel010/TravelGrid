@@ -421,7 +421,7 @@ export default function Forum() {
 
       const data = await res.json();
       if (res.ok) {
-        toast.success("Reply added successfully!");
+        
 
         // Update the forumTopics with the new reply
         setForumTopics((prev) =>
@@ -435,6 +435,10 @@ export default function Forum() {
         // Reset state
         setAddReply({ senderName: user?.name, message: "" });
         setReply(false);
+        setTimeout(() => {
+          toast.success("Reply added successfully!");
+        }, 2000);
+        
       } else {
         toast.error(data.message || "Failed to add reply");
       }
