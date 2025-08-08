@@ -94,27 +94,32 @@ export default function Forum() {
   const [reply, setReply] = useState(false);
   const [replyPostId, setReplyPostId] = useState(null);
 
+
+
+  // Define the data fetching logic in its own function
+const fetchForumTopics = async () => {
+  try {
+    const res = await axios.get("http://localhost:5000/api/post/allPosts");
+    const transformed = res.data.map((post) => ({
+      id: post._id,
+      title: post.title,
+      description: post.info,
+      category: post.tag?.toLowerCase() || "general",
+      author: post.senderName,
+      createdAt: post.createdAt,
+      replies: post.replies || [],
+      views: post.views || 0,
+      trending: post.trending || false,
+    }));
+    setForumTopics(transformed);
+  } catch (err) {
+    console.error("Failed to load forum topics:", err);
+    toast.error("Failed to fetch forum topics");
+  }
+};
+
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/post/allPosts")
-      .then((res) => {
-        const transformed = res.data.map((post) => ({
-          id: post._id,
-          title: post.title,
-          description: post.info, // mapping "info" → "description"
-          category: post.tag?.toLowerCase() || "general", // mapping tag to category
-          author: post.senderName,
-          createdAt: post.createdAt,
-          replies: post.replies || [],
-          views: post.views || 0, // if not present, default to 0
-          trending: post.trending || false, // optional default
-        }));
-        setForumTopics(transformed);
-      })
-      .catch((err) => {
-        console.error("Failed to load forum topics:", err);
-        toast.error("Failed to fetch forum topics");
-      });
+     fetchForumTopics();
   }, []);
 
   const categories = [
@@ -220,9 +225,6 @@ export default function Forum() {
   // };
 
   const handleNewQuestion2 = async (questionData) => {
-    
-
-    
     const postPayload = {
       title: questionData.title,
       info: questionData.description, // mapping `description` to `info`
@@ -274,8 +276,8 @@ export default function Forum() {
       setForumTopics((prev) => [newQuestion, ...prev]);
 
       if (newQuestion.category) {
-      setSelectedCategory(newQuestion.category);
-    }
+        setSelectedCategory(newQuestion.category);
+      }
 
       // Optional scroll-to effect
       setTimeout(() => {
@@ -342,18 +344,7 @@ export default function Forum() {
     }
   };
 
-  // const filteredAndSortedTopics2 = sortTopics2(
-  //   forumTopics.filter((topic) => {
-  //     const matchesCategory =
-  //       selectedCategory === "all" || topic.category === selectedCategory;
-  //     const matchesSearch =
-  //       searchQuery === "" ||
-  //       topic.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  //       topic.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  //       topic.author.toLowerCase().includes(searchQuery.toLowerCase());
-  //     return matchesCategory && matchesSearch;
-  //   })
-  // );
+  
 
   const filteredAndSortedTopics = useMemo(() => {
     let filteredTopics = forumTopics;
@@ -361,33 +352,34 @@ export default function Forum() {
     // 1. Filter by selected category
     if (selectedCategory !== "all") {
       // Note: We use `label` here to match the `category` property on your topic objects.
-      const categoryLabel = categories.find(cat => cat.value === selectedCategory)?.label;
+      const categoryLabel = categories.find(
+        (cat) => cat.value === selectedCategory
+      )?.label;
       if (categoryLabel) {
-        filteredTopics = filteredTopics.filter(topic => topic.category === categoryLabel);
+        filteredTopics = filteredTopics.filter(
+          (topic) => topic.category === categoryLabel
+        );
       }
     }
 
     // 2. Filter by search query
     if (searchQuery) {
-        const lowercasedQuery = searchQuery.toLowerCase();
-        filteredTopics = filteredTopics.filter(topic =>
-            topic.title.toLowerCase().includes(lowercasedQuery) ||
-            topic.description.toLowerCase().includes(lowercasedQuery) ||
-            topic.author.toLowerCase().includes(lowercasedQuery)
-        );
+      const lowercasedQuery = searchQuery.toLowerCase();
+      filteredTopics = filteredTopics.filter(
+        (topic) =>
+          topic.title.toLowerCase().includes(lowercasedQuery) ||
+          topic.description.toLowerCase().includes(lowercasedQuery) ||
+          topic.author.toLowerCase().includes(lowercasedQuery)
+      );
     }
 
     // 3. Sort the topics (example: by date)
-    const sortedTopics = [...filteredTopics].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    const sortedTopics = [...filteredTopics].sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
 
     return sortedTopics;
-
   }, [forumTopics, selectedCategory, searchQuery]);
-
-  
-
-  
- 
 
   //handleReply
   const handleReply = (id) => {
@@ -422,23 +414,12 @@ export default function Forum() {
       const data = await res.json();
       if (res.ok) {
         
-
-        // Update the forumTopics with the new reply
-        setForumTopics((prev) =>
-          prev.map((topic) =>
-            topic.id === replyPostId
-              ? { ...topic, replies: [...topic.replies, data.reply] }
-              : topic
-          )
-        );
+        fetchForumTopics();
 
         // Reset state
         setAddReply({ senderName: user?.name, message: "" });
-        setReply(false);
-        setTimeout(() => {
-          toast.success("Reply added successfully!");
-        }, 2000);
-        
+        setReplyPostId(null);
+        toast.success("Reply added successfully!");
       } else {
         toast.error(data.message || "Failed to add reply");
       }
@@ -888,9 +869,9 @@ export default function Forum() {
                           </p>
                         </div>
                       )}
-                      {reply ? (
+                      {replyPostId === topic.id ? (
                         <button
-                          onClick={() => setReply(false)}
+                          onClick={() => setReplyPostId(null)}
                           className=" mt-3 border rounded-lg text-black hover:cursor-pointer hover:scale-105 w-fit p-3 bg-gradient-to-l from-pink-600 to-purple-400"
                         >
                           Close
@@ -904,7 +885,7 @@ export default function Forum() {
                         </button>
                       )}
 
-                      {reply && (
+                      {replyPostId === topic.id && (
                         <>
                           <form onSubmit={handleReplySubmit}>
                             <label
@@ -923,7 +904,7 @@ export default function Forum() {
                                 name="message"
                                 value={addReply?.message}
                                 onChange={handleReplyChange}
-                                placeholder="Provide more details about your question. Include context like destination, budget, travel dates, or specific concerns..."
+                                placeholder="Enter Your Reply Here"
                                 rows={6}
                                 className={`w-full px-6 py-4 rounded-2xl border-2 transition-all duration-300 focus:outline-none resize-none text-lg leading-relaxed textarea-scrollbar ${
                                   isDarkMode
