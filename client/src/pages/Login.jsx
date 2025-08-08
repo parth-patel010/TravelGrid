@@ -51,6 +51,8 @@ const Login = () => {
     if (result.success) {
       navigate(from, { replace: true });
     } else {
+      // Display the error message from the backend
+      setError(result.error || "Login failed. Please try again.");
     }
   };
 
