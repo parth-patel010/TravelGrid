@@ -78,6 +78,7 @@ const PackageDetails = lazy(() => import('./pages/PackageDetails'));
 const Login = lazy(() => import('./pages/Login'));
 const Signup = lazy(() => import('./pages/Signup'));
 const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
+const VerifyEmail = lazy(() => import('./pages/VerifyEmail'));
 const NetworkError = lazy(() => import('./components/ErrorHandle/NetworkError'));
 const ServerError = lazy(() => import('./components/ErrorHandle/ServerError'));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -87,6 +88,7 @@ const router = createBrowserRouter([
   { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
   { path: '/signup', element: <AuthLayout><Signup /></AuthLayout> },
   { path: '/forgot-password', element: <AuthLayout><ForgotPassword /></AuthLayout> },
+  { path: '/verify-email', element: <AuthLayout><VerifyEmail /></AuthLayout> },
   {
     path: '/',
     element: <App />,

@@ -3,7 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useWishlist } from "../../context/WishlistContext";
 import { useTheme } from "../../context/ThemeContext";
-import { Menu, X, User, LogOut, LogIn, ChevronDown } from "lucide-react";
+import { Menu, X, User, LogOut, LogIn, ChevronDown, Mail, AlertTriangle } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
@@ -188,6 +188,18 @@ const Navbar = () => {
             
             {isLoggedIn ? (
               <>
+                {/* Email verification alert for unverified users */}
+                {user && !user.isEmailVerified && (
+                  <NavLink
+                    to={`/verify-email?email=${encodeURIComponent(user.email)}`}
+                    className="flex items-center gap-2 bg-yellow-600/20 text-yellow-400 border border-yellow-600/30 px-3 py-2 rounded-md text-sm font-medium hover:bg-yellow-600/30 transition-all"
+                    title="Click to verify your email"
+                  >
+                    <AlertTriangle size={16} />
+                    Verify Email
+                  </NavLink>
+                )}
+                
                 <NavLink
                   to="/dashboard"
                   className="hover:text-white flex items-center gap-2 transition-colors"
@@ -319,6 +331,16 @@ const Navbar = () => {
             {/* Mobile Auth Buttons */}
             {isLoggedIn ? (
               <>
+                {/* Email verification alert for mobile */}
+                {user && !user.isEmailVerified && (
+                  <NavLink
+                    to={`/verify-email?email=${encodeURIComponent(user.email)}`}
+                    className="flex gap-2 items-center py-2 px-3 rounded bg-yellow-600/20 text-yellow-400 border border-yellow-600/30 font-medium"
+                  >
+                    <AlertTriangle size={18} /> Verify Email
+                  </NavLink>
+                )}
+                
                 <NavLink
                   to="/dashboard"
                   className="flex gap-2 items-center py-2 px-3 rounded hover:bg-pink-500/30"
