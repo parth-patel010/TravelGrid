@@ -1,3 +1,11 @@
+
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { Eye, EyeOff, Mail, Lock, User, UserPlus, AlertCircle, CheckCircle } from 'lucide-react';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../firebase/firebase'; 
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -15,6 +23,7 @@ import { toast } from "react-hot-toast";
 import GoogleLoginButton from "../components/Auth/GoogleLogin";
 import Navbar from "../components/Custom/Navbar";
 import Footer from "../components/Custom/Footer";
+
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -324,6 +333,51 @@ const Signup = () => {
                 </div>
               </div>
 
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading ? (
+                <>
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                  Creating Account...
+                </>
+              ) : (
+                <>
+                  <UserPlus className="w-5 h-5" />
+                  Create Account
+                </>
+              )}
+            </button>
+          </form>
+<div className="relative my-4">
+  <div className="absolute inset-0 flex items-center">
+    <div className="w-full border-t border-white/20" />
+  </div>
+  
+</div>
+
+<button
+  onClick={async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      console.log('Google user:', result.user);
+      navigate('/', { replace: true }); // Redirect on success
+    } catch (err) {
+      setError('Google Sign-in failed. Try again.');
+      console.error(err);
+    }
+  }}
+  type="button"
+  className="w-full bg-white text-black py-3 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 hover:bg-gray-200"
+>
+  <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google icon" className="w-5 h-5" />
+  Continue with Google
+</button>
+
               {/* Google Signup Button */}
               <GoogleLoginButton
                 onSuccess={handleGoogleSuccess}
@@ -331,6 +385,7 @@ const Signup = () => {
                 className="w-full"
               />
             </form>
+
 
             {/* Footer */}
             <div className="mt-6 text-center">
