@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useWishlist } from "../../context/WishlistContext";
 import { useTheme } from "../../context/ThemeContext";
@@ -103,7 +103,7 @@ const Navbar = () => {
     "py-1.5 px-4 text-md font-medium rounded-sm hover:text-pink-500 hover:shadow-sm transition-all duration-300";
 
   return (
-    <>
+    <div>
 
       {/* Sticky Translucent Navbar */}
       <nav className="w-full fixed top-0 left-0 z-50 backdrop-blur-md bg-black/90 border-b border-white/20 px-4 py-3 flex justify-between items-center">
@@ -131,7 +131,7 @@ const Navbar = () => {
             </Link>
           ))}
         </div>
-
+      </nav>
       {/* Top Navbar */}
       <nav
         className={`box-border w-full fixed top-0 left-0 z-50 h-20 backdrop-blur-md border-b transition-all duration-300 px-4 sm:px-6 ${isDarkMode
@@ -372,7 +372,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
