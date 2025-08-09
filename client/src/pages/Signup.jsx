@@ -91,7 +91,9 @@ const Signup = () => {
     const result = await signup(formData);
 
     if (result.success) {
-      navigate("/", { replace: true });
+      // Redirect to email verification page
+      navigate(`/verify-email?email=${encodeURIComponent(formData.email)}`, { replace: true });
+      toast.success("Account created! Please verify your email to continue.");
     } else {
       toast.error(result.error || "Signup failed");
     }
