@@ -8,26 +8,33 @@ const destinations = [
   {
     id: 1,
     name: "Manali, Himachal",
-    description: "A beautiful hill station known for its scenic beauty and adventure sports.",
-    image: "https://images.unsplash.com/photo-1712388430474-ace0c16051e2?w=600&auto=format&fit=crop&q=60"
+    description:
+      "A beautiful hill station known for its scenic beauty and adventure sports.",
+    image:
+      "https://images.unsplash.com/photo-1712388430474-ace0c16051e2?w=600&auto=format&fit=crop&q=60",
   },
   {
     id: 2,
     name: "Jaipur, Rajasthan",
     description: "The Pink City with rich history, forts, and vibrant culture.",
-    image: "https://images.unsplash.com/photo-1603262110263-fb0112e7cc33?w=600&auto=format&fit=crop&q=60"
+    image:
+      "https://images.unsplash.com/photo-1603262110263-fb0112e7cc33?w=600&auto=format&fit=crop&q=60",
   },
   {
     id: 3,
     name: "Goa",
-    description: "Popular beach destination with nightlife, water sports, and culture.",
-    image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=600&auto=format&fit=crop&q=60"
+    description:
+      "Popular beach destination with nightlife, water sports, and culture.",
+    image:
+      "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=600&auto=format&fit=crop&q=60",
   },
   {
     id: 4,
     name: "Rishikesh, Uttarakhand",
-    description: "The yoga capital of the world, nestled on the banks of the Ganges.",
-    image: "https://plus.unsplash.com/premium_photo-1697730398251-40cd8dc57e0b?w=600&auto=format&fit=crop&q=60"
+    description:
+      "The yoga capital of the world, nestled on the banks of the Ganges.",
+    image:
+      "https://plus.unsplash.com/premium_photo-1697730398251-40cd8dc57e0b?w=600&auto=format&fit=crop&q=60",
   },
 ];
 
@@ -35,14 +42,14 @@ const container = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.2
-    }
-  }
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 const item = {
   hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0 }
+  show: { opacity: 1, y: 0 },
 };
 
 const DiscoverSection = () => {
@@ -64,19 +71,17 @@ const DiscoverSection = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="w-full py-20 text-center"
     >
-<div
-  className={`max-w-7xl mx-auto px-4 py-4 ${
-    isDarkMode
-      ? 'bg-[#1e293b]'
-      : 'bg-gradient-to-r from-[#e694bd] to-white'
-  }`}
->
-
+      <div
+        className={`max-w-7xl mx-auto px-4 py-4 ${
+          isDarkMode ? "" : "bg-gradient-to-r from-[#e694bd] to-white"
+        }`}
+      >
         {/* Heading */}
         <div className="mb-16">
           <motion.h2
-            className={`text-2xl md:text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'
-              }`}
+            className={`text-2xl md:text-3xl font-bold mb-6 ${
+              isDarkMode ? "text-white" : "text-gray-900"
+            }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -87,13 +92,15 @@ const DiscoverSection = () => {
             </span>
           </motion.h2>
           <motion.p
-            className={`text-base md:text-lg mb-10 leading-relaxed transition-all duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'
-              }`}
+            className={`text-base md:text-lg mb-10 leading-relaxed transition-all duration-300 ${
+              isDarkMode ? "text-gray-300" : "text-gray-600"
+            }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            Explore trending places, hidden gems, and must-visit spots curated just for you.
+            Explore trending places, hidden gems, and must-visit spots curated
+            just for you.
           </motion.p>
         </div>
 
@@ -120,12 +127,12 @@ const DiscoverSection = () => {
           ))}
         </motion.div>
 
-
         {/* CTA Section */}
         <div className="mt-16">
           <motion.h3
-            className={`text-xl md:text-2xl font-semibold mb-4 transition-all duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'
-              }`}
+            className={`text-xl md:text-2xl font-semibold mb-4 transition-all duration-300 ${
+              isDarkMode ? "text-white" : "text-gray-900"
+            }`}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -133,8 +140,9 @@ const DiscoverSection = () => {
             Ready to plan your next adventure?
           </motion.h3>
           <motion.p
-            className={`mb-6 leading-relaxed transition-all duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'
-              }`}
+            className={`mb-6 leading-relaxed transition-all duration-300 ${
+              isDarkMode ? "text-gray-300" : "text-gray-600"
+            }`}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
