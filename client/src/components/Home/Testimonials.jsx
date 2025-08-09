@@ -48,8 +48,13 @@ const Testimonials = () => {
 
   return (
     <section className="w-full py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+<div
+  className={`max-w-7xl mx-auto px-4 py-4 ${
+    isDarkMode
+      ? 'bg-[#1e293b]'
+      : 'bg-gradient-to-l from-[#e694bd] to-white'
+  }`}
+>        <div className="text-center mb-16">
           <h2 className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'
             }`}>
             What Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">Travelers Say</span>

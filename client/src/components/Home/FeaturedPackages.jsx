@@ -70,8 +70,13 @@ const FeaturedPackages = () => {
       viewport={{ once: true, amount: 0.2 }}
       className="w-full py-20"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
+<div
+  className={`max-w-7xl mx-auto px-4 py-4 ${
+    isDarkMode
+      ? 'bg-[#1e293b]'
+      : 'bg-gradient-to-r from-[#e694bd] to-white'
+  }`}
+>        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
