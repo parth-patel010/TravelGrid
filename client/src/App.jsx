@@ -14,6 +14,7 @@ import GoToTopButton from "./components/GoToTopButton";
 import FeedbackButton from "./components/FeedbackButton";
 import Chatbot from "./components/Chatbot";
 import EmailVerificationBanner from "./components/Auth/EmailVerificationBanner";
+import FluidCursor from "./components/FluidCursor";
 
 function App() {
   const location = useLocation();
@@ -32,6 +33,7 @@ function App() {
           <DashboardDataProvider>
             <MapProvider>
               <div className="flex flex-col min-h-screen">
+                <FluidCursor />
                 {/* Show spinner when route changes */}
                 {loading && <Spinner />}
 
