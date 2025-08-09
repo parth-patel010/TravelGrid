@@ -48,11 +48,10 @@ const Footer = () => {
 
   return (
     <>
-      <footer className={`relative text-white transition-all duration-300 ${
-        isDarkMode 
-          ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900' 
-          : 'bg-gradient-to-br from-gray-900 via-pink-900 to-gray-900'
-      }`}>
+      <footer className={`relative text-white transition-all duration-300 ${isDarkMode
+        ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'
+        : 'bg-gradient-to-br from-gray-900 via-pink-900 to-gray-900'
+        }`}>
         {/* Background pattern */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml,...')] opacity-20" />
 
@@ -177,11 +176,10 @@ const Footer = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your email"
-                      className={`w-full px-4 py-3 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm transition-all duration-300 ${
-                        isDarkMode 
-                          ? 'bg-slate-800 border-slate-600' 
-                          : 'bg-gray-800 border-gray-600'
-                      }`}
+                      className={`w-full px-4 py-3 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm transition-all duration-300 ${isDarkMode
+                        ? 'bg-slate-800 border-slate-600'
+                        : 'bg-gray-800 border-gray-600'
+                        }`}
                       required
                     />
                     <div className="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -203,13 +201,14 @@ const Footer = () => {
             </div>
 
             {/* Bottom Section */}
-            <div className="border-t border-gray-700 mt-12 pt-8">
-              <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0">
-                <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
+            <div className="border-t border-gray-700 mt-12 pt-8 pb-8">
+              <div className="flex flex-col md:flex-row justify-center items-center text-center space-y-4 md:space-y-0">
+                <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
                   <p className="text-gray-400 text-sm">
                     © 2025 TravelGrid. All rights reserved.
                   </p>
-                  <div className="flex space-x-4 text-sm">
+                  {/* Links stacked on mobile, inline on desktop */}
+                  <div className="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0 text-sm items-center">
                     <Link to="/privacy" className="text-gray-400 hover:text-pink-300 transition-colors">
                       Privacy Policy
                     </Link>
@@ -225,7 +224,7 @@ const Footer = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex items-center justify-center space-x-2 text-gray-400 text-sm mt-4">
+              <div className="flex flex-wrap items-center justify-center space-x-2 text-gray-400 text-sm mt-4 text-center">
                 <span>Made with</span>
                 <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
@@ -241,13 +240,11 @@ const Footer = () => {
       {toast.show && (
         <div className="fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-2 duration-300">
           <div
-            className={`max-w-sm w-full rounded-lg shadow-xl border-l-4 p-4 flex items-center space-x-3 transition-all duration-300 ${
-              isDarkMode 
-                ? 'bg-slate-800 text-white border-slate-600' 
-                : 'bg-white text-gray-900 border-gray-200'
-            } ${
-              toast.type === "success" ? "border-green-500" : "border-red-500"
-            }`}
+            className={`max-w-sm w-full rounded-lg shadow-xl border-l-4 p-4 flex items-center space-x-3 transition-all duration-300 ${isDarkMode
+              ? 'bg-slate-800 text-white border-slate-600'
+              : 'bg-white text-gray-900 border-gray-200'
+              } ${toast.type === "success" ? "border-green-500" : "border-red-500"
+              }`}
           >
             <div className="flex-shrink-0">
               {toast.type === "success" ? (
@@ -262,9 +259,8 @@ const Footer = () => {
             </div>
             <div className="flex-1">
               <p
-                className={`text-sm font-medium ${
-                  toast.type === "success" ? "text-green-400" : "text-red-400"
-                }`}
+                className={`text-sm font-medium ${toast.type === "success" ? "text-green-400" : "text-red-400"
+                  }`}
               >
                 {toast.message}
               </p>
