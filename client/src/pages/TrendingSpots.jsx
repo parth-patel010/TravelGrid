@@ -315,7 +315,7 @@ const TrendingSpots = () => {
           {filteredSpots.slice(0, visibleCount).map((spot, index) => (
             <div
               key={spot.id}
-              className="border-white/20 hover:border-white/40 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col h-full bg-white border border-gray-200"
+              className=" hover:border-white/40 hover:scale-105 hover:shadow-pink-500/20 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col h-full bg-white border border-gray-200"
             >
               {/* Image Container */}
               <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
