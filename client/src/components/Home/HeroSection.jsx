@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 import Typewriter from "typewriter-effect";
 import { X, ChevronDown, Check } from "lucide-react";
 import toast from "react-hot-toast";
@@ -10,16 +11,15 @@ const HeroSection = ({ onSearch }) => {
   const [category, setCategory] = useState("All Categories");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { isDarkMode } = useTheme();
+  const { isAuthenticated } = useAuth();
 
   const handleSearch = () => {
-    const isLoggedIn = false;
-
-    if (!isLoggedIn) {
+    if (!isAuthenticated) {
       toast.error("Please sign in to search for destinations.");
       return;
     }
-
     onSearch({ location, category });
+    console.log("Search button clicked:", searchTerm, location);
   };
 
   const categories = [
@@ -53,8 +53,8 @@ const HeroSection = ({ onSearch }) => {
       ></div>
 
       <div className={`absolute inset-0 z-15 ${isDarkMode
-          ? 'bg-gradient-to-b from-black/60 via-black/40 to-black/70'
-          : 'bg-gradient-to-b from-black/30 via-black/20 to-black/50'
+        ? 'bg-gradient-to-b from-black/60 via-black/40 to-black/70'
+        : 'bg-gradient-to-b from-black/30 via-black/20 to-black/50'
         }`} />
 
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 lg:px-8">
@@ -95,8 +95,8 @@ const HeroSection = ({ onSearch }) => {
             className="flex-1 w-full max-w-md"
           >
             <div className={`backdrop-blur-md rounded-2xl shadow-2xl p-6 space-y-4 border transition-all duration-300 ${isDarkMode
-                ? 'bg-white/10 border-white/20'
-                : 'bg-white/90 border-white/30'
+              ? 'bg-white/10 border-white/20'
+              : 'bg-white/90 border-white/30'
               }`}>
               <div className="space-y-3">
                 <div className="relative">
@@ -106,8 +106,8 @@ const HeroSection = ({ onSearch }) => {
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     className={`w-full px-4 py-3 backdrop-blur-sm border rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-300 ${isDarkMode
-                        ? 'bg-white/90 text-gray-950 placeholder-gray-950 border-white/30'
-                        : 'bg-white/90 text-gray-700 placeholder-gray-500 border-white/30'
+                      ? 'bg-white/90 text-gray-950 placeholder-gray-950 border-white/30'
+                      : 'bg-white/90 text-gray-700 placeholder-gray-500 border-white/30'
                       }`}
                   />
                 </div>
@@ -119,8 +119,8 @@ const HeroSection = ({ onSearch }) => {
                       type="button"
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                       className={`w-full px-4 py-3 backdrop-blur-sm border rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-300 flex items-center justify-between ${isDarkMode
-                          ? 'bg-white/90 text-gray-950 border-white/30 hover:bg-white/95'
-                          : 'bg-white/90 text-gray-700 border-white/30 hover:bg-white/95'
+                        ? 'bg-white/90 text-gray-950 border-white/30 hover:bg-white/95'
+                        : 'bg-white/90 text-gray-700 border-white/30 hover:bg-white/95'
                         } ${isDropdownOpen ? 'ring-2 ring-pink-500 border-transparent' : ''}`}
                     >
                       <span className="font-medium">{category}</span>
@@ -140,8 +140,8 @@ const HeroSection = ({ onSearch }) => {
                           exit={{ opacity: 0, y: -10, scale: 0.95 }}
                           transition={{ duration: 0.2, ease: "easeOut" }}
                           className={`absolute z-50 w-full mt-2 py-2 rounded-xl shadow-2xl border backdrop-blur-xl ${isDarkMode
-                              ? 'bg-slate-800/95 border-slate-700/50'
-                              : 'bg-white/95 border-gray-200/50'
+                            ? 'bg-slate-800/95 border-slate-700/50'
+                            : 'bg-white/95 border-gray-200/50'
                             }`}
                         >
                           {categories.map((cat, index) => (
@@ -152,11 +152,11 @@ const HeroSection = ({ onSearch }) => {
                               transition={{ delay: index * 0.05 }}
                               onClick={() => handleCategorySelect(cat)}
                               className={`w-full px-4 py-3 text-left flex items-center justify-between transition-all duration-200 hover:bg-gradient-to-r hover:from-pink-500/10 hover:to-purple-500/10 ${category === cat
-                                  ? `bg-gradient-to-r from-pink-500/20 to-purple-500/20 ${isDarkMode ? 'text-pink-300' : 'text-pink-600'
-                                  }`
-                                  : isDarkMode
-                                    ? 'text-gray-200 hover:text-white'
-                                    : 'text-gray-700 hover:text-gray-900'
+                                ? `bg-gradient-to-r from-pink-500/20 to-purple-500/20 ${isDarkMode ? 'text-pink-300' : 'text-pink-600'
+                                }`
+                                : isDarkMode
+                                  ? 'text-gray-200 hover:text-white'
+                                  : 'text-gray-700 hover:text-gray-900'
                                 }`}
                             >
                               <span className="font-medium">{cat}</span>
