@@ -61,7 +61,11 @@ const TravelGuides = () => {
           </p>
         </div>
 
-        <CustomCarousel guides={guides} viewprofilehandle={handleguide} />
+        <CustomCarousel
+          guides={guides}
+          viewprofilehandle={handleguide}
+          isHome={true}
+        />
         <div className="relative"></div>
       </div>
     </section>
