@@ -3,11 +3,13 @@ import { Star, Send } from "lucide-react";
 import toast from "react-hot-toast";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
 
 const Feedback = () => {
   // Add CSS to force dropdown to open downward
   const { user, isAuthenticated, isLoading } = useAuth();
   const navigate = useNavigate();
+  const { isDarkMode } = useTheme();
 
   React.useEffect(() => {
     const style = document.createElement("style");
@@ -200,15 +202,27 @@ const Feedback = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-pink-900">
+    <div className={`min-h-screen ${
+      isDarkMode 
+        ? 'bg-gradient-to-br from-black via-gray-900 to-pink-900'
+        : 'bg-gradient-to-br from-blue-50 via-pink-50 to-purple-50'
+    }`}>
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-red-900 via-pink-800 to-fuchsia-500 text-white py-32 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-black bg-opacity-10"></div>
+      <div className={`py-32 px-4 relative overflow-hidden ${
+        isDarkMode 
+          ? 'bg-gradient-to-r from-red-900 via-pink-800 to-fuchsia-500 text-white'
+          : 'bg-gradient-to-r from-red-100 via-pink-100 to-fuchsia-100 text-gray-900'
+      }`}>
+        <div className={`absolute inset-0 ${
+          isDarkMode ? 'bg-black bg-opacity-10' : 'bg-white bg-opacity-20'
+        }`}></div>
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <h1 className="text-6xl font-bold mb-8 leading-tight">
             Share Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">Feedback</span>
           </h1>
-          <p className="text-2xl opacity-95 max-w-3xl mx-auto text-gray-200">
+          <p className={`text-2xl opacity-95 max-w-3xl mx-auto ${
+            isDarkMode ? 'text-gray-200' : 'text-gray-700'
+          }`}>
             Help us improve your travel experience! Your feedback is invaluable
             to us and helps us create better adventures for everyone.
           </p>
@@ -219,20 +233,34 @@ const Feedback = () => {
       <div className="max-w-6xl mx-auto px-4 -mt-16 relative z-20 pb-20">
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Feedback Info */}
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl p-8 border border-white/20">
-            <h3 className="text-3xl font-bold text-white mb-8 text-center">
+          <div className={`backdrop-blur-md rounded-2xl shadow-2xl p-8 border ${
+            isDarkMode 
+              ? 'bg-white/10 border-white/20'
+              : 'bg-white/90 border-pink-200'
+          }`}>
+            <h3 className={`text-3xl font-bold mb-8 text-center ${
+              isDarkMode ? 'text-white' : 'text-gray-900'
+            }`}>
               Why Your Feedback Matters
             </h3>
             <div className="space-y-6">
               {feedbackCards.map((card, index) => (
-                <div key={index} className={`flex items-center p-6 ${card.bg} rounded-xl transition-all duration-300 border border-white/10 hover:border-white/20`}>
+                <div key={index} className={`flex items-center p-6 rounded-xl transition-all duration-300 ${
+                  isDarkMode 
+                    ? `${card.bg} border border-white/10 hover:border-white/20`
+                    : 'bg-white border border-gray-200 hover:border-pink-300'
+                }`}>
                   <div className={`w-14 h-14 bg-gradient-to-br ${card.iconBg} rounded-xl flex items-center justify-center text-white text-2xl mr-6 shadow-lg`}>
                     {card.icon}
                   </div>
                   <div>
-                    <h4 className="font-semibold text-white text-lg mb-2">{card.title}</h4>
+                    <h4 className={`font-semibold text-lg mb-2 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>{card.title}</h4>
                     <p className={`${card.color} font-medium mb-1`}>{card.info}</p>
-                    <p className="text-gray-300 text-sm">{card.sub}</p>
+                    <p className={`text-sm ${
+                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}>{card.sub}</p>
                   </div>
                 </div>
               ))}
@@ -240,8 +268,14 @@ const Feedback = () => {
           </div>
 
           {/* Feedback Form */}
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl p-8 border border-white/20">
-            <h2 className="text-3xl font-bold text-white mb-8 text-center">
+          <div className={`backdrop-blur-md rounded-2xl shadow-2xl p-8 border ${
+            isDarkMode 
+              ? 'bg-white/10 border-white/20'
+              : 'bg-white/90 border-pink-200'
+          }`}>
+            <h2 className={`text-3xl font-bold mb-8 text-center ${
+              isDarkMode ? 'text-white' : 'text-gray-900'
+            }`}>
               Tell Us What You Think
             </h2>
 
@@ -253,7 +287,7 @@ const Feedback = () => {
                 <h3 className="text-2xl font-bold text-green-400 mb-4">
                   Feedback Submitted!
                 </h3>
-                <p className="text-gray-300">
+                <p className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>
                   Thank you for helping us improve. We'll review your feedback
                   carefully.
                 </p>
@@ -263,7 +297,9 @@ const Feedback = () => {
                 {/* Package/Destination and Hotel */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="relative">
-                    <label className="block text-sm font-semibold text-gray-200 mb-2">
+                    <label className={`block text-sm font-semibold mb-2 ${
+                      isDarkMode ? 'text-gray-200' : 'text-gray-700'
+                    }`}>
                       Package
                     </label>
                     <div className="relative">
@@ -332,7 +368,9 @@ const Feedback = () => {
                     </div>
                   </div>
                   <div className="relative">
-                    <label className="block text-sm font-semibold text-gray-200 mb-2">
+                    <label className={`block text-sm font-semibold mb-2 ${
+                      isDarkMode ? 'text-gray-200' : 'text-gray-700'
+                    }`}>
                       Hotel (if booked)
                     </label>
                     <div className="relative">
@@ -405,9 +443,11 @@ const Feedback = () => {
 
                 {/* Message */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-200 mb-2">
-                    Your Feedback *
-                  </label>
+                                      <label className={`block text-sm font-semibold mb-2 ${
+                      isDarkMode ? 'text-gray-200' : 'text-gray-700'
+                    }`}>
+                      Your Feedback *
+                    </label>
                   <textarea
                     name="message"
                     rows="4"
