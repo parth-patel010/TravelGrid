@@ -13,18 +13,17 @@
   margin-bottom: 0.5rem;
   margin-top: 3.5rem;
 }
-.main-span{
+.main-span {
   color: #fb64b6;
 }
-.search-tab{
+.search-tab {
   position: relative;
-  border-radius:15px;
+  border-radius: 15px;
   border: 3.5px solid transparent;
   transition: border 0.3s;
 }
-.search-tab:hover{
-   border:3.5px solid #ec4899;
-
+.search-tab:hover {
+  border: 3.5px solid #ec4899;
 }
 .sub-caption {
   font-size: 1rem;
@@ -39,7 +38,7 @@
   justify-content: center;
   max-width: 1200px;
   margin: auto;
-  height: 420px;
+  height: 460px;
   margin-top: -40px;
   overflow: hidden;
 }
@@ -55,34 +54,31 @@
 
 .card {
   position: absolute;
-  width: 320px;
-  height: 360px;
-  padding: 20px;
-  border-radius: 20px;
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 192, 203, 0.2);
-  box-shadow: 0 0 20px rgba(236, 72, 153, 0.15);
-  transition: transform 0.5s ease, opacity 0.5s ease;
+  transition: all 0.5s ease;
   opacity: 0;
   z-index: 0;
   color: white;
 }
 
+.card:hover{
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.15);
+}
+
 .card.left {
-  transform: translateX(-340px) scale(0.92);
+  transform: translateX(-340px);
   opacity: 1;
   z-index: 2;
 }
 
 .card.center {
-  transform: translateX(0px) scale(1.1);
+  transform: translateX(0px);
   opacity: 1;
   z-index: 3;
 }
 
 .card.right {
-  transform: translateX(340px) scale(0.92);
+  transform: translateX(340px);
   opacity: 1;
   z-index: 2;
 }
@@ -174,16 +170,8 @@
 @media (max-width: 768px) {
   .card.left,
   .card.right {
-    display: none;
-  }
-
-  .card.center {
-    transform: scale(1.05);
-  }
-
-  .carousel-container {
-    height: 400px;
-    margin: auto;
+    opacity: 0;
+    visibility: hidden;
   }
 
   .carousel-title {
