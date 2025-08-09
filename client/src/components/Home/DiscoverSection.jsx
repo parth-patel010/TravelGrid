@@ -72,9 +72,7 @@ const DiscoverSection = () => {
       className="w-full py-20"
     >
       <div
-        className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 ${
-          isDarkMode ? "" : "bg-gradient-to-r from-[#e694bd] to-white"
-        }`}
+        className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 $`}
       >
         {/* Heading */}
         <div className="text-center mb-16">
