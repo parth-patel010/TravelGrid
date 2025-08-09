@@ -27,14 +27,14 @@ const Contact = () => {
 
   return (
     <div className={`min-h-screen ${
-      isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
+      isDarkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-rose-100 via-rose-200 to-gray-300'
     }`}>
       
       {/* Hero Section */}
       <div className={`py-24 px-4 relative overflow-hidden ${
         isDarkMode 
           ? 'bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white'
-          : 'bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 text-gray-900'
+          : 'bg-gradient-to-br from-rose-100 via-rose-200 to-gray-300 text-gray-900'
       }`}>
         <div className={`absolute inset-0 ${
           isDarkMode ? 'bg-black bg-opacity-10' : 'bg-white bg-opacity-20'

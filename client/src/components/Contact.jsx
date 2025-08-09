@@ -27,21 +27,21 @@ const Contact = () => {
   ];
 
   return (
-    <div className={`min-h-screen ${
-      isDarkMode 
-        ? 'bg-gradient-to-br from-black to-pink-700'
-        : 'bg-gradient-to-br from-blue-50 to-pink-50'
-    }`}>
+                    <div className={`min-h-screen ${
+                  isDarkMode
+                    ? 'bg-gradient-to-br from-black to-pink-700'
+                    : 'bg-gradient-to-br from-rose-50 to-gray-100'
+                }`}>
       
       {/* Navbar at the top */}
       <Navbar />
       
       {/* Hero Section */}
-      <div className={`py-24 px-4 relative overflow-hidden ${
-        isDarkMode 
-          ? 'bg-gradient-to-br from-black to-pink-700 text-white'
-          : 'bg-gradient-to-br from-blue-100 to-pink-100 text-gray-900'
-      }`}>
+                        <div className={`py-24 px-4 relative overflow-hidden ${
+                    isDarkMode
+                      ? 'bg-gradient-to-br from-black to-pink-700 text-white'
+                      : 'bg-gradient-to-br from-rose-100 to-gray-200 text-gray-900'
+                  }`}>
         <div className={`absolute inset-0 ${
           isDarkMode ? 'bg-opacity-10' : 'bg-white bg-opacity-20'
         }`}></div>
@@ -67,7 +67,7 @@ const Contact = () => {
           <div className={`rounded-2xl shadow-2xl p-8 border ${
             isDarkMode 
               ? 'bg-gradient-to-br from-black to-pink-900 border-white/20'
-              : 'bg-white border-pink-200'
+              : 'bg-white border-rose-200'
           }`}>
             <h3 className={`text-2xl font-bold mb-8 text-center ${
               isDarkMode ? 'text-white' : 'text-gray-900'
@@ -77,7 +77,7 @@ const Contact = () => {
                 <div key={index} className={`flex items-center p-6 backdrop-blur-sm rounded-xl transition-all duration-300 hover:scale-105 shadow-xl ${
                   isDarkMode 
                     ? `${card.bg} border border-pink-500/30 hover:border-pink-400/50`
-                    : 'bg-white border border-gray-200 hover:border-pink-300'
+                    : 'bg-white border border-gray-200 hover:border-rose-300'
                 }`}>
                   <div className={`w-14 h-14 bg-gradient-to-br ${card.iconBg} rounded-xl flex items-center justify-center text-white text-2xl mr-5 shadow-lg`}>
                     {card.icon}
@@ -100,7 +100,7 @@ const Contact = () => {
           <div className={`rounded-2xl shadow-2xl p-8 border ${
             isDarkMode 
               ? 'bg-gradient-to-br from-black to-pink-900 border-white/20'
-              : 'bg-white border-pink-200'
+              : 'bg-white border-rose-200'
           }`}>
             <h2 className={`text-2xl font-bold mb-8 text-center ${
               isDarkMode ? 'text-white' : 'text-gray-900'
