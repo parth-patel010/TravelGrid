@@ -519,7 +519,7 @@ const TravelGuidesCarousel = () => {
             <div className="line" />
           </div>
           <div className="flex items-center justify-center p-6 font-sans">
-            <div className={`w-full max-w-lg p-8 rounded-3xl shadow-2xl transition-all duration-300 hover:shadow-pink-500/30 ${
+            <div className={`w-full max-w-lg p-8 bg-white/20 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/30 transition-all duration-300 hover:shadow-pink-500/30 ${
               isDarkMode 
                 ? 'bg-white/5 backdrop-blur-md' 
                 : 'bg-white shadow-lg'

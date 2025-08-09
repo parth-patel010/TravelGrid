@@ -146,15 +146,21 @@ const Navbar = () => {
         <div className="w-full max-w-full mx-auto flex justify-between items-center gap-4 px-2 py-6">
           {/* Logo */}
           <NavLink
-            to="/"
-            onClick={() =>
-              typeof window !== "undefined" &&
-              window.scrollTo({ top: 0, behavior: "smooth" })
-            }
-            className="text-2xl font-bold tracking-tight bg-gradient-to-br from-pink-400 to-pink-600 bg-clip-text text-transparent transition-colors duration-200"
-          >
-            TravelGrid
-          </NavLink>
+  to="/"
+  onClick={() =>
+    typeof window !== "undefined" &&
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+  className="flex items-center gap-2 text-2xl font-bold tracking-tight bg-gradient-to-br from-pink-400 to-pink-600 bg-clip-text text-transparent transition-colors duration-200"
+>
+  <img
+    src="/favicon.ico"
+    alt="TravelGrid Logo"
+    className="w-10 h-10 rounded-full border border-pink-300 shadow-md"
+  />
+  TravelGrid
+</NavLink>
+
 
           {/* Desktop Nav */}
           <div
