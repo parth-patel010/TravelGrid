@@ -1,7 +1,3 @@
-import { useState, useRef, useEffect } from "react";
-import "./styles/TravelGuidesCarousel.css";
-import { useLocation } from "react-router-dom";
-import { useTheme } from "../context/ThemeContext";
 import {
   Briefcase,
   GraduationCap,
@@ -10,6 +6,11 @@ import {
   MapPin,
   Trophy,
 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
+import CustomCarousel from "../components/Custom/CustomCarousel";
+import { useTheme } from "../context/ThemeContext";
+import "./styles/TravelGuidesCarousel.css";
 
 const guides = [
   {
@@ -75,7 +76,7 @@ const guides = [
       certifications: "Certified Pet Travel Consultant (CPTC)",
       experience: "Helped 100+ pet parents travel stress-free",
       contact: "ayushi.petguide@example.com",
-    }
+    },
   },
   {
     name: "Weddy Brown",
@@ -88,9 +89,8 @@ const guides = [
       certifications: "Urban Pet Travel Certified",
       experience: "Guided 150+ city tours with pets",
       contact: "Brownweddy.peturban@example.com",
-    }
-  }
-
+    },
+  },
 ];
 
 const TravelGuidesCarousel = () => {
@@ -105,7 +105,6 @@ const TravelGuidesCarousel = () => {
     }
   }, []);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedGuide, setSelectedGuide] = useState(null);
   const profileRef = useRef(null);
 
@@ -113,14 +112,6 @@ const TravelGuidesCarousel = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + guides.length) % guides.length);
-  };
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % guides.length);
-  };
 
   const viewProfile = (guide) => {
     setSelectedGuide(guide);
@@ -515,48 +506,7 @@ const TravelGuidesCarousel = () => {
         </div>
       ) : (
         // Default Carousel View
-        <div className="carousel-container">
-          <button className="carousel-btn left" onClick={prevSlide}>
-            &lt;
-          </button>
-
-          <div className="carousel-track">
-            {guides.map((guide, index) => {
-              let position = "hidden";
-              if (index === currentIndex) position = "center";
-              else if (index === (currentIndex + 1) % guides.length)
-                position = "right";
-              else if (
-                index ===
-                (currentIndex - 1 + guides.length) % guides.length
-              )
-                position = "left";
-
-              return (
-                <div key={index} className={`card ${position}`}>
-                  <div className="card-image">
-                    <img src={guide.image} alt={guide.name} />
-                  </div>
-                  <div className="card-info">
-                    <h3>{guide.name}</h3>
-                    <p className="expertise">{guide.expertise}</p>
-                    <p className="bio">{guide.bio}</p>
-                    <button
-                      className="view-btn"
-                      onClick={() => viewProfile(guide)}
-                    >
-                      View Profile
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          <button className="carousel-btn right" onClick={nextSlide}>
-            &gt;
-          </button>
-        </div>
+        <CustomCarousel guides={guides} viewprofilehandle={viewProfile} />
       )}
 
       {selectedGuide && (
