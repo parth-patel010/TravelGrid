@@ -199,7 +199,7 @@ const HeroSection = ({ onSearch }) => {
               {/* Category Filters */}
               <div className={`pt-4 border-t ${isDarkMode ? 'border-white/20' : 'border-white/20'
                 }`}>
-                <p className="text-sm font-medium text-white/80 mb-3">Quick Filters:</p>
+                <p className="text-sm font-medium text-black/80 mb-3">Quick Filters:</p>
                 <div className="flex flex-wrap gap-2">
                   {["Restaurants", "Events", "Shopping"].map((filter) => (
                     <motion.button
@@ -210,7 +210,7 @@ const HeroSection = ({ onSearch }) => {
                         setCategory(filter);
                         handleSearch();
                       }}
-                      className="px-3 py-2 bg-white/20 hover:bg-white/30 text-white text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer backdrop-blur-sm"
+                      className="px-3 py-2 bg-white/20 hover:bg-white/30 text-black/80 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer backdrop-blur-sm"
                     >
                       {filter}
                     </motion.button>

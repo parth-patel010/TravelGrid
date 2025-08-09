@@ -72,9 +72,7 @@ const FeaturedPackages = () => {
       className="w-full py-20"
     >
       <div
-        className={`max-w-7xl mx-auto px-4 py-4 ${
-          isDarkMode ? "" : "bg-gradient-to-r from-[#e694bd] to-white"
-        }`}
+        className={`max-w-7xl mx-auto px-4 py-4 `}
       >
         {" "}
         <motion.div

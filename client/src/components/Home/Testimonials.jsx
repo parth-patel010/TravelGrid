@@ -59,9 +59,7 @@ const Testimonials = () => {
       <style>{scrollStyles}</style>
 
       <div
-        className={`max-w-7xl mx-auto px-4 py-4 ${
-          isDarkMode ? "" : "bg-gradient-to-l from-[#e694bd] to-white"
-        }`}
+        className={`max-w-7xl mx-auto px-4 py-4 `}
       >
         <div className="text-center mb-16">
           <h2
