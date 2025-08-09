@@ -60,33 +60,26 @@ const Footer = () => {
         <div className="relative z-10">
           <div className="container mx-auto px-4 py-16">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 text-left">
-              {/* Company Info */}
               <div className="space-y-6">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-pink-600 rounded-lg flex items-center justify-center">
+  <div className="flex items-center space-x-3">
+    <img
+      src="/favicon.ico"
+      alt="TravelGrid Logo"
+      className="w-10 h-10"
+    />
+    <h3 className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-pink-300 bg-clip-text text-transparent">
+      TravelGrid
+    </h3>
+  </div>
+  <p className="text-gray-300 text-sm leading-relaxed">
+    Discover amazing destinations and create unforgettable memories with our curated travel experiences around the world. Your journey starts here.
+  </p>
+  {/* Social Media Links */}
+  <div className="flex space-x-4">
+    {/* Icons like Twitter, Pinterest, YouTube, Contributors */}
+  </div>
+</div>
 
-                    <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center">
-                      <img
-                        src="./../logo.jpg"
-                        alt="TravelGrid Logo"
-                        className="object-contain scale-125"
-                      />
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-pink-300 bg-clip-text text-transparent">
-                    TravelGrid
-                  </h3>
-                </div>
-                <p className="text-gray-300 text-sm leading-relaxed">
-                  Discover amazing destinations and create unforgettable
-                  memories with our curated travel experiences around the world.
-                  Your journey starts here.
-                </p>
-                {/* Social Media Links */}
-                <div className="flex space-x-4">
-                  {/* Icons like Twitter, Pinterest, YouTube, Contributors */}
-                </div>
-              </div>
 
               {/* Quick Links */}
               <div className="space-y-6">
