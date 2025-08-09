@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DiscoverCard from '../components/DiscoverCard';
+import { useTheme } from "../context/ThemeContext";
+
 
 function DiscovermoreDestination() {
     const navigate = useNavigate();
-
+    const { isDarkMode } = useTheme();
     const handleBookNowClick = () => {
         navigate("/packages");
     };
@@ -75,7 +77,7 @@ function DiscovermoreDestination() {
     const indexOfFirstCard = indexOfLastCard - cardsPerPage;
     const currentCards = destinations.slice(indexOfFirstCard, indexOfLastCard);
     const totalPages = Math.ceil(destinations.length / cardsPerPage);
-
+    // const { isDarkMode } = useTheme();
     const handleNext = () => {
         if (currentPage < totalPages) setCurrentPage(currentPage + 1);
     };
@@ -85,11 +87,11 @@ function DiscovermoreDestination() {
     };
 
     return (
-        <section className="w-full bg-gradient-to-br text-cyan-950 py-16 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-black mt-6">
+        <section className={`w-full  text-cyan-950 ${isDarkMode?'bg-[#1e293b]':'bg-gradient-to-br'} py-16 text-center`}>
+            <h2 className={`text-2xl md:text-3xl font-bold mb-4 ${isDarkMode?'text-white':'text-black'} mt-6`}>
                 Discover New Destinations
             </h2>
-            <p className="text-gray-800 text-base md:text-lg mb-10">
+            <p className={`${isDarkMode?'text-gray-300':'text-gray-800'} text-base md:text-lg mb-10`}>
                 Explore trending places, hidden gems, and must-visit spots curated just for you.
             </p>
 
@@ -113,7 +115,7 @@ function DiscovermoreDestination() {
                 >
                     Previous
                 </button>
-                <span className="text-black font-semibold">{`Page ${currentPage} of ${totalPages}`}</span>
+                <span className={`${isDarkMode?'text-white':'text-black'} font-semibold`}>{`Page ${currentPage} of ${totalPages}`}</span>
                 <button
                     onClick={handleNext}
                     disabled={currentPage === totalPages}
