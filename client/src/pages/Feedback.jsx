@@ -309,7 +309,7 @@ const Feedback = () => {
                           setIsPackageDropdownOpen(!isPackageDropdownOpen);
                           setIsHotelDropdownOpen(false);
                         }}
-                        className="w-full px-4 py-3 bg-white/90 backdrop-blur-sm border-2 border-white/30 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-500/20 transition-all outline-none text-left flex items-center justify-between text-gray-700"
+                        className="w-full px-4 py-3 bg-white/90 backdrop-blur-sm border-2 border-white/30 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-500/20 transition-all outline-none text-left flex items-center justify-between text-black"
                       >
                         <span className="truncate">
                           {formData.package
@@ -340,7 +340,7 @@ const Feedback = () => {
                       {isPackageDropdownOpen && (
                         <div className="absolute top-full left-0 mt-1 bg-white/95 backdrop-blur-md border-2 border-white/30 rounded-xl shadow-lg z-10 max-h-60 overflow-y-auto min-w-full w-max">
                           <div
-                            className="px-4 py-2 cursor-pointer hover:bg-pink-50 text-gray-700"
+                            className="px-4 py-2 cursor-pointer hover:bg-pink-50 text-black"
                             onClick={() => {
                               setFormData({ ...formData, package: "" });
                               setIsPackageDropdownOpen(false);
@@ -351,7 +351,7 @@ const Feedback = () => {
                           {travelPackages.map((pkg) => (
                             <div
                               key={pkg.value}
-                              className="px-4 py-2 cursor-pointer hover:bg-pink-50 whitespace-nowrap text-gray-700"
+                              className="px-4 py-2 cursor-pointer hover:bg-pink-50 whitespace-nowrap text-black"
                               onClick={() => {
                                 setFormData({
                                   ...formData,
@@ -380,7 +380,7 @@ const Feedback = () => {
                           setIsHotelDropdownOpen(!isHotelDropdownOpen);
                           setIsPackageDropdownOpen(false);
                         }}
-                        className="w-full px-4 py-3 bg-white/90 backdrop-blur-sm border-2 border-white/30 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-500/20 transition-all outline-none text-left flex items-center justify-between text-gray-700"
+                        className="w-full px-4 py-3 bg-white/90 backdrop-blur-sm border-2 border-white/30 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-500/20 transition-all outline-none text-left flex items-center justify-between text-black"
                       >
                         <span className="truncate">
                           {formData.hotel
@@ -412,7 +412,7 @@ const Feedback = () => {
                       {isHotelDropdownOpen && (
                         <div className="absolute top-full left-0 mt-1 bg-white/95 backdrop-blur-md border-2 border-white/30 rounded-xl shadow-lg z-10 max-h-60 overflow-y-auto min-w-full w-max">
                           <div
-                            className="px-4 py-2 cursor-pointer hover:bg-pink-50 text-gray-700"
+                            className="px-4 py-2 cursor-pointer hover:bg-pink-50 text-black"
                             onClick={() => {
                               setFormData({ ...formData, hotel: "" });
                               setIsHotelDropdownOpen(false);
@@ -423,7 +423,7 @@ const Feedback = () => {
                           {hotels.map((hotel) => (
                             <div
                               key={hotel.value}
-                              className="px-4 py-2 cursor-pointer hover:bg-pink-50 whitespace-nowrap text-gray-700"
+                              className="px-4 py-2 cursor-pointer hover:bg-pink-50 whitespace-nowrap text-black"
                               onClick={() => {
                                 setFormData({
                                   ...formData,
@@ -453,7 +453,7 @@ const Feedback = () => {
                     rows="4"
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-white/90 backdrop-blur-sm border-2 border-white/30 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-500/20 transition-all outline-none resize-none text-gray-700"
+                    className="w-full px-4 py-3 bg-white/90 backdrop-blur-sm border-2 border-white/30 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-500/20 transition-all outline-none resize-none text-black"
                     placeholder="Tell us about your experience, suggestions, or any issues you encountered..."
                     required
                   />
