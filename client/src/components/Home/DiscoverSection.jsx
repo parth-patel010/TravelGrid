@@ -71,7 +71,11 @@ const DiscoverSection = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="w-full py-20"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 ${
+          isDarkMode ? "" : "bg-gradient-to-r from-[#e694bd] to-white"
+        }`}
+      >
         {/* Heading */}
         <div className="text-center mb-16">
           <motion.h2

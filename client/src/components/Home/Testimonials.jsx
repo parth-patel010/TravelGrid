@@ -5,25 +5,29 @@ const testimonials = [
   {
     name: "Amit P.",
     avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-    review: "TravelGrid made my trip planning effortless and fun! The curated recommendations were spot-on and saved me hours of research.",
+    review:
+      "TravelGrid made my trip planning effortless and fun! The curated recommendations were spot-on and saved me hours of research.",
     rating: 5,
   },
   {
     name: "Sara L.",
     avatar: "https://randomuser.me/api/portraits/women/44.jpg",
-    review: "The local guides and easy booking process exceeded my expectations. Will definitely use again for my next adventure!",
+    review:
+      "The local guides and easy booking process exceeded my expectations. Will definitely use again for my next adventure!",
     rating: 5,
   },
   {
     name: "John D.",
     avatar: "https://randomuser.me/api/portraits/men/65.jpg",
-    review: "Loved the community features and 24/7 support. The platform is intuitive and the deals are unbeatable.",
+    review:
+      "Loved the community features and 24/7 support. The platform is intuitive and the deals are unbeatable.",
     rating: 4,
   },
   {
     name: "Priya S.",
     avatar: "https://randomuser.me/api/portraits/women/68.jpg",
-    review: "A beautiful, modern platform that made planning my dream vacation so much easier. Highly recommended!",
+    review:
+      "A beautiful, modern platform that made planning my dream vacation so much easier. Highly recommended!",
     rating: 5,
   },
 ];
@@ -34,7 +38,6 @@ const extendedTestimonials = [...testimonials, ...testimonials];
 const scrollStyles = `
   @keyframes scroll {
     0% { transform: translateX(0); }
-    /* Change translateX to -50% for a seamless loop */
     100% { transform: translateX(-50%); } 
   }
 
@@ -56,19 +59,28 @@ const Testimonials = () => {
       <style>{scrollStyles}</style>
 
       <div
-        className={`max-w-7xl mx-auto px-4 py-4 ${isDarkMode
-            ? 'bg-[#1e293b]'
-            : 'bg-gradient-to-l from-[#e694bd] to-white'
-          }`}
+        className={`max-w-7xl mx-auto px-4 py-4 ${
+          isDarkMode ? "" : "bg-gradient-to-l from-[#e694bd] to-white"
+        }`}
       >
         <div className="text-center mb-16">
-          <h2 className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'
-            }`}>
-            What Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">Travelers Say</span>
+          <h2
+            className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-300 ${
+              isDarkMode ? "text-white" : "text-gray-900"
+            }`}
+          >
+            What Our{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+              Travelers Say
+            </span>
           </h2>
-          <p className={`text-lg max-w-2xl mx-auto leading-relaxed transition-all duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'
-            }`}>
-            Join thousands of satisfied travelers who have discovered amazing destinations with TravelGrid.
+          <p
+            className={`text-lg max-w-2xl mx-auto leading-relaxed transition-all duration-300 ${
+              isDarkMode ? "text-gray-300" : "text-gray-600"
+            }`}
+          >
+            Join thousands of satisfied travelers who have discovered amazing
+            destinations with TravelGrid.
           </p>
         </div>
 
@@ -77,26 +89,42 @@ const Testimonials = () => {
             {extendedTestimonials.map((t, i) => (
               <div
                 key={i}
-                className={`group backdrop-blur-md rounded-2xl p-6 flex flex-col items-center text-center border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 w-72 mx-4 flex-shrink-0 ${isDarkMode
-                  ? 'bg-white/10 border-white/20 hover:border-white/40'
-                  : 'bg-white/80 border-gray-200 hover:border-pink-300'
-                  }`}
+                className={`group backdrop-blur-md rounded-2xl p-6 flex flex-col items-center text-center border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 w-72 mx-4 flex-shrink-0 ${
+                  isDarkMode
+                    ? "bg-white/10 border-white/20 hover:border-white/40"
+                    : "bg-white/80 border-gray-200 hover:border-pink-300"
+                }`}
               >
                 <img
                   src={t.avatar}
                   alt={t.name}
                   className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-pink-400 group-hover:border-pink-300 transition-colors duration-300"
                 />
-                <h3 className={`text-lg font-semibold mb-2 group-hover:text-pink-300 transition-colors duration-300 ${isDarkMode ? 'text-white group-hover:text-pink-400'
-                  : 'text-gray-900 group-hover:text-pink-500'
-                  }`}>{t.name}</h3>
-                <p className={`text-sm mb-6 leading-relaxed group-hover:text-gray-800 transition-colors duration-300 ${isDarkMode ? 'text-gray-300 group-hover:text-white' : 'text-gray-600'
-                  }`}>{t.review}</p>
+                <h3
+                  className={`text-lg font-semibold mb-2 group-hover:text-pink-300 transition-colors duration-300 ${
+                    isDarkMode
+                      ? "text-white group-hover:text-pink-400"
+                      : "text-gray-900 group-hover:text-pink-500"
+                  }`}
+                >
+                  {t.name}
+                </h3>
+                <p
+                  className={`text-sm mb-6 leading-relaxed group-hover:text-gray-800 transition-colors duration-300 ${
+                    isDarkMode
+                      ? "text-gray-300 group-hover:text-white"
+                      : "text-gray-600"
+                  }`}
+                >
+                  {t.review}
+                </p>
                 <div className="flex gap-1">
                   {[...Array(5)].map((_, idx) => (
                     <svg
                       key={idx}
-                      className={`w-5 h-5 ${idx < t.rating ? 'text-yellow-400' : 'text-gray-500'}`}
+                      className={`w-5 h-5 ${
+                        idx < t.rating ? "text-yellow-400" : "text-gray-500"
+                      }`}
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
