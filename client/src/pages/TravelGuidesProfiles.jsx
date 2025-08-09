@@ -9,6 +9,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import CustomCarousel from "../components/Custom/CustomCarousel";
+import { useTheme } from "../context/ThemeContext";
 import "./styles/TravelGuidesCarousel.css";
 
 const guides = [
@@ -93,6 +94,7 @@ const guides = [
 ];
 
 const TravelGuidesCarousel = () => {
+  const { isDarkMode } = useTheme();
   const location = useLocation();
   useEffect(() => {
     if (location.state) {
@@ -148,9 +150,16 @@ const TravelGuidesCarousel = () => {
   return (
     <section
       className="travel-guides-section"
-      style={{ scrollMarginTop: "80px" }}
+      style={{ 
+        scrollMarginTop: "80px",
+        background: isDarkMode 
+          ? "linear-gradient(to bottom right, #000000, #831843)"
+          : "linear-gradient(to bottom right, #f8fafc, #fdf2f8)"
+      }}
     >
-      <h1 className="main-heading unique-heading-1">
+      <h1 className="main-heading unique-heading-1" style={{
+        color: isDarkMode ? "#ffffff" : "#1f2937"
+      }}>
         Travel <span className="main-span">Guides</span>
       </h1>
 
@@ -168,7 +177,7 @@ const TravelGuidesCarousel = () => {
             fontWeight: "600",
             lineHeight: "1.6",
             marginBottom: "10px",
-            color: "#fcfcfc",
+            color: isDarkMode ? "#fcfcfc" : "#1f2937",
           }}
         >
           Explore the world with our expert local guides
@@ -176,7 +185,7 @@ const TravelGuidesCarousel = () => {
         <p
           style={{
             fontSize: "16px",
-            color: "#bcbcbc",
+            color: isDarkMode ? "#bcbcbc" : "#6b7280",
             fontWeight: "400",
             lineHeight: "1.5",
           }}
@@ -206,8 +215,8 @@ const TravelGuidesCarousel = () => {
               border: "none",
               outline: "none",
               fontSize: "16px",
-              background: "#fcfcfc",
-              color: "#2d3748",
+              background: isDarkMode ? "#fcfcfc" : "#ffffff",
+              color: isDarkMode ? "#2d3748" : "#1f2937",
               fontWeight: "500",
               borderRadius: "10px",
             }}
@@ -285,12 +294,15 @@ const TravelGuidesCarousel = () => {
                   key={index}
                   className="search-result-card"
                   style={{
-                    background:
-                      "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                    background: isDarkMode
+                      ? "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+                      : "linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%)",
                     borderRadius: "25px",
                     padding: "30px",
-                    color: "white",
-                    boxShadow: "0 10px 30px rgba(102, 126, 234, 0.3)",
+                    color: isDarkMode ? "white" : "#1f2937",
+                    boxShadow: isDarkMode 
+                      ? "0 10px 30px rgba(102, 126, 234, 0.3)"
+                      : "0 10px 30px rgba(102, 126, 234, 0.1)",
                     transition: "all 0.3s ease",
                     cursor: "pointer",
                     position: "relative",
@@ -445,7 +457,7 @@ const TravelGuidesCarousel = () => {
                 style={{
                   fontSize: "28px",
                   marginBottom: "15px",
-                  color: "#2d3748",
+                  color: isDarkMode ? "#f3f4f6" : "#1f2937",
                 }}
               >
                 No guides found
@@ -453,7 +465,7 @@ const TravelGuidesCarousel = () => {
               <p
                 style={{
                   fontSize: "16px",
-                  color: "#718096",
+                  color: isDarkMode ? "#9ca3af" : "#6b7280",
                   maxWidth: "500px",
                   margin: "0 auto",
                 }}
@@ -501,44 +513,61 @@ const TravelGuidesCarousel = () => {
         <div className="profile-section" ref={profileRef}>
           <div className="profile-heading">
             <div className="line" />
-            <h2>{selectedGuide.name}'s Profile</h2>
+            <h2 style={{
+              color: isDarkMode ? "#ffffff" : "#1f2937"
+            }}>{selectedGuide.name}'s Profile</h2>
             <div className="line" />
           </div>
           <div className="flex items-center justify-center p-6 font-sans">
-            <div className="w-full max-w-lg p-8 bg-gradient-to-br bg-white/5 backdrop:blur-md rounded-3xl shadow-2xl transition-all duration-300 hover:shadow-pink-500/30">
+            <div className={`w-full max-w-lg p-8 rounded-3xl shadow-2xl transition-all duration-300 hover:shadow-pink-500/30 ${
+              isDarkMode 
+                ? 'bg-white/5 backdrop-blur-md' 
+                : 'bg-white shadow-lg'
+            }`}>
               <div className="flex flex-col items-center text-center space-y-4">
                 {/* profile image */}
                 <div className="relative p-1 rounded-full bg-gradient-to-br from-pink-500 to-purple-500">
                   <img
                     src={selectedGuide.image}
                     alt="Profile"
-                    className="w-28 h-28 rounded-full object-cover border-4 border-white dark:border-gray-800"
+                    className={`w-28 h-28 rounded-full object-cover border-4 ${
+                      isDarkMode ? 'border-gray-800' : 'border-white'
+                    }`}
                   />
                 </div>
                 {/* name and bio section */}
                 <div className="space-y-1">
-                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+                  <h2 className={`text-3xl font-bold ${
+                    isDarkMode ? 'text-white' : 'text-gray-900'
+                  }`}>
                     {selectedGuide.name}
                   </h2>
-                  <p className="text-md text-gray-600 dark:text-gray-300">
+                  <p className={`text-md ${
+                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                  }`}>
                     {selectedGuide.bio}
                   </p>
                 </div>
                 <div className="flex justify-center space-x-4">
-                  <Mail size={24} />
-                  <p>{selectedGuide.details.contact}</p>
+                    <Mail size={24} /><p className={isDarkMode ? 'text-white' : 'text-gray-900'}>{selectedGuide.details.contact}</p>
                 </div>
               </div>
-              <hr className="my-6 border-gray-200 dark:border-gray-600" />
+              <hr className={`my-6 ${
+                isDarkMode ? 'border-gray-600' : 'border-gray-200'
+              }`} />
               <div className="space-y-6">
                 {/* location */}
-                <div className="flex items-center space-x-4 text-gray-700 dark:text-gray-200">
+                <div className={`flex items-center space-x-4 ${
+                  isDarkMode ? 'text-gray-200' : 'text-gray-700'
+                }`}>
                   <MapPin size={20} className="text-pink-500 flex-shrink-0" />
                   <p className="text-lg">{selectedGuide.details.location}</p>
                 </div>
                 {/* expertise */}
                 <div className="space-y-2">
-                  <h3 className="flex items-center space-x-2 text-xl font-semibold text-gray-800 dark:text-white">
+                  <h3 className={`flex items-center space-x-2 text-xl font-semibold ${
+                    isDarkMode ? 'text-white' : 'text-gray-800'
+                  }`}>
                     <Trophy size={20} className="text-pink-500" />
                     <span>Expertise</span>
                   </h3>
@@ -551,12 +580,16 @@ const TravelGuidesCarousel = () => {
 
                 {/* experience section */}
                 <div className="space-y-2">
-                  <h3 className="flex items-center space-x-2 text-xl font-semibold text-gray-800 dark:text-white">
+                  <h3 className={`flex items-center space-x-2 text-xl font-semibold ${
+                    isDarkMode ? 'text-white' : 'text-gray-800'
+                  }`}>
                     <Briefcase size={20} className="text-pink-500" />
                     <span>Experience</span>
                   </h3>
-                  <ul className="list-inside text-gray-600 dark:text-gray-300 space-y-1">
-                    <li className="text-left pr-4">
+                  <ul className={`list-inside space-y-1 ${
+                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                  }`}>
+                    <li className="text-left pr-4" >
                       - {selectedGuide.details.experience}
                     </li>
                   </ul>
@@ -564,11 +597,15 @@ const TravelGuidesCarousel = () => {
 
                 {/* Certifications section */}
                 <div className="space-y-2">
-                  <h3 className="flex items-center space-x-2 text-xl font-semibold text-gray-800 dark:text-white">
+                  <h3 className={`flex items-center space-x-2 text-xl font-semibold ${
+                    isDarkMode ? 'text-white' : 'text-gray-800'
+                  }`}>
                     <GraduationCap size={20} className="text-pink-500" />
                     <span>Certifications</span>
                   </h3>
-                  <ul className="list-inside text-gray-600 dark:text-gray-300 space-y-1">
+                  <ul className={`list-inside space-y-1 ${
+                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                  }`}>
                     <li className="text-left pr-4">
                       - {selectedGuide.details.certifications}
                     </li>
@@ -576,11 +613,15 @@ const TravelGuidesCarousel = () => {
                 </div>
                 {/* languages section */}
                 <div className="space-y-2">
-                  <h3 className="flex items-center space-x-2 text-xl font-semibold text-gray-800 dark:text-white">
+                  <h3 className={`flex items-center space-x-2 text-xl font-semibold ${
+                    isDarkMode ? 'text-white' : 'text-gray-800'
+                  }`}>
                     <LanguagesIcon size={20} className="text-pink-500" />
                     <span>Languages</span>
                   </h3>
-                  <ul className="list-inside text-gray-600 dark:text-gray-300 space-y-1">
+                  <ul className={`list-inside space-y-1 ${
+                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                  }`}>
                     <li className="text-left pr-4">
                       - {selectedGuide.details.languages}
                     </li>
