@@ -69,17 +69,17 @@ const DiscoverSection = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="w-full py-20 text-center"
+      className="w-full py-20"
     >
       <div
-        className={`max-w-7xl mx-auto px-4 py-4 ${
+        className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 ${
           isDarkMode ? "" : "bg-gradient-to-r from-[#e694bd] to-white"
         }`}
       >
         {/* Heading */}
-        <div className="mb-16">
+        <div className="text-center mb-16">
           <motion.h2
-            className={`text-2xl md:text-3xl font-bold mb-6 ${
+            className={`text-3xl md:text-4xl font-bold mb-4 ${
               isDarkMode ? "text-white" : "text-gray-900"
             }`}
             initial={{ opacity: 0 }}
@@ -92,8 +92,8 @@ const DiscoverSection = () => {
             </span>
           </motion.h2>
           <motion.p
-            className={`text-base md:text-lg mb-10 leading-relaxed transition-all duration-300 ${
-              isDarkMode ? "text-gray-300" : "text-gray-600"
+            className={`text-lg md:text-xl mx-auto max-w-2xl ${
+              isDarkMode ? "text-gray-300" : "text-gray-700"
             }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -128,9 +128,9 @@ const DiscoverSection = () => {
         </motion.div>
 
         {/* CTA Section */}
-        <div className="mt-16">
+        <div className="text-center mt-16">
           <motion.h3
-            className={`text-xl md:text-2xl font-semibold mb-4 transition-all duration-300 ${
+            className={`text-2xl md:text-3xl font-semibold mb-4 ${
               isDarkMode ? "text-white" : "text-gray-900"
             }`}
             initial={{ opacity: 0 }}
@@ -140,8 +140,8 @@ const DiscoverSection = () => {
             Ready to plan your next adventure?
           </motion.h3>
           <motion.p
-            className={`mb-6 leading-relaxed transition-all duration-300 ${
-              isDarkMode ? "text-gray-300" : "text-gray-600"
+            className={`text-lg mb-8 mx-auto max-w-2xl ${
+              isDarkMode ? "text-gray-300" : "text-gray-700"
             }`}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
