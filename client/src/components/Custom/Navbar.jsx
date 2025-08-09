@@ -5,7 +5,7 @@ import { useWishlist } from "../../context/WishlistContext";
 import { useTheme } from "../../context/ThemeContext";
 import { Menu, X, User, LogOut, LogIn, ChevronDown } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
-import { Link } from "react-router-dom";
+
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -104,9 +104,6 @@ const Navbar = () => {
     "py-1.5 px-4 text-md font-medium rounded-sm hover:text-pink-500 hover:shadow-sm transition-all duration-300";
 
   return (
-
-    <>
-
     <div>
 
 
