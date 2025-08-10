@@ -143,7 +143,6 @@ const Testimonials = () => {
                   </svg>
                 ))}
               </div>
-              </div>
             </motion.div>
           ))}
         </div>
