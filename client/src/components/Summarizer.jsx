@@ -80,7 +80,7 @@ Input:
           <textarea
             className={`w-full p-4 rounded-lg text-base focus:outline-none h-32 resize-none shadow-inner placeholder-gray-500 ${
               isDarkMode 
-                ? 'bg-gray-700/50 border-gray-600/30 text-white' 
+                ? 'bg-gray-700/50 border-1 text-white focus:border-pink-400 focus:ring-1' 
                 : 'bg-gray-100 text-gray-900'
             }`}
             placeholder="e.g. Taj Hotel New Delhi - luxury hotel known for its service and ambience"
