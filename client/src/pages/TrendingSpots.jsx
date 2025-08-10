@@ -217,7 +217,8 @@ const TrendingSpots = () => {
     { key: 'beach', label: 'Beach', icon: '🏖️' },
     { key: 'cultural', label: 'Cultural', icon: '🏛️' },
     { key: 'nature', label: 'Nature', icon: '🏔️' },
-    { key: 'city', label: 'City', icon: '🏙️' }
+    { key: 'city', label: 'City', icon: '🏙️' },
+    { key: 'adventure', label: 'Adventure', icon: '🏕️' }
   ];
 
    //function to navigate to location detail
