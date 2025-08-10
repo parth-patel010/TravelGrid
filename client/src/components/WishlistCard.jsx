@@ -53,19 +53,23 @@ const WishlistCard = ({ item }) => {
         </div>
 
         {/* Category badge */}
-        <div className="absolute top-3 left-3">
-          <div className="px-2 py-1 rounded-full text-xs font-medium bg-pink-500 text-white">
-            {item.category.charAt(0).toUpperCase() + item.category.slice(1)}
+        {item.category && (
+          <div className="absolute top-3 left-3">
+            <div className="px-2 py-1 rounded-full text-xs font-medium bg-pink-500 text-white">
+              {item.category.charAt(0).toUpperCase() + item.category.slice(1)}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Rating badge */}
-        <div className="absolute top-3 right-3">
-          <div className="px-2 py-1 rounded-full text-xs font-medium bg-yellow-400 text-gray-900 flex items-center">
-            <Star className="h-3 w-3 mr-1" fill="currentColor" />
-            {item.rating}
+        {item.rating && (
+          <div className="absolute top-3 right-3">
+            <div className="px-2 py-1 rounded-full text-xs font-medium bg-yellow-400 text-gray-900 flex items-center">
+              <Star className="h-3 w-3 mr-1" fill="currentColor" />
+              {item.rating}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Content Section */}
@@ -74,34 +78,40 @@ const WishlistCard = ({ item }) => {
         
         <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm mb-3">
           <MapPin className="h-4 w-4 mr-1 flex-shrink-0" />
-          <span>{item.country}</span>
+          <span>{item.country || 'Unknown Location'}</span>
         </div>
 
         {/* Stats grid */}
         <div className="grid grid-cols-2 gap-3 mb-3 text-xs">
-          <div className="flex items-center">
-            <Users className="h-3 w-3 mr-1 text-pink-500" />
-            <span className="text-gray-600 dark:text-gray-300">{item.visitors_count} visitors</span>
-          </div>
-          <div className="flex items-center">
-            <Calendar className="h-3 w-3 mr-1 text-pink-500" />
-            <span className="text-gray-600 dark:text-gray-300">{item.best_time}</span>
-          </div>
+          {item.visitors_count && (
+            <div className="flex items-center">
+              <Users className="h-3 w-3 mr-1 text-pink-500" />
+              <span className="text-gray-600 dark:text-gray-300">{item.visitors_count} visitors</span>
+            </div>
+          )}
+          {item.best_time && (
+            <div className="flex items-center">
+              <Calendar className="h-3 w-3 mr-1 text-pink-500" />
+              <span className="text-gray-600 dark:text-gray-300">{item.best_time}</span>
+            </div>
+          )}
         </div>
 
         {/* Highlights */}
-        <div className="mt-auto">
-          <div className="flex flex-wrap gap-1">
-            {item.highlights.map((highlight, idx) => (
-              <span
-                key={idx}
-                className="inline-block px-2 py-1 rounded-full text-xs font-medium bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300"
-              >
-                {highlight}
-              </span>
-            ))}
+        {item.highlights && item.highlights.length > 0 && (
+          <div className="mt-auto">
+            <div className="flex flex-wrap gap-1">
+              {item.highlights.map((highlight, idx) => (
+                <span
+                  key={idx}
+                  className="inline-block px-2 py-1 rounded-full text-xs font-medium bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300"
+                >
+                  {highlight}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
