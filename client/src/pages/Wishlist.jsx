@@ -16,8 +16,11 @@ const Wishlist = () => {
   const { isDarkMode } = useTheme();
 
   useEffect(() => {
+    // Add animation effect when component mounts
     setAnimate(true);
-    setPage(1); // Reset to first page when wishlist changes
+
+    // Reset page to 1 when wishlist changes
+    setPage(1);
   }, [wishlist.length]);
 
   const totalPages = Math.ceil(wishlist.length / ITEMS_PER_PAGE);
@@ -29,44 +32,28 @@ const Wishlist = () => {
   };
 
   return (
-    <div
-      className={`min-h-screen transition-colors duration-300 bg-gradient-to-br ${
-        isDarkMode
-          ? 'from-black via-gray-900 to-pink-900'
-          : 'from-pink-200 via-white to-yellow-100'
-      }`}
+    <div className="min-h-screen transition-colors duration-300" 
+      style={{ 
+        background: isDarkMode ? 'var(--bg-primary)' : 'linear-gradient(to right bottom, #f9fafb, #f3f4f6)', 
+        color: 'var(--text-primary)'
+      }}
     >
       <Navbar lightBackground />
 
       {/* Hero Section */}
       <div className="pt-24 pb-10 px-4">
         <div className="max-w-7xl mx-auto">
-          <div
-            className={`text-center transition-all duration-700 transform ${
-              animate ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-            }`}
-          >
+          <div className={`text-center transition-all duration-700 transform ${animate ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <div className="flex justify-center mb-4">
               <div className="bg-pink-100 dark:bg-pink-900/30 p-3 rounded-full">
-                <Heart
-                  className="h-8 w-8 text-pink-600 dark:text-pink-400"
-                  fill="currentColor"
-                />
+                <Heart className="h-8 w-8 text-pink-600 dark:text-pink-400" fill="currentColor" />
               </div>
             </div>
-            <h1
-              className="text-4xl md:text-5xl font-bold mb-4"
-              style={{ color: 'var(--text-primary)' }}
-            >
-              Your{' '}
-              <span className="text-pink-600 dark:text-pink-400">Wishlist</span>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+              Your <span className="text-pink-600 dark:text-pink-400">Wishlist</span>
             </h1>
-            <p
-              className="text-lg max-w-2xl mx-auto"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              All your favorite destinations saved in one place for your future
-              adventures.
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+              All your favorite destinations saved in one place for your future adventures.
             </p>
           </div>
         </div>
@@ -76,29 +63,17 @@ const Wishlist = () => {
       <div className="px-4 pb-16">
         <div className="max-w-7xl mx-auto">
           {wishlist.length === 0 ? (
-            <div
-              className={`text-center py-16 rounded-xl bg-white dark:bg-gray-800 shadow-md transition-all duration-700 transform ${
-                animate
-                  ? 'translate-y-0 opacity-100'
-                  : 'translate-y-10 opacity-0'
-              }`}
-            >
+            <div className={`text-center py-16 rounded-xl bg-white dark:bg-gray-800 shadow-md transition-all duration-700 transform ${animate ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
               <div className="flex justify-center mb-6">
                 <Heart className="h-16 w-16 text-gray-300 dark:text-gray-600" />
               </div>
-              <h3
-                className="text-xl md:text-2xl font-bold mb-3"
-                style={{ color: 'var(--text-primary)' }}
-              >
+              <h3 className="text-xl md:text-2xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>
                 Your wishlist is empty
               </h3>
-              <p
-                className="text-md max-w-md mx-auto mb-6"
-                style={{ color: 'var(--text-secondary)' }}
-              >
+              <p className="text-md max-w-md mx-auto mb-6" style={{ color: 'var(--text-secondary)' }}>
                 Start saving your dream destinations to plan your next adventure!
               </p>
-              <button
+              <button 
                 onClick={handleNavigateToTrending}
                 className="inline-flex items-center px-6 py-3 bg-pink-600 hover:bg-pink-700 text-white rounded-full font-medium transition-colors duration-200"
               >
@@ -108,21 +83,12 @@ const Wishlist = () => {
             </div>
           ) : (
             <>
-              <div
-                className={`mb-8 transition-all duration-700 transform ${
-                  animate
-                    ? 'translate-y-0 opacity-100'
-                    : 'translate-y-10 opacity-0'
-                }`}
-              >
+              <div className={`mb-8 transition-all duration-700 transform ${animate ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
                 <div className="flex justify-between items-center mb-6">
-                  <h2
-                    className="text-xl font-semibold"
-                    style={{ color: 'var(--text-primary)' }}
-                  >
+                  <h2 className="text-xl font-semibold" style={{ color: 'var(--text-primary)' }}>
                     Saved Destinations ({wishlist.length})
                   </h2>
-                  <button
+                  <button 
                     onClick={handleNavigateToTrending}
                     className="text-sm flex items-center text-pink-600 dark:text-pink-400 hover:underline"
                   >
@@ -133,13 +99,9 @@ const Wishlist = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {paginated.map((item, index) => (
-                    <div
-                      key={item.id}
-                      className={`transition-all duration-700 transform ${
-                        animate
-                          ? 'translate-y-0 opacity-100'
-                          : 'translate-y-10 opacity-0'
-                      }`}
+                    <div 
+                      key={item.id} 
+                      className={`transition-all duration-700 transform ${animate ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
                       style={{ transitionDelay: `${index * 100}ms` }}
                     >
                       <WishlistCard item={item} />
@@ -158,10 +120,7 @@ const Wishlist = () => {
                       <ChevronLeft className="h-5 w-5 mr-1" />
                       <span>Previous</span>
                     </button>
-                    <span
-                      className="text-sm font-medium px-4 py-2 rounded-full bg-white dark:bg-gray-800 shadow-md"
-                      style={{ color: 'var(--text-primary)' }}
-                    >
+                    <span className="text-sm font-medium px-4 py-2 rounded-full bg-white dark:bg-gray-800 shadow-md" style={{ color: 'var(--text-primary)' }}>
                       Page {page} of {totalPages}
                     </span>
                     <button
