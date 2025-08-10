@@ -240,24 +240,33 @@ const TrendingSpots = () => {
     <div className="min-h-screen overflow-x-hidden transition-colors duration-300" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)',marginTop:"5rem" }}>
 
       <Navbar lightBackground />
+  {/* Hero Section */}
+      <div className="relative text-white py-24 md:py-46 overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3000&q=80"
+            alt="World travel destinations"
+            className="w-full h-full object-cover object-center brightness-100"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-pink-900/40 to-black/30" />
+        </div>
 
-      {/* Hero Section */}
-      <section className="relative w-full flex items-center justify-center min-h-[320px] md:min-h-[400px] lg:min-h-[480px] bg-gradient-to-br from-pink-100 via-white to-pink-200 dark:from-black dark:via-gray-900 dark:to-pink-900 overflow-hidden mb-8 md:mb-16">
-        <div className="absolute inset-0 pointer-events-none select-none opacity-30 dark:opacity-40" style={{ background: 'radial-gradient(circle at 60% 40%, #ec4899 0%, transparent 70%)' }}></div>
-        <div className="relative z-10 w-full max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 text-center flex flex-col items-center justify-center">
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-4 mt-4 md:mt-8 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-fuchsia-500 to-pink-400 drop-shadow-lg">
-            Trending <span className="text-pink-500">Spots</span>
-          </h1>
-          <div className="w-16 h-1 rounded-full bg-gradient-to-r from-pink-400 via-fuchsia-400 to-pink-600 mx-auto mb-6"></div>
-          <p className="text-lg md:text-2xl mb-6 md:mb-8 px-2 md:px-8 text-gray-700 dark:text-gray-200 font-medium">
-            Discover the hottest destinations everyone's talking about
-          </p>
-          <div className="flex items-center justify-center space-x-2 px-4 text-pink-600 dark:text-pink-300">
-            <TrendingUp className="h-5 w-5" />
-            <span className="text-base md:text-lg font-semibold">Updated daily based on bookings and reviews</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg text-pink-500">
+              Trending <span className='text-pink-500'>Spots</span>
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 text-gray-100 drop-shadow-md">
+              Discover the hottest destinations everyone's talking about
+            </p>
+            <div className="flex items-center justify-center space-x-2 text-gray-100 drop-shadow-sm">
+              <TrendingUp className="h-5 w-5" />
+              <span>Updated daily based on bookings and reviews</span>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Filter Tabs */}
       <div className="bg-pink-900 shadow-sm sticky top-0 z-10" style={{marginTop:"-5rem",marginBottom:"5rem"}}>
@@ -315,7 +324,7 @@ const TrendingSpots = () => {
           {filteredSpots.slice(0, visibleCount).map((spot, index) => (
             <div
               key={spot.id}
-              className="border-white/20 hover:border-white/40 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col h-full bg-white border border-gray-200"
+              className=" hover:border-white/40 hover:scale-105 hover:shadow-pink-500/20 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col h-full bg-white border border-gray-200"
             >
               {/* Image Container */}
               <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">

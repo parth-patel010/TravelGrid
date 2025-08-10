@@ -3,7 +3,7 @@ import { useTheme } from "@/context/ThemeContext";
 
 function DiscoverCard({ index, place, handleBookNowClick }) {
     const [wishlisted, setWishlisted] = useState(false);
-    const { isDarkMode } = useTheme();
+        const { isDarkMode } = useTheme();
 
     return (
         <div
@@ -14,8 +14,7 @@ function DiscoverCard({ index, place, handleBookNowClick }) {
                           " border-white/10 hover:border-white/40 shadow-pink-300 hover:shadow-pink-500/20 bg-white/10"
                         : // ☀️ Light Mode (new styles)
                           "border-pink-50-900 hover:border-gray-500 shadow-pink-200 hover:shadow-pink-400/40 bg-white"
-                }`}
-        >
+                }`}        >
             {/* Image */}
             <div className="relative overflow-hidden">
                 <img
@@ -26,7 +25,7 @@ function DiscoverCard({ index, place, handleBookNowClick }) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
             </div>
 
-            {/* Content */}
+               {/* Content */}
             <div className="px-4 py-3 flex-1 space-y-2">
                 <h3
                     className={`text-lg font-bold text-center group-hover:text-pink-400 transition-colors duration-300
@@ -50,7 +49,7 @@ function DiscoverCard({ index, place, handleBookNowClick }) {
                 </p>
             </div>
 
-            {/* Button */}
+         {/* Button */}
             <div className="px-4 pb-4 pt-2">
                 <button
                     onClick={handleBookNowClick}

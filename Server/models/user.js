@@ -34,6 +34,18 @@ const userSchema = new mongoose.Schema(
         return !!this.googleId;
       },
     },
+    isEmailVerified: {
+      type: Boolean,
+      default: function() {
+        return !!this.googleId; // Google users are pre-verified
+      },
+    },
+    emailVerificationCode: {
+      type: String,
+    },
+    emailVerificationExpires: {
+      type: Date,
+    },
     savedPlaces: [
       {
         placeId: {

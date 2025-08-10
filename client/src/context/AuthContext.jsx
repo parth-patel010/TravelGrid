@@ -99,6 +99,83 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Email verification functions
+  const sendVerificationEmail = async (email) => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/email/send-verification`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) return { success: false, error: data.error || data.message };
+
+      return { success: true, message: data.message };
+    } catch (err) {
+      return { success: false, error: "Failed to send verification email" };
+    }
+  };
+
+  const verifyEmailCode = async (email, code) => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/email/verify-code`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, code }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) return { success: false, error: data.error || data.message };
+
+      // Update user state if verification successful
+      if (data.user) {
+        setUser(data.user);
+      }
+
+      return { success: true, message: data.message };
+    } catch (err) {
+      return { success: false, error: "Failed to verify email" };
+    }
+  };
+
+  const resendVerificationCode = async (email) => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/email/resend-code`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) return { success: false, error: data.error || data.message };
+
+      return { success: true, message: data.message };
+    } catch (err) {
+      return { success: false, error: "Failed to resend verification code" };
+    }
+  };
+
+  const checkVerificationStatus = async (email) => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/email/status?email=${encodeURIComponent(email)}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+
+      const data = await res.json();
+      if (!res.ok) return { success: false, error: data.error || data.message };
+
+      return { success: true, isVerified: data.isVerified };
+    } catch (err) {
+      return { success: false, error: "Failed to check verification status" };
+    }
+  };
+
   return (
     <AuthContext.Provider value={{
       user,
@@ -106,7 +183,11 @@ export const AuthProvider = ({ children }) => {
       isLoading,
       login,
       signup,
-      logout
+      logout,
+      sendVerificationEmail,
+      verifyEmailCode,
+      resendVerificationCode,
+      checkVerificationStatus
     }}>
       {children}
     </AuthContext.Provider>

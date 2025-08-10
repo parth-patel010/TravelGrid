@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 import Typewriter from "typewriter-effect";
 import { X, ChevronDown, Check } from "lucide-react";
 import toast from "react-hot-toast";
@@ -10,16 +11,15 @@ const HeroSection = ({ onSearch }) => {
   const [category, setCategory] = useState("All Categories");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { isDarkMode } = useTheme();
+  const { isAuthenticated } = useAuth();
 
   const handleSearch = () => {
-    const isLoggedIn = false;
-
-    if (!isLoggedIn) {
+    if (!isAuthenticated) {
       toast.error("Please sign in to search for destinations.");
       return;
     }
-
     onSearch({ location, category });
+    console.log("Search button clicked:", searchTerm, location);
   };
 
   const categories = [
@@ -53,8 +53,8 @@ const HeroSection = ({ onSearch }) => {
       ></div>
 
       <div className={`absolute inset-0 z-15 ${isDarkMode
-          ? 'bg-gradient-to-b from-black/60 via-black/40 to-black/70'
-          : 'bg-gradient-to-b from-black/30 via-black/20 to-black/50'
+        ? 'bg-gradient-to-b from-black/60 via-black/40 to-black/70'
+        : 'bg-gradient-to-b from-black/30 via-black/20 to-black/50'
         }`} />
 
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 lg:px-8">
@@ -106,8 +106,8 @@ const HeroSection = ({ onSearch }) => {
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     className={`w-full px-4 py-3 backdrop-blur-sm border rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-300 ${isDarkMode
-                        ? 'bg-white/20 text-gray-950 placeholder-gray-950 border-white/30'
-                        : 'bg-white/10 text-black placeholder-gray-900 border-white/30'
+                        ? 'bg-white/90 text-gray-950 placeholder-gray-950 border-white/30'
+                        : 'bg-white/90 text-gray-700 placeholder-gray-500 border-white/30'
                       }`}
                   />
                 </div>
@@ -152,11 +152,11 @@ const HeroSection = ({ onSearch }) => {
                               transition={{ delay: index * 0.05 }}
                               onClick={() => handleCategorySelect(cat)}
                               className={`w-full px-4 py-3 text-left flex items-center justify-between transition-all duration-200 hover:bg-gradient-to-r hover:from-pink-500/10 hover:to-purple-500/10 ${category === cat
-                                  ? `bg-gradient-to-r from-pink-500/20 to-purple-500/20 ${isDarkMode ? 'text-pink-300' : 'text-pink-600'
-                                  }`
-                                  : isDarkMode
-                                    ? 'text-gray-200 hover:text-white'
-                                    : 'text-gray-700 hover:text-gray-900'
+                                ? `bg-gradient-to-r from-pink-500/20 to-purple-500/20 ${isDarkMode ? 'text-pink-300' : 'text-pink-600'
+                                }`
+                                : isDarkMode
+                                  ? 'text-gray-200 hover:text-white'
+                                  : 'text-gray-700 hover:text-gray-900'
                                 }`}
                             >
                               <span className="font-medium">{cat}</span>
@@ -199,7 +199,7 @@ const HeroSection = ({ onSearch }) => {
               {/* Category Filters */}
               <div className={`pt-4 border-t ${isDarkMode ? 'border-white/20' : 'border-white/20'
                 }`}>
-                <p className="text-sm font-medium text-white/80 mb-3">Quick Filters:</p>
+                <p className="text-sm font-medium text-black/80 mb-3">Quick Filters:</p>
                 <div className="flex flex-wrap gap-2">
                   {["Restaurants", "Events", "Shopping"].map((filter) => (
                     <motion.button
@@ -210,7 +210,7 @@ const HeroSection = ({ onSearch }) => {
                         setCategory(filter);
                         handleSearch();
                       }}
-                      className="px-3 py-2 bg-white/20 hover:bg-white/30 text-white text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer backdrop-blur-sm"
+                      className="px-3 py-2 bg-white/20 hover:bg-white/30 text-black/80 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer backdrop-blur-sm"
                     >
                       {filter}
                     </motion.button>

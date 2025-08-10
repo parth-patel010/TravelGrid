@@ -46,11 +46,24 @@ const Login = () => {
       setError("Please enter your password.");
       return;
     }
+    
     const result = await login(formData.email, formData.password);
 
     if (result.success) {
       navigate(from, { replace: true });
     } else {
+      // Check if error is related to email verification
+      if (result.error && result.error.toLowerCase().includes('verify')) {
+        setError('Please verify your email before logging in.');
+        // Show option to resend verification
+        setTimeout(() => {
+          if (window.confirm('Would you like to resend the verification email?')) {
+            navigate(`/verify-email?email=${encodeURIComponent(formData.email)}`);
+          }
+        }, 2000);
+      } else {
+        setError(result.error || 'Invalid email or password');
+      }
     }
   };
 

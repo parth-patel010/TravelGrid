@@ -16,17 +16,44 @@ function Home() {
     return (
         <div className={`flex flex-col min-h-screen w-full overflow-x-hidden transition-all duration-300 ${
             isDarkMode 
-                ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900' 
-                : 'bg-white'
+               ? 'bg-gradient-to-br from-gray-900 via-slate-800 to-blue-900' 
+                : 'bg-gradient-to-br from-rose-300 via-blue-200 to-gray-300'
         }`}>
             <main className="flex flex-col flex-1 items-center justify-start w-full h-full">
-                <HeroSection onSearch={setSearchFilter} />
-                <FeatureCards />
-                <FeaturedPackages />
-                <TravelGuides />
-                <Testimonials />
-                <ForumSection />
-                <DiscoverSection />
+                {/* Hero Section */}
+                <div className="w-full relative">
+                    <HeroSection onSearch={setSearchFilter} />
+                </div>
+
+                {/* Feature Cards Section */}
+                <div className="w-full py-16 px-4">
+                    <FeatureCards />
+                </div>
+
+                {/* Featured Packages Section */}
+                <div className="w-full py-16 px-4">
+                    <FeaturedPackages />
+                </div>
+
+                {/* Travel Guides Section */}
+                <div className="w-full py-16 px-4">
+                    <TravelGuides />
+                </div>
+
+                {/* Testimonials Section */}
+                <div className="w-full py-16 px-4">
+                    <Testimonials />
+                </div>
+
+                {/* Forum Section */}
+                <div className="w-full py-16 px-4">
+                    <ForumSection />
+                </div>
+
+                {/* Discover Section */}
+                <div className="w-full py-16 px-4">
+                    <DiscoverSection />
+                </div>
             </main>
         </div>
     )
