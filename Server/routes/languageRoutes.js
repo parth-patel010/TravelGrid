@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
-const auth = require('../middleware/auth');
+const { verifyJWT } = require('../middleware/auth');
 
 // Get user's language preference
-router.get('/preference', auth, async (req, res) => {
+router.get('/preference', verifyJWT, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('language');
     res.json({ language: user.language || 'en' });
@@ -15,7 +15,7 @@ router.get('/preference', auth, async (req, res) => {
 });
 
 // Update user's language preference
-router.put('/preference', auth, async (req, res) => {
+router.put('/preference', verifyJWT, async (req, res) => {
   try {
     const { language } = req.body;
 
