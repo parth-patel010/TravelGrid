@@ -1,6 +1,7 @@
 import React from "react";
-import { useTheme } from "../../context/ThemeContext";
 import { motion } from "framer-motion";
+import { useTheme } from "../../context/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 const testimonials = [
   {
@@ -58,30 +59,35 @@ const scrollStyles = `
 
 const Testimonials = () => {
   const { isDarkMode } = useTheme();
+  const { t } = useTranslation();
 
   return (
-    <section className="w-full py-20">
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      className={`w-full py-20 ${isDarkMode ? "bg-slate-900" : "bg-gray-50"}`}
+    >
       <style>{scrollStyles}</style>
 
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="text-center mb-16">
           <h2
-            className={`text-3xl md:text-4xl font-medium mb-6 transition-all duration-300 ${
+            className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-300 break-words ${
               isDarkMode ? "text-white" : "text-gray-900"
             }`}
           >
-            What Our{" "}
+            {t('home.whatOur')}{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
-              Travelers Say
+              {t('home.travelersSay')}
             </span>
           </h2>
           <p
-            className={`text-lg max-w-2xl mx-auto leading-relaxed transition-all duration-300 ${
+            className={`text-lg max-w-2xl mx-auto leading-relaxed transition-all duration-300 break-words ${
               isDarkMode ? "text-gray-300" : "text-gray-600"
             }`}
           >
-            Join thousands of satisfied travelers who have discovered amazing
-            destinations with TravelGrid.
+            {t('home.testimonialsDescription')}
           </p>
         </div>
 
@@ -115,7 +121,7 @@ const Testimonials = () => {
                 {t.name}
               </h3>
               <p
-                className={`text-sm mb-6 leading-relaxed transition-colors duration-300 ${
+                className={`text-sm mb-6 leading-relaxed transition-colors duration-300 break-words ${
                   isDarkMode
                     ? "text-gray-300 group-hover:text-white"
                     : "text-gray-600 group-hover:text-gray-800"
@@ -141,7 +147,7 @@ const Testimonials = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
