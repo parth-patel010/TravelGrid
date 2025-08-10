@@ -32,6 +32,7 @@ const navLinks = [
     name: "Tools",
     subitems: [
       { label: "Trip Expense Calculator", path: "/trip-calculator" },
+      { label: "Currency Converter", path: "/currency-converter" },
       { label: "Packing Checklist", path: "/packing-checklist" },
       { label: "Travel Recommendations", path: "/recommendation" },
       { label: "Feedback", path: "/feedback" },

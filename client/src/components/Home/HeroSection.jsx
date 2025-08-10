@@ -228,6 +228,21 @@ const HeroSection = ({ onSearch }) => {
                   )}
                 </div>
               </div>
+
+              {/* Quick Tools */}
+              <div className={`pt-4 border-t ${isDarkMode ? 'border-white/20' : 'border-white/20'}`}>
+                <p className="text-sm font-medium text-black/80 mb-3">Quick Tools:</p>
+                <div className="flex flex-wrap gap-2">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => window.location.href = '/currency-converter'}
+                    className="px-3 py-2 bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer shadow-lg"
+                  >
+                    💰 Currency Converter
+                  </motion.button>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
