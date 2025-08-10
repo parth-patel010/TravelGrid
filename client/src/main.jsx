@@ -2,6 +2,7 @@ import { StrictMode, lazy, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Toaster } from 'react-hot-toast';
 import './index.css';
+import './i18n'; // Import i18n configuration
 import App from './App.jsx';
 import Spinner from './components/Spinner';
 import ErrorBoundary from './components/ErrorHandle/ErrorBoundary';
@@ -10,6 +11,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider } from './context/AuthContext';
 import { WishlistProvider } from './context/WishlistContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { LanguageProvider } from './context/LanguageContext';
 import AuthLayout from './components/AuthLayout';
 //import TrendingSpots from './pages/TrendingSpots.jsx';
 //import PackingChecklistPage from './pages/PackingChecklist.jsx';
@@ -165,27 +167,29 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-        <ThemeProvider>
-          <AuthProvider>
-            <WishlistProvider>
-              <Provider store={appStore}>
-                <RouterProvider router={router} />
-                <Toaster
-                  position="top-center"
-                  reverseOrder={false}
-                  toastOptions={{
-                    duration: 5000,
-                    style: {
-                      background: '#333',
-                      color: '#fff',
-                      fontSize: '16px',
-                    },
-                  }}
-                />
-              </Provider>
-            </WishlistProvider>
-          </AuthProvider>
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <AuthProvider>
+              <WishlistProvider>
+                <Provider store={appStore}>
+                  <RouterProvider router={router} />
+                  <Toaster
+                    position="top-center"
+                    reverseOrder={false}
+                    toastOptions={{
+                      duration: 5000,
+                      style: {
+                        background: '#333',
+                        color: '#fff',
+                        fontSize: '16px',
+                      },
+                    }}
+                  />
+                </Provider>
+              </WishlistProvider>
+            </AuthProvider>
+          </ThemeProvider>
+        </LanguageProvider>
       </GoogleOAuthProvider>
     </ErrorBoundary>
   </StrictMode>

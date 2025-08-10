@@ -18,6 +18,7 @@ const postRoutes = require('./routes/postRoutes')
 const saveRoutes = require('./routes/saveRoutes');
 const tripRoutes = require('./routes/trips.js');
 const reviewsRoutes = require('./routes/reviewRoutes.js');
+const languageRoutes = require('./routes/languageRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -118,6 +119,9 @@ app.use('/api', tripRoutes);
 
 // Reviews Routes
 app.use('/api/reviews', reviewsRoutes);
+
+// Language Routes
+app.use('/api/language', languageRoutes);
 
 // 404 Not Found middleware
 app.use((req, res, next) => {

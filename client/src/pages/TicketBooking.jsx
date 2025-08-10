@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Navbar from "../components/Custom/Navbar";
+import { useTheme } from "../context/ThemeContext";
 import {
   Users,
   CalendarDays,
@@ -30,6 +31,7 @@ const travelOptions = [
 function TicketBooking() {
   const [tripMode, setTripMode] = useState("oneWay");
   const [travelType, setTravelType] = useState("flight");
+  const { isDarkMode } = useTheme();
   const [form, setForm] = useState({
     from: "",
     to: "",
@@ -39,7 +41,7 @@ function TicketBooking() {
     cabin: "Economy",
     petFriendly: false //adding for pet friendly feature
   });
-
+  
   const [submitted, setSubmitted] = useState(false);
   const [booked, setBooked] = useState(false); //adding a booked state variable to keep track if booked or not
 
@@ -256,7 +258,7 @@ function TicketBooking() {
                   required
                   value={form.from}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
+                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white':'bg-white/90'} text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30 `}
                 />
               </div>
 
@@ -291,7 +293,7 @@ function TicketBooking() {
                   required
                   value={form.to}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
+                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white':'bg-white/90'} text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
                 />
               </div>
               
@@ -307,7 +309,7 @@ function TicketBooking() {
                   required
                   value={form.depart}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
+                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'}  focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
                 />
               </div>
 
@@ -326,7 +328,7 @@ function TicketBooking() {
                       value={form.return}
                       min={form.depart}
                       onChange={handleChange}
-                      className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
+                      className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
                     />
                   </>
                 ) : (
@@ -343,7 +345,7 @@ function TicketBooking() {
                       required
                       value={form.passengers}
                       onChange={handleChange}
-                      className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
+                      className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
                     />
                   </>
                 )}
@@ -366,7 +368,7 @@ function TicketBooking() {
                     required
                     value={form.passengers}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
+                    className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
                     placeholder="Passengers"
                   />
                 </div>
@@ -375,7 +377,7 @@ function TicketBooking() {
                 name="cabin"
                 value={form.cabin}
                 onChange={handleChange}
-                className="w-full p-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
+                className={`w-full p-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
               >
                 {travelType === "flight" &&
                   ["Economy", "Premium Economy", "Business", "First"].map((c) => (
@@ -419,7 +421,7 @@ function TicketBooking() {
                     petFriendly: e.target.checked,
                   }))
                 }
-                className="accent-pink-600 w-5 h-5 rounded focus:ring-2 focus:ring-pink-500"
+                className={` accent-pink-600 w-5 h-5 rounded focus:ring-2 focus:ring-pink-500 `}
               />
               <label htmlFor="petFriendly" className="text-sm md:text-base font-medium">
                 I’m traveling with a pet

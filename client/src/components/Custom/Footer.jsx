@@ -48,12 +48,11 @@ const Footer = () => {
 
   return (
     <>
-      <footer
-        className={`relative text-white transition-all duration-300 ${
-          isDarkMode
-            ? "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
-            : "bg-gradient-to-br from-gray-900 via-pink-900 to-gray-900"
-        }`}>
+      <footer className={`relative text-white transition-all duration-300 ${
+     isDarkMode 
+          ? 'bg-gradient-to-b from-black via-zinc-800 to-zinc-800' 
+          : 'bg-gradient-to-br from-gray-900  to-pink-900'
+      }`}>
         {/* Background pattern */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml,...')] opacity-20" />
 
@@ -95,6 +94,7 @@ const Footer = () => {
                     { name: "Hotels", path: "/hotels" },
                     { name: "Forums", path: "/forum" },
                     { name: "Feedback", path: "/feedback" },
+                    { name: "Currency Converter", path: "/currency-converter" },
                   ].map((link) => (
                     <Link
                       key={link.name}
@@ -219,10 +219,11 @@ const Footer = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your email"
-                      className={`w-full px-4 py-3 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm transition-all duration-300 ${isDarkMode
-                        ? 'bg-slate-800 border-slate-600'
-                        : 'bg-gray-800 border-gray-600'
-                        }`}
+                      className={`w-full px-4 py-3 border rounded-l focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm transition-all duration-300 ${
+                        isDarkMode 
+                          ? ' text-white placeholder-gray-400 bg-zinc-800 border-slate-600' 
+                          : 'text-black placeholder-gray-700 bg-gray-50 border-gray-600'
+                      }`}
                       required
                     />
                     <div className="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -231,7 +232,7 @@ const Footer = () => {
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white py-3 px-4 rounded-lg text-sm font-medium flex items-center justify-center space-x-2 transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-pink-500 to-purple-700 hover:from-pink-600 hover:to-pink-700 text-white py-3 px-4 rounded-lg text-sm font-medium flex items-center justify-center space-x-2 transition-all duration-300"
                   >
                     <span>Subscribe</span>
                     {/* Send icon */}
