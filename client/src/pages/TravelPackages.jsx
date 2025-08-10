@@ -1,8 +1,8 @@
-
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { packages } from "../data/PackageData";
 import Navbar from "../components/Custom/Navbar";
+import { Search, X } from "lucide-react"; // Import search and clear icons
 
 // Function to extract numerical price from a formatted string like "₹10,000"
 const parsePrice = (priceStr) => {
@@ -19,45 +19,72 @@ const TravelPackages = () => {
 	const [selectedCountry, setSelectedCountry] = useState("All");
 	const [selectedSeason, setSelectedSeason] = useState("All");
 	const [selectedDuration, setSelectedDuration] = useState("All");
+	const [searchTerm, setSearchTerm] = useState(""); // New state for search term
 
 	const navigate = useNavigate();
 
-	// Filters the packages based on all the selected criteria
-	const filteredPackages = packages.filter((pkg) => {
-		const matchContinent =
-			selectedContinent === "All" || pkg.continent === selectedContinent;
+	// Filters the packages based on all the selected criteria and search term
+	const filteredPackages = useCallback(() => {
+		return packages.filter((pkg) => {
+			const matchContinent =
+				selectedContinent === "All" || pkg.continent === selectedContinent;
 
-		const matchCountry =
-			selectedCountry === "All" || pkg.country === selectedCountry;
+			const matchCountry =
+				selectedCountry === "All" || pkg.country === selectedCountry;
 
-		const matchSeason =
-			selectedSeason === "All" || pkg.season === selectedSeason;
+			const matchSeason =
+				selectedSeason === "All" || pkg.season === selectedSeason;
 
-		// Extract number of days from the `duration` string like "5 Days / 4 Nights"
-		const match = pkg.duration.match(/^(\d+)/);
-		const days = match ? Number(match[1]) : 0;
+			// Extract number of days from the `duration` string like "5 Days / 4 Nights"
+			const match = pkg.duration.match(/^(\d+)/);
+			const days = match ? Number(match[1]) : 0;
 
-		// Match based on selected duration range
-		const matchDuration =
-			selectedDuration === "All" ||
-			(selectedDuration === "1-3" && days <= 3) ||
-			(selectedDuration === "4-7" && days >= 4 && days <= 7) ||
-			(selectedDuration === "8-14" && days >= 8 && days <= 14) ||
-			(selectedDuration === "15+" && days > 14);
+			// Match based on selected duration range
+			const matchDuration =
+				selectedDuration === "All" ||
+				(selectedDuration === "1-3" && days <= 3) ||
+				(selectedDuration === "4-7" && days >= 4 && days <= 7) ||
+				(selectedDuration === "8-14" && days >= 8 && days <= 14) ||
+				(selectedDuration === "15+" && days > 14);
 
-		const matchRating = pkg.rating >= minRating;
-		const matchPrice = parsePrice(pkg.price) <= maxPrice;
+			const matchRating = pkg.rating >= minRating;
+			const matchPrice = parsePrice(pkg.price) <= maxPrice;
 
-		// Final filter result for this package
-		return (
-			matchContinent &&
-			matchCountry &&
-			matchSeason &&
-			matchDuration &&
-			matchRating &&
-			matchPrice
-		);
-	});
+			// Search filter logic
+
+			let matchSearch = true;
+			if (searchTerm) {
+				const lowerSearch = searchTerm.toLowerCase();
+				const searchFields = [
+					pkg.title || '',
+					pkg.country || '',
+					pkg.continent || '',
+					pkg.description || '',
+					pkg.highlights ? pkg.highlights.join(' ') : ''
+				].join(' ').toLowerCase();
+
+				matchSearch = searchFields.includes(lowerSearch);
+			}
+
+			return (
+				matchContinent &&
+				matchCountry &&
+				matchSeason &&
+				matchDuration &&
+				matchRating &&
+				matchPrice &&
+				matchSearch
+			);
+		});
+	}, [
+		selectedContinent,
+		selectedCountry,
+		selectedSeason,
+		selectedDuration,
+		minRating,
+		maxPrice,
+		searchTerm
+	]);
 
 	// Converts input price to number or sets it to infinity if empty
 	const handlePriceChange = (e) => {
@@ -67,6 +94,11 @@ const TravelPackages = () => {
 		} else {
 			setMaxPrice(Number(val));
 		}
+	};
+
+	// Clear search input
+	const clearSearch = () => {
+		setSearchTerm("");
 	};
 
 	// Returns unique values from the packages array for dropdown filters
@@ -122,6 +154,35 @@ const TravelPackages = () => {
 							<span className="mr-2">🎯</span>
 							Create Custom Travel Plan
 						</button>
+					</div>
+
+					{/* SEARCH BAR */}
+					<div className="max-w-3xl mx-auto mb-8 relative">
+						<div className="relative">
+							<input
+								type="text"
+								placeholder="Search destinations, packages, or keywords..."
+								value={searchTerm}
+								onChange={(e) => setSearchTerm(e.target.value)}
+								className="w-full bg-pink-800 rounded-xl px-5 py-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-400 pl-14 pr-12 text-lg"
+							/>
+							<div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-pink-300">
+								<Search size={24} />
+							</div>
+							{searchTerm && (
+								<button
+									onClick={clearSearch}
+									className="absolute right-4 top-1/2 transform -translate-y-1/2 text-pink-300 hover:text-white transition-colors"
+								>
+									<X size={24} />
+								</button>
+							)}
+						</div>
+						{searchTerm && (
+							<div className="mt-2 text-pink-300 text-sm">
+								Searching for: <span className="font-semibold">{searchTerm}</span>
+							</div>
+						)}
 					</div>
 
 					{/* Filter dropdowns */}
@@ -215,10 +276,10 @@ const TravelPackages = () => {
 										{duration === "1-3"
 											? "1-3 Days"
 											: duration === "4-7"
-											? "4-7 Days"
-											: duration === "8-14"
-											? "8-14 Days"
-											: "15+ Days"}
+												? "4-7 Days"
+												: duration === "8-14"
+													? "8-14 Days"
+													: "15+ Days"}
 									</option>
 								))}
 							</select>
@@ -243,8 +304,8 @@ const TravelPackages = () => {
 
 				{/* Filtered Travel Packages Grid */}
 				<section className="max-w-7xl w-full px-4 pb-16 grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-					{filteredPackages.length > 0 ? (
-						filteredPackages.map((pkg) => (
+					{filteredPackages().length > 0 ? (
+						filteredPackages().map((pkg) => (
 							<div
 								key={pkg.id}
 								className="backdrop-blur-sm bg-white/5 border border-pink-400/20 rounded-2xl shadow-xl hover:bg-white/8 transition-shadow duration-300 hover:shadow-2xl cursor-pointer"
@@ -267,9 +328,8 @@ const TravelPackages = () => {
 										{[...Array(5)].map((_, idx) => (
 											<svg
 												key={idx}
-												className={`w-5 h-5 ${
-													idx < pkg.rating ? "text-yellow-400" : "text-gray-300"
-												}`}
+												className={`w-5 h-5 ${idx < pkg.rating ? "text-yellow-400" : "text-gray-300"
+													}`}
 												fill="currentColor"
 												viewBox="0 0 20 20">
 												<path d="M9.049 2.927a1 1 0 011.902 0l1.517 4.674a1 1 0 00.95.69h4.911c.969 0 1.371 1.24.588 1.81l-3.978 2.89a1 1 0 00-.364 1.118l1.517 4.674c.3.921-.755 1.688-1.538 1.118l-3.978-2.89a1 1 0 00-1.176 0l-3.978 2.89c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.364-1.118l-3.978-2.89c-.784-.57-.38-1.81.588-1.81h4.912a1 1 0 00.95-.69l1.517-4.674z" />
@@ -316,9 +376,31 @@ const TravelPackages = () => {
 							</div>
 						))
 					) : (
-						<p className="text-pink-300 text-center col-span-full">
-							No packages match the selected filters.
-						</p>
+						<div className="col-span-full text-center py-16">
+							<div className="text-6xl mb-4 text-pink-500">😢</div>
+							<h3 className="text-2xl font-bold text-pink-300 mb-2">
+								No packages found
+							</h3>
+							<p className="text-pink-200 max-w-md mx-auto">
+								{searchTerm
+									? `No packages match your search for "${searchTerm}"`
+									: "No packages match the selected filters"}
+							</p>
+							<button
+								onClick={() => {
+									setSearchTerm("");
+									setMinRating(0);
+									setMaxPrice(Infinity);
+									setSelectedContinent("All");
+									setSelectedCountry("All");
+									setSelectedSeason("All");
+									setSelectedDuration("All");
+								}}
+								className="mt-6 bg-pink-800 hover:bg-pink-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+							>
+								Clear all filters
+							</button>
+						</div>
 					)}
 				</section>
 			</main>

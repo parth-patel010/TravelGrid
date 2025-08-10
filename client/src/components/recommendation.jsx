@@ -54,51 +54,61 @@ Provide the suggestions in plain text (no markdown) with bullet points and short
   };
 
   return (
-    <div className="max-w-4xl mx-auto pt-60 bg-pink-600 text-white p-8 rounded-2xl shadow-xl">
-      <h1 className="text-3xl font-bold mb-3">🌐 Travel Recommendation Engine</h1>
-      <p className="text-pink-100 mb-6">Get personalized AI-based travel ideas based on your inputs</p>
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#0f0f17] via-[#1f0f2f] to-[#1a051e] py-24 px-4">
+      <div className="flex-grow flex items-center justify-center">
+        <div className="w-full max-w-3xl bg-[rgba(30, 10, 60, 0.95)] backdrop-blur-sm text-white p-10 rounded-2xl shadow-2xl border border-pink-500">
+          <h1 className="text-3xl font-semibold mb-2 flex items-center gap-2">
+            <span role="img" aria-label="globe">🌐</span> Travel Recommendation Engine
+          </h1>
+          <p className="text-pink-200 mb-6">
+            Get personalized AI-based travel ideas based on your inputs.
+          </p>
 
-      <div className="grid md:grid-cols-2 gap-4">
-        <input
-          className="p-3 rounded-lg text-black bg-white"
-          placeholder="🌴 Interests (e.g. beach, hiking)"
-          onChange={(e) => handleChange('interests', e.target.value)}
-        />
-        <input
-          className="p-3 rounded-lg text-black bg-white"
-          placeholder="💰 Budget (e.g. ₹20k or $500)"
-          onChange={(e) => handleChange('budget', e.target.value)}
-        />
-        <input
-          className="p-3 rounded-lg text-black bg-white"
-          placeholder="📍 Current location"
-          onChange={(e) => handleChange('location', e.target.value)}
-        />
-        <input
-          className="p-3 rounded-lg text-black bg-white"
-          placeholder="🎯 Travel type (e.g. adventure, honeymoon)"
-          onChange={(e) => handleChange('type', e.target.value)}
-        />
-        <input
-          className="p-3 rounded-lg text-black bg-white md:col-span-2"
-          placeholder="🏨 Hotel preference (e.g. budget, luxury)"
-          onChange={(e) => handleChange('hotel', e.target.value)}
-        />
-      </div>
+          <div className="grid md:grid-cols-2 gap-4">
+            <input
+              className="p-3 rounded-lg text-rgb(153,153,153) bg-white"
+              placeholder="🌴 Interests (e.g. beach, hiking)"
+              onChange={(e) => handleChange('interests', e.target.value)}
+            />
+            <input
+              className="p-3 rounded-lg text-[rgb(153,153,153)] bg-white"
+              placeholder="💰 Budget (e.g. ₹20k or $500)"
+              onChange={(e) => handleChange('budget', e.target.value)}
+            />
+            <input
+              className="p-3 rounded-lg text-[rgb(153,153,153)] bg-white"
+              placeholder="📍 Current location"
+              onChange={(e) => handleChange('location', e.target.value)}
+            />
+            <input
+              className="p-3 rounded-lg text-[rgb(153,153,153)] bg-white"
+              placeholder="🎯 Travel type (e.g. adventure, honeymoon)"
+              onChange={(e) => handleChange('type', e.target.value)}
+            />
+            <input
+              className="p-3 rounded-lg text-[rgb(153,153,153)] bg-white md:col-span-2"
+              placeholder="🏨 Hotel preference (e.g. budget, luxury)"
+              onChange={(e) => handleChange('hotel', e.target.value)}
+            />
+          </div>
 
-      <button
-        onClick={handleSubmit}
-        disabled={loading}
-        className="mt-6 bg-white text-pink-600 font-semibold py-2 px-6 rounded-xl hover:bg-gray-100 transition-all"
-      >
-        {loading ? 'Generating...' : 'Get Recommendations'}
-      </button>
+          <div className="mt-6 flex flex-col sm:flex-row gap-4">
+            <button
+              onClick={handleSubmit}
+              disabled={loading}
+              className="flex-shrink-0 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-xl transition-all disabled:opacity-60"
+            >
+              {loading ? 'Generating...' : 'Get Recommendations'}
+            </button>
+          </div>
 
-      {recommendation && (
-        <div className="mt-8 bg-white text-black p-6 rounded-xl whitespace-pre-wrap font-sans shadow-md leading-relaxed">
-          {recommendation}
+          {recommendation && (
+            <div className="mt-8 bg-[#0f1220] text-white p-6 rounded-xl whitespace-pre-wrap font-sans shadow-md leading-relaxed border border-pink-400">
+              {recommendation}
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
