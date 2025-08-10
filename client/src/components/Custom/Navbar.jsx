@@ -9,39 +9,7 @@ import ThemeToggle from "./ThemeToggle";
 import LanguageSelector from "../LanguageSelector";
 
 
-const navLinks = [
-  { name: t('navigation.home'), path: "/" },
-  { name: t('navigation.trendingSpots'), path: "/trending-spots" },
-  {
-    name: t('navigation.booking'),
-    subitems: [
-      { label: t('navigation.ticket'), path: "/ticket" },
-      { label: t('navigation.hotels'), path: "/hotels" },
-      { label: t('navigation.packages'), path: "/packages" },
-      { label: t('navigation.bookingHistory'), path: "/booking-history" },
-    ],
-  },
-  {
-    name: t('navigation.support'),
-    subitems: [
-      { label: t('navigation.travelPlans'), path: "/travel-plan-generator" },
-      { label: t('navigation.guide'), path: "/guides" },
-      { label: t('navigation.contact'), path: "/contact" },
-      { label: t('navigation.reviewSummarizer'), path: "/Summarizer" },
-    ],
-  },
-  {
-    name: t('navigation.tools'),
-    subitems: [
-      { label: t('navigation.tripCalculator'), path: "/trip-calculator" },
-      { label: t('navigation.packingChecklist'), path: "/packing-checklist" },
-      { label: t('navigation.travelRecommendations'), path: "/recommendation" },
-      { label: t('navigation.feedback'), path: "/feedback" },
-    ],
-  },
-  { name: t('navigation.wishlist'), path: "/wishlist" },
-  { name: t('navigation.petTravelGuide'), path: "/pettravel" },
-];
+
 
 const Navbar = () => {
   const { t } = useTranslation();
