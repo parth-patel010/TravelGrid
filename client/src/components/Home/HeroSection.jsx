@@ -67,7 +67,7 @@ const HeroSection = ({ onSearch }) => {
             transition={{ delay: 0.2, duration: 0.8 }}
             className="flex-1 text-center lg:text-left text-white"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight leading-tight font-[Playfair Display]">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium mb-6 tracking-tight leading-tight font-[Playfair Display]">
               Explore&nbsp;
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 inline-block min-h-[1.5em]">
                 <Typewriter
@@ -95,8 +95,8 @@ const HeroSection = ({ onSearch }) => {
             className="flex-1 w-full max-w-md"
           >
             <div className={`backdrop-blur-md rounded-2xl shadow-2xl p-6 space-y-4 border transition-all duration-300 ${isDarkMode
-              ? 'bg-white/10 border-white/20'
-              : 'bg-white/90 border-white/30'
+                ? 'bg-white/10 border-white/20'
+                : 'bg-white/10 border-white/60'
               }`}>
               <div className="space-y-3">
                 <div className="relative">
@@ -106,8 +106,8 @@ const HeroSection = ({ onSearch }) => {
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     className={`w-full px-4 py-3 backdrop-blur-sm border rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-300 ${isDarkMode
-                      ? 'bg-white/90 text-gray-950 placeholder-gray-950 border-white/30'
-                      : 'bg-white/90 text-gray-700 placeholder-gray-500 border-white/30'
+                        ? 'bg-white/90 text-gray-950 placeholder-gray-950 border-white/30'
+                        : 'bg-white/90 text-gray-700 placeholder-gray-500 border-white/30'
                       }`}
                   />
                 </div>
@@ -119,8 +119,8 @@ const HeroSection = ({ onSearch }) => {
                       type="button"
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                       className={`w-full px-4 py-3 backdrop-blur-sm border rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-300 flex items-center justify-between ${isDarkMode
-                        ? 'bg-white/90 text-gray-950 border-white/30 hover:bg-white/95'
-                        : 'bg-white/90 text-gray-700 border-white/30 hover:bg-white/95'
+                          ? 'bg-white/20 text-gray-950 placeholder-gray-950 border-white/30'
+                          : 'bg-white/10 text-black placeholder-gray-700 border-white/30 hover:bg-white/95'
                         } ${isDropdownOpen ? 'ring-2 ring-pink-500 border-transparent' : ''}`}
                     >
                       <span className="font-medium">{category}</span>
@@ -140,8 +140,8 @@ const HeroSection = ({ onSearch }) => {
                           exit={{ opacity: 0, y: -10, scale: 0.95 }}
                           transition={{ duration: 0.2, ease: "easeOut" }}
                           className={`absolute z-50 w-full mt-2 py-2 rounded-xl shadow-2xl border backdrop-blur-xl ${isDarkMode
-                            ? 'bg-slate-800/95 border-slate-700/50'
-                            : 'bg-white/95 border-gray-200/50'
+                              ? 'bg-slate-800/95 border-slate-700/50'
+                              : 'bg-white/85 border-gray-200/50'
                             }`}
                         >
                           {categories.map((cat, index) => (

@@ -77,9 +77,8 @@ const DiscoverSection = () => {
         {/* Heading */}
         <div className="text-center mb-16">
           <motion.h2
-            className={`text-3xl md:text-4xl font-bold mb-4 ${
-              isDarkMode ? "text-white" : "text-gray-900"
-            }`}
+            className={`text-3xl md:text-3xl font-medium mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'
+              }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -151,7 +150,7 @@ const DiscoverSection = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleDiscoverMore}
-            className="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium rounded-full shadow-lg transition-all duration-300 cursor-pointer"
+            className="px-8 py-3 bg-gradient-to-r from-pink-400 to-purple-500 hover:from-pink-600 hover:to-purple-700 text-white font-medium rounded-full shadow-lg transition-all duration-300 cursor-pointer"
           >
             Discover More Destinations
           </motion.button>
