@@ -3,7 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { MessageCircle, X, Send, Bot, User, Loader2, MapPin, Sparkles } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 
-const genAI = new GoogleGenerativeAI("gemini_api_key");
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 
 const Chatbot = () => {
   const [open, setOpen] = useState(false);

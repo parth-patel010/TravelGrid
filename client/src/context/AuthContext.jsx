@@ -10,141 +10,185 @@ export const useAuth = () => {
   }
   return context;
 };
-// ... baaki imports same
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-const updateUser = (updatedData) => {
-  const normalizedUser = { ...updatedData, id: updatedData.id || updatedData._id };
-  setUser(normalizedUser);
-  localStorage.setItem("travelgrid_user", JSON.stringify(normalizedUser));
-};
-
+  // Fetch user from cookie session
+  const fetchUser = async () => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/me`, {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setUser(data.user);
+      }
+    } catch (err) {
+      console.error("Auth check failed:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-  const storedUser = localStorage.getItem("travelgrid_user");
-  const token = localStorage.getItem("token");
+    fetchUser();
+  }, []);
 
-  if (storedUser && token) {
+  // Signup
+  const signup = async ({ name, email, password }) => {
+    setIsLoading(true);
     try {
-      const parsedUser = JSON.parse(storedUser);
-      const normalizedUser = { ...parsedUser, id: parsedUser.id || parsedUser._id }; // <-- normalize here
-      setUser(normalizedUser);
-    } catch {
-      localStorage.removeItem("travelgrid_user");
-      localStorage.removeItem("token");
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) return { success: false, error: data.error || data.message };
+
+      setUser(data.user);
+      toast.success("Signup successful! 🎉");
+      return { success: true };
+    } catch (err) {
+      return { success: false, error: "Signup failed" };
+    } finally {
+      setIsLoading(false);
     }
-  }
-  setIsLoading(false);
-}, []);
+  };
 
-
-  // --- Normal Login ---
+  // Login
   const login = async (email, password) => {
     setIsLoading(true);
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include", // very important
         body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
+      if (!res.ok) return { success: false, error: data.error || data.message };
 
-      if (res.ok && data.user) {
-        // Ensure ID consistency
-        const normalizedUser = { ...data.user, id: data.user.id || data.user._id };
-        setUser(normalizedUser);
-        localStorage.setItem("travelgrid_user", JSON.stringify(normalizedUser));
-        localStorage.setItem("token", data.token);
-        return { success: true };
-      } else {
-        return { success: false, error: data.error || data.message };
-      }
+      setUser(data.user);
+      toast.success("Login successful 👋");
+      return { success: true };
     } catch (err) {
-      return { success: false, error: "Something went wrong" };
+      return { success: false, error: "Login failed" };
     } finally {
       setIsLoading(false);
     }
   };
 
-  // --- Google Login ---
-  const googleLogin = async (token) => {
-    setIsLoading(true);
+  // Logout
+  const logout = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/google`, {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+      setUser(null);
+      toast.success("Logged out 👋");
+    } catch {
+      toast.error("Logout failed");
+    }
+  };
+
+  // Email verification functions
+  const sendVerificationEmail = async (email) => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/email/send-verification`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token }),
+        credentials: "include",
+        body: JSON.stringify({ email }),
       });
 
       const data = await res.json();
+      if (!res.ok) return { success: false, error: data.error || data.message };
 
-      if (res.ok && data.user && data.token) {
-        const normalizedUser = { ...data.user, id: data.user.id || data.user._id };
-        setUser(normalizedUser);
-        localStorage.setItem("travelgrid_user", JSON.stringify(normalizedUser));
-        localStorage.setItem("token", data.token);
-        toast.success("Successfully logged in with Google! 🎉");
-        return { success: true };
-      } else {
-        return { success: false, error: data.error || "Google login failed" };
-      }
+      return { success: true, message: data.message };
     } catch (err) {
-      return { success: false, error: "Something went wrong with Google authentication" };
-    } finally {
-      setIsLoading(false);
+      return { success: false, error: "Failed to send verification email" };
     }
   };
 
-  // --- Logout ---
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("travelgrid_user");
-    localStorage.removeItem("token");
-    toast.success("Logged out successfully 👋");
-    window.location.href = "/";
-  };
-
-  // --- Signup remains same ---
-  const signup = async (userData) => {
-    setIsLoading(true);
+  const verifyEmailCode = async (email, code) => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/email/verify-code`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
+        credentials: "include",
+        body: JSON.stringify({ email, code }),
       });
 
       const data = await res.json();
+      if (!res.ok) return { success: false, error: data.error || data.message };
 
-      if (!res.ok) {
-        return { success: false, error: data.message };
+      // Update user state if verification successful
+      if (data.user) {
+        setUser(data.user);
       }
 
-      return await login(userData.email, userData.password);
+      return { success: true, message: data.message };
     } catch (err) {
-      return { success: false, error: "Something went wrong during signup" };
-    } finally {
-      setIsLoading(false);
+      return { success: false, error: "Failed to verify email" };
     }
   };
 
-  const value = {
-    user,
-    login,
-    signup,
-    googleLogin,
-    logout,
-    isLoading,
-    updateUser,
-    isAuthenticated: !!user && !!localStorage.getItem("token"),
+  const resendVerificationCode = async (email) => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/email/resend-code`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) return { success: false, error: data.error || data.message };
+
+      return { success: true, message: data.message };
+    } catch (err) {
+      return { success: false, error: "Failed to resend verification code" };
+    }
+  };
+
+  const checkVerificationStatus = async (email) => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/email/status?email=${encodeURIComponent(email)}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+
+      const data = await res.json();
+      if (!res.ok) return { success: false, error: data.error || data.message };
+
+      return { success: true, isVerified: data.isVerified };
+    } catch (err) {
+      return { success: false, error: "Failed to check verification status" };
+    }
   };
 
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={{
+      user,
+      isAuthenticated: !!user,
+      isLoading,
+      login,
+      signup,
+      logout,
+      sendVerificationEmail,
+      verifyEmailCode,
+      resendVerificationCode,
+      checkVerificationStatus
+    }}>
       {children}
     </AuthContext.Provider>
   );

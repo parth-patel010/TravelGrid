@@ -12,6 +12,13 @@ import Spinner from "./components/Spinner";
 import ErrorBoundary from "./components/ErrorHandle/ErrorBoundary";
 import GoToTopButton from "./components/GoToTopButton";
 import FeedbackButton from "./components/FeedbackButton";
+<<<<<<< HEAD
+=======
+import Chatbot from "./components/Chatbot";
+import EmailVerificationBanner from "./components/Auth/EmailVerificationBanner";
+import FluidCursor from "./components/FluidCursor";
+
+>>>>>>> upstream/main
 function App() {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
@@ -29,11 +36,15 @@ function App() {
           <DashboardDataProvider>
             <MapProvider>
               <div className="flex flex-col min-h-screen">
+                <FluidCursor />
                 {/* Show spinner when route changes */}
                 {loading && <Spinner />}
 
                 {/* Navbar */}
                 <Navbar />
+
+                {/* Email Verification Banner */}
+                <EmailVerificationBanner />
 
                 {/* Main Content */}
                 <div className="flex-grow">
@@ -45,6 +56,7 @@ function App() {
 
                 {/* Buttons and Footer */}
                 <GoToTopButton />
+                <Chatbot />
                 <FeedbackButton />
                 <Footer />
               </div>

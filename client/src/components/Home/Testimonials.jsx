@@ -1,64 +1,93 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "../../context/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 const testimonials = [
   {
     name: "Amit P.",
     avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-    review: "TravelGrid made my trip planning effortless and fun! The curated recommendations were spot-on and saved me hours of research.",
+    review:
+      "TravelGrid made my trip planning effortless and fun! The curated recommendations were spot-on and saved me hours of research.",
     rating: 5,
   },
   {
     name: "Sara L.",
     avatar: "https://randomuser.me/api/portraits/women/44.jpg",
-    review: "The local guides and easy booking process exceeded my expectations. Will definitely use again for my next adventure!",
+    review:
+      "The local guides and easy booking process exceeded my expectations. Will definitely use again for my next adventure!",
     rating: 5,
   },
   {
     name: "John D.",
     avatar: "https://randomuser.me/api/portraits/men/65.jpg",
-    review: "Loved the community features and 24/7 support. The platform is intuitive and the deals are unbeatable.",
+    review:
+      "Loved the community features and 24/7 support. The platform is intuitive and the deals are unbeatable.",
     rating: 4,
   },
   {
     name: "Priya S.",
     avatar: "https://randomuser.me/api/portraits/women/68.jpg",
-    review: "A beautiful, modern platform that made planning my dream vacation so much easier. Highly recommended!",
+    review:
+      "A beautiful, modern platform that made planning my dream vacation so much easier. Highly recommended!",
     rating: 5,
   },
 ];
 
-// Animation variants
+// Animation variant
 const cardVariant = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 20 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
-    transition: {
-      delay: i * 0.2,
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  }),
+    transition: { delay: i * 0.2, duration: 0.6 }
+  })
 };
+
+const scrollStyles = `
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
+  }
+  .scroller {
+    animation: scroll 20s linear infinite;
+  }
+  .scroller:hover {
+    animation-play-state: paused;
+  }
+`;
 
 const Testimonials = () => {
   const { isDarkMode } = useTheme();
+  const { t } = useTranslation();
 
   return (
-    <section className="w-full py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      className={`w-full py-20 ${isDarkMode ? "bg-slate-900" : "bg-gray-50"}`}
+    >
+      <style>{scrollStyles}</style>
+
+      <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="text-center mb-16">
-          <h2 className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-300 ${
-            isDarkMode ? 'text-white' : 'text-gray-900'
-          }`}>
-            What Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">Travelers Say</span>
+          <h2
+            className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-300 break-words ${
+              isDarkMode ? "text-white" : "text-gray-900"
+            }`}
+          >
+            {t('home.whatOur')}{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+              {t('home.travelersSay')}
+            </span>
           </h2>
-          <p className={`text-lg max-w-2xl mx-auto leading-relaxed transition-all duration-300 ${
-            isDarkMode ? 'text-gray-300' : 'text-gray-600'
-          }`}>
-            Join thousands of satisfied travelers who have discovered amazing destinations with TravelGrid.
+          <p
+            className={`text-lg max-w-2xl mx-auto leading-relaxed transition-all duration-300 break-words ${
+              isDarkMode ? "text-gray-300" : "text-gray-600"
+            }`}
+          >
+            {t('home.testimonialsDescription')}
           </p>
         </div>
 
@@ -72,9 +101,9 @@ const Testimonials = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               className={`group backdrop-blur-md rounded-2xl p-6 flex flex-col items-center text-center border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 ${
-                isDarkMode 
-                  ? 'bg-white/10 border-white/20 hover:border-white/40' 
-                  : 'bg-white/80 border-gray-200 hover:border-pink-300'
+                isDarkMode
+                  ? "bg-gradient-to-b from-black to-zinc-700 border-white/20 hover:border-white/40"
+                  : "bg-gradient-to-br from-white to-gray-200 border-pink-300 shadow-2xl shadow-gray-500 hover:border-pink-300"
               }`}
             >
               <img
@@ -82,17 +111,31 @@ const Testimonials = () => {
                 alt={t.name}
                 className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-pink-400 group-hover:border-pink-300 transition-colors duration-300"
               />
-              <h3 className={`text-lg font-semibold mb-2 group-hover:text-pink-300 transition-colors duration-300 ${
-                isDarkMode ? 'text-white' : 'text-gray-900'
-              }`}>{t.name}</h3>
-              <p className={`text-sm mb-4 leading-relaxed group-hover:text-gray-200 transition-colors duration-300 ${
-                isDarkMode ? 'text-gray-300' : 'text-gray-600'
-              }`}>{t.review}</p>
+              <h3
+                className={`text-lg font-semibold mb-2 transition-colors duration-300 ${
+                  isDarkMode
+                    ? "text-white group-hover:text-pink-400"
+                    : "text-gray-900 group-hover:text-pink-500"
+                }`}
+              >
+                {t.name}
+              </h3>
+              <p
+                className={`text-sm mb-6 leading-relaxed transition-colors duration-300 break-words ${
+                  isDarkMode
+                    ? "text-gray-300 group-hover:text-white"
+                    : "text-gray-600 group-hover:text-gray-800"
+                }`}
+              >
+                {t.review}
+              </p>
               <div className="flex gap-1">
                 {[...Array(5)].map((_, idx) => (
                   <svg
                     key={idx}
-                    className={`w-5 h-5 ${idx < t.rating ? 'text-yellow-400' : 'text-gray-500'}`}
+                    className={`w-5 h-5 ${
+                      idx < t.rating ? "text-yellow-400" : "text-gray-500"
+                    }`}
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -104,7 +147,7 @@ const Testimonials = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

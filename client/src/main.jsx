@@ -2,6 +2,7 @@ import { StrictMode, lazy, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Toaster } from 'react-hot-toast';
 import './index.css';
+import './i18n'; // Import i18n configuration
 import App from './App.jsx';
 import Spinner from './components/Spinner';
 import ErrorBoundary from './components/ErrorHandle/ErrorBoundary';
@@ -10,8 +11,37 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider } from './context/AuthContext';
 import { WishlistProvider } from './context/WishlistContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { LanguageProvider } from './context/LanguageContext';
 import AuthLayout from './components/AuthLayout';
+//import TrendingSpots from './pages/TrendingSpots.jsx';
+//import PackingChecklistPage from './pages/PackingChecklist.jsx';
+//import Summarizer from './components/Summarizer';
+//import Recommendation from './components/recommendation';
+//import Wishlist from './pages/Wishlist';
+//import { WishlistProvider } from "./context/WishlistContext";
+import LocationDetail from './pages/LocationDetail';
+
+//import TrendingSpots from './pages/TrendingSpots.jsx';
+//import PackingChecklistPage from './pages/PackingChecklist.jsx';
+//import Summarizer from './components/Summarizer';
+//import Recommendation from './components/recommendation';
+//import Wishlist from './pages/Wishlist';
+// import PetTravel from './pages/PetTravel';
+
 import ProtectedRoute from './components/Auth/ProtectedRoute';
+import { Provider } from 'react-redux';
+import appStore from './app/store.js';
+
+//import TrendingSpots from './pages/TrendingSpots.jsx';
+//import PackingChecklistPage from './pages/PackingChecklist.jsx';
+//import Summarizer from './components/Summarizer';
+//import Recommendation from './components/recommendation';
+//import Wishlist from './pages/Wishlist';
+//import { WishlistProvider } from "./context/WishlistContext";
+//import PetTravel from './pages/PetTravel';
+
+//import ProtectedRoute from './components/Auth/ProtectedRoute';
+
 
 // Lazy imports for pages
 const Home = lazy(() => import('./pages/Home'));
@@ -23,6 +53,7 @@ const Review = lazy(() => import('./pages/Review'));
 const Contributors = lazy(() => import('./pages/Contributors'));
 const Hotels = lazy(() => import('./pages/Hotels'));
 const HotelDetails = lazy(() => import('./pages/HotelDetails'));
+const HotelBookingForm = lazy(() => import('./pages/HotelBookingForm'));
 const TicketBooking = lazy(() => import('./pages/TicketBooking'));
 const TravelGuidesCarousel = lazy(() => import('./pages/TravelGuidesProfiles'));
 const TravelPackages = lazy(() => import('./pages/TravelPackages'));
@@ -36,8 +67,8 @@ const CurrencyConverter = lazy(() => import('./pages/currencyconverter'));
 const Feedback = lazy(() => import('./pages/Feedback'));
 const TravelPlanGenerator = lazy(() => import('./pages/TravelPlanGenerator'));
 const TravelForum = lazy(() => import('./pages/TravelForum'));
-const TrendingSpots = lazy(() => import('./pages/TrendingSpots.jsx'));
-const PackingChecklistPage = lazy(() => import('./pages/PackingChecklist.jsx'));
+const TrendingSpots = lazy(() => import('./pages/TrendingSpots'));
+const PackingChecklistPage = lazy(() => import('./pages/PackingChecklist'));
 const Summarizer = lazy(() => import('./components/Summarizer'));
 const Recommendation = lazy(() => import('./components/recommendation'));
 const Wishlist = lazy(() => import('./pages/Wishlist'));
@@ -49,14 +80,18 @@ const PackageDetails = lazy(() => import('./pages/PackageDetails'));
 const Login = lazy(() => import('./pages/Login'));
 const Signup = lazy(() => import('./pages/Signup'));
 const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
+const VerifyEmail = lazy(() => import('./pages/VerifyEmail'));
 const NetworkError = lazy(() => import('./components/ErrorHandle/NetworkError'));
 const ServerError = lazy(() => import('./components/ErrorHandle/ServerError'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const PetTravel = lazy(() => import('./pages/PetTravel'));
+const BookingHistory = lazy(() => import('./pages/BookingHistory'));
 
 const router = createBrowserRouter([
   { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
   { path: '/signup', element: <AuthLayout><Signup /></AuthLayout> },
   { path: '/forgot-password', element: <AuthLayout><ForgotPassword /></AuthLayout> },
+  { path: '/verify-email', element: <AuthLayout><VerifyEmail /></AuthLayout> },
   {
     path: '/',
     element: <App />,
@@ -72,6 +107,7 @@ const router = createBrowserRouter([
       { path: '/contributors', element: <Suspense fallback={<Spinner />}><Contributors /></Suspense> },
       { path: '/hotels', element: <Suspense fallback={<Spinner />}><Hotels /></Suspense> },
       { path: '/hotels/:id', element: <Suspense fallback={<Spinner />}><HotelDetails /></Suspense> },
+      { path: '/hotel-booking', element: <Suspense fallback={<Spinner />}><HotelBookingForm /></Suspense> },
       { path: '/ticket', element: <Suspense fallback={<Spinner />}><TicketBooking /></Suspense> },
       { path: '/guides', element: <Suspense fallback={<Spinner />}><TravelGuidesCarousel /></Suspense> },
       { path: '/packages', element: <Suspense fallback={<Spinner />}><TravelPackages /></Suspense> },
@@ -89,6 +125,8 @@ const router = createBrowserRouter([
       { path: '/wishlist', element: <Suspense fallback={<Spinner />}><Wishlist /></Suspense> },
       { path: '/trending-spots', element: <Suspense fallback={<Spinner />}><TrendingSpots /></Suspense> },
       { path: '/trending', element: <Suspense fallback={<Spinner />}><TrendingSpots /></Suspense> },
+      { path: '/pettravel', element: <Suspense fallback={<Spinner />}><PetTravel /></Suspense> },
+      { path: '/booking-history', element: <Suspense fallback={<Spinner />}><BookingHistory /></Suspense> },
 
       {
         path: '/dashboard',
@@ -106,10 +144,21 @@ const router = createBrowserRouter([
         path: '/dashboard/countries',
         element: <ProtectedRoute><CountriesVisited /></ProtectedRoute>
       },
+      /*{ path: '/network-error', element: <NetworkError /> },
+      { path: '/server-error', element: <ServerError /> },
+      { path: '*', element: <NotFound /> },
+      { path: '/package/:id', element: <PackageDetails /> },*/
+      { path: '/location/:locationId', element: <LocationDetail /> },
+
+
+
+      { path: '/pettravel', element: <PetTravel /> },
+
       { path: '/package/:id', element: <Suspense fallback={<Spinner />}><PackageDetails /></Suspense> },
       { path: '/network-error', element: <Suspense fallback={<Spinner />}><NetworkError /></Suspense> },
       { path: '/server-error', element: <Suspense fallback={<Spinner />}><ServerError /></Suspense> },
       { path: '*', element: <Suspense fallback={<Spinner />}><NotFound /></Suspense> },
+
     ],
   },
 ]);
@@ -118,26 +167,29 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-        <ThemeProvider>
-          <AuthProvider>
-            <WishlistProvider>
-              <RouterProvider router={router} />
-              <Toaster
-                position="top-center"
-                reverseOrder={false}
-                toastOptions={{
-                  duration: 5000,
-                  style: {
-                    background: 'var(--card-bg)',
-                    color: 'var(--text-primary)',
-                    fontSize: '16px',
-                    border: '1px solid var(--border-primary)',
-                  },
-                }}
-              />
-            </WishlistProvider>
-          </AuthProvider>
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <AuthProvider>
+              <WishlistProvider>
+                <Provider store={appStore}>
+                  <RouterProvider router={router} />
+                  <Toaster
+                    position="top-center"
+                    reverseOrder={false}
+                    toastOptions={{
+                      duration: 5000,
+                      style: {
+                        background: '#333',
+                        color: '#fff',
+                        fontSize: '16px',
+                      },
+                    }}
+                  />
+                </Provider>
+              </WishlistProvider>
+            </AuthProvider>
+          </ThemeProvider>
+        </LanguageProvider>
       </GoogleOAuthProvider>
     </ErrorBoundary>
   </StrictMode>

@@ -34,6 +34,18 @@ const userSchema = new mongoose.Schema(
         return !!this.googleId;
       },
     },
+    isEmailVerified: {
+      type: Boolean,
+      default: function() {
+        return !!this.googleId; // Google users are pre-verified
+      },
+    },
+    emailVerificationCode: {
+      type: String,
+    },
+    emailVerificationExpires: {
+      type: Date,
+    },
     savedPlaces: [
       {
         placeId: {
@@ -45,6 +57,18 @@ const userSchema = new mongoose.Schema(
         image: String,
       },
     ],
+
+     plannedTrips: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Trip',
+      },
+    ],
+    language: {
+      type: String,
+      default: 'en',
+      enum: ['en', 'hi', 'es', 'bn', 'ta', 'te', 'mr', 'gu', 'kn', 'ml', 'de']
+    },
   },
   {
     timestamps: true, // createdAt, updatedAt
