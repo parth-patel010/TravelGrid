@@ -9,6 +9,7 @@ const morgan = require('morgan');
 require('dotenv').config();
 
 const connectDB = require('./config/db');
+const { validateEnvironment } = require('./utils/envValidator');
 
 const authRoutes = require('./routes/authRoutes');
 const emailVerificationRoutes = require('./routes/emailVerificationRoutes');
@@ -21,6 +22,9 @@ const reviewsRoutes = require('./routes/reviewRoutes.js');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Validate environment variables before starting
+validateEnvironment();
 
 // DB Connection
 connectDB();
@@ -137,5 +141,9 @@ app.use((err, req, res, next) => {
 
 // server
 app.listen(PORT, () => {
-  console.log(` Server running on http://localhost:${PORT}`);
+  if (process.env.NODE_ENV === 'production') {
+    console.log(`✅ Server running on port ${PORT} in production mode`);
+  } else {
+    console.log(`🚀 Server running on http://localhost:${PORT} in development mode`);
+  }
 });

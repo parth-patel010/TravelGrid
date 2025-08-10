@@ -5,10 +5,26 @@ const User = require('../models/user');
 const mongoose = require('mongoose');
 const { sendEmail } = require('../utils/emailService');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
+const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {
-  console.error('JWT_SECRET not set in environment variables');
+  console.error('🚨 CRITICAL SECURITY ERROR: JWT_SECRET environment variable is not set!');
+  console.error('❌ Application cannot start without proper JWT configuration.');
+  console.error('💡 Please set JWT_SECRET in your .env file with a strong, random secret.');
+  console.error('🔐 Generate a secure secret using: node -e "console.log(require(\'crypto\').randomBytes(64).toString(\'hex\'))"');
   process.exit(1);
+}
+
+// Validate JWT_SECRET strength
+if (JWT_SECRET.length < 32) {
+  console.error('🚨 SECURITY WARNING: JWT_SECRET is too short!');
+  console.error('❌ Minimum length should be 32 characters for production security.');
+  console.error('💡 Current length:', JWT_SECRET.length, 'characters');
+  if (process.env.NODE_ENV === 'production') {
+    console.error('🚨 PRODUCTION ENVIRONMENT: Exiting due to weak JWT_SECRET');
+    process.exit(1);
+  } else {
+    console.error('⚠️  Development mode: Continuing with weak secret (NOT RECOMMENDED)');
+  }
 }
 
 // Cookie helper
@@ -75,7 +91,7 @@ exports.googleAuth = async (req, res) => {
     });
 
   } catch (error) {
-    console.error("Google Auth Error:", error);
+    console.error("Google Auth Error:", error.message);
     res.status(500).json({ success: false, error: "Server error" });
   }
 };
@@ -194,7 +210,7 @@ exports.registerUser = async (req, res) => {
     });
 
   } catch (err) {
-    console.error(err);
+    console.error('Registration error:', err.message);
     return res.status(500).json({ success: false, error: 'Server Error' });
   }
 };
@@ -225,8 +241,8 @@ exports.loginUser = async (req, res) => {
 
     // Optional: Check if email is verified for non-Google users
     if (!user.isGoogleUser && !user.isEmailVerified) {
-      return res.status(403).json({ 
-        success: false, 
+      return res.status(403).json({
+        success: false,
         error: 'Please verify your email address before logging in',
         needsVerification: true
       });
@@ -251,7 +267,7 @@ exports.loginUser = async (req, res) => {
     });
 
   } catch (err) {
-    console.error(err);
+    console.error('Login error:', err.message);
     return res.status(500).json({ success: false, error: 'Server Error' });
   }
 };
@@ -292,7 +308,7 @@ exports.getCurrentUser = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.error("Error fetching user:", error);
+    console.error("Error fetching user:", error.message);
     res.status(500).json({ success: false, error: "Server error" });
   }
 };
