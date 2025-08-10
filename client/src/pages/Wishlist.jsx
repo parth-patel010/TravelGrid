@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useWishlist } from '../context/WishlistContext';
 import TravelCard from '../components/TravelCard';
+import { FaHeart, FaPlaneDeparture, FaMapMarkedAlt } from 'react-icons/fa';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -14,11 +15,57 @@ const Wishlist = () => {
 
   return (
     <div className="p-6 min-h-screen bg-gradient-to-br from-black via-gray-900 to-pink-900 pt-20">
-      <h2 className="text-2xl font-bold mb-4 text-white">Your Wishlist</h2>
       {wishlist.length === 0 ? (
-        <p className="text-gray-300">No packages in your wishlist.</p>
+
+        <div className="flex flex-col md:flex-row h-[70vh] px-4 md:px-12 gap-6 mt-12">
+          
+          {/* LEFT HALF */}
+          <div className="flex-1 flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-pink-900 rounded-t-3xl md:rounded-l-3xl md:rounded-tr-none overflow-hidden shadow-2xl">
+            <div className="max-w-lg p-6 text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start mb-4">
+                <FaHeart className="text-pink-400 text-5xl" />
+              </div>
+              <h2 className="text-3xl font-bold text-white mb-3">Your Wishlist Awaits</h2>
+              <p className="text-gray-300 text-base leading-relaxed">
+                Every adventure starts with a dream. This is your personal space to collect
+                the destinations that inspire you, the places you want to see, and the
+                experiences you can’t wait to live.
+              </p>
+              
+            </div>
+          </div>
+
+          {/* RIGHT HALF */}
+          <div className="flex-1 flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-pink-900 rounded-b-3xl md:rounded-r-3xl md:rounded-bl-none shadow-2xl">
+            <div className="p-8 text-center max-w-lg">
+              <div className="flex justify-center gap-6 mb-5">
+                <div className="w-16 h-16 rounded-full bg-pink-500 flex items-center justify-center shadow-lg">
+                  <FaPlaneDeparture className="text-white text-xl" />
+                </div>
+                <div className="w-16 h-16 rounded-full bg-pink-400 flex items-center justify-center shadow-lg">
+                  <FaMapMarkedAlt className="text-white text-xl" />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Save Now, Travel Later</h3>
+              <p className="text-gray-300 text-sm leading-relaxed mb-5">
+                Find amazing destinations, save them here, and we’ll help you plan
+                the perfect trip when the time comes. From hidden beaches to bustling
+                cities, your next adventure is just a click away.
+              </p>
+              <a
+                href="https://travel-grid.vercel.app/trending-spots"
+                className="w-full block bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-full font-semibold shadow-lg transform hover:-translate-y-0.5 transition text-center"
+              >
+              Explore Popular Destinations
+              </a>
+            </div>
+          </div>
+
+        </div>
       ) : (
+        
         <>
+          <h2 className="text-2xl font-bold mb-4 text-white">Your Wishlist</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {paginated.map(pkg => (
               <TravelCard key={pkg.id} pkg={pkg} />
