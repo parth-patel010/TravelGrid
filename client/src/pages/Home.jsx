@@ -17,7 +17,7 @@ function Home() {
         <div className={`flex flex-col min-h-screen w-full overflow-x-hidden transition-all duration-300 ${
             isDarkMode 
                 ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900' 
-                : 'bg-gradient-to-br from-gray-50 via-white to-gray-50'
+                : 'bg-white'
         }`}>
             <main className="flex flex-col flex-1 items-center justify-start w-full h-full">
                 <HeroSection onSearch={setSearchFilter} />

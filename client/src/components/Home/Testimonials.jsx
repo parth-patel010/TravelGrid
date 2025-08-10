@@ -50,7 +50,7 @@ const Testimonials = () => {
     <section className="w-full py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'
+          <h2 className={`text-3xl md:text-4xl font-medium mb-6 transition-all duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'
             }`}>
             What Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">Travelers Say</span>
           </h2>
@@ -70,8 +70,8 @@ const Testimonials = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               className={`group backdrop-blur-md rounded-2xl p-6 flex flex-col items-center text-center border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 ${isDarkMode
-                  ? 'bg-white/10 border-white/20 hover:border-white/40'
-                  : 'bg-white/80 border-gray-200 hover:border-pink-300'
+                  ? 'bg-gradient-to-b from-black to-zinc-700 border-white/20 hover:border-white/40'
+                  : 'bg-gradient-to-br from-white to-gray-200 border-pink-300 shadow-2xl shadow-gray-500 hover:border-pink-300'
                 }`}
             >
               <img
