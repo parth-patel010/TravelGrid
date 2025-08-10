@@ -219,10 +219,10 @@ const Footer = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your email"
-                      className={`w-full px-4 py-3 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm transition-all duration-300 ${
+                      className={`w-full px-4 py-3 border rounded-l focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm transition-all duration-300 ${
                         isDarkMode 
-                          ? 'bg-zinc-800 border-slate-600' 
-                          : 'bg-gray-800 border-gray-600'
+                          ? ' text-white placeholder-gray-400 bg-zinc-800 border-slate-600' 
+                          : 'text-black placeholder-gray-700 bg-gray-50 border-gray-600'
                       }`}
                       required
                     />
