@@ -13,10 +13,13 @@ const Wishlist = () => {
   const paginated = wishlist.slice(startIdx, startIdx + ITEMS_PER_PAGE);
 
   return (
-    <div className="p-6 min-h-screen bg-gradient-to-br from-black via-gray-900 to-pink-900 pt-20">
-      <h2 className="text-2xl font-bold mb-4 text-white">Your Wishlist</h2>
+    // <div className="p-6 min-h-screen bg-gradient-to-br from-black via-gray-900 to-pink-900 pt-20">
+           
+      <div className="p-6 min-h-screen bg-gradient-to-br from-pink-200 via-white to-yellow-100 pt-20">
+
+      <h2 className="text-2xl font-bold mb-4 text-black">Your Wishlist</h2>
       {wishlist.length === 0 ? (
-        <p className="text-gray-300">No packages in your wishlist.</p>
+        <p className="text-rose-700">No packages in your wishlist.</p>
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
