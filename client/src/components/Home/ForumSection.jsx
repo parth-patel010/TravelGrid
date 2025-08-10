@@ -78,8 +78,8 @@ const ForumSection = () => {
               whileInView="visible"
               viewport={{ once: true }}
               className={`group backdrop-blur-md rounded-xl p-6 border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 relative ${isDarkMode
-                  ? 'bg-white/10 border-white/20 hover:border-white/40'
-                  : 'bg-white/80 border-gray-200 hover:border-pink-300'
+                  ? 'bg-gray-900 border-pink-300 hover:border-white/40'
+                  : 'bg-white/80 border-pink-200 shadow-2xl shadow-pink-200 hover:border-pink-300'
                 }`}
             >
               <div

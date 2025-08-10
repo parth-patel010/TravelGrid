@@ -1,7 +1,8 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import CustomCarousel from "../Custom/CustomCarousel";
-
+import { useState } from "react";
 const guides = [
   {
     name: "Aarav Mehta",
@@ -30,11 +31,12 @@ const guides = [
 ];
 
 const TravelGuides = () => {
+  const [index, setIndex] = useState(0);
   const navigate = useNavigate();
   const { isDarkMode } = useTheme();
 
-  const handleguide = (guide) => {
-    navigate("/guides", { state: { selectedGuideId: guide.name } });
+  const handleguide = (guideName) => {
+    navigate("/guides", { state: { selectedGuideId: guideName } });
   };
 
   return (
@@ -42,7 +44,7 @@ const TravelGuides = () => {
       <div className="max-w-6xl mx-auto px-4 text-center">
         <div className="mb-16">
           <h2
-            className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-300 ${
+            className={`text-3xl md:text-4xl font-medium mb-6 transition-all duration-300 ${
               isDarkMode ? "text-white" : "text-gray-900"
             }`}
           >
@@ -56,17 +58,12 @@ const TravelGuides = () => {
               isDarkMode ? "text-gray-300" : "text-gray-600"
             }`}
           >
-            Connect with experienced local guides who will make your journey
-            truly unforgettable.
+            Connect with experienced local guides who will make your journey truly unforgettable.
           </p>
         </div>
 
-        <CustomCarousel
-          guides={guides}
-          viewprofilehandle={handleguide}
-          isHome={true}
-        />
-        <div className="relative"></div>
+        {/* Only CustomCarousel component here */}
+        <CustomCarousel guides={guides} viewprofilehandle={handleguide} isHome={true} />
       </div>
     </section>
   );
