@@ -81,11 +81,8 @@ const FeaturedPackages = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2
-            className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-300 ${
-              isDarkMode ? "text-white" : "text-gray-900"
-            }`}
-          >
+          <h2 className={`text-3xl md:text-4xl font-medium mb-6 transition-all duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'
+            }`}>
             Featured{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
               Travel Packages
@@ -108,12 +105,10 @@ const FeaturedPackages = () => {
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
-              className={`group relative backdrop-blur-md rounded-2xl overflow-hidden border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 ${
-                isDarkMode
-                  ? "bg-white/10 border-white/20 hover:border-white/40"
-                  : "bg-white/80 border-gray-200 hover:border-pink-300"
-              }`}
+          className={`group relative backdrop-blur-md rounded-2xl overflow-hidden border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 ${isDarkMode
+                  ? 'bg-gradient-r from-black to-zinc-600 border-white/50 hover:border-white/40 shadow-xl shadow-white/20'
+                  : 'bg-white/80 border-gray-200 hover:border-pink-300'
+                }`}
             >
               <div className="relative overflow-hidden">
                 <img

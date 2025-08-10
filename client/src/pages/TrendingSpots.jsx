@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, TrendingUp, Star, Users, Calendar, Heart, Share2, Eye } from 'lucide-react';
+import { MapPin, TrendingUp, Star, Users, Calendar, Heart, Share2, Eye, Trash2 } from 'lucide-react';
 import Navbar from '../components/Custom/Navbar';
 import { useTheme } from '../context/ThemeContext';
 import { useNavigate } from 'react-router-dom'; 
+import { useWishlist } from '../context/WishlistContext';
+import trendingLocationsData from '../data/TrendingLocationsData.json';
 
 const TrendingSpots = () => {
   const [spots, setSpots] = useState([]);
@@ -12,194 +14,11 @@ const TrendingSpots = () => {
 
   const navigate = useNavigate();
   const { isDarkMode } = useTheme();
-
-  // Mock data for trending spots
-  const mockTrendingSpots = [
-    {
-      id: 1,
-      name: "Santorini, Greece",
-      country: "Greece",
-      image: "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      rating: 4.8,
-      trending_score: 95,
-      visitors_count: "2.3M",
-      category: "beach",
-      price_range: "$$",
-      best_time: "Apr-Oct",
-      highlights: ["Stunning sunsets", "White architecture", "Wine tours"],
-      recent_reviews: 1250,
-      growth_percentage: 23
-    },
-    {
-      id: 2,
-      name: "Kyoto, Japan",
-      country: "Japan",
-      image: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      rating: 4.9,
-      trending_score: 92,
-      visitors_count: "1.8M",
-      category: "cultural",
-      price_range: "$",
-      best_time: "Mar-May, Sep-Nov",
-      highlights: ["Ancient temples", "Cherry blossoms", "Traditional culture"],
-      recent_reviews: 2100,
-      growth_percentage: 18
-    },
-    {
-      id: 3,
-      name: "Banff National Park",
-      country: "Canada",
-      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      rating: 4.7,
-      trending_score: 89,
-      visitors_count: "4.2M",
-      category: "nature",
-      price_range: "$",
-      best_time: "Jun-Sep",
-      highlights: ["Mountain lakes", "Wildlife viewing", "Hiking trails"],
-      recent_reviews: 890,
-      growth_percentage: 31
-    },
-    {
-      id: 4,
-      name: "Dubai, UAE",
-      country: "United Arab Emirates",
-      image: "https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      rating: 4.6,
-      trending_score: 87,
-      visitors_count: "16.7M",
-      category: "city",
-      price_range: "$$",
-      best_time: "Nov-Mar",
-      highlights: ["Luxury shopping", "Modern architecture", "Desert safari"],
-      recent_reviews: 3200,
-      growth_percentage: 15
-    },
-    {
-      id: 5,
-      name: "Tulum, Mexico",
-      country: "Mexico",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      rating: 4.5,
-      trending_score: 85,
-      visitors_count: "800K",
-      category: "beach",
-      price_range: "$$",
-      best_time: "Dec-Apr",
-      highlights: ["Mayan ruins", "Cenotes", "Bohemian vibes"],
-      recent_reviews: 670,
-      growth_percentage: 42
-    },
-    {
-      id: 6,
-      name: "Reykjavik, Iceland",
-      country: "Iceland",
-      image: "https://images.unsplash.com/photo-1606130503037-6a8ef67c9d2d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      rating: 4.8,
-      trending_score: 83,
-      visitors_count: "1.2M",
-      category: "nature",
-      price_range: "$$",
-      best_time: "Jun-Aug, Sep-Mar",
-      highlights: ["Northern lights", "Blue lagoon", "Unique landscapes"],
-      recent_reviews: 540,
-      growth_percentage: 28
-    },
-    {
-      id: 7,
-      name: "Maldives",
-      country: "Maldives",
-      image: "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      rating: 4.9,
-      trending_score: 91,
-      visitors_count: "1.7M",
-      category: "beach",
-      price_range: "$$",
-      best_time: "Nov-Apr",
-      highlights: ["Overwater villas", "Crystal clear water", "Luxury resorts"],
-      recent_reviews: 980,
-      growth_percentage: 35
-    },
-    {
-      id: 8,
-      name: "Machu Picchu, Peru",
-      country: "Peru",
-      image: "https://images.unsplash.com/photo-1587595431973-160d0d94add1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      rating: 4.8,
-      trending_score: 88,
-      visitors_count: "1.5M",
-      category: "cultural",
-      price_range: "$",
-      best_time: "May-Sep",
-      highlights: ["Ancient Inca ruins", "Mountain hiking", "Sacred valley"],
-      recent_reviews: 1150,
-      growth_percentage: 22
-    },
-    {
-      id: 9,
-      name: "Bali, Indonesia",
-      country: "Indonesia",
-      image: "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      rating: 4.6,
-      trending_score: 86,
-      visitors_count: "6.3M",
-      category: "beach",
-      price_range: "$",
-      best_time: "Apr-Oct",
-      highlights: ["Rice terraces", "Temples", "Beach clubs"],
-      recent_reviews: 2800,
-      growth_percentage: 29
-    },
-    {
-      id: 10,
-      name: "Swiss Alps",
-      country: "Switzerland",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      rating: 4.9,
-      trending_score: 90,
-      visitors_count: "3.1M",
-      category: "nature",
-      price_range: "$$",
-      best_time: "Jun-Sep, Dec-Mar",
-      highlights: ["Mountain peaks", "Skiing", "Alpine villages"],
-      recent_reviews: 750,
-      growth_percentage: 19
-    },
-    {
-      id: 11,
-      name: "Paris, France",
-      country: "France",
-      image: "https://images.unsplash.com/photo-1712647016816-7072674bd83f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      rating: 4.7,
-      trending_score: 84,
-      visitors_count: "38M",
-      category: "city",
-      price_range: "$$",
-      best_time: "Apr-Jun, Sep-Oct",
-      highlights: ["Eiffel Tower", "Art museums", "French cuisine"],
-      recent_reviews: 4200,
-      growth_percentage: 12
-    },
-    {
-      id: 12,
-      name: "New York City, USA",
-      country: "United States",
-      image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      rating: 4.5,
-      trending_score: 82,
-      visitors_count: "65M",
-      category: "city",
-      price_range: "$$",
-      best_time: "Apr-Jun, Sep-Nov",
-      highlights: ["Broadway shows", "Central Park", "Museums"],
-      recent_reviews: 5800,
-      growth_percentage: 8
-    }
-  ];
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
 
   useEffect(() => {
     setTimeout(() => {
-      setSpots(mockTrendingSpots);
+      setSpots(trendingLocationsData.trendingSpots);
       setLoading(false);
     }, 1000);
   }, []);
@@ -223,6 +42,16 @@ const TrendingSpots = () => {
    //function to navigate to location detail
   const handleExploreLocation = (locationId) =>{
     navigate(`/location/${locationId}`);
+  }
+  
+  // Function to toggle wishlist status
+  const handleToggleWishlist = (e, spot) => {
+    e.stopPropagation();
+    if (isInWishlist(spot.id)) {
+      removeFromWishlist(spot.id);
+    } else {
+      addToWishlist(spot);
+    }
   }
 
   if (loading) {
@@ -340,8 +169,20 @@ const TrendingSpots = () => {
                   </div>
                 </div>
                 <div className="absolute top-3 right-3 flex space-x-2">
-                  <button className="p-1.5 md:p-2 rounded-full transition-all cursor-pointer hover:scale-110" style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--border-primary)' }}>
-                    <Heart className="h-3 w-3 md:h-4 md:w-4" />
+                  <button 
+                    className="p-1.5 md:p-2 rounded-full transition-all cursor-pointer hover:scale-110" 
+                    style={{ 
+                      background: 'var(--card-bg)', 
+                      color: isInWishlist(spot.id) ? 'red' : 'var(--text-primary)', 
+                      border: '1px solid var(--border-primary)' 
+                    }}
+                    onClick={(e) => handleToggleWishlist(e, spot)}
+                  >
+                    {isInWishlist(spot.id) ? (
+                      <Trash2 className="h-3 w-3 md:h-4 md:w-4 text-red-500" />
+                    ) : (
+                      <Heart className="h-3 w-3 md:h-4 md:w-4" />
+                    )}
                   </button>
                   <button className="p-1.5 md:p-2 rounded-full transition-all cursor-pointer hover:scale-110" style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--border-primary)' }}>
                     <Share2 className="h-3 w-3 md:h-4 md:w-4" />
