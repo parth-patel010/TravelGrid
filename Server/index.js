@@ -6,7 +6,7 @@ const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const xssClean = require('xss-clean');
 const morgan = require('morgan');
-require('dotenv').config();
+require('dotenv').config({ path: './.env' });
 
 const connectDB = require('./config/db');
 
@@ -18,6 +18,9 @@ const postRoutes = require('./routes/postRoutes')
 const saveRoutes = require('./routes/saveRoutes');
 const tripRoutes = require('./routes/trips.js');
 const reviewsRoutes = require('./routes/reviewRoutes.js');
+const languageRoutes = require('./routes/languageRoutes');
+const moodBoardRoutes = require('./routes/moodBoardRoutes');
+const currencyRoutes = require('./routes/currencyRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -118,6 +121,15 @@ app.use('/api', tripRoutes);
 
 // Reviews Routes
 app.use('/api/reviews', reviewsRoutes);
+
+// Language Routes
+app.use('/api/language', languageRoutes);
+
+// Mood Board Routes
+app.use('/api/moodboards', moodBoardRoutes);
+
+// Currency Routes
+app.use('/api/currency', currencyRoutes);
 
 // 404 Not Found middleware
 app.use((req, res, next) => {

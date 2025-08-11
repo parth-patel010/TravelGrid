@@ -2,6 +2,7 @@ import { StrictMode, lazy, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Toaster } from 'react-hot-toast';
 import './index.css';
+import './i18n'; // Import i18n configuration
 import App from './App.jsx';
 import Spinner from './components/Spinner';
 import ErrorBoundary from './components/ErrorHandle/ErrorBoundary';
@@ -10,6 +11,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider } from './context/AuthContext';
 import { WishlistProvider } from './context/WishlistContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { LanguageProvider } from './context/LanguageContext';
 import AuthLayout from './components/AuthLayout';
 //import TrendingSpots from './pages/TrendingSpots.jsx';
 //import PackingChecklistPage from './pages/PackingChecklist.jsx';
@@ -62,6 +64,7 @@ const PrivacyPolicy = lazy(() => import('./pages/Privacypolicy'));
 const TermsAndConditions = lazy(() => import('./pages/Terms&Conditions'));
 const TripCalculatorPage = lazy(() => import('./pages/TripCalculator'));
 const CurrencyConverter = lazy(() => import('./pages/currencyconverter'));
+const EnhancedCurrencyConverter = lazy(() => import('./pages/EnhancedCurrencyConverter'));
 const Feedback = lazy(() => import('./pages/Feedback'));
 const TravelPlanGenerator = lazy(() => import('./pages/TravelPlanGenerator'));
 const TravelForum = lazy(() => import('./pages/TravelForum'));
@@ -84,6 +87,8 @@ const ServerError = lazy(() => import('./components/ErrorHandle/ServerError'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const PetTravel = lazy(() => import('./pages/PetTravel'));
 const BookingHistory = lazy(() => import('./pages/BookingHistory'));
+const MoodBoardPage = lazy(() => import('./pages/MoodBoardPage'));
+const CountdownDemo = lazy(() => import('./pages/CountdownDemo'));
 
 const router = createBrowserRouter([
   { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
@@ -99,6 +104,7 @@ const router = createBrowserRouter([
       { path: '/blog', element: <Suspense fallback={<Spinner />}><Blog /></Suspense> },
       { path: '/discover', element: <Suspense fallback={<Spinner />}><Discover /></Suspense> },
       { path: '/currency-converter', element: <Suspense fallback={<Spinner />}><CurrencyConverter /></Suspense> },
+      { path: '/enhanced-currency', element: <Suspense fallback={<Spinner />}><EnhancedCurrencyConverter /></Suspense> },
       { path: '/trips', element: <Suspense fallback={<Spinner />}><Trips /></Suspense> },
       { path: '/review', element: <Suspense fallback={<Spinner />}><Review /></Suspense> },
       { path: '/forum', element: <Suspense fallback={<Spinner />}><TravelForum /></Suspense> },
@@ -121,10 +127,12 @@ const router = createBrowserRouter([
       { path: '/travel-plan-generator', element: <Suspense fallback={<Spinner />}><TravelPlanGenerator /></Suspense> },
       { path: '/packing-checklist', element: <Suspense fallback={<Spinner />}><PackingChecklistPage /></Suspense> },
       { path: '/wishlist', element: <Suspense fallback={<Spinner />}><Wishlist /></Suspense> },
+      { path: '/mood-board', element: <Suspense fallback={<Spinner />}><MoodBoardPage /></Suspense> },
       { path: '/trending-spots', element: <Suspense fallback={<Spinner />}><TrendingSpots /></Suspense> },
       { path: '/trending', element: <Suspense fallback={<Spinner />}><TrendingSpots /></Suspense> },
       { path: '/pettravel', element: <Suspense fallback={<Spinner />}><PetTravel /></Suspense> },
       { path: '/booking-history', element: <Suspense fallback={<Spinner />}><BookingHistory /></Suspense> },
+      { path: '/countdown-demo', element: <Suspense fallback={<Spinner />}><CountdownDemo /></Suspense> },
 
       {
         path: '/dashboard',
@@ -165,27 +173,29 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-        <ThemeProvider>
-          <AuthProvider>
-            <WishlistProvider>
-              <Provider store={appStore}>
-                <RouterProvider router={router} />
-                <Toaster
-                  position="top-center"
-                  reverseOrder={false}
-                  toastOptions={{
-                    duration: 5000,
-                    style: {
-                      background: '#333',
-                      color: '#fff',
-                      fontSize: '16px',
-                    },
-                  }}
-                />
-              </Provider>
-            </WishlistProvider>
-          </AuthProvider>
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <AuthProvider>
+              <WishlistProvider>
+                <Provider store={appStore}>
+                  <RouterProvider router={router} />
+                  <Toaster
+                    position="top-center"
+                    reverseOrder={false}
+                    toastOptions={{
+                      duration: 5000,
+                      style: {
+                        background: '#333',
+                        color: '#fff',
+                        fontSize: '16px',
+                      },
+                    }}
+                  />
+                </Provider>
+              </WishlistProvider>
+            </AuthProvider>
+          </ThemeProvider>
+        </LanguageProvider>
       </GoogleOAuthProvider>
     </ErrorBoundary>
   </StrictMode>

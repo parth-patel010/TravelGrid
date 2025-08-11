@@ -190,3 +190,6 @@ Please refer to the [Code of Conduct](https://github.com/Adarsh-Chaubey03/Travel
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
+
+Contributed by Arpita Singh 🌟 GSSoC'25
+

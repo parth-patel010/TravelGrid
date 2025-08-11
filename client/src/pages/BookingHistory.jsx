@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useTheme } from '@/context/ThemeContext';
 import axios from 'axios';
 
-const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+import { config } from '../config';
+
+const backendUrl = config.API_BASE_URL.replace('/api', '');
 
 const sampleUpcomingTrips = [
     {
