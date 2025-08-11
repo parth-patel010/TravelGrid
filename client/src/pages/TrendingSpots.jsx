@@ -82,9 +82,11 @@ const TrendingSpots = () => {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg text-pink-500">
-              Trending <span className='text-pink-500'>Spots</span>
+<div className="text-center bg-white/10 backdrop-blur-md border border-white/30 shadow-lg rounded-xl p-4 w-[700px] mx-auto">
+
+
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg text-pink-800">
+              Trending <span className='text-pink-800'>Spots</span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-100 drop-shadow-md">
               Discover the hottest destinations everyone's talking about
