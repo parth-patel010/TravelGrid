@@ -50,7 +50,8 @@ const Navbar = () => {
         { label: t('navigation.feedback'), path: "/feedback" },
         { label: "AI Mood Board", path: "/mood-board" },
         { label: "Travel Countdown Timer", path: "/countdown-demo" },
-        { label: t('navigation.petTravelGuide'), path: "/pettravel" }
+        { label: t('navigation.petTravelGuide'), path: "/pettravel" },
+        { label: "Enhanced Currency Converter", path: "/enhanced-currency" }
       ],
     },
     { name: t('navigation.wishlist'), path: "/wishlist" },

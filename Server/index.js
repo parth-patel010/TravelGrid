@@ -20,6 +20,7 @@ const tripRoutes = require('./routes/trips.js');
 const reviewsRoutes = require('./routes/reviewRoutes.js');
 const languageRoutes = require('./routes/languageRoutes');
 const moodBoardRoutes = require('./routes/moodBoardRoutes');
+const currencyRoutes = require('./routes/currencyRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -126,6 +127,9 @@ app.use('/api/language', languageRoutes);
 
 // Mood Board Routes
 app.use('/api/moodboards', moodBoardRoutes);
+
+// Currency Routes
+app.use('/api/currency', currencyRoutes);
 
 // 404 Not Found middleware
 app.use((req, res, next) => {
