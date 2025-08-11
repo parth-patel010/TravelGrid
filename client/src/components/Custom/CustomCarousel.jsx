@@ -21,8 +21,8 @@ const CustomCarousel = ({ guides, viewprofilehandle, isHome = false }) => {
           isDarkMode
             ? "bg-white/10 border border-white/20 hover:bg-white/20 hover:border-white/40"
             : "bg-white/80 border border-gray-200 hover:bg-white hover:border-pink-300"
-        }`}
-      >
+        } cursor-pointer`}>
+            {/* add cursor pointer on prevSlide */}
         <ChevronLeft
           className={`w-6 h-6 ${isDarkMode ? "text-white" : "text-gray-700"}`}
         />
@@ -133,8 +133,8 @@ const CustomCarousel = ({ guides, viewprofilehandle, isHome = false }) => {
           isDarkMode
             ? "bg-white/10 border border-white/20 hover:bg-white/20 hover:border-white/40"
             : "bg-white/80 border border-gray-200 hover:bg-white hover:border-pink-300"
-        }`}
-      >
+        } cursor-pointer`} > 
+        {/* add cursor pointer on nextSlide */}
         <ChevronRight
           className={`w-6 h-6 ${isDarkMode ? "text-white" : "text-gray-700"}`}
         />

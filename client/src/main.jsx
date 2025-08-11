@@ -86,6 +86,7 @@ const ServerError = lazy(() => import('./components/ErrorHandle/ServerError'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const PetTravel = lazy(() => import('./pages/PetTravel'));
 const BookingHistory = lazy(() => import('./pages/BookingHistory'));
+const MoodBoardPage = lazy(() => import('./pages/MoodBoardPage'));
 
 const router = createBrowserRouter([
   { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
@@ -123,6 +124,7 @@ const router = createBrowserRouter([
       { path: '/travel-plan-generator', element: <Suspense fallback={<Spinner />}><TravelPlanGenerator /></Suspense> },
       { path: '/packing-checklist', element: <Suspense fallback={<Spinner />}><PackingChecklistPage /></Suspense> },
       { path: '/wishlist', element: <Suspense fallback={<Spinner />}><Wishlist /></Suspense> },
+      { path: '/mood-board', element: <Suspense fallback={<Spinner />}><MoodBoardPage /></Suspense> },
       { path: '/trending-spots', element: <Suspense fallback={<Spinner />}><TrendingSpots /></Suspense> },
       { path: '/trending', element: <Suspense fallback={<Spinner />}><TrendingSpots /></Suspense> },
       { path: '/pettravel', element: <Suspense fallback={<Spinner />}><PetTravel /></Suspense> },
