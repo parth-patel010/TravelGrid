@@ -150,7 +150,7 @@ const Chatbot = () => {
               </div>
               <button 
                 onClick={toggleChat}
-                className="p-2 hover:bg-white/20 rounded-xl transition-all duration-200 hover:scale-110 hover:rotate-90"
+                className="p-2 hover:bg-white/20 rounded-xl transition-all duration-200 hover:scale-110 hover:rotate-90 cursor-pointer"
                 aria-label="Close chat"
               >
                 <X className="w-5 h-5" />
@@ -276,7 +276,7 @@ const Chatbot = () => {
               <button
                 onClick={sendMessage}
                 disabled={!input.trim() || isLoading}
-                className="p-4 bg-gradient-to-br from-pink-500 to-rose-500 text-white rounded-full hover:from-pink-600 hover:to-rose-600 disabled:text-gray-400 disabled:from-white/10 disabled:to-white/10 disabled:cursor-not-allowed transition-all duration-200 hover:scale-105 hover:shadow-lg flex-shrink-0 shadow-md"
+                className="p-4 bg-gradient-to-br from-pink-500 to-rose-500 text-white rounded-full hover:from-pink-600 hover:to-rose-600 disabled:text-gray-400 disabled:from-white/10 disabled:to-white/10 disabled:cursor-not-allowed transition-all duration-200 hover:scale-105 hover:shadow-lg flex-shrink-0 shadow-md cursor-pointer"
                 aria-label="Send message"
               >
                 <Send className="w-4 h-4" />
