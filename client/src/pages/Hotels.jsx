@@ -5,6 +5,7 @@ import Navbar from '../components/Custom/Navbar';
 import Footer from '../components/Custom/Footer';
 import hotels from '../data/hotels';
 import { useTheme } from "../context/ThemeContext";
+import { config } from '../config';
 
 function Hotels() {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ function Hotels() {
     };
 
     try {
-      const res = await fetch('http://localhost:5000/api/save/save-place', {
+      const res = await fetch(`${config.API_BASE_URL}/save/save-place`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -76,9 +77,9 @@ function Hotels() {
           {filteredHotels.map((hotel) => (
             <div
               key={hotel.id}
-              className={` ${isDarkMode ? 
-                "backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 border border-pink-400/20 dark:border-pink-400/30 rounded-2xl shadow-xl hover:bg-white/95 dark:hover:bg-gray-800/95 transition-all duration-300 hover:shadow-2xl cursor-pointer" : 
-                "backdrop-blur-lg bg-white/95 border border-pink-300/50 rounded-2xl shadow-2xl overflow-hidden flex flex-col hover:shadow-pink-200/30 transition-all duration-300 transform hover:scale-105" }`}
+              className={` ${isDarkMode ?
+                "backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 border border-pink-400/20 dark:border-pink-400/30 rounded-2xl shadow-xl hover:bg-white/95 dark:hover:bg-gray-800/95 transition-all duration-300 hover:shadow-2xl cursor-pointer" :
+                "backdrop-blur-lg bg-white/95 border border-pink-300/50 rounded-2xl shadow-2xl overflow-hidden flex flex-col hover:shadow-pink-200/30 transition-all duration-300 transform hover:scale-105"}`}
             >
               <img
                 src={hotel.image}
@@ -99,7 +100,7 @@ function Hotels() {
                     </div>
                   )}
                 </div>
-                
+
                 <span className="text-pink-600 dark:text-pink-400 font-medium mb-3">
                   {hotel.location}
                 </span>
