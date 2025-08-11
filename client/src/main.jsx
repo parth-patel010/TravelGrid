@@ -71,7 +71,7 @@ const TravelForum = lazy(() => import('./pages/TravelForum'));
 const TrendingSpots = lazy(() => import('./pages/TrendingSpots'));
 const PackingChecklistPage = lazy(() => import('./pages/PackingChecklist'));
 const Summarizer = lazy(() => import('./components/Summarizer'));
-const Recommendation = lazy(() => import('./components/recommendation'));
+const Recommendation = lazy(() => import('./components/Recommendation'));
 const Wishlist = lazy(() => import('./pages/Wishlist'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const TripsPlanned = lazy(() => import('./pages/TripsPlanned'));
