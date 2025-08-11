@@ -145,10 +145,12 @@ const Navbar = () => {
 
       {/* Top Navbar */}
       <nav
+
         className={`box-border w-full fixed top-0 left-0 z-50  backdrop-blur-md border-b transition-all duration-300 px-4 sm:px-6 ${isDarkMode
 
             ? "bg-gradient-to-r from-slate-900/20 border-slate-700/50 text-white"
             : "bg-gradient-to-r from-white via-gray-50 to-white border-gray-200 text-gray-900"
+
 
           } ${isScrolled ? "shadow-xl" : "shadow-md"}`}
       >
@@ -181,14 +183,12 @@ const Navbar = () => {
                 <div className="relative group" key={link.name}>
                   <button
 
-
-                    className={`py-1.5 px-4 text-sm font-medium rounded-sm transition-all duration-300 flex items-center gap-1 break-words transform hover:scale-115 ${activeParentTab === link.name
-                        ? "bg-gradient-to-r from-pink-700 via-pink-500 to-rose-500 shadow-md text-white"
-                        : `hover:text-pink-500 hover:shadow-sm ${isDarkMode ? "text-gray-200" : "text-gray-900"
-                        }`
+                    className={`py-1.5 px-4 text-sm font-medium rounded-sm transition-all duration-300 flex items-center gap-1 break-words ${activeParentTab === link.name
+                      ? "bg-gradient-to-r from-pink-700 to-pink-500 shadow-md text-white"
+                      : `hover:text-pink-500 hover:shadow-sm ${isDarkMode ? "text-gray-200" : "text-gray-900"
+                      }`
                       }`}
-       >
-
+                  >
                     {link.name} <ChevronDown fontSize={16} />
                   </button>
                   {/* Dropdown menu */}
@@ -204,7 +204,7 @@ const Navbar = () => {
                         to={item.path}
                         className={({ isActive }) =>
                           `py-2 px-4 text-sm hover:bg-gradient-to-r from-pink-500 to-pink-600 hover:text-white block transition-all rounded-md duration-200 break-words ${isActive
-                            ? "bg-gradient-to-r from-pink-700 via-pink-500 to-rose-500 text-white"
+                            ? "bg-gradient-to-r from-pink-700 to-pink-500 text-white"
                             : ""
                           }`
                         }
@@ -220,8 +220,8 @@ const Navbar = () => {
                   to={link.path}
                   end
                   className={({ isActive }) =>
-                    `${linkBaseClasses} break-words transform hover:scale-115 ${isActive
-                      ? "bg-gradient-to-r from-pink-700 via-pink-500 to-rose-500 shadow-md text-white hover:text-white"
+                    `${linkBaseClasses} break-words ${isActive
+                      ? "bg-gradient-to-r from-pink-700 to-pink-500 shadow-md text-white hover:text-white"
                       : ""
                     }`
                   }
