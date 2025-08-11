@@ -145,14 +145,14 @@ const Navbar = () => {
 
       {/* Top Navbar */}
       <nav
-        className={`box-border w-full fixed top-0 left-0 z-50 h-20 backdrop-blur-md border-b transition-all duration-300 px-4 sm:px-6 ${isDarkMode
+        className={`box-border w-full fixed top-0 left-0 z-50  backdrop-blur-md border-b transition-all duration-300 px-4 sm:px-6 ${isDarkMode
 
             ? "bg-gradient-to-r from-slate-900/20 border-slate-700/50 text-white"
             : "bg-gradient-to-r from-white via-gray-50 to-white border-gray-200 text-gray-900"
 
           } ${isScrolled ? "shadow-xl" : "shadow-md"}`}
       >
-        <div className="w-full max-w-full mx-auto flex justify-between items-center gap-4 px-2 py-6">
+        <div className="w-full max-w-full mx-auto flex justify-between items-center gap-4 px-2 py-3">
           {/* Logo */}
           <NavLink
             to="/"
