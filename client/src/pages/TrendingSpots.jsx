@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MapPin, TrendingUp, Star, Users, Calendar, Heart, Share2, Eye } from 'lucide-react';
 import Navbar from '../components/Custom/Navbar';
 import { useTheme } from '../context/ThemeContext';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 const TrendingSpots = () => {
   const [spots, setSpots] = useState([]);
@@ -194,7 +194,68 @@ const TrendingSpots = () => {
       highlights: ["Broadway shows", "Central Park", "Museums"],
       recent_reviews: 5800,
       growth_percentage: 8
+    },
+    {
+      id: 13,
+      name: "Queenstown, New Zealand",
+      country: "New Zealand",
+      image: "https://images.unsplash.com/photo-1729297916353-05bc7dc01cb5?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      rating: 4.8,
+      trending_score: 90,
+      visitors_count: "3M",
+      category: "adventure",
+      price_range: "$$$",
+      best_time: "Dec-Feb",
+      highlights: ["Bungee jumping", "Skiing", "Skydiving"],
+      recent_reviews: 1200,
+      growth_percentage: 12
+    },
+    {
+      id: 14,
+      name: "Interlaken, Switzerland",
+      country: "Switzerland",
+      image: "https://images.unsplash.com/photo-1689074521618-6c2b3dc31470?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      rating: 4.7,
+      trending_score: 87,
+      visitors_count: "2M",
+      category: "adventure",
+      price_range: "$$$",
+      best_time: "Jun-Sep",
+      highlights: ["Paragliding", "Hiking", "Canyoning"],
+      recent_reviews: 980,
+      growth_percentage: 10
+    },
+    {
+      id: 15,
+      name: "Banff National Park, Canada",
+      country: "Canada",
+      image: "https://images.unsplash.com/photo-1703359330110-fab35ef1c326?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      rating: 4.9,
+      trending_score: 93,
+      visitors_count: "4.1M",
+      category: "adventure",
+      price_range: "$$",
+      best_time: "Jun-Aug",
+      highlights: ["Kayaking", "Rock climbing", "Mountain biking"],
+      recent_reviews: 2100,
+      growth_percentage: 14
+    },
+    {
+      id: 16,
+      name: "Moab, Utah, USA",
+      country: "United States",
+      image: "https://images.unsplash.com/photo-1610332218333-28cf27f6f771?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      rating: 4.6,
+      trending_score: 85,
+      visitors_count: "1.6M",
+      category: "adventure",
+      price_range: "$$",
+      best_time: "Mar-May, Sep-Oct",
+      highlights: ["Off-road driving", "Rock climbing", "Hiking in Arches NP"],
+      recent_reviews: 760,
+      growth_percentage: 9
     }
+
   ];
 
   useEffect(() => {
@@ -221,8 +282,8 @@ const TrendingSpots = () => {
     { key: 'adventure', label: 'Adventure', icon: '🏕️' }
   ];
 
-   //function to navigate to location detail
-  const handleExploreLocation = (locationId) =>{
+  //function to navigate to location detail
+  const handleExploreLocation = (locationId) => {
     navigate(`/location/${locationId}`);
   }
 
@@ -238,10 +299,10 @@ const TrendingSpots = () => {
   }
 
   return (
-    <div className="min-h-screen overflow-x-hidden transition-colors duration-300" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)',marginTop:"5rem" }}>
+    <div className="min-h-screen overflow-x-hidden transition-colors duration-300" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', marginTop: "5rem" }}>
 
       <Navbar lightBackground />
-  {/* Hero Section */}
+      {/* Hero Section */}
       <div className="relative text-white py-24 md:py-46 overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0">
@@ -270,7 +331,7 @@ const TrendingSpots = () => {
       </div>
 
       {/* Filter Tabs */}
-      <div className="bg-pink-900 shadow-sm sticky top-0 z-10" style={{marginTop:"-5rem",marginBottom:"5rem"}}>
+      <div className="bg-pink-900 shadow-sm sticky top-0 z-10" style={{ marginTop: "-5rem", marginBottom: "5rem" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-start md:justify-center space-x-2 md:space-x-4 py-3 md:py-4 overflow-x-auto scrollbar-hide">
             {categories.map((category) => (
@@ -278,8 +339,8 @@ const TrendingSpots = () => {
                 key={category.key}
                 onClick={() => setFilter(category.key)}
                 className={`flex items-center space-x-1 md:space-x-2 px-3 md:px-4 py-2 rounded-full whitespace-nowrap transition-all duration-200 cursor-pointer text-sm md:text-base ${filter === category.key
-                    ? 'bg-white text-pink-600 font-semibold shadow-md'
-                    : 'border border-pink-300/20 text-pink-100 hover:bg-white/10 hover:border-pink-200/30'
+                  ? 'bg-white text-pink-600 font-semibold shadow-md'
+                  : 'border border-pink-300/20 text-pink-100 hover:bg-white/10 hover:border-pink-200/30'
                   }`}
               >
                 {typeof category.icon === 'string' ? (
@@ -420,8 +481,8 @@ const TrendingSpots = () => {
                 </div>
 
                 {/* CTA Button */}
-                 <button className="w-full mt-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white py-3 px-6 rounded-lg font-semibold transition-all transform hover:scale-105 cursor-pointer duration-200"
-                onClick={() => handleExploreLocation(spot.id)}>
+                <button className="w-full mt-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white py-3 px-6 rounded-lg font-semibold transition-all transform hover:scale-105 cursor-pointer duration-200"
+                  onClick={() => handleExploreLocation(spot.id)}>
                   Explore {spot.name}
                 </button>
               </div>
