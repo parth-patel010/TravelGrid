@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { Menu, X, User, LogOut, LogIn, ChevronDown, Mail, AlertTriangle } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import LanguageSelector from "../LanguageSelector";
+import path from "path";
 
 
 
@@ -47,11 +48,14 @@ const Navbar = () => {
         { label: t('navigation.packingChecklist'), path: "/packing-checklist" },
         { label: t('navigation.travelRecommendations'), path: "/recommendation" },
         { label: t('navigation.feedback'), path: "/feedback" },
+
         { label: "AI Mood Board", path: "/mood-board" },
+
+        { label: t('navigation.petTravelGuide'), path: "/pettravel" }
+
       ],
     },
     { name: t('navigation.wishlist'), path: "/wishlist" },
-    { name: t('navigation.petTravelGuide'), path: "/pettravel" },
   ];
 
   const getActiveParentTab = () => {
@@ -175,12 +179,13 @@ const Navbar = () => {
               link.subitems ? (
                 <div className="relative group" key={link.name}>
                   <button
+
                     className={`py-1.5 px-4 text-sm font-medium rounded-sm transition-all duration-300 flex items-center gap-1 break-words ${activeParentTab === link.name
                         ? "bg-gradient-to-r from-pink-700 to-pink-500 shadow-md text-white"
                         : `hover:text-pink-500 hover:shadow-sm ${isDarkMode ? "text-gray-200" : "text-gray-900"
                         }`
                       }`}
-                  >
+    >
                     {link.name} <ChevronDown fontSize={16} />
                   </button>
                   {/* Dropdown menu */}
