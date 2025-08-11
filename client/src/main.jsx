@@ -87,6 +87,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 const PetTravel = lazy(() => import('./pages/PetTravel'));
 const BookingHistory = lazy(() => import('./pages/BookingHistory'));
 const MoodBoardPage = lazy(() => import('./pages/MoodBoardPage'));
+const CountdownDemo = lazy(() => import('./pages/CountdownDemo'));
 
 const router = createBrowserRouter([
   { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
@@ -129,6 +130,7 @@ const router = createBrowserRouter([
       { path: '/trending', element: <Suspense fallback={<Spinner />}><TrendingSpots /></Suspense> },
       { path: '/pettravel', element: <Suspense fallback={<Spinner />}><PetTravel /></Suspense> },
       { path: '/booking-history', element: <Suspense fallback={<Spinner />}><BookingHistory /></Suspense> },
+      { path: '/countdown-demo', element: <Suspense fallback={<Spinner />}><CountdownDemo /></Suspense> },
 
       {
         path: '/dashboard',

@@ -48,11 +48,9 @@ const Navbar = () => {
         { label: t('navigation.packingChecklist'), path: "/packing-checklist" },
         { label: t('navigation.travelRecommendations'), path: "/recommendation" },
         { label: t('navigation.feedback'), path: "/feedback" },
-
         { label: "AI Mood Board", path: "/mood-board" },
-
+        { label: "Travel Countdown Timer", path: "/countdown-demo" },
         { label: t('navigation.petTravelGuide'), path: "/pettravel" }
-
       ],
     },
     { name: t('navigation.wishlist'), path: "/wishlist" },
@@ -134,8 +132,8 @@ const Navbar = () => {
               key={link.name}
               to={link.path}
               className={`px-4 py-2 rounded-lg hover:text-white hover:bg-pink-500 hover:shadow-lg transition-all duration-300 transform hover:scale-105 ${location.pathname === link.path
-                  ? "bg-pink-500/20 text-white shadow-md"
-                  : ""
+                ? "bg-pink-500/20 text-white shadow-md"
+                : ""
                 }`}
             >
               {link.name}
@@ -147,8 +145,8 @@ const Navbar = () => {
       {/* Top Navbar */}
       <nav
         className={`box-border w-full fixed top-0 left-0 z-50 h-20 backdrop-blur-md border-b transition-all duration-300 px-4 sm:px-6 ${isDarkMode
-            ? "bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-slate-700 text-white"
-            : "bg-gradient-to-r from-white via-gray-50 to-white border-gray-200 text-gray-900"
+          ? "bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-slate-700 text-white"
+          : "bg-gradient-to-r from-white via-gray-50 to-white border-gray-200 text-gray-900"
           } ${isScrolled ? "shadow-xl" : "shadow-md"}`}
       >
         <div className="w-full max-w-full mx-auto flex justify-between items-center gap-4 px-2 py-6">
@@ -181,18 +179,18 @@ const Navbar = () => {
                   <button
 
                     className={`py-1.5 px-4 text-sm font-medium rounded-sm transition-all duration-300 flex items-center gap-1 break-words ${activeParentTab === link.name
-                        ? "bg-gradient-to-r from-pink-700 to-pink-500 shadow-md text-white"
-                        : `hover:text-pink-500 hover:shadow-sm ${isDarkMode ? "text-gray-200" : "text-gray-900"
-                        }`
+                      ? "bg-gradient-to-r from-pink-700 to-pink-500 shadow-md text-white"
+                      : `hover:text-pink-500 hover:shadow-sm ${isDarkMode ? "text-gray-200" : "text-gray-900"
+                      }`
                       }`}
-    >
+                  >
                     {link.name} <ChevronDown fontSize={16} />
                   </button>
                   {/* Dropdown menu */}
                   <div
                     className={`absolute left-0 mt-0 top-full opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-300 z-50 p-2 min-w-[200px] max-w-[280px] rounded-lg shadow-lg ${isDarkMode
-                        ? "bg-slate-800 text-white border border-slate-700"
-                        : "bg-white text-gray-900 border border-gray-200"
+                      ? "bg-slate-800 text-white border border-slate-700"
+                      : "bg-white text-gray-900 border border-gray-200"
                       }`}
                   >
                     {link.subitems.map((item) => (
@@ -319,8 +317,8 @@ const Navbar = () => {
       {/* Mobile Sidebar */}
       <div
         className={`fixed top-0 right-0 h-full w-[80vw] sm:w-[60vw] max-w-[320px] z-[1002] transition-transform duration-300 ease-in-out transform ${isDarkMode
-            ? "bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-gray-200"
-            : "bg-gradient-to-r from-white via-gray-50 to-white text-gray-900"
+          ? "bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-gray-200"
+          : "bg-gradient-to-r from-white via-gray-50 to-white text-gray-900"
           } ${isSidebarOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="p-5 flex flex-col h-full">

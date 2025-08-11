@@ -98,6 +98,25 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Utility class for content below fixed navbar */
+.content-below-navbar {
+  padding-top: 5rem;
+  /* h-20 = 5rem = 80px */
+  margin-top: 1rem;
+}
+
+/* Global fix for fixed navbar spacing */
+body {
+  padding-top: 0;
+}
+
+/* Ensure main content areas have proper spacing */
+main,
+.main-content {
+  padding-top: 5rem;
+  /* Account for fixed navbar */
+}
+
 /* Custom component styles for dark mode */
 [data-theme="dark"] .bg-white {
   background-color: var(--card-bg);
@@ -167,6 +186,7 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
