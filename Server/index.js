@@ -4,7 +4,8 @@ const cookieParser = require('cookie-parser'); // <-- NEW
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
-const xssClean = require('xss-clean');
+// const xssClean = require('xss-clean');
+const xss = require('xss-clean');
 const morgan = require('morgan');
 require('dotenv').config();
 
@@ -56,10 +57,26 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Body sanitization against NoSQL injection
-app.use(mongoSanitize());
+app.use((req, res, next) => {
+  if (req.body) {
+    req.body = mongoSanitize.sanitize(req.body);
+  }
+  if (req.params) {
+    req.params = mongoSanitize.sanitize(req.params);
+  }
+  // Do NOT touch req.query
+  next();
+});
 
-// Prevent XSS attacks
-app.use(xssClean());
+// Patched XSS-clean for modern Express (ignores req.query)
+app.use((req, res, next) => {
+  // Run original middleware logic only for req.body and req.params
+  xss()( 
+    { body: req.body, params: req.params }, 
+    res, 
+    next
+  );
+});
 
 // Basic rate limiting for auth and general API
 const generalLimiter = rateLimit({
