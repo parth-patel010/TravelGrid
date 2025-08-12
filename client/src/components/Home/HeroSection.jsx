@@ -27,7 +27,8 @@ const HeroSection = ({ onSearch }) => {
     t('home.events'),
     t('home.shopping'),
     t('home.attractions'),
-    t('home.transportation')
+    t('home.transportation'),
+    "Package", // ✅ Added new category
   ];
 
   const handleCategorySelect = (selectedCategory) => {
@@ -44,11 +45,42 @@ const HeroSection = ({ onSearch }) => {
 
     try {
       setLoading(true);
+
+      // If category is "Package", navigate to packages page
+      if (category === "Package") {
+        if (location.trim()) {
+          navigate(`/packages?query=${encodeURIComponent(location)}`);
+        } else {
+          navigate("/packages");
+        }
+        return; // Skip the API search here for packages
+      }
+
+      // ✅ Handle Hotels redirect when All Categories
+      if (category === t('home.allCategories') || category === "All Categories") {
+        if (location.trim()) {
+          navigate(`/hotels?query=${encodeURIComponent(location)}`);
+        } else {
+          navigate("/hotels");
+        }
+        return;
+      }
+
+      // Otherwise (Hotels, Restaurants, etc.)
       const { data } = await axios.get(`/api/search?location=${encodeURIComponent(location)}&category=${encodeURIComponent(category)}`);
       setSearchResults(data); // ✅ Store results so they show below
-      navigate(`/hotels?query=${encodeURIComponent(location)}`);
+
+      // Ensure it's always an array before setting state
+      setSearchResults(Array.isArray(data) ? data : []);
+
+      if (category === t('home.hotels') || category === "Hotels") {
+        navigate(`/hotels?query=${encodeURIComponent(location)}`);
+      }
+      // Add other category navigations here if needed
+
     } catch (err) {
       console.error(err);
+      setSearchResults([]);
     } finally {
       setLoading(false);
     }
