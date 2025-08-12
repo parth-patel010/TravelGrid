@@ -94,16 +94,18 @@ const rebookTrip = async (bookingId) => {
 const BookingHistory = () => {
     const { isDarkMode } = useTheme();
 
-    const [upcomingTrips, setUpcomingTrips] = useState(sampleUpcomingTrips);
-    const [pastTrips, setPastTrips] = useState(samplePastTrips);
-
+    const [upcomingTrips, setUpcomingTrips] = useState([]);
+    const [pastTrips, setPastTrips] = useState([]);
+    const [loading, setloading] = useState(true)
     useEffect(() => {
         const getBookingHistory = async () => {
+            setloading(true)
             const bookings = await fetchBookingHistory();
             const upcoming = bookings.filter(booking => new Date(booking.startDate) > new Date());
             const past = bookings.filter(booking => new Date(booking.startDate) <= new Date());
             setUpcomingTrips(upcoming);
             setPastTrips(past);
+            setloading(false);
         }
 
         getBookingHistory();
@@ -115,12 +117,17 @@ const BookingHistory = () => {
                 <h1 className='text-3xl sm:text-5xl font-extrabold mb-3 tracking-tight drop-shadow-lg text-center'>Booking History</h1>
                 <p className='text-sm sm:text-lg mb-8 opacity-80 text-center'>Check your Past Booking History & Manage your Upcoming Journey</p>
             </div>
-            <div className="flex flex-col lg:flex-row gap-8 justify-center items-stretch my-2 px-2 w-full max-w-6xl mx-auto">
-                {/* Upcoming Trips */}
-                <TripsCard isDarkMode={isDarkMode} title="upcoming trips" tripsData={upcomingTrips} />
-                {/* Past Trips */}
-                <TripsCard isDarkMode={isDarkMode} title="past trips" tripsData={pastTrips} />
-            </div>
+            {
+                loading ?
+                    <p className='text-sm sm:text-lg mb-8 opacity-80 text-center'> Loading Booking History....</p> :
+                    <div className="flex flex-col lg:flex-row gap-8 justify-center items-stretch my-2 px-2 w-full max-w-6xl mx-auto">
+                        {/* Upcoming Trips */}
+                        <TripsCard isDarkMode={isDarkMode} title="upcoming trips" tripsData={upcomingTrips} />
+                        {/* Past Trips */}
+                        <TripsCard isDarkMode={isDarkMode} title="past trips" tripsData={pastTrips} />
+                    </div>
+            }
+
         </div>
     )
 }
