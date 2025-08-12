@@ -69,7 +69,7 @@ function Hotels() {
 
       <main className="flex flex-col flex-1 w-full items-center">
         <section className="w-full py-24 flex flex-col items-center text-center px-4 bg-gradient-to-br from-black to-pink-900">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6 my-6">
             Explore World-Class <span className="text-pink-600">Hotels</span>
           </h1>
           <p className="text-lg md:text-xl text-white max-w-2xl mb-8">
@@ -81,7 +81,7 @@ function Hotels() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search by hotel or destination..."
-              className="w-full px-6 py-4 rounded-xl bg-white border-2 border-pink-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30 focus:border-pink-500 shadow-lg transition-all"
+              className="w-full px-6 py-4 rounded-xl bg-white border-2 border-pink-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30 focus:border-pink-500 shadow-lg transition-all my-4"
             />
           </div>
         </section>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 // Enhanced currency data with more currencies and hardcoded exchange rates (base: USD)
 // Rates are approximate and should be updated periodically
@@ -87,7 +88,7 @@ const CurrencyConverter = () => {
     // Convert to USD first (base currency), then to target currency
     const usdAmount = amount / EXCHANGE_RATES[fromCurrency];
     const convertedAmount = usdAmount * EXCHANGE_RATES[toCurrency];
-    
+
     return Math.round(convertedAmount * 100) / 100; // Round to 2 decimal places
   };
 
@@ -96,7 +97,7 @@ const CurrencyConverter = () => {
     if (fromCurrency === toCurrency) {
       return 1;
     }
-    
+
     return EXCHANGE_RATES[toCurrency] / EXCHANGE_RATES[fromCurrency];
   };
 
@@ -104,11 +105,11 @@ const CurrencyConverter = () => {
   const formatCurrency = (amount, currency) => {
     // Some currencies don't use decimal places
     const noDecimalCurrencies = ['JPY', 'KRW', 'IDR', 'VND', 'HUF'];
-    
+
     if (noDecimalCurrencies.includes(currency)) {
       return Math.round(amount).toLocaleString();
     }
-    
+
     return amount.toLocaleString('en-US', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
@@ -134,7 +135,7 @@ const CurrencyConverter = () => {
     try {
       const converted = convertCurrency(amount, fromCurrency, toCurrency);
       const rate = getExchangeRate(fromCurrency, toCurrency);
-      
+
       setConvertedAmount(converted);
       setConversionRate(rate);
       setError('');
@@ -155,6 +156,17 @@ const CurrencyConverter = () => {
         <div className="text-center mb-8">
           <h1 className="text-3xl font-extrabold text-gray-800 mb-2">Travel Wallet</h1>
           <p className="text-gray-600">Convert currencies instantly - Works offline!</p>
+
+          {/* Enhanced Version Link */}
+          <div className="mt-4">
+            <Link
+              to="/enhanced-currency"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
+              🚀 Try Enhanced Version
+              <span className="text-sm opacity-90">(Real-time rates, expense tracking, charts)</span>
+            </Link>
+          </div>
         </div>
 
         <div className="mb-6">
