@@ -44,6 +44,7 @@
   },
   "navigation": {
     "home": "Inicio",
+    "about": "Acerca de",
     "trendingSpots": "Lugares Populares",
     "booking": "Reserva",
     "support": "Soporte",
