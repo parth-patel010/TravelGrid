@@ -188,12 +188,11 @@ const Navbar = () => {
                     {link.name} <ChevronDown fontSize={16} />
                   </button>
                   {/* Dropdown menu */}
-                  <div
-                    className={`absolute left-0 mt-0 top-full opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-300 z-50 p-2 min-w-[200px] max-w-[280px] rounded-lg shadow-lg ${isDarkMode
-                      ? "bg-slate-800 text-white border border-slate-700"
+                  <div className={`absolute left-1/2 -translate-x-1/2 mt-2 top-full opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-300 z-50 p-2 min-w-[200px] max-w-[280px] rounded-lg shadow-lg ${
+                    isDarkMode 
+                      ? "bg-slate-800 text-white border border-slate-700" 
                       : "bg-white text-gray-900 border border-gray-200"
-                      }`}
-                  >
+                  } space-y-2`}>
                     {link.subitems.map((item) => (
                       <NavLink
                         key={item.label}
