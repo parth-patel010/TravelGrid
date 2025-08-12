@@ -26,30 +26,31 @@ function App() {
     return () => clearTimeout(timer);
   }, [location]);
 
-  // Check if current route is home page
-  const isHomePage = location.pathname === "/";
-
-  // Set background class based on route
-  const bgClass = isHomePage
-    ? "bg-gradient-to-br from-rose-300 via-blue-200 to-gray-300" // home page light mode bg
-    : "bg-white"; // other pages light bg (aap customize kar sakte ho)
-
   return (
     <AuthProvider>
       <WishlistProvider>
         <AppProvider>
           <DashboardDataProvider>
             <MapProvider>
-              <div className={`flex flex-col min-h-screen ${bgClass}`}>
+              <div className="flex flex-col min-h-screen">
                 <FluidCursor />
+                {/* Show spinner when route changes */}
                 {loading && <Spinner />}
+
+                {/* Navbar */}
                 <Navbar />
+
+                {/* Email Verification Banner */}
                 <EmailVerificationBanner />
+
+                {/* Main Content */}
                 <div className="flex-grow">
                   <ErrorBoundary>
                     <Outlet />
                   </ErrorBoundary>
                 </div>
+
+                {/* Buttons and Footer */}
                 <GoToTopButton />
                 <Chatbot />
                 <FeedbackButton />
