@@ -22,6 +22,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: t('navigation.home'), path: "/" },
+    { name: t('navigation.about'), path: "/about" },
     { name: t('navigation.trendingSpots'), path: "/trending-spots" },
     {
       name: t('navigation.booking'),
