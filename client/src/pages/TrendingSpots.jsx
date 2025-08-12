@@ -3,14 +3,16 @@ import { MapPin, TrendingUp, Star, Users, Calendar, Heart, Share2, Eye } from 'l
 import Navbar from '../components/Custom/Navbar';
 import { useTheme } from '../context/ThemeContext';
 import { useNavigate } from 'react-router-dom';
+import { Heart as HeartFilled } from "lucide-react"; // We'll reuse but with fill
 
 const TrendingSpots = () => {
   const [spots, setSpots] = useState([]);
   const [filter, setFilter] = useState('all');
   const [loading, setLoading] = useState(true);
   const [visibleCount, setVisibleCount] = useState(9);
-
-  const navigate = useNavigate();
+  const [favoriteSpots, setFavoriteSpots] = useState([]);
+  
+const navigate = useNavigate();
   const { isDarkMode } = useTheme();
 
   // Mock data for trending spots
@@ -269,6 +271,15 @@ const TrendingSpots = () => {
     setVisibleCount((prev) => prev + 9);
   }
 
+  const toggleFavorite = (spotId) => {
+  setFavoriteSpots((prev) =>
+    prev.includes(spotId)
+      ? prev.filter((id) => id !== spotId) // remove if already in favorites
+      : [...prev, spotId]                  // add if not in favorites
+   );
+  };
+
+
   const filteredSpots = filter === 'all'
     ? spots
     : spots.filter(spot => spot.category === filter);
@@ -402,8 +413,24 @@ const TrendingSpots = () => {
                   </div>
                 </div>
                 <div className="absolute top-3 right-3 flex space-x-2">
-                  <button className="p-1.5 md:p-2 rounded-full transition-all cursor-pointer hover:scale-110" style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--border-primary)' }}>
-                    <Heart className="h-3 w-3 md:h-4 md:w-4" />
+                  <button
+                    onClick={() => toggleFavorite(spot.id)}
+                    className="p-1.5 md:p-2 rounded-full transition-all cursor-pointer hover:scale-110"
+                    style={{
+                      background: "var(--card-bg)",
+                      color: "var(--text-primary)",
+                      border: "1px solid var(--border-primary)",
+                    }}
+                  >
+                    {favoriteSpots.includes(spot.id) ? (
+                      <HeartFilled
+                        className="h-3 w-3 md:h-4 md:w-4"
+                        fill="red"
+                        color="red"
+                      />
+                    ) : (
+                      <Heart className="h-3 w-3 md:h-4 md:w-4" />
+                    )}
                   </button>
                   <button className="p-1.5 md:p-2 rounded-full transition-all cursor-pointer hover:scale-110" style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--border-primary)' }}>
                     <Share2 className="h-3 w-3 md:h-4 md:w-4" />
