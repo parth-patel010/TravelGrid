@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { Menu, X, User, LogOut, LogIn, ChevronDown, Mail, AlertTriangle } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import LanguageSelector from "../LanguageSelector";
-import path from "path";
+
 
 
 
@@ -50,6 +50,7 @@ const Navbar = () => {
         { label: t('navigation.travelRecommendations'), path: "/recommendation" },
         { label: t('navigation.feedback'), path: "/feedback" },
         { label: "AI Mood Board", path: "/mood-board" },
+        { label: "AI Travel Planner", path: "/ai-travel-planner" },
         { label: "Travel Countdown Timer", path: "/countdown-demo" },
         { label: t('navigation.petTravelGuide'), path: "/pettravel" },
         { label: "Enhanced Currency Converter", path: "/enhanced-currency" }
