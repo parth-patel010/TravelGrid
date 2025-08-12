@@ -3,7 +3,7 @@ import {
   DragDropContext, 
   Droppable, 
   Draggable 
-} from "react-beautiful-dnd";
+} from "@hello-pangea/dnd";
 import { 
   Calendar, 
   Clock, 
@@ -452,4 +452,5 @@ const AIIteraryBuilder = ({
 };
 
 export default AIIteraryBuilder;
+
 

@@ -40,7 +40,7 @@ A sophisticated, AI-driven travel planning system that provides personalized rec
 
 ### Dependencies
 - **React 19.1.0** - Modern React with hooks
-- **react-beautiful-dnd** - Drag and drop functionality
+- **@hello-pangea/dnd** - Drag and drop functionality
 - **Lucide React** - Icon library
 - **Tailwind CSS** - Styling framework
 
@@ -242,3 +242,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ---
 
 **Note**: This is a demonstration implementation with simulated AI functionality. For production use, integrate with real AI services and APIs.
+
