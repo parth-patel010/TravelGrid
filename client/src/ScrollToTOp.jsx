@@ -16,7 +16,7 @@ const ScrollToTop = () => {
     window.addEventListener('scroll', toggleVisibility);
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
-/* test */
+// ... existing code ...
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
