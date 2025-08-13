@@ -150,16 +150,7 @@ const router = createBrowserRouter([
         path: '/dashboard/countries',
         element: <ProtectedRoute><CountriesVisited /></ProtectedRoute>
       },
-      /*{ path: '/network-error', element: <NetworkError /> },
-      { path: '/server-error', element: <ServerError /> },
-      { path: '*', element: <NotFound /> },
-      { path: '/package/:id', element: <PackageDetails /> },*/
-      { path: '/location/:locationId', element: <LocationDetail /> },
-
-
-
-      { path: '/pettravel', element: <PetTravel /> },
-
+      { path: '/location/:locationId', element: <Suspense fallback={<Spinner />}><LocationDetail /></Suspense> },
       { path: '/package/:id', element: <Suspense fallback={<Spinner />}><PackageDetails /></Suspense> },
       { path: '/network-error', element: <Suspense fallback={<Spinner />}><NetworkError /></Suspense> },
       { path: '/server-error', element: <Suspense fallback={<Spinner />}><ServerError /></Suspense> },
