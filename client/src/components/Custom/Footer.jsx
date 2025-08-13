@@ -250,7 +250,7 @@ const Footer = () => {
               <div className="flex flex-col md:flex-row justify-center items-center text-center space-y-4 md:space-y-0">
                 <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
                   <p className="text-gray-400 text-sm">
-                    © 2025 TravelGrid. All rights reserved.
+                     © {new Date().getFullYear()} TravelGrid. All rights reserved.
                   </p>
                   {/* Links stacked on mobile, inline on desktop */}
                   <div className="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0 text-sm items-center">
