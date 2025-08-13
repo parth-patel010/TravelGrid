@@ -179,7 +179,7 @@ function Hotels() {
         </section>
       </main>
 
-      <Footer />
+    
     </div>
   );
 }
