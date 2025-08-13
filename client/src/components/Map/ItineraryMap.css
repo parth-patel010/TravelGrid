@@ -1,0 +1,53 @@
+/* Basic routing machine styles */
+.leaflet-routing-container {
+    background: white;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+    margin: 0;
+    padding: 0;
+    width: 320px;
+}
+
+.leaflet-routing-container h2 {
+    margin: 0;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+
+.leaflet-routing-alt {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.leaflet-routing-alt h3 {
+    margin: 0;
+    padding: 8px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    background: #f8f8f8;
+    border-bottom: 1px solid #ddd;
+}
+
+.leaflet-routing-alt tr {
+    border-bottom: 1px solid #eee;
+}
+
+.leaflet-routing-alt td {
+    padding: 4px 8px;
+    font-size: 11px;
+}
+
+.leaflet-routing-alt .leaflet-routing-alt-minimized {
+    display: none;
+}
+
+.leaflet-routing-alt-minimized .leaflet-routing-alt {
+    display: none;
+}
+
+.leaflet-routing-alt-minimized .leaflet-routing-alt-minimized {
+    display: block;
+}

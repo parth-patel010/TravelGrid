@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTheme } from "../../context/ThemeContext";
 import { Check, Plus, Trash2, Download, FileText, X, FolderPlus, Edit3 } from "lucide-react";
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
@@ -6,6 +7,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 const PackingChecklist = () => {
+  const { isDarkMode } = useTheme();
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState("");
   const [showAddForm, setShowAddForm] = useState(false);
@@ -24,7 +26,7 @@ const PackingChecklist = () => {
     { id: 4, name: "Travel insurance", category: "🧳 Travel Essentials", packed: false, essential: true },
     { id: 5, name: "Copies of important documents", category: "🧳 Travel Essentials", packed: false, essential: true },
     { id: 6, name: "Itinerary / booking confirmations", category: "🧳 Travel Essentials", packed: false, essential: true },
-    
+
     // Clothing
     { id: 7, name: "T-shirts / tops", category: "👕 Clothing", packed: false, essential: true },
     { id: 8, name: "Pants / shorts / skirts", category: "👕 Clothing", packed: false, essential: true },
@@ -35,7 +37,7 @@ const PackingChecklist = () => {
     { id: 13, name: "Comfortable shoes", category: "👕 Clothing", packed: false, essential: true },
     { id: 14, name: "Flip-flops / sandals", category: "👕 Clothing", packed: false, essential: false },
     { id: 15, name: "Swimsuit", category: "👕 Clothing", packed: false, essential: false },
-    
+
     // Toiletries
     { id: 16, name: "Toothbrush & toothpaste", category: "🧼 Toiletries", packed: false, essential: true },
     { id: 17, name: "Hairbrush / comb", category: "🧼 Toiletries", packed: false, essential: true },
@@ -46,7 +48,7 @@ const PackingChecklist = () => {
     { id: 22, name: "Sunscreen", category: "🧼 Toiletries", packed: false, essential: true },
     { id: 23, name: "Moisturizer / lip balm", category: "🧼 Toiletries", packed: false, essential: false },
     { id: 24, name: "Feminine hygiene products", category: "🧼 Toiletries", packed: false, essential: false },
-    
+
     // Health & Safety
     { id: 25, name: "Prescription medications", category: "💊 Health & Safety", packed: false, essential: true },
     { id: 26, name: "Painkillers / allergy meds", category: "💊 Health & Safety", packed: false, essential: false },
@@ -54,7 +56,7 @@ const PackingChecklist = () => {
     { id: 28, name: "Hand sanitizer", category: "💊 Health & Safety", packed: false, essential: true },
     { id: 29, name: "Face masks", category: "💊 Health & Safety", packed: false, essential: false },
     { id: 30, name: "Insect repellent", category: "💊 Health & Safety", packed: false, essential: false },
-    
+
     // Electronics
     { id: 31, name: "Mobile phone + charger", category: "📱 Electronics", packed: false, essential: true },
     { id: 32, name: "Power bank", category: "📱 Electronics", packed: false, essential: false },
@@ -62,7 +64,7 @@ const PackingChecklist = () => {
     { id: 34, name: "Travel adapter (if going abroad)", category: "📱 Electronics", packed: false, essential: false },
     { id: 35, name: "Camera", category: "📱 Electronics", packed: false, essential: false },
     { id: 36, name: "E-reader / book", category: "📱 Electronics", packed: false, essential: false },
-    
+
     // Other Useful Items
     { id: 37, name: "Sunglasses", category: "🎒 Other Useful Items", packed: false, essential: false },
     { id: 38, name: "Hat / cap", category: "🎒 Other Useful Items", packed: false, essential: false },
@@ -81,10 +83,10 @@ const PackingChecklist = () => {
     if (savedItems && savedItems !== '[]') {
       // Check if saved items contain default items structure
       const parsedItems = JSON.parse(savedItems);
-      const hasDefaultStructure = parsedItems.some(item => 
+      const hasDefaultStructure = parsedItems.some(item =>
         item.category.includes('🧳') || item.category.includes('👕') || item.category.includes('🧼')
       );
-      
+
       if (hasDefaultStructure) {
         setItems(parsedItems);
       } else {
@@ -191,20 +193,20 @@ const PackingChecklist = () => {
   // Export functions
   const exportToPDF = () => {
     const doc = new jsPDF();
-    
+
     doc.setFontSize(20);
     doc.text("Travel Packing Checklist", 14, 22);
-    
+
     doc.setFontSize(12);
     doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 32);
-    
+
     const packedCount = items.filter(item => item.packed).length;
     const totalCount = items.length;
     doc.text(`Progress: ${packedCount}/${totalCount} items packed`, 14, 42);
-    
+
     const tableColumn = ["Category", "Item", "Status", "Essential"];
     const tableRows = [];
-    
+
     // Group items by category
     const groupedItems = items.reduce((acc, item) => {
       if (!acc[item.category]) {
@@ -213,7 +215,7 @@ const PackingChecklist = () => {
       acc[item.category].push(item);
       return acc;
     }, {});
-    
+
     Object.entries(groupedItems).forEach(([category, categoryItems]) => {
       categoryItems.forEach((item, index) => {
         tableRows.push([
@@ -224,7 +226,7 @@ const PackingChecklist = () => {
         ]);
       });
     });
-    
+
     autoTable(doc, {
       startY: 50,
       head: [tableColumn],
@@ -238,7 +240,7 @@ const PackingChecklist = () => {
         textColor: 255,
       },
     });
-    
+
     doc.save("Travel_Packing_Checklist.pdf");
   };
 
@@ -249,31 +251,31 @@ const PackingChecklist = () => {
       Status: item.packed ? "Packed" : "Not Packed",
       Essential: item.essential ? "Yes" : "No"
     }));
-    
+
     const worksheet = XLSX.utils.json_to_sheet(data);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Packing Checklist");
-    
+
     const excelBuffer = XLSX.write(workbook, {
       bookType: "xlsx",
       type: "array",
     });
-    
+
     const blob = new Blob([excelBuffer], {
       type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     });
-    
+
     saveAs(blob, "Travel_Packing_Checklist.xlsx");
   };
 
   const exportToText = () => {
     const packedCount = items.filter(item => item.packed).length;
     const totalCount = items.length;
-    
+
     let textContent = `Travel Packing Checklist\n`;
     textContent += `Generated on: ${new Date().toLocaleDateString()}\n`;
     textContent += `Progress: ${packedCount}/${totalCount} items packed\n\n`;
-    
+
     // Group items by category
     const groupedItems = items.reduce((acc, item) => {
       if (!acc[item.category]) {
@@ -282,7 +284,7 @@ const PackingChecklist = () => {
       acc[item.category].push(item);
       return acc;
     }, {});
-    
+
     Object.entries(groupedItems).forEach(([category, categoryItems]) => {
       textContent += `${category.toUpperCase()}:\n`;
       categoryItems.forEach(item => {
@@ -292,7 +294,7 @@ const PackingChecklist = () => {
       });
       textContent += "\n";
     });
-    
+
     const blob = new Blob([textContent], { type: "text/plain" });
     saveAs(blob, "Travel_Packing_Checklist.txt");
   };
@@ -321,21 +323,24 @@ const PackingChecklist = () => {
     <div className="max-w-6xl mx-auto p-6">
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-white mb-4">
+        <h1 className={`text-4xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'
+          }`}>
           Travel Packing Checklist
         </h1>
-        <p className="text-gray-300 text-lg mb-6">
+        <p className={`text-lg mb-6 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'
+          }`}>
           Stay organized and never forget essential items for your trip
         </p>
-        
+
         {/* Overall Progress Bar */}
-        <div className="bg-gray-700 rounded-full h-4 mb-4">
-          <div 
+        <div className={`rounded-full h-4 mb-4 ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'
+          }`}>
+          <div
             className="bg-gradient-to-r from-pink-500 to-pink-600 h-4 rounded-full transition-all duration-300"
             style={{ width: `${progressPercentage}%` }}
           ></div>
         </div>
-        <p className="text-gray-300">
+        <p className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>
           {packedCount} of {totalCount} items packed ({Math.round(progressPercentage)}%)
         </p>
       </div>
@@ -349,7 +354,7 @@ const PackingChecklist = () => {
           <Plus size={20} />
           Add Item
         </button>
-        
+
         <button
           onClick={() => setShowAddSectionForm(true)}
           className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-colors"
@@ -357,7 +362,7 @@ const PackingChecklist = () => {
           <FolderPlus size={20} />
           Add Section
         </button>
-        
+
         <button
           onClick={markAllAsPacked}
           className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors"
@@ -365,7 +370,7 @@ const PackingChecklist = () => {
           <Check size={20} />
           Mark All Packed
         </button>
-        
+
         <button
           onClick={markAllAsUnpacked}
           className="flex items-center gap-2 bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg transition-colors"
@@ -373,14 +378,14 @@ const PackingChecklist = () => {
           <X size={20} />
           Mark All Unpacked
         </button>
-        
+
         <button
           onClick={resetList}
           className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
         >
           Reset to Default
         </button>
-        
+
         <button
           onClick={clearAll}
           className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors"
@@ -399,7 +404,7 @@ const PackingChecklist = () => {
           <Download size={20} />
           Export PDF
         </button>
-        
+
         <button
           onClick={exportToExcel}
           className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors"
@@ -407,7 +412,7 @@ const PackingChecklist = () => {
           <Download size={20} />
           Export Excel
         </button>
-        
+
         <button
           onClick={exportToText}
           className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
@@ -419,15 +424,20 @@ const PackingChecklist = () => {
 
       {/* Add Item Form */}
       {showAddForm && (
-        <div className="bg-gray-800 rounded-lg p-6 mb-8">
-          <h3 className="text-xl font-semibold text-white mb-4">Add New Item</h3>
+        <div className={`rounded-lg p-6 mb-8 ${isDarkMode ? 'bg-gray-800' : 'bg-white border border-gray-200'
+          }`}>
+          <h3 className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'
+            }`}>Add New Item</h3>
           <div className="flex gap-3">
             <input
               type="text"
               value={newItem}
               onChange={(e) => setNewItem(e.target.value)}
               placeholder="Enter item name..."
-              className="flex-1 bg-gray-700 text-white px-4 py-2 rounded-lg border border-gray-600 focus:border-pink-500 focus:outline-none"
+              className={`flex-1 px-4 py-2 rounded-lg border focus:outline-none transition-colors ${isDarkMode
+                  ? 'bg-gray-700 text-white border-gray-600 focus:border-pink-500'
+                  : 'bg-gray-50 text-gray-800 border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200'
+                }`}
               onKeyPress={(e) => e.key === 'Enter' && addItem()}
             />
             <button
@@ -438,7 +448,10 @@ const PackingChecklist = () => {
             </button>
             <button
               onClick={() => setShowAddForm(false)}
-              className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg transition-colors"
+              className={`px-6 py-2 rounded-lg transition-colors ${isDarkMode
+                  ? 'bg-gray-600 hover:bg-gray-700 text-white'
+                  : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
+                }`}
             >
               Cancel
             </button>
@@ -448,15 +461,20 @@ const PackingChecklist = () => {
 
       {/* Add Section Form */}
       {showAddSectionForm && (
-        <div className="bg-gray-800 rounded-lg p-6 mb-8">
-          <h3 className="text-xl font-semibold text-white mb-4">Add New Section</h3>
+        <div className={`rounded-lg p-6 mb-8 ${isDarkMode ? 'bg-gray-800' : 'bg-white border border-gray-200'
+          }`}>
+          <h3 className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'
+            }`}>Add New Section</h3>
           <div className="flex gap-3">
             <input
               type="text"
               value={newSection}
               onChange={(e) => setNewSection(e.target.value)}
               placeholder="Enter section name (e.g., 🎵 Music Gear)"
-              className="flex-1 bg-gray-700 text-white px-4 py-2 rounded-lg border border-gray-600 focus:border-indigo-500 focus:outline-none"
+              className={`flex-1 px-4 py-2 rounded-lg border focus:outline-none transition-colors ${isDarkMode
+                  ? 'bg-gray-700 text-white border-gray-600 focus:border-indigo-500'
+                  : 'bg-gray-50 text-gray-800 border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200'
+                }`}
               onKeyPress={(e) => e.key === 'Enter' && addSection()}
             />
             <button
@@ -467,7 +485,10 @@ const PackingChecklist = () => {
             </button>
             <button
               onClick={() => setShowAddSectionForm(false)}
-              className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg transition-colors"
+              className={`px-6 py-2 rounded-lg transition-colors ${isDarkMode
+                  ? 'bg-gray-600 hover:bg-gray-700 text-white'
+                  : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
+                }`}
             >
               Cancel
             </button>
@@ -479,35 +500,37 @@ const PackingChecklist = () => {
       <div className="flex gap-6">
         {/* Left Sidebar - Sections */}
         <div className="w-80 flex-shrink-0">
-          <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
-            <h3 className="text-lg font-semibold text-white mb-4">Sections</h3>
+          <div className={`rounded-lg p-4 border ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+            }`}>
+            <h3 className={`text-lg font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'
+              }`}>Sections</h3>
             <div className="space-y-2">
               {Object.entries(groupedItems).map(([category, categoryItems]) => {
                 const categoryPackedCount = categoryItems.filter(item => item.packed).length;
                 const categoryProgressPercentage = categoryItems.length > 0 ? (categoryPackedCount / categoryItems.length) * 100 : 0;
                 const isSelected = selectedSection === category;
-                
+
                 return (
                   <div
                     key={category}
                     onClick={() => setSelectedSection(category)}
-                    className={`p-3 rounded-lg cursor-pointer transition-all ${
-                      isSelected 
-                        ? 'bg-pink-600 text-white' 
-                        : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
-                    }`}
+                    className={`p-3 rounded-lg cursor-pointer transition-all ${isSelected
+                        ? 'bg-pink-600 text-white'
+                        : isDarkMode
+                          ? 'bg-gray-700 hover:bg-gray-600 text-gray-300'
+                          : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                      }`}
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-medium">{category}</span>
-                      <span className="text-sm">
+                      <span className="text-sm opacity-75">
                         {categoryPackedCount}/{categoryItems.length}
                       </span>
                     </div>
-                    <div className="bg-gray-600 rounded-full h-2">
-                      <div 
-                        className={`h-2 rounded-full transition-all duration-300 ${
-                          isSelected ? 'bg-white' : 'bg-blue-500'
-                        }`}
+                    <div className={`rounded-full h-2 ${isDarkMode ? 'bg-gray-600' : 'bg-gray-300'
+                      }`}>
+                      <div
+                        className="bg-pink-500 h-2 rounded-full transition-all duration-300"
                         style={{ width: `${categoryProgressPercentage}%` }}
                       ></div>
                     </div>
@@ -518,60 +541,54 @@ const PackingChecklist = () => {
           </div>
         </div>
 
-        {/* Right Content - Checklist Items */}
+        {/* Right Content - Items */}
         <div className="flex-1">
-          {selectedSection && groupedItems[selectedSection] ? (
-            <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
+          {selectedSection ? (
+            <div className={`rounded-lg p-6 border ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+              }`}>
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-white flex items-center gap-3">
-                  {selectedSection}
-                  <span className="text-lg text-gray-400">
-                    ({groupedItems[selectedSection].filter(item => item.packed).length}/{groupedItems[selectedSection].length})
-                  </span>
-                </h2>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-400">
-                    {Math.round((groupedItems[selectedSection].filter(item => item.packed).length / groupedItems[selectedSection].length) * 100)}%
-                  </span>
-                </div>
+                <h3 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-800'
+                  }`}>{selectedSection}</h3>
+                <button
+                  onClick={() => setShowAddForm(true)}
+                  className="flex items-center gap-2 bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg transition-colors"
+                >
+                  <Plus size={20} />
+                  Add Item
+                </button>
               </div>
-              
-              {/* Section Progress Bar */}
-              <div className="bg-gray-700 rounded-full h-4 mb-6">
-                <div 
-                  className="bg-gradient-to-r from-blue-500 to-blue-600 h-4 rounded-full transition-all duration-300"
-                  style={{ width: `${(groupedItems[selectedSection].filter(item => item.packed).length / groupedItems[selectedSection].length) * 100}%` }}
-                ></div>
-              </div>
-              
-              <div className="grid gap-3">
-                {groupedItems[selectedSection].map((item) => (
+
+              <div className="space-y-3">
+                {groupedItems[selectedSection]?.map((item) => (
                   <div
                     key={item.id}
-                    className={`flex items-center gap-3 p-4 rounded-lg transition-all ${
-                      item.packed 
-                        ? 'bg-green-900/30 border border-green-500/30' 
-                        : 'bg-gray-700/50 border border-gray-600/30'
-                    }`}
+                    className={`flex items-center gap-3 p-4 rounded-lg border transition-all ${isDarkMode
+                        ? 'bg-gray-700 border-gray-600 hover:bg-gray-600'
+                        : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
+                      }`}
                   >
                     <button
                       onClick={() => toggleItem(item.id)}
-                      className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all ${
-                        item.packed
+                      className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${item.packed
                           ? 'bg-green-500 border-green-500 text-white'
-                          : 'border-gray-400 hover:border-pink-500'
-                      }`}
+                          : isDarkMode
+                            ? 'border-gray-400 hover:border-pink-500'
+                            : 'border-gray-300 hover:border-pink-500'
+                        }`}
                     >
                       {item.packed && <Check size={16} />}
                     </button>
-                    
+
                     {editingItem === item.id ? (
                       <div className="flex-1 flex gap-2">
                         <input
                           type="text"
                           value={editItemName}
                           onChange={(e) => setEditItemName(e.target.value)}
-                          className="flex-1 bg-gray-600 text-white px-3 py-2 rounded border border-gray-500 focus:border-pink-500 focus:outline-none"
+                          className={`flex-1 px-3 py-2 rounded border focus:outline-none transition-colors ${isDarkMode
+                              ? 'bg-gray-600 text-white border-gray-500 focus:border-pink-500'
+                              : 'bg-white text-gray-800 border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200'
+                            }`}
                           onKeyPress={(e) => e.key === 'Enter' && saveEditItem()}
                           autoFocus
                         />
@@ -589,17 +606,20 @@ const PackingChecklist = () => {
                         </button>
                       </div>
                     ) : (
-                      <span className={`flex-1 text-lg ${item.packed ? 'line-through text-gray-400' : 'text-white'}`}>
+                      <span className={`flex-1 text-lg ${item.packed
+                          ? 'line-through text-gray-400'
+                          : isDarkMode ? 'text-white' : 'text-gray-800'
+                        }`}>
                         {item.name}
                       </span>
                     )}
-                    
+
                     {item.essential && (
                       <span className="text-xs bg-red-600 text-white px-2 py-1 rounded">
                         Essential
                       </span>
                     )}
-                    
+
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => startEditingItem(item)}
@@ -621,9 +641,11 @@ const PackingChecklist = () => {
               </div>
             </div>
           ) : (
-            <div className="bg-gray-800 rounded-lg p-6 border border-gray-700 text-center">
+            <div className={`rounded-lg p-6 border text-center ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+              }`}>
               <div className="text-gray-400 text-6xl mb-4">📦</div>
-              <h3 className="text-xl font-semibold text-white mb-2">No section selected</h3>
+              <h3 className={`text-xl font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-800'
+                }`}>No section selected</h3>
               <p className="text-gray-400">Select a section from the sidebar to view items</p>
             </div>
           )}
@@ -634,7 +656,8 @@ const PackingChecklist = () => {
       {items.length === 0 && (
         <div className="text-center py-12">
           <div className="text-gray-400 text-6xl mb-4">📦</div>
-          <h3 className="text-xl font-semibold text-white mb-2">No items in your checklist</h3>
+          <h3 className={`text-xl font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-800'
+            }`}>No items in your checklist</h3>
           <p className="text-gray-400 mb-6">Add some items to get started with your packing!</p>
           <div className="flex gap-3 justify-center">
             <button

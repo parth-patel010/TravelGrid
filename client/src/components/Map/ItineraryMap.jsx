@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
+import "./ItineraryMap.css"; // Import local CSS instead of problematic package CSS
 import "leaflet-routing-machine";
 
 const ItineraryMap = ({ stops }) => {
@@ -10,7 +10,7 @@ const ItineraryMap = ({ stops }) => {
 
     // Remove old map container before creating new one
     const existingMap = document.getElementById("map");
-    if (existingMap._leaflet_id) {
+    if (existingMap && existingMap._leaflet_id) {
       existingMap._leaflet_id = null;
     }
 
@@ -36,7 +36,17 @@ const ItineraryMap = ({ stops }) => {
     };
   }, [stops]);
 
-  return <div id="map" style={{ height: "500px", width: "100%" }}></div>;
+  return (
+    <div
+      id="map"
+      style={{
+        height: "500px",
+        width: "100%",
+        // Add basic routing machine styles inline to prevent layout issues
+        position: "relative"
+      }}
+    />
+  );
 };
 
 export default ItineraryMap;
