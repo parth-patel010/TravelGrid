@@ -95,7 +95,7 @@ const Footer = () => {
                     { name: "Hotels", path: "/hotels" },
                     { name: "Forums", path: "/forum" },
                     { name: "Feedback", path: "/feedback" },
-                    { name: "Currency Converter", path: "/currency-converter" },
+                    { name: "Currency Converter", path: "/enhanced-currency" },
                   ].map((link) => (
                     <Link
                       key={link.name}

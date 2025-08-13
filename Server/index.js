@@ -10,6 +10,7 @@ const morgan = require('morgan');
 require('dotenv').config({ path: './.env' });
 
 const connectDB = require('./config/db');
+const securityMiddleware = require('./middleware/securityMiddleware');
 
 const authRoutes = require('./routes/authRoutes');
 const emailVerificationRoutes = require('./routes/emailVerificationRoutes');
@@ -61,27 +62,9 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-// Body sanitization against NoSQL injection
-app.use((req, res, next) => {
-  if (req.body) {
-    req.body = mongoSanitize.sanitize(req.body);
-  }
-  if (req.params) {
-    req.params = mongoSanitize.sanitize(req.params);
-  }
-  // Do NOT touch req.query
-  next();
-});
-
-// Patched XSS-clean for modern Express (ignores req.query)
-app.use((req, res, next) => {
-  // Run original middleware logic only for req.body and req.params
-  xss()(
-    { body: req.body, params: req.params },
-    res,
-    next
-  );
-});
+// Use centralized security middleware
+app.use(securityMiddleware.sanitizeInputs);
+app.use(securityMiddleware.xssProtection);
 
 // Basic rate limiting for auth and general API
 const generalLimiter = rateLimit({
@@ -100,11 +83,8 @@ const authLimiter = rateLimit({
 });
 app.use('/api/auth', authLimiter);
 
-app.use((req, res, next) => {
-  res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
-  res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
-  next();
-});
+// Use centralized security headers middleware
+app.use(securityMiddleware.securityHeaders);
 
 // No need for custom audio serving - files are now in client/public/uploads
 
