@@ -1,6 +1,7 @@
 import { StrictMode, lazy, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Toaster } from 'react-hot-toast';
+import ItineraryMapPage from "./pages/ItineraryMapPage";
 import './index.css';
 import './i18n'; // Import i18n configuration
 import App from './App.jsx';
@@ -139,6 +140,7 @@ const router = createBrowserRouter([
       { path: '/ai-travel-planner', element: <Suspense fallback={<Spinner />}><AITravelPlannerDemo /></Suspense> },
       { path: '/music-player-demo', element: <Suspense fallback={<Spinner />}><MusicPlayerDemo /></Suspense> },
       { path: '/music', element: <Suspense fallback={<Spinner />}><Music /></Suspense> },
+      {path:"/itinerary-map", element:<Suspense fallback={<Spinner />}><ItineraryMapPage/></Suspense>},
 
       {
         path: '/dashboard',

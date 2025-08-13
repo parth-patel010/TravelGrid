@@ -53,6 +53,7 @@ const Navbar = () => {
         { label: "AI Travel Planner", path: "/ai-travel-planner" },
         { label: "Travel Countdown Timer", path: "/countdown-demo" },
         { label: "Music", path: "/music" },
+        {label:"Map",path:"/itinerary-map"},
 
         { label: t('navigation.petTravelGuide'), path: "/pettravel" },
         { label: "Enhanced Currency Converter", path: "/enhanced-currency" }
