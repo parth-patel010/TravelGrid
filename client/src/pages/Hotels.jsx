@@ -1,35 +1,81 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { toast } from 'react-hot-toast';
 import Navbar from '../components/Custom/Navbar';
 import Footer from '../components/Custom/Footer';
-import hotels from '../data/hotels';
+import HotelFilters from '../components/HotelFilters';
+import HotelPagination from '../components/HotelPagination';
+import HotelCard from '../components/HotelCard';
 import { useTheme } from "../context/ThemeContext";
-import { config } from '../config';
+import { useHotelFilters } from '../hooks/useHotelFilters';
 
+/**
+ * Enhanced Hotels Page Component
+ * Features:
+ * - Advanced filtering (location, budget, rating, availability)
+ * - Pagination with configurable page size
+ * - Enhanced hotel cards with pricing information
+ * - Responsive design with consistent UI
+ * - API integration for real-time data
+ */
 function Hotels() {
-  const navigate = useNavigate();
-  const [query, setQuery] = useState('');
   const { isDarkMode } = useTheme();
+  
+  // Use the custom hook for filtering and pagination
+  const {
+    // Filter states and setters
+    searchQuery,
+    setSearchQuery,
+    locationFilter,
+    setLocationFilter,
+    budgetRange,
+    setBudgetRange,
+    ratingFilter,
+    setRatingFilter,
+    availabilityDates,
+    setAvailabilityDates,
+    onlyPetFriendly,
+    setOnlyPetFriendly,
+    
+    // Data
+    paginatedHotels,
+    availableCities,
+    
+    // API states
+    loading,
+    error,
+    useStaticData,
+    
+    // Pagination
+    currentPage,
+    totalPages,
+    goToPage,
+    goToNextPage,
+    goToPrevPage,
+    
+    // Helper functions
+    clearAllFilters,
+    refetch,
+    
+    // Stats
+    totalResults,
+    showingStart,
+    showingEnd,
+    itemsPerPage
+  } = useHotelFilters(9); // Show 9 hotels per page
 
-  const filteredHotels = hotels.filter((hotel) => {
-    const q = query.toLowerCase();
-    return (
-      hotel.name.toLowerCase().includes(q) ||
-      hotel.location.toLowerCase().includes(q)
-    );
-  });
-
+  // Handle hotel like/save functionality
   const handleLike = async (hotel) => {
     const body = {
-      placeId: hotel.id,
+      placeId: hotel._id || hotel.id,
       name: hotel.name,
       location: hotel.location,
       description: hotel.description,
     };
 
     try {
-      const res = await fetch(`${config.API_BASE_URL}/save/save-place`, {
+      // Use the API base URL from config or environment
+      const apiUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+      const res = await fetch(`${apiUrl}/save/save-place`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,6 +101,7 @@ function Hotels() {
       <Navbar lightBackground />
 
       <main className="flex flex-col flex-1 w-full items-center">
+        {/* Hero Section - unchanged from original */}
         <section className="w-full py-24 flex flex-col items-center text-center px-4 bg-gradient-to-br from-black to-pink-900">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6 my-6">
             Explore World-Class <span className="text-pink-600">Hotels</span>
@@ -62,72 +109,138 @@ function Hotels() {
           <p className="text-lg md:text-xl text-white max-w-2xl mb-8">
             Browse and book from our curated list of the top luxury hotels worldwide.
           </p>
+          
+          {/* Quick Search - maintaining original search functionality */}
           <div className="w-full max-w-lg">
             <input
               type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by hotel or destination..."
               className="w-full px-6 py-4 rounded-xl bg-white border-2 border-pink-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30 focus:border-pink-500 shadow-lg transition-all my-4"
             />
           </div>
         </section>
 
-        <section className="max-w-7xl w-full pt-12 px-4 pb-16 grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredHotels.map((hotel) => (
-            <div
-              key={hotel.id}
-              className={` ${isDarkMode ?
-                "backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 border border-pink-400/20 dark:border-pink-400/30 rounded-2xl shadow-xl hover:bg-white/95 dark:hover:bg-gray-800/95 transition-all duration-300 hover:shadow-2xl cursor-pointer" :
-                "backdrop-blur-lg bg-white/95 border border-pink-300/50 rounded-2xl shadow-2xl overflow-hidden flex flex-col hover:shadow-pink-200/30 transition-all duration-300 transform hover:scale-105"}`}
-            >
-              <img
-                src={hotel.image}
-                alt={hotel.name}
-                className="w-full h-56 object-cover object-center"
-              />
-              <div className="p-6 flex-1 flex flex-col">
-                <div className="flex items-center gap-2 mb-1">
-                  <h3 className={`text-2xl font-semibold ${isDarkMode ? "text-gray-800 dark:text-white" : "text-gray-950"}`}>
-                    {hotel.name}
-                  </h3>
-                  {hotel.isPetFriendly && (
-                    <div
-                      className={`text-xl cursor-pointer ${isDarkMode ? "text-pink-600" : "text-pink-900"}`}
-                      title="Pet-friendly hotel"
-                    >
-                      🐾
-                    </div>
-                  )}
-                </div>
+        {/* Filters Section */}
+        <section className="max-w-7xl w-full px-4 pt-8">
+          <HotelFilters
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            locationFilter={locationFilter}
+            setLocationFilter={setLocationFilter}
+            budgetRange={budgetRange}
+            setBudgetRange={setBudgetRange}
+            ratingFilter={ratingFilter}
+            setRatingFilter={setRatingFilter}
+            availabilityDates={availabilityDates}
+            setAvailabilityDates={setAvailabilityDates}
+            onlyPetFriendly={onlyPetFriendly}
+            setOnlyPetFriendly={setOnlyPetFriendly}
+            availableCities={availableCities}
+            clearAllFilters={clearAllFilters}
+            totalResults={totalResults}
+            showingStart={showingStart}
+            showingEnd={showingEnd}
+          />
+        </section>
 
-                <span className="text-pink-600 dark:text-pink-400 font-medium mb-3">
-                  {hotel.location}
-                </span>
-                <p className={`text-sm text-gray-700 line-clamp-3 flex-1 ${isDarkMode ? "dark:text-gray-300" : "text-gray-950"}`}>
-                  {hotel.description}
-                </p>
-                <button
-                  onClick={() => navigate(`/hotels/${hotel.id}`)}
-                  className="mt-4 self-start bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 cursor-pointer"
-                >
-                  Book Hotel
-                </button>
-                <button
-                  onClick={() => handleLike(hotel)}
-                  className={`mt-2 px-4 py-2 rounded-lg text-sm font-semibold transition cursor-pointer ${isDarkMode ? "bg-pink-100 dark:bg-pink-900/30 hover:bg-pink-200 dark:hover:bg-pink-900/50 text-pink-600 dark:text-pink-400" : "bg-pink-400 darl:bg-pink-900/10 hover:bg-pink-500 dark:hover:bg-pink-900/30 text-white"}`}
-                >
-                  ❤️ Save to Dashboard
-                </button>
+        {/* Status Indicator for Static Data */}
+        {useStaticData && (
+          <section className="max-w-7xl w-full px-4">
+            <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-r-lg mb-4">
+              <div className="flex">
+                <div className="flex-shrink-0">
+                  <svg className="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm">
+                    <strong>Demo Mode:</strong> API connection unavailable. Showing sample data with working filters.
+                  </p>
+                </div>
               </div>
             </div>
-          ))}
-          {filteredHotels.length === 0 && (
-            <p className="col-span-full text-center text-gray-600 dark:text-gray-400 text-lg font-medium">
-              No hotels match your search.
-            </p>
+          </section>
+        )}
+
+        {/* Hotels Grid Section */}
+        <section className="max-w-7xl w-full px-4 pb-8">
+          {loading ? (
+            // Loading state
+            <div className="flex flex-col items-center justify-center py-16">
+              <div className="animate-spin rounded-full h-16 w-16 border-4 border-pink-500 border-t-transparent mb-4"></div>
+              <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                Loading hotels...
+              </p>
+            </div>
+          ) : error ? (
+            // Error state
+            <div className="text-center py-16">
+              <div className={`text-6xl mb-4 ${isDarkMode ? 'text-gray-600' : 'text-gray-300'}`}>
+                ⚠️
+              </div>
+              <h3 className={`text-2xl font-bold mb-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                Error Loading Hotels
+              </h3>
+              <p className={`text-lg mb-6 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                {error}
+              </p>
+              <button
+                onClick={refetch}
+                className="bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+              >
+                Try Again
+              </button>
+            </div>
+          ) : paginatedHotels.length > 0 ? (
+            <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+              {paginatedHotels.map((hotel) => (
+                <HotelCard 
+                  key={hotel._id || hotel.id} 
+                  hotel={hotel} 
+                  onLike={handleLike}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <div className={`text-6xl mb-4 ${isDarkMode ? 'text-gray-600' : 'text-gray-300'}`}>
+                🏨
+              </div>
+              <h3 className={`text-2xl font-bold mb-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                No hotels found
+              </h3>
+              <p className={`text-lg mb-6 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                Try adjusting your filters or search criteria
+              </p>
+              <button
+                onClick={clearAllFilters}
+                className="bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+              >
+                Clear All Filters
+              </button>
+            </div>
           )}
         </section>
+
+        {/* Pagination Section */}
+        {!loading && !error && paginatedHotels.length > 0 && (
+          <section className="max-w-7xl w-full px-4 pb-16">
+            <HotelPagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              goToPage={goToPage}
+              goToNextPage={goToNextPage}
+              goToPrevPage={goToPrevPage}
+              totalResults={totalResults}
+              showingStart={showingStart}
+              showingEnd={showingEnd}
+              itemsPerPage={itemsPerPage}
+            />
+          </section>
+        )}
       </main>
     </div>
   );

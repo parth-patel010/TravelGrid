@@ -6,7 +6,8 @@ const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const xssClean = require('xss-clean');
 const morgan = require('morgan');
-require('dotenv').config({ path: './.env' });
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const connectDB = require('./config/db');
 
@@ -21,6 +22,7 @@ const reviewsRoutes = require('./routes/reviewRoutes.js');
 const languageRoutes = require('./routes/languageRoutes');
 const moodBoardRoutes = require('./routes/moodBoardRoutes');
 const currencyRoutes = require('./routes/currencyRoutes');
+const hotelRoutes = require('./routes/hotelRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -30,7 +32,8 @@ connectDB();
 
 // Middleware
 const allowedOrigins = [
-  "http://localhost:5173", // Vite dev
+  "http://localhost:5173", // Vite dev (primary)
+  "http://localhost:5174", // Vite dev (backup port)
   "http://localhost:3000", // CRA dev
   "https://travel-grid.vercel.app" // Production
 ];
@@ -130,6 +133,9 @@ app.use('/api/moodboards', moodBoardRoutes);
 
 // Currency Routes
 app.use('/api/currency', currencyRoutes);
+
+// Hotel Routes
+app.use('/api/hotels', hotelRoutes);
 
 // 404 Not Found middleware
 app.use((req, res, next) => {
