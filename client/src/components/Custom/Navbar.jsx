@@ -52,6 +52,8 @@ const Navbar = () => {
         { label: "AI Mood Board", path: "/mood-board" },
         { label: "AI Travel Planner", path: "/ai-travel-planner" },
         { label: "Travel Countdown Timer", path: "/countdown-demo" },
+        { label: "Music", path: "/music" },
+
         { label: t('navigation.petTravelGuide'), path: "/pettravel" },
         { label: "Enhanced Currency Converter", path: "/enhanced-currency" }
       ],
