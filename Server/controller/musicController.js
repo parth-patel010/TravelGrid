@@ -5,6 +5,54 @@ const { asyncHandler } = require('../utils/asyncHandler');
 const getAllMusic = asyncHandler(async (req, res) => {
   const { type, page = 1, limit = 20, search } = req.query;
 
+  // Input validation and sanitization for query parameters
+  if (type && typeof type !== 'string') {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid type parameter'
+    });
+  }
+
+  if (search && typeof search !== 'string') {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid search parameter'
+    });
+  }
+
+  // Validate and sanitize numeric parameters
+  const pageNum = parseInt(page);
+  const limitNum = parseInt(limit);
+
+  if (isNaN(pageNum) || pageNum < 1) {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid page parameter'
+    });
+  }
+
+  if (isNaN(limitNum) || limitNum < 1 || limitNum > 100) {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid limit parameter (must be 1-100)'
+    });
+  }
+
+  // Length validation to prevent injection attacks
+  if (type && type.length > 50) {
+    return res.status(400).json({
+      success: false,
+      message: 'Type parameter too long'
+    });
+  }
+
+  if (search && search.length > 200) {
+    return res.status(400).json({
+      success: false,
+      message: 'Search parameter too long'
+    });
+  }
+
   let query = { isActive: true };
 
   // Filter by type if specified
