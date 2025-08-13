@@ -16,11 +16,7 @@
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.0",
-<<<<<<< HEAD
-    "express": "^5.1.0",
-=======
     "express": "^4.21.2",
->>>>>>> 71353903205dd877845e0c0833cc78b719db1dc7
     "express-mongo-sanitize": "^2.2.0",
     "express-rate-limit": "^7.4.0",
     "helmet": "^7.1.0",

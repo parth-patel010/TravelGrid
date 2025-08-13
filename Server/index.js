@@ -23,6 +23,7 @@ const languageRoutes = require('./routes/languageRoutes');
 const moodBoardRoutes = require('./routes/moodBoardRoutes');
 const searchRoutes = require('./routes/search');
 const currencyRoutes = require('./routes/currencyRoutes');
+const musicRoutes = require('./routes/musicRoutes');
 
 
 const app = express();
@@ -75,9 +76,9 @@ app.use((req, res, next) => {
 // Patched XSS-clean for modern Express (ignores req.query)
 app.use((req, res, next) => {
   // Run original middleware logic only for req.body and req.params
-  xss()( 
-    { body: req.body, params: req.params }, 
-    res, 
+  xss()(
+    { body: req.body, params: req.params },
+    res,
     next
   );
 });
@@ -105,8 +106,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve uploaded files statically (ensure no executable types are allowed by upload filter)
-app.use('/uploads', express.static('uploads'));
+// No need for custom audio serving - files are now in client/public/uploads
 
 
 app.get('/', (req, res) => {
@@ -117,6 +117,8 @@ app.get('/', (req, res) => {
 app.get('/api/health', (req, res) => {
   res.status(200).json({ message: 'API is running smoothly!' });
 });
+
+// Test endpoints removed - no longer needed
 
 // Authentication Routes
 app.use('/api/auth', authRoutes);
@@ -153,6 +155,8 @@ app.use('/api/search', searchRoutes);
 // Currency Routes
 app.use('/api/currency', currencyRoutes);
 
+// Music Routes
+app.use('/api/music', musicRoutes);
 
 // 404 Not Found middleware
 app.use((req, res, next) => {

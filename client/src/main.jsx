@@ -90,6 +90,8 @@ const BookingHistory = lazy(() => import('./pages/BookingHistory'));
 const MoodBoardPage = lazy(() => import('./pages/MoodBoardPage'));
 const CountdownDemo = lazy(() => import('./pages/CountdownDemo'));
 const AITravelPlannerDemo = lazy(() => import('./pages/AITravelPlannerDemo'));
+const MusicPlayerDemo = lazy(() => import('./pages/MusicPlayerDemo'));
+const Music = lazy(() => import('./pages/Music'));
 
 const router = createBrowserRouter([
   { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
@@ -135,6 +137,8 @@ const router = createBrowserRouter([
       { path: '/booking-history', element: <Suspense fallback={<Spinner />}><BookingHistory /></Suspense> },
       { path: '/countdown-demo', element: <Suspense fallback={<Spinner />}><CountdownDemo /></Suspense> },
       { path: '/ai-travel-planner', element: <Suspense fallback={<Spinner />}><AITravelPlannerDemo /></Suspense> },
+      { path: '/music-player-demo', element: <Suspense fallback={<Spinner />}><MusicPlayerDemo /></Suspense> },
+      { path: '/music', element: <Suspense fallback={<Spinner />}><Music /></Suspense> },
 
       {
         path: '/dashboard',
