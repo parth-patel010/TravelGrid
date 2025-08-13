@@ -98,10 +98,6 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    setIsSidebarOpen(false);
-  }, [location.pathname]);
-
-  useEffect(() => {
     document.body.style.overflow = isSidebarOpen ? "hidden" : "auto";
   }, [isSidebarOpen]);
 
