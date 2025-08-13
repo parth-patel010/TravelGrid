@@ -6,4 +6,4 @@
 
     }
  }
- module.exports={asyncHandler}
+ module.exports = asyncHandler
