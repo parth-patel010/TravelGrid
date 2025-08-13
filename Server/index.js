@@ -4,10 +4,10 @@ const cookieParser = require('cookie-parser'); // <-- NEW
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
-const xssClean = require('xss-clean');
+// const xssClean = require('xss-clean');
+const xss = require('xss-clean');
 const morgan = require('morgan');
-const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '.env') });
+require('dotenv').config({ path: './.env' });
 
 const connectDB = require('./config/db');
 
@@ -21,8 +21,9 @@ const tripRoutes = require('./routes/trips.js');
 const reviewsRoutes = require('./routes/reviewRoutes.js');
 const languageRoutes = require('./routes/languageRoutes');
 const moodBoardRoutes = require('./routes/moodBoardRoutes');
+const searchRoutes = require('./routes/search');
 const currencyRoutes = require('./routes/currencyRoutes');
-const hotelRoutes = require('./routes/hotelRoutes');
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -32,8 +33,7 @@ connectDB();
 
 // Middleware
 const allowedOrigins = [
-  "http://localhost:5173", // Vite dev (primary)
-  "http://localhost:5174", // Vite dev (backup port)
+  "http://localhost:5173", // Vite dev
   "http://localhost:3000", // CRA dev
   "https://travel-grid.vercel.app" // Production
 ];
@@ -61,10 +61,26 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Body sanitization against NoSQL injection
-app.use(mongoSanitize());
+app.use((req, res, next) => {
+  if (req.body) {
+    req.body = mongoSanitize.sanitize(req.body);
+  }
+  if (req.params) {
+    req.params = mongoSanitize.sanitize(req.params);
+  }
+  // Do NOT touch req.query
+  next();
+});
 
-// Prevent XSS attacks
-app.use(xssClean());
+// Patched XSS-clean for modern Express (ignores req.query)
+app.use((req, res, next) => {
+  // Run original middleware logic only for req.body and req.params
+  xss()( 
+    { body: req.body, params: req.params }, 
+    res, 
+    next
+  );
+});
 
 // Basic rate limiting for auth and general API
 const generalLimiter = rateLimit({
@@ -131,11 +147,12 @@ app.use('/api/language', languageRoutes);
 // Mood Board Routes
 app.use('/api/moodboards', moodBoardRoutes);
 
+// Search Routes
+app.use('/api/search', searchRoutes);
+
 // Currency Routes
 app.use('/api/currency', currencyRoutes);
 
-// Hotel Routes
-app.use('/api/hotels', hotelRoutes);
 
 // 404 Not Found middleware
 app.use((req, res, next) => {

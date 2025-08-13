@@ -30,8 +30,7 @@ const HotelBookingForm = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [errors, setErrors] = useState({});
 
-  // Use room types from hotel data if available, otherwise fallback to default
-  const roomTypes = hotel?.roomTypes || [
+  const roomTypes = [
     { id: 'standard', name: 'Standard Room', price: 1500, description: 'Comfortable room with basic amenities' },
     { id: 'deluxe', name: 'Deluxe Room', price: 2500, description: 'Spacious room with premium amenities' },
     { id: 'suite', name: 'Executive Suite', price: 3500, description: 'Luxury suite with separate living area' },
