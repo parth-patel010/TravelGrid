@@ -21,6 +21,11 @@ function About() {
   const [activeFeature, setActiveFeature] = useState(0);
   const [isVisible, setIsVisible] = useState({});
 
+  //for features cards navigation
+  const handleCardClick = (path) => {
+    navigate(path);
+  };
+
   // Intersection Observer for animations
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -45,41 +50,85 @@ function About() {
 
   const features = [
     {
+      //adding path to each of the feature
       title: "Travel Booking",
       description:
         "Easily book flights, trains, buses, and more with our intuitive booking system.",
       icon: "✈️",
+      path: '/ticket'
     },
     {
       title: "Vehicle Rentals",
       description:
         "Rent or hire vehicles tailored to your travel needs, from cars to bikes.",
       icon: "🚗",
+      path: '/ticket'
     },
     {
       title: "Hotel Reservations",
       description:
         "Browse and book hotels based on your preferences and budget.",
       icon: "🏨",
+      path: '/hotel-booking'
     },
     {
       title: "Travel Guides",
       description:
         "Discover curated guides to plan your ideal trip with local insights.",
       icon: "📖",
+      path: '/guides'
+    },
+    // Adding new feature cards
+    {
+      title: "Travel with pets",
+      description:
+        "Enjoy your trip with your furry friends with our pet friednly packages, travel and guides",
+      icon: "🐾",
+      path: '/pettravel'
+    },
+    {
+      title: "Essentials Chechlist",
+      description:
+        "Ensure you are not forgetting anything with our checklist feature.",
+      icon: "📋",
+      path: '/packing-checklist'
+    },
+    {
+      title: "Expense Calculator",
+      description:
+        "We will manage all your expenses, be it solo travelling or a fun group trip. Just enter amount and number of people(for a group)",
+      icon: "💸",
+      path: '/trip-calculator'
+    },
+    {
+      title: "Currency converter",
+      description:
+        "With us you dont have to worry about currency, just enter amount and currency, and you'll get exact amount in requested currency.",
+      icon: "💱",
+      path: '/enhanced-currency'
+    },
+    {
+      title: "Travel with music",
+      description:
+        "Travel the world listening to your favourite melodies with our wide categories of music.",
+      icon: "🎶",
+      path: '/music'
     },
     {
       title: "Travel Packages",
       description:
         "Choose pre-designed packages or customize your own adventure.",
       icon: "🎒",
+      path: '/packages'
     },
     {
       title: "Responsive Design",
       description:
         "Enjoy a consistent experience across desktops, tablets, and mobile devices.",
       icon: "📱",
+      path: '/'
     },
+  
   ];
 
   const techStack = [
@@ -540,25 +589,38 @@ function About() {
             Why Choose <span className="text-pink-400">TravelGrid?</span>
           </motion.h2>
 
+{/*Enhanced UI feature cards */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
                 whileInView={{ opacity: 1, y: 0 }}
                 initial={{ opacity: 0, y: 50 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
+                transition={{ duration: 0.8}}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-                className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-6 border border-gray-700 hover:border-pink-400 transition-all duration-300 cursor-pointer"
-                onMouseEnter={() => setActiveFeature(index)}
+                whileHover={{ scale: 1.1 }}
+                className="group relative h-64 cursor-pointer"
+                //onMouseEnter={() => setActiveFeature(index)}
+                //style={{ perspective: '1000px' }}
               >
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-bold text-white mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-300 leading-relaxed">
-                  {feature.description}
-                </p>
+                  <div className="relative w-full h-full transition-transform duration-700 group-hover:rotate-y-180" 
+                    style={{ transformStyle: 'preserve-3d' }}>
+                  {/* Front */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-6 border border-gray-700 group-hover:border-pink-400 transition-all duration-300"
+                      style={{ backfaceVisibility: 'hidden' }}>
+                    <div className="text-4xl mb-4">{feature.icon}</div>
+                    <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+                    <p className="text-gray-300 leading-relaxed">{feature.description}</p>
+                  </div>
+                  
+                  {/* Back */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-pink-600 to-purple-700 rounded-lg p-6 border border-pink-400 flex flex-col items-center justify-center text-center hover:from-pink-500 hover:to-purple-600 transition-all duration-300"
+                      style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+                      onClick={() => handleCardClick(feature.path)}>
+                    <h3 className="text-7xl mb-4">{feature.icon}</h3>
+                    <h3 className="text-xl font-bold text-white mb-3">Explore the Feature</h3>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
