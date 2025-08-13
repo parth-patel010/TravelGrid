@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation  } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import Navbar from '../components/Custom/Navbar';
 import Footer from '../components/Custom/Footer';
@@ -9,8 +9,21 @@ import { config } from '../config';
 
 function Hotels() {
   const navigate = useNavigate();
+  const location = useLocation(); 
   const [query, setQuery] = useState('');
   const { isDarkMode } = useTheme();
+
+  // Get query param from URL on initial render
+  const getInitialQuery = () => {
+    const params = new URLSearchParams(location.search);
+    return params.get('query') || '';
+  };
+
+  // If the URL changes (user navigates with a new query), update the input
+  useEffect(() => {
+    setQuery(getInitialQuery());
+    // eslint-disable-next-line
+  }, [location.search]);
 
   const filteredHotels = hotels.filter((hotel) => {
     const q = query.toLowerCase();
