@@ -5,6 +5,7 @@ import { DashboardDataProvider } from "./context/DashboardDataContext";
 import { MapProvider } from "./context/MapContext";
 import { AuthProvider } from "./context/AuthContext";
 import { WishlistProvider } from "./context/WishlistContext";
+import { ThemeProvider } from "./context/ThemeContext";
 
 import Navbar from "./components/Custom/Navbar";
 import Footer from "./components/Custom/Footer";
@@ -27,40 +28,42 @@ function App() {
   }, [location]);
 
   return (
-    <AuthProvider>
-      <WishlistProvider>
-        <AppProvider>
-          <DashboardDataProvider>
-            <MapProvider>
-              <div className="flex flex-col min-h-screen">
-                <FluidCursor />
-                {/* Show spinner when route changes */}
-                {loading && <Spinner />}
+    <ThemeProvider>
+      <AuthProvider>
+        <WishlistProvider>
+          <AppProvider>
+            <DashboardDataProvider>
+              <MapProvider>
+                <div className="flex flex-col min-h-screen">
+                  <FluidCursor />
+                  {/* Show spinner when route changes */}
+                  {loading && <Spinner />}
 
-                {/* Navbar */}
-                <Navbar />
+                  {/* Navbar */}
+                  <Navbar />
 
-                {/* Email Verification Banner */}
-                <EmailVerificationBanner />
+                  {/* Email Verification Banner */}
+                  <EmailVerificationBanner />
 
-                {/* Main Content */}
-                <div className="flex-grow">
-                  <ErrorBoundary>
-                    <Outlet />
-                  </ErrorBoundary>
+                  {/* Main Content */}
+                  <div className="flex-grow">
+                    <ErrorBoundary>
+                      <Outlet />
+                    </ErrorBoundary>
+                  </div>
+
+                  {/* Buttons and Footer */}
+                  <GoToTopButton />
+                  <Chatbot />
+                  <FeedbackButton />
+                  <Footer />
                 </div>
-
-                {/* Buttons and Footer */}
-                <GoToTopButton />
-                <Chatbot />
-                <FeedbackButton />
-                <Footer />
-              </div>
-            </MapProvider>
-          </DashboardDataProvider>
-        </AppProvider>
-      </WishlistProvider>
-    </AuthProvider>
+              </MapProvider>
+            </DashboardDataProvider>
+          </AppProvider>
+        </WishlistProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

@@ -62,6 +62,16 @@ const SavedPlaces = () => {
         }
     };
 
+    const handleBookNow = (placeId) => {
+        // Navigate to hotel booking page since saved places are hotels
+        navigate(`/hotel-booking?hotelId=${placeId}`);
+    };
+
+    const handleOverview = (placeId) => {
+        // Navigate to hotel details page
+        navigate(`/hotels/${placeId}`);
+    };
+
     useEffect(() => {
         setPlaceCount(places.length);
     }, [places, setPlaceCount]);
@@ -86,18 +96,30 @@ const SavedPlaces = () => {
                                 <li key={index} className="bg-white/5 p-4 rounded-lg hover:bg-white/10 transition">
                                     <h3 className="text-white font-semibold">{place.name}</h3>
                                     <p className="text-gray-300 text-sm">{place.description}</p>
-                                    <button
-                                        onClick={() => navigate(`/hotels/${place.placeId}`)}
-                                        className="mt-2 text-pink-400 hover:underline text-sm"
-                                    >
-                                        View Hotel
-                                    </button>
-                                    <button
-                                        onClick={() => handleDelete(place.placeId)}
-                                        className="ml-4 bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg text-sm"
-                                    >
-                                        Delete
-                                    </button>
+
+                                    {/* Button Group */}
+                                    <div className="flex flex-wrap gap-2 mt-3">
+                                        <button
+                                            onClick={() => handleOverview(place.placeId)}
+                                            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm transition-colors"
+                                        >
+                                            Overview
+                                        </button>
+
+                                        <button
+                                            onClick={() => handleBookNow(place.placeId)}
+                                            className="px-4 py-2 bg-gradient-to-r from-pink-400 to-purple-500 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg text-sm transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-xl"
+                                        >
+                                            Book Now
+                                        </button>
+
+                                        <button
+                                            onClick={() => handleDelete(place.placeId)}
+                                            className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm transition-colors"
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
                                 </li>
                             ))}
                         </ul>

@@ -9,9 +9,6 @@ import Spinner from './components/Spinner';
 import ErrorBoundary from './components/ErrorHandle/ErrorBoundary';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { AuthProvider } from './context/AuthContext';
-import { WishlistProvider } from './context/WishlistContext';
-import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
 import AuthLayout from './components/AuthLayout';
 //import TrendingSpots from './pages/TrendingSpots.jsx';
@@ -93,6 +90,7 @@ const CountdownDemo = lazy(() => import('./pages/CountdownDemo'));
 const AITravelPlannerDemo = lazy(() => import('./pages/AITravelPlannerDemo'));
 const MusicPlayerDemo = lazy(() => import('./pages/MusicPlayerDemo'));
 const Music = lazy(() => import('./pages/Music'));
+const ThemeTest = lazy(() => import('./components/ThemeTest'));
 
 const router = createBrowserRouter([
   { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
@@ -140,7 +138,8 @@ const router = createBrowserRouter([
       { path: '/ai-travel-planner', element: <Suspense fallback={<Spinner />}><AITravelPlannerDemo /></Suspense> },
       { path: '/music-player-demo', element: <Suspense fallback={<Spinner />}><MusicPlayerDemo /></Suspense> },
       { path: '/music', element: <Suspense fallback={<Spinner />}><Music /></Suspense> },
-      {path:"/itinerary-map", element:<Suspense fallback={<Spinner />}><ItineraryMapPage/></Suspense>},
+      { path: '/itinerary-map', element: <Suspense fallback={<Spinner />}><ItineraryMapPage /></Suspense> },
+      { path: '/theme-test', element: <Suspense fallback={<Spinner />}><ThemeTest /></Suspense> },
 
       {
         path: '/dashboard',
@@ -164,8 +163,6 @@ const router = createBrowserRouter([
       { path: '/package/:id', element: <PackageDetails /> },*/
       { path: '/location/:locationId', element: <LocationDetail /> },
 
-
-
       { path: '/pettravel', element: <PetTravel /> },
 
       { path: '/package/:id', element: <Suspense fallback={<Spinner />}><PackageDetails /></Suspense> },
@@ -182,27 +179,21 @@ createRoot(document.getElementById('root')).render(
     <ErrorBoundary>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
         <LanguageProvider>
-          <ThemeProvider>
-            <AuthProvider>
-              <WishlistProvider>
-                <Provider store={appStore}>
-                  <RouterProvider router={router} />
-                  <Toaster
-                    position="top-center"
-                    reverseOrder={false}
-                    toastOptions={{
-                      duration: 5000,
-                      style: {
-                        background: '#333',
-                        color: '#fff',
-                        fontSize: '16px',
-                      },
-                    }}
-                  />
-                </Provider>
-              </WishlistProvider>
-            </AuthProvider>
-          </ThemeProvider>
+          <Provider store={appStore}>
+            <RouterProvider router={router} />
+            <Toaster
+              position="top-center"
+              reverseOrder={false}
+              toastOptions={{
+                duration: 5000,
+                style: {
+                  background: '#333',
+                  color: '#fff',
+                  fontSize: '16px',
+                },
+              }}
+            />
+          </Provider>
         </LanguageProvider>
       </GoogleOAuthProvider>
     </ErrorBoundary>
